@@ -161,6 +161,67 @@ def nll_gaussian(y_test, y_pred_mean, y_pred_sd, num_labels, batch_size):
     ms = 0.5 * ms1 + 0.5 * ms2
     return ms
 
+class RVLinearlayer(nn.Module):
+    """
+    Custom Bayesian Linear Input Layer that takes random variable input.
+
+    Attributes:
+        size_in (int): The input size of the layer.
+        size_out (int): The output size of the layer.
+        w_mu (nn.Parameter): The weight mean parameter.
+        w_sigma (nn.Parameter): The weight sigma parameter.
+        b_mu (nn.Parameter): The bias mean parameter.
+        b_sigma (nn.Parameter): The bias sigma parameter.
+    """
+    def __init__(self, size_in, size_out):
+        super(RVLinearlayer, self).__init__()
+        self.size_in, self.size_out = size_in, size_out
+
+        # initialize weight and bias mean and sigma parameters
+        self.w_mu       = nn.Parameter(torch.Tensor(size_in,  size_out))
+        self.w_sigma    = nn.Parameter(torch.Tensor(size_in * size_out))
+        self.b_mu       = nn.Parameter(torch.Tensor(size_out, ))
+        self.b_sigma    = nn.Parameter(torch.Tensor(size_out))
+
+        # initialize weights and biases using normal and uniform distributions
+        nn.init.normal_(self.w_mu, mean=0.0, std=0.00005)
+        nn.init.uniform_(self.w_sigma, a=-12.0, b=-2.2)
+        nn.init.normal_(self.b_mu, mean=0.0, std=0.00005)
+        nn.init.uniform_(self.b_sigma, a=-12.0, b=-10.0)
+
+    def forward(self, mu_in, sigma_in):
+       
+        # Extract stats
+        batch_size = mu_in.size(0)
+
+        # Broadcast to batch size
+        # [batch_size size_in size_out] <- [size_in size_out]]
+        w_t_expanded = self.w_mu.transpose(1, 0).unsqueeze(0).expand(batch_size, -1, -1) 
+
+        # Linear Layer
+        # [batch size_out 1] <- [batch size_out size_in] X [batch size_in 1] + [batch size_out 1]
+        z = torch.bmm(w_t_expanded, mu_in) + self.b_mu
+
+        # Expand variance to diag of cov and perform a reparameterization trick
+        # [batch_size, size_in*size_out, size_in*size_out] <- diag(size_in*size_out)
+        W_Sigma = torch.diag_embed(torch.log(1. + torch.exp(self.w_sigma))).unsqueeze(0).expand(batch_size, -1, -1) 
+
+        # x Sigma x^T
+        # [batch_size size_in 1] x [batch_size, size_in*size_out, size_in*size_out ] x [batch_size 1 size_in]
+        Sigma_out = x_Sigma_w_x_T(inputs, W_Sigma) + torch.log(1. + torch.exp(self.b_sigma))
+        exit()
+
+        
+        # KL loss
+        Term1 = self.w_mu.size(0) * torch.log(torch.log(1. + torch.exp(self.w_sigma)))
+        Term2 = torch.sum(torch.sum(torch.abs(self.w_mu)))
+        Term3 = self.w_mu.size(0) * torch.log(1. + torch.exp(self.w_sigma))
+        
+        kl_loss = -0.5 * torch.mean(Term1 - Term2 - Term3)
+        
+        return mu_out, Sigma_out, kl_loss
+
+
 class Constant2RVLinearlayer(nn.Module):
     """
     Custom Bayesian Linear Input Layer that takes a constant input and a random variable input.
@@ -371,14 +432,14 @@ class exVDPMLP(nn.Module):
         hidden_dim (int): The number of hidden units.
         output_dim (int): The number of output classes.
     """
-    def __init__(self, input_dim=784, hidden_dim=256, output_dim=10):
+    def __init__(self, input_dim=784, hidden_dim=64, output_dim=10):
         super(exVDPMLP, self).__init__()
-        self.linear_1 = Constant2RVLinearlayer(input_dim, hidden_dim)
+        self.linear_1 = RVLinearlayer(input_dim, hidden_dim)
         self.myrelu_1 = RVRelu()
         self.linear_2 = RV2RVLinearlayer(hidden_dim, output_dim)
         self.softmax  = RVSoftmax()
 
-    def forward(self, inputs):
+    def forward(self, x):
         """
         Forward pass of the Bayesian Multi-Layer Perceptron with KL Loss.
 
@@ -391,7 +452,7 @@ class exVDPMLP(nn.Module):
                 including the mean of the output, the covariance of the output,
                 and the sum of the KL regularization loss terms.
         """
-        m, s, kl_loss_1 = self.linear_1(inputs)
+        m, s, kl_loss_1 = self.linear_1(x, None)
         m, s = self.myrelu_1(m, s)
         m, s, kl_loss_2  = self.linear_2(m, s)
         outputs, Sigma = self.softmax(m, s)

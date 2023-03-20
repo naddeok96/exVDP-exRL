@@ -215,7 +215,7 @@ class exVDPMLP(tf.keras.Model):
         outputs, Sigma = self.mysoftma(m, s)        
         return outputs, Sigma
 
-def main_function( input_dim = 10, units = 256, output_size = 2 , batch_size = 200, epochs = 5, lr = 0.001, 
+def main_function( input_dim = 10, units = 256, output_size = 2 , batch_size = 200, epochs = 5, lr = 0.001, uniform_
          Random_noise=True, gaussain_noise_std=10000, Training = False):
     
 
