@@ -1,3 +1,10 @@
+import timeit
+import torch 
+import torchvision
+from torchvision import transforms
+import torch.nn.functional as F
+import numpy as np
+from torch_exVDP_MLP import exVDPMLP, nll_gaussian
 
 def train_model(mlp_model, train_loader, epochs, batch_size, lr, kl_factor, PATH):
 
@@ -41,10 +48,10 @@ def train_model(mlp_model, train_loader, epochs, batch_size, lr, kl_factor, PATH
         #Training
         for step, (x, y) in enumerate(train_loader):
             update_progress(step / int(len(train_loader)) ) 
-            x = x.reshape(-1, 28*28).to(device)
+            x = x.reshape(-1, 28*28, 1).to(device)
             y = y.to(device)
 
-             # Convert labels to one hot encoding
+            # Convert labels to one hot encoding
             labels_one_hot = F.one_hot(y, num_classes=10)
 
             optimizer.zero_grad()
@@ -74,26 +81,8 @@ def train_model(mlp_model, train_loader, epochs, batch_size, lr, kl_factor, PATH
     print('Training Acc  ', np.mean(train_acc))          
     print('Training error  ', np.mean(train_err))       
 
-    torch.save(mlp_model.state_dict(), PATH + 'DP_MLP_model.pth')
+    torch.save(mlp_model.state_dict(), PATH + 'VDP_MLP_model.pth')
 
-    if (epochs > 1):
-        fig = plt.figure(figsize=(15,7))
-        plt.plot(train_acc, 'b', label='Training acc')
-        plt.ylim(0, 1.1)
-        plt.title("Density Propagation MLP on MNIST Data")
-        plt.xlabel("Epochs")
-        plt.ylabel("Accuracy")
-        plt.legend(loc='lower right')
-        plt.savefig(PATH + 'DP_MLP_on_MNIST_Data_acc.png')
-        plt.close(fig)
-
-        fig = plt.figure(figsize=(15,7))
-        plt.plot(train_err, 'b', label='Training error')          
-        plt.title("Density Propagation MLP on MNIST Data")
-        plt.xlabel("Epochs")
-        plt.ylabel("Error")
-        plt.legend(loc='lower right')
-        plt.savefig(PATH)
 
 def test_mlp_model(mlp_model, x_test, y_test, val_dataset, batch_size, input_dim, output_size, PATH, epochs, lr, gaussain_noise_std=0.0, Random_noise=False):
     device = torch.device("cpu")
@@ -153,7 +142,7 @@ def test_mlp_model(mlp_model, x_test, y_test, val_dataset, batch_size, input_dim
             textfile.write('\n Random Noise std: '+ str(gaussain_noise_std ))              
         textfile.write("\n---------------------------------")
 
-def main_function(input_dim=784, hidden_dim=500, output_dim=10, batch_size=256, epochs=1, lr=0.001, kl_factor = 0.01,
+def main_function(input_dim=784, hidden_dim=10, output_dim=10, batch_size=256, epochs=1, lr=0.001, kl_factor = 0.01,
                   random_noise=True, gaussian_noise_std=10000, training=False, PATH="dump/"):
     
     
