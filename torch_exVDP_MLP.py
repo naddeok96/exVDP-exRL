@@ -45,8 +45,11 @@ def nll_gaussian(y_test, y_pred_mean, y_pred_sd, num_labels, batch_size):
     Returns:
         torch.Tensor: A scalar tensor representing the negative log-likelihood of the predicted distribution.
     """
+    # Declare device
+    device = y_pred_mean.device
+     
     # Add small constant to diagonal for numerical stability
-    NS = torch.diag_embed(torch.full((batch_size, num_labels), 1e-3))
+    NS = torch.diag_embed(torch.full((batch_size, num_labels), 1e-3)).to(device)
     y_pred_sd_ns = y_pred_sd + NS
     
     # Invert sigma
@@ -142,10 +145,11 @@ class RVLinearlayer(nn.Module):
     def forward(self, mu_in, sigma_in):
         
         # Extract stats
+        device = self.w_mu.device
         batch_size = mu_in.size(0)
         
         if sigma_in is None:
-            sigma_in = torch.zeros((batch_size, self.size_in, self.size_in))
+            sigma_in = torch.zeros((batch_size, self.size_in, self.size_in)).to(device)
 
         # Broadcast to batch size
         # [batch_size size_in size_out] <- [size_in size_out]]
@@ -164,7 +168,7 @@ class RVLinearlayer(nn.Module):
         B_Sigma = torch.diag_embed(B_Sigma)
 
         # Calculate Sigma_out
-        Sigma_out = torch.empty((batch_size, self.size_out, self.size_out))
+        Sigma_out = torch.empty((batch_size, self.size_out, self.size_out)).to(device)
         for i in range(self.size_out):
             mu_i = self.w_mu[:, i].expand(batch_size, -1).unsqueeze(1)
             sigma_i = W_Sigma[i, :, :].expand(batch_size, -1, -1)
@@ -172,9 +176,9 @@ class RVLinearlayer(nn.Module):
             for j in range(self.size_out):
                 mu_j = self.w_mu[:, j].expand(batch_size, -1).unsqueeze(2)
                 
-                tr_sigma_i_and_sigma_in = torch.bmm(sigma_i, sigma_in).diagonal(offset=0, dim1=-1, dim2=-2).sum(-1) if i == j else torch.zeros(batch_size)
+                tr_sigma_i_and_sigma_in = torch.bmm(sigma_i, sigma_in).diagonal(offset=0, dim1=-1, dim2=-2).sum(-1) if i == j else torch.zeros(batch_size).to(device)
                 mu_w_i_t_sigma_in_mu_w_j = torch.bmm(mu_i, torch.bmm(sigma_in, mu_j)).view(-1)
-                mu_in_t_sigma_i_mu_in = torch.bmm(mu_in.transpose(2, 1), torch.bmm(sigma_i, mu_in)).view(-1) if i == j else torch.zeros(batch_size)
+                mu_in_t_sigma_i_mu_in = torch.bmm(mu_in.transpose(2, 1), torch.bmm(sigma_i, mu_in)).view(-1) if i == j else torch.zeros(batch_size).to(device)
             
                 Sigma_out[:, i, j] = tr_sigma_i_and_sigma_in + mu_w_i_t_sigma_in_mu_w_j + mu_in_t_sigma_i_mu_in
                 
@@ -264,13 +268,14 @@ class RVSoftmax(nn.Module):
         """
         
         # Collect stats
+        device = mu_in.device
         batch_size, feature_size = mu_in.size()[:2]
         
         # Mean
-        mu_out = self.softmax(mu_in)  # shape: [batch_size, output_size]
+        mu_out = self.softmax(mu_in).squeeze()  # shape: [batch_size, output_size]
 
         # Compute jacobian
-        jac = torch.empty((batch_size, feature_size, feature_size))
+        jac = torch.empty((batch_size, feature_size, feature_size)).to(device)
         for i in range(batch_size):
             jac[i] = torch.autograd.functional.jacobian(self.softmax, mu_in[i].view(-1))
 
