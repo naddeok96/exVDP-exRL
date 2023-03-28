@@ -142,7 +142,7 @@ def test_mlp_model(mlp_model, x_test, y_test, val_dataset, batch_size, input_dim
             textfile.write('\n Random Noise std: '+ str(gaussain_noise_std ))              
         textfile.write("\n---------------------------------")
 
-def main_function(input_dim=784, hidden_dim=10, output_dim=10, batch_size=256, epochs=1, lr=0.001, kl_factor = 0.01,
+def main_function(input_dim=784, hidden_dim=10, output_dim=10, batch_size=256, epochs=1, lr=0.001, kl_factor = 0.001,
                   random_noise=True, gaussian_noise_std=10000, training=False, PATH="dump/"):
     
     
@@ -169,18 +169,6 @@ def main_function(input_dim=784, hidden_dim=10, output_dim=10, batch_size=256, e
     mlp_model = exVDPMLP(input_dim=input_dim, hidden_dim=hidden_dim, output_dim=output_dim)
 
     train_model(mlp_model, train_loader, epochs, batch_size, lr, kl_factor, PATH)
-
+    
 if __name__ == '__main__':
     main_function() 
-
-#     Epoch:  1 / 1
-# Training Progress: [##########] 99.57% Traceback (most recent call last):
-#   File "torchExVDP.py", line 368, in <module>
-#     main_function() 
-#   File "torchExVDP.py", line 365, in main_function
-#     train_model(mlp_model, train_loader, epochs, batch_size, lr, kl_factor, PATH)
-#   File "torchExVDP.py", line 237, in train_model
-#     log_loss = nll_gaussian(labels_one_hot, logits, sigma.clamp(min=-1e+10, max=1e+10), len(train_loader.dataset.classes), batch_size)
-#   File "torchExVDP.py", line 43, in nll_gaussian
-#     y_pred_sd_ns = y_pred_sd + NS
-# RuntimeError: The size of tensor a (96) must match the size of tensor b (256) at non-singleton dimension 0

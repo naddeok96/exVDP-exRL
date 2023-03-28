@@ -163,8 +163,8 @@ class myReLU(keras.layers.Layer):
     def call(self, mu_in, Sigma_in):
         mu_out = tf.nn.relu(mu_in)
         with tf.GradientTape() as g:
-          g.watch(mu_in)
-          out = tf.nn.relu(mu_in)
+            g.watch(mu_in)
+            out = tf.nn.relu(mu_in)
         gradi = g.gradient(out, mu_in) 
 
         Sigma_out = activation_Sigma (gradi, Sigma_in)
