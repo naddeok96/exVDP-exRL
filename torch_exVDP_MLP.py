@@ -31,7 +31,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-def nll_gaussian(y_test, y_pred_mean, y_pred_sd, num_labels, batch_size):
+def nll_gaussian(y_test, y_pred_mean, y_pred_sd, num_labels):
     """
     Compute the negative log-likelihood of a Gaussian distribution.
 
@@ -40,11 +40,13 @@ def nll_gaussian(y_test, y_pred_mean, y_pred_sd, num_labels, batch_size):
         y_pred_mean (torch.Tensor): A tensor of shape (batch_size, num_labels).
         y_pred_sd (torch.Tensor): A tensor of shape (batch_size, num_labels, num_labels).
         num_labels (int): The number of output labels.
-        batch_size (int): The batch size.
 
     Returns:
         torch.Tensor: A scalar tensor representing the negative log-likelihood of the predicted distribution.
     """
+    # Collect Stats
+    batch_size = y_test.size(0)
+
     # Declare device
     device = y_pred_mean.device
      
@@ -128,6 +130,7 @@ class RVLinearlayer(nn.Module):
     """
     def __init__(self, size_in, size_out):
         super(RVLinearlayer, self).__init__()
+        # collect stats
         self.size_in, self.size_out = size_in, size_out
 
         # initialize weight and bias mean and sigma parameters
@@ -156,8 +159,8 @@ class RVLinearlayer(nn.Module):
         w_t_expanded = self.w_mu.transpose(1, 0).unsqueeze(0).expand(batch_size, -1, -1) 
 
         # Linear Layer
-        # [batch size_out 1] <- [batch size_out size_in] X [batch size_in 1] + [batch size_out 1]
-        mu_out = torch.bmm(w_t_expanded, mu_in) + self.b_mu
+        # [batch size_out 1] <- [batch size_out size_in] X [batch size_in 1] + [size_out 1] 
+        mu_out = torch.bmm(w_t_expanded, mu_in) + self.b_mu # note that b_mu will broadcast to all batches
         
         # Perform a reparameterization trick
         W_Sigma = torch.log(1. + torch.exp(self.w_sigma))
@@ -250,7 +253,7 @@ class RVSoftmax(nn.Module):
         
     def softmax(self, x):
         # Apply softmax function along feature dimension
-        return torch.softmax(x, dim=0)      
+        return torch.softmax(x, dim=-1)      
         
     def forward(self, mu_in, Sigma_in):
         """
@@ -272,7 +275,7 @@ class RVSoftmax(nn.Module):
         batch_size, feature_size = mu_in.size()[:2]
         
         # Mean
-        mu_out = self.softmax(mu_in).squeeze()  # shape: [batch_size, output_size]
+        mu_out = self.softmax(mu_in.view(batch_size, feature_size))  # shape: [batch_size, output_size]
 
         # Compute jacobian
         jac = torch.empty((batch_size, feature_size, feature_size)).to(device)
