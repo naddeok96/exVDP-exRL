@@ -101,7 +101,7 @@ def main():
 
     # Training parameters
     n_epochs        = 5
-    batch_size      = 124
+    batch_size      = 32
     learning_rate   = 0.001
     kl_factor       = 0.001
     test_freq       = 10
