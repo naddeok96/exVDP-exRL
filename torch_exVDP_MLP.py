@@ -71,8 +71,6 @@ def nll_gaussian(y_test, y_pred_mean, y_pred_sd, num_labels):
     ms = 0.5 * ms1 + 0.5 * ms2
     return ms
 
-import torch
-
 def compute_kl_loss(mu, sigma):
     """
     Computes the Kullback-Leibler (KL) divergence between a Gaussian distribution
@@ -99,22 +97,16 @@ def compute_kl_loss(mu, sigma):
         itself, `k` is the dimension of the Gaussian distribution (i.e., the number of features), and `det(sigma)`
         is the determinant of the covariance matrix.
     """
+    device = mu.device
+
+    # calculate the KL divergence
+    k = torch.tensor(mu.size(0)).view(-1, 1).to(device)
+    trace_sigma = torch.diagonal(sigma, dim1=-2, dim2=-1).sum(-1).view(-1, 1)
+    mu_sq = torch.bmm(mu.t().unsqueeze(1), mu.t().unsqueeze(2)).view(-1, 1)
+    logdet_sigma = torch.slogdet(sigma)[1].view(-1, 1)
+    kl_loss = 0.5 * (trace_sigma + mu_sq - k - logdet_sigma).sum()
     
-    kl_losses = []
-    for i in range(mu.size(1)):
-        mu_i = mu[:, i].unsqueeze(1)
-        sigma_i = sigma[i, :, :]
-        sigma_i_det = torch.det(sigma_i)
-        
-        term1 = torch.matmul(mu_i.t(), mu_i)
-        term2 = torch.trace(sigma_i)
-        term3 = mu_i.size(0)
-        term4 = torch.log(sigma_i_det) if sigma_i_det.item() > 0 else -1e3
-        
-        # compute the KL divergence
-        kl_losses.append(0.5 * (term1 + term2 - term3 - term4))
-        
-    return sum(kl_losses)
+    return kl_loss
 
 class RVLinearlayer(nn.Module):
     """
@@ -150,18 +142,9 @@ class RVLinearlayer(nn.Module):
         # Extract stats
         device = self.w_mu.device
         batch_size = mu_in.size(0)
-        
-        if sigma_in is None:
-            sigma_in = torch.zeros((batch_size, self.size_in, self.size_in)).to(device)
 
-        # Broadcast to batch size
-        # [batch_size size_in size_out] <- [size_in size_out]]
-        w_t_expanded = self.w_mu.transpose(1, 0).unsqueeze(0).expand(batch_size, -1, -1) 
+        mu_out = torch.matmul(self.w_mu.transpose(1, 0), mu_in.view(batch_size, self.size_in, 1)) + self.b_mu
 
-        # Linear Layer
-        # [batch size_out 1] <- [batch size_out size_in] X [batch size_in 1] + [size_out 1] 
-        mu_out = torch.bmm(w_t_expanded, mu_in) + self.b_mu # note that b_mu will broadcast to all batches
-        
         # Perform a reparameterization trick
         W_Sigma = torch.log(1. + torch.exp(self.w_sigma))
         B_Sigma = torch.log(1. + torch.exp(self.b_sigma))
@@ -171,24 +154,15 @@ class RVLinearlayer(nn.Module):
         B_Sigma = torch.diag_embed(B_Sigma)
 
         # Calculate Sigma_out
-        Sigma_out = torch.empty((batch_size, self.size_out, self.size_out)).to(device)
-        for i in range(self.size_out):
-            mu_i = self.w_mu[:, i].expand(batch_size, -1).unsqueeze(1)
-            sigma_i = W_Sigma[i, :, :].expand(batch_size, -1, -1)
-            
-            for j in range(self.size_out):
-                mu_j = self.w_mu[:, j].expand(batch_size, -1).unsqueeze(2)
-                
-                tr_sigma_i_and_sigma_in = torch.bmm(sigma_i, sigma_in).diagonal(offset=0, dim1=-1, dim2=-2).sum(-1) if i == j else torch.zeros(batch_size).to(device)
-                mu_w_i_t_sigma_in_mu_w_j = torch.bmm(mu_i, torch.bmm(sigma_in, mu_j)).view(-1)
-                mu_in_t_sigma_i_mu_in = torch.bmm(mu_in.transpose(2, 1), torch.bmm(sigma_i, mu_in)).view(-1) if i == j else torch.zeros(batch_size).to(device)
-            
-                Sigma_out[:, i, j] = tr_sigma_i_and_sigma_in + mu_w_i_t_sigma_in_mu_w_j + mu_in_t_sigma_i_mu_in
-                
-        # Add Reparameterized b_sigma
-        for i in range(Sigma_out.size(0)):
-            Sigma_out[i] = Sigma_out[i] + B_Sigma
-        
+        mu_in_t_W_Sigma_mu_in = torch.bmm(torch.matmul(W_Sigma, mu_in.transpose(2, 1).unsqueeze(-1)).squeeze(-1), mu_in).squeeze()
+
+        if sigma_in is not None:
+            tr_W_Sigma_and_sigma_in = torch.matmul(W_Sigma.view(self.size_out, -1), sigma_in.view(-1, batch_size)).view(batch_size, self.size_out)
+            mu_w_t_sigma_in_mu_w = torch.matmul(torch.matmul(self.w_mu.t(), sigma_in), self.w_mu)
+            Sigma_out = (torch.diag_embed(tr_W_Sigma_and_sigma_in) + mu_w_t_sigma_in_mu_w + torch.diag_embed(mu_in_t_W_Sigma_mu_in)) + B_Sigma
+        else:
+            Sigma_out = torch.diag_embed(mu_in_t_W_Sigma_mu_in) + B_Sigma
+      
         # KL loss
         kl_loss = compute_kl_loss(self.w_mu, W_Sigma)
         
@@ -249,11 +223,11 @@ class RVSoftmax(nn.Module):
         None
     """
     def __init__(self):
-        super(RVSoftmax, self).__init__()
-        
+        super(RVSoftmax, self).__init__() 
+
     def softmax(self, x):
         # Apply softmax function along feature dimension
-        return torch.softmax(x, dim=-1)      
+        return torch.softmax(x, dim=1)      
         
     def forward(self, mu_in, Sigma_in):
         """
@@ -271,20 +245,17 @@ class RVSoftmax(nn.Module):
         """
         
         # Collect stats
-        device = mu_in.device
         batch_size, feature_size = mu_in.size()[:2]
         
         # Mean
         mu_out = self.softmax(mu_in.view(batch_size, feature_size))  # shape: [batch_size, output_size]
 
-        # Compute jacobian
-        jac = torch.empty((batch_size, feature_size, feature_size)).to(device)
-        for i in range(batch_size):
-            jac[i] = torch.autograd.functional.jacobian(self.softmax, mu_in[i].view(-1))
-
+        # Compute Jacobian
+        jac = torch.diagonal(torch.autograd.functional.jacobian(self.softmax, mu_in.view(batch_size, -1), create_graph=True, strict=True), dim1=0, dim2=2).permute(2, 0, 1)
+      
         # Compute covariance
-        Sigma_out = torch.bmm(jac, torch.bmm(Sigma_in, jac.permute(0, 2, 1)))
-        
+        Sigma_out = torch.bmm(jac, torch.bmm(Sigma_in, jac.transpose(1, 2)))
+
         return mu_out, Sigma_out
 
 class exVDPMLP(nn.Module):
