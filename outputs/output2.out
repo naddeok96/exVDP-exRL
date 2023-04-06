@@ -1,0 +1,21 @@
+Epochs:  5
+Adversarial Training Type:  None
+MNIST Data Loaded
+Network Loaded
+Training:   0%|          | 0/5 [00:00<?, ?it/s]Training:   0%|          | 0/5 [00:02<?, ?it/s]
+Traceback (most recent call last):
+  File "model_trainer.py", line 185, in <module>
+    main()
+  File "model_trainer.py", line 166, in main
+    net = train(net, data, gpu, n_epochs, learning_rate, batch_size, attack_type, epsilon, kl_factor, test_freq)
+  File "model_trainer.py", line 41, in train
+    outputs, sigma, kl_loss = net(inputs)
+  File "/home/naddeok5/envs/vdprl/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1501, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/naddeok5/exVDP-exRL/torch_exVDP_MLP.py", line 290, in forward
+    m, s, kl_1 = self.linear_1(x, None)
+  File "/home/naddeok5/envs/vdprl/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1501, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/naddeok5/exVDP-exRL/torch_exVDP_MLP.py", line 157, in forward
+    mu_in_t_W_Sigma_mu_in = torch.bmm(torch.matmul(W_Sigma, mu_in.transpose(2, 1).unsqueeze(-1)).squeeze(-1), mu_in).squeeze()
+torch.cuda.OutOfMemoryError: CUDA out of memory. Tried to allocate 35.21 GiB (GPU 0; 23.65 GiB total capacity; 300.86 MiB already allocated; 21.50 GiB free; 314.00 MiB reserved in total by PyTorch) If reserved memory is >> allocated memory try setting max_split_size_mb to avoid fragmentation.  See documentation for Memory Management and PYTORCH_CUDA_ALLOC_CONF
