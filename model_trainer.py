@@ -3,7 +3,7 @@ This script will train a model and save it
 '''
 # Imports
 import torch
-import pickle
+import time
 from data_setup import Data
 import torch.nn.functional as F
 from tqdm import tqdm
@@ -24,7 +24,7 @@ def train(net, data, gpu, n_epochs, learning_rate, batch_size, attack_type, epsi
     for epoch in tqdm(range(n_epochs), desc='Training'):   
         for inputs, labels in train_loader:
             # Flatten input
-            inputs = inputs.reshape(-1, 28*28, 1)
+            inputs = inputs.view(-1, 28*28, 1)
 
             # Convert labels to one hot encoding
             labels_one_hot = F.one_hot(labels, num_classes=10).float()
@@ -79,7 +79,7 @@ def test(net, data, gpu, kl_factor):
 
         #Forward pass
         if kl_factor:
-            outputs, sigma, kl_loss = net(inputs)
+            outputs, _, _ = net(inputs)
         else:
             outputs = net(inputs.squeeze())
 
@@ -97,13 +97,13 @@ def main():
     # Machine parameters
     seed       = 3
     gpu        = True
-    gpu_number = "4"
+    gpu_number = "2"
 
     # Training parameters
     n_epochs        = 5
     batch_size      = 124
     learning_rate   = 0.001
-    kl_factor       = None
+    kl_factor       = 0.001
     test_freq       = 10
 
     # Model parameters
@@ -162,7 +162,9 @@ def main():
 
     # Fit Model
     if n_epochs > 0:
+        start_time = time.time()
         net = train(net, data, gpu, n_epochs, learning_rate, batch_size, attack_type, epsilon, kl_factor, test_freq)
+        print("Training took ", time.time() - start_time, "s")
 
     # Calculate accuracy on test set
     accuracy = test(net, data, gpu, kl_factor)
