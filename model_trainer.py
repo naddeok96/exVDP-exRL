@@ -21,8 +21,8 @@ def train(net, data, gpu, n_epochs, learning_rate, batch_size, attack_type, epsi
 
 
     #Loop for n_epochs
-    for epoch in tqdm(range(n_epochs), desc='Training'):   
-        for inputs, labels in train_loader:
+    for epoch in tqdm(range(n_epochs), desc='Epochs'):   
+        for inputs, labels in tqdm(train_loader, desc='Batches'):
             # Flatten input
             inputs = inputs.view(-1, 28*28, 1)
 
@@ -44,7 +44,7 @@ def train(net, data, gpu, n_epochs, learning_rate, batch_size, attack_type, epsi
 
             # Get loss
             if kl_factor:
-                log_loss = nll_gaussian(labels_one_hot, outputs, sigma.clamp(min=-1e+10, max=1e+10), len(train_loader.dataset.classes), batch_size)
+                log_loss = nll_gaussian(y_test=labels_one_hot, y_pred_mean=outputs, y_pred_sd=sigma.clamp(min=-1e+10, max=1e+10), num_labels=len(train_loader.dataset.classes))
                 total_loss = log_loss + kl_factor * kl_loss
             else:
                 total_loss = F.mse_loss(labels_one_hot, outputs)
@@ -53,9 +53,9 @@ def train(net, data, gpu, n_epochs, learning_rate, batch_size, attack_type, epsi
             total_loss.backward()
             optimizer.step()
         
-        if epoch % test_freq == 0:
-            accuracy = test(net, data, gpu, kl_factor)
-            print("Epoch: ", epoch + 1 , "\tLoss: ", total_loss.item(), "\tAcc:", accuracy)    
+        # if epoch % test_freq == 0:
+        #     accuracy = test(net, data, gpu, kl_factor)
+        #     print("Epoch: ", epoch + 1 , "\tLoss: ", total_loss.item(), "\tAcc:", accuracy)    
 
     return net 
 
@@ -107,6 +107,7 @@ def main():
     test_freq       = 10
 
     # Model parameters
+    hidden_dim = 124
     pretrained_weights_filename = None # "model_weights/VDP_MLP_model.pth"
     save_model                  = True
 
@@ -143,9 +144,9 @@ def main():
 
     # Initalize Network
     if kl_factor:
-        net = exVDPMLP(input_dim=784, hidden_dim=124, output_dim=10)
+        net = exVDPMLP(input_dim=784, hidden_dim=hidden_dim, output_dim=10)
     else:
-        net = MLP(input_dim=784, hidden_dim=124, output_dim=10)
+        net = MLP(input_dim=784, hidden_dim=hidden_dim, output_dim=10)
     
     net.eval()
 
