@@ -160,6 +160,7 @@ class RVLinearlayer(nn.Module):
             tr_W_Sigma_and_sigma_in = torch.matmul(W_Sigma.view(self.size_out, -1), sigma_in.view(-1, batch_size)).view(batch_size, self.size_out)
             mu_w_t_sigma_in_mu_w = torch.matmul(torch.matmul(self.w_mu.t(), sigma_in), self.w_mu)
             Sigma_out = (torch.diag_embed(tr_W_Sigma_and_sigma_in) + mu_w_t_sigma_in_mu_w + torch.diag_embed(mu_in_t_W_Sigma_mu_in)) + B_Sigma
+            
         else:
             Sigma_out = torch.diag_embed(mu_in_t_W_Sigma_mu_in) + B_Sigma
       
@@ -287,9 +288,12 @@ class exVDPMLP(nn.Module):
                 including the mean of the output, the covariance of the output,
                 and the sum of the KL regularization loss terms.
         """
+
         m, s, kl_1 = self.linear_1(x, None)
         m, s = self.relu_1(m, s)
         m, s, kl_2  = self.linear_2(m, s)
         outputs, Sigma = self.softmax(m, s)
+
+        total_kl_loss = kl_1 + kl_2
         
-        return outputs, Sigma, sum(kl_1, kl_2)
+        return outputs, Sigma, total_kl_loss
