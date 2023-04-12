@@ -61,4 +61,3 @@ def calculate_coverage_exploration_efficiency(visited_states, state_space_size):
     coverage = len(visited_states) / state_space_size
     exploration_efficiency = coverage
     return exploration_efficiency
-
