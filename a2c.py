@@ -30,12 +30,16 @@ class A2CAgent:
         if pretrained_weights is not None:
             self.model.load_state_dict(torch.load(pretrained_weights, map_location=torch.device('cpu')))
 
-    def act(self, state):
+    def act(self, state, return_logits=False):
         state = torch.from_numpy(state).float().to(self.device)
         logits, _ = self.model(state)
         dist = Categorical(logits=logits)
         action = dist.sample()
-        return action.item()
+
+        if return_logits:
+            return action.item(), logits
+        else:
+            return action.item()
 
     def update(self, states, actions, rewards, next_states, dones):
         states = torch.FloatTensor(states).to(self.device)
