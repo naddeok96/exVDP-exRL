@@ -14,10 +14,14 @@ class ActorCritic(nn.Module):
         self.critic = nn.Linear(128, 1)
 
     def forward(self, x):
+        # Embed
         x = F.relu(self.fc1(x))
         x = F.relu(self.fc2(x))
+
+        # Actor and Critic
         logits = self.actor(x)
         value = self.critic(x)
+
         return logits, value
 
 class A2CAgent:
