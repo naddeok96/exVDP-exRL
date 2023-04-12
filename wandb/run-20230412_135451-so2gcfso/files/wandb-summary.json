@@ -1,1 +1,0 @@
-{"i_episode": 17, "novelty_based_exploration_efficiency": Infinity, "entropy_based_exploration_efficiency": 0.002710920525714755, "coverage_based_exploration_efficiency": 1.0, "episode_reward": 8.0, "moving_average": 8.0, "_timestamp": 1681322618.1708927, "_runtime": 526.8896336555481, "_step": 8484, "_wandb": {"runtime": 526}}
