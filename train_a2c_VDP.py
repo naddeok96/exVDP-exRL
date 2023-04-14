@@ -7,20 +7,16 @@ from tqdm import tqdm
 import numpy as np
 import wandb
 from collections import deque
+import time
 
-from a2c import A2CAgent
+from a2c_VDP import A2CAgent
 from utils import calculate_novelty_exploration_efficiency, calculate_entropy_exploration_efficiency, calculate_coverage_exploration_efficiency
 
-import os
-import gym
-import torch
-from a2c_VDP import A2CAgent
-import wandb
-
 # Initialize WandB
-wandb.init(project="A2C", entity="naddeok")
+wandb.init(project="A2C VDP", entity="naddeok")
 wandb.config.episodes = episodes = int(1e4)
 wandb.config.max_time_steps = max_time_steps = 300 
+wandb.config.kl_factor = kl_factor = 0.00001
 
 # Get the run name
 run_name = wandb.run.name
@@ -29,11 +25,11 @@ run_name = wandb.run.name
 epsilon = 0.1
 save_freq = int(1e2) # save model every n episodes
 render_freq = int(2.5e3) # render every n episodes
-model_path = f"saved_models/a2c_model_{run_name}.pt"
-output_path = f"results/a2c_model_{run_name}.mp4"
+model_path = f"saved_models/a2c_VDP_model_{run_name}.pt"
+output_path = f"results/a2c_VDP_model_{run_name}.mp4"
 
 # Initialize GPU usage
-gpu_number = "5"
+gpu_number = "0"
 if gpu_number:
     os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
     os.environ["CUDA_VISIBLE_DEVICES"] = gpu_number
@@ -51,7 +47,7 @@ else:
     state_space_size = env.observation_space.n # total number of possible states
 
 # Initialize agent
-agent = A2CAgent(env.observation_space.shape[0], env.action_space.n, device=device)
+agent = A2CAgent(env.observation_space.shape[0], env.action_space.n, device=device, kl_factor=kl_factor)
 
 # Initialize storage
 frames = []
@@ -61,6 +57,7 @@ step = 0
 
 # Train
 for i_episode in tqdm(range(episodes),desc="Episodes"):
+    episode_start = time.time()
     state, info = env.reset()
     episode_reward = 0
     done = False
@@ -84,7 +81,7 @@ for i_episode in tqdm(range(episodes),desc="Episodes"):
         entropy_based_exploration_efficiency = calculate_entropy_exploration_efficiency(logits)
 
         # Backward pass
-        actor_loss, critic_loss = agent.update(state, action, reward, next_state, done)
+        total_actor_loss, total_critic_loss, actor_loss, critic_loss, actor_kl, critic_kl, feature_kl = agent.update(state, action, reward, next_state, done)
 
         # Store
         step += 1
@@ -96,8 +93,13 @@ for i_episode in tqdm(range(episodes),desc="Episodes"):
                 "i_episode": i_episode,
                 "step": step,
                 "entropy_based_exploration_efficiency": entropy_based_exploration_efficiency,
+                "total_actor_loss": total_actor_loss,
+                "total_critic_loss": total_critic_loss,
                 "actor_loss": actor_loss,
-                "critic_loss": critic_loss
+                "critic_loss": critic_loss,
+                "actor_kl": actor_kl,
+                "critic_kl": critic_kl,
+                "feature_kl":feature_kl
             })
         
         # Log
@@ -116,6 +118,7 @@ for i_episode in tqdm(range(episodes),desc="Episodes"):
                 # "entropy_based_exploration_efficiency": entropy_based_exploration_efficiency,
                 # "coverage_based_exploration_efficiency": coverage_based_exploration_efficiency,
                 "episode_reward": episode_reward,
+                "episode_time": time.time() - episode_start,
                 # "moving_average": moving_avg,
                 # "actor_loss": actor_loss,
                 # "critic_loss": critic_loss

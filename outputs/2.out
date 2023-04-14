@@ -1,10 +1,344 @@
 wandb: Currently logged in as: naddeok. Use `wandb login --relogin` to force relogin
-wandb: - Waiting for wandb.init()...wandb: \ Waiting for wandb.init()...wandb: Tracking run with wandb version 0.14.2
-wandb: Run data is saved locally in /home/naddeok5/exVDP-exRL/wandb/run-20230412_152805-ukcd9q7m
+wandb: Tracking run with wandb version 0.14.2
+wandb: Run data is saved locally in /home/naddeok5/exVDP-exRL/wandb/run-20230413_173855-o1lf4bhz
 wandb: Run `wandb offline` to turn off syncing.
-wandb: Syncing run logical-paper-12
+wandb: Syncing run skilled-vortex-14
 wandb: ⭐️ View project at https://wandb.ai/naddeok/A2C
-wandb: 🚀 View run at https://wandb.ai/naddeok/A2C/runs/ukcd9q7m
+wandb: 🚀 View run at https://wandb.ai/naddeok/A2C/runs/o1lf4bhz
 Episodes:   0%|          | 0/10000 [00:00<?, ?it/s]/home/naddeok5/envs/vdprl/lib/python3.8/site-packages/gym/utils/passive_env_checker.py:233: DeprecationWarning: `np.bool8` is a deprecated alias for `np.bool_`.  (Deprecated NumPy 1.24)
   if not isinstance(terminated, (bool, np.bool8)):
-Episodes:   0%|          | 1/10000 [00:01<5:32:53,  2.00s/it]Episodes:   0%|          | 2/10000 [00:02<2:43:48,  1.02it/s]Episodes:   0%|          | 3/10000 [00:02<2:03:31,  1.35it/s]Episodes:   0%|          | 4/10000 [00:03<1:39:24,  1.68it/s]Episodes:   0%|          | 5/10000 [00:03<1:18:11,  2.13it/s]Episodes:   0%|          | 6/10000 [00:03<1:12:33,  2.30it/s]Episodes:   0%|          | 7/10000 [00:04<1:26:09,  1.93it/s]Episodes:   0%|          | 8/10000 [00:04<1:23:18,  2.00it/s]Episodes:   0%|          | 9/10000 [00:05<1:21:35,  2.04it/s]Episodes:   0%|          | 10/10000 [00:05<1:16:07,  2.19it/s]Episodes:   0%|          | 11/10000 [00:06<1:28:20,  1.88it/s]Episodes:   0%|          | 12/10000 [00:06<1:21:48,  2.03it/s]Episodes:   0%|          | 13/10000 [00:07<1:14:55,  2.22it/s]Episodes:   0%|          | 14/10000 [00:07<1:08:54,  2.42it/s]Episodes:   0%|          | 15/10000 [00:07<1:07:50,  2.45it/s]Episodes:   0%|          | 16/10000 [00:08<1:07:06,  2.48it/s]Episodes:   0%|          | 17/10000 [00:08<1:04:37,  2.57it/s]Episodes:   0%|          | 18/10000 [00:09<1:08:19,  2.44it/s]Episodes:   0%|          | 19/10000 [00:09<1:19:33,  2.09it/s]Episodes:   0%|          | 20/10000 [00:10<1:23:58,  1.98it/s]Episodes:   0%|          | 21/10000 [00:11<2:04:49,  1.33it/s]Episodes:   0%|          | 22/10000 [00:12<2:02:44,  1.35it/s]Episodes:   0%|          | 23/10000 [00:13<2:09:50,  1.28it/s]Episodes:   0%|          | 24/10000 [00:13<1:51:18,  1.49it/s]Episodes:   0%|          | 25/10000 [00:14<1:48:02,  1.54it/s]Episodes:   0%|          | 26/10000 [00:15<2:04:41,  1.33it/s]Episodes:   0%|          | 27/10000 [00:16<2:13:14,  1.25it/s]Episodes:   0%|          | 28/10000 [00:18<3:12:02,  1.16s/it]Episodes:   0%|          | 29/10000 [00:18<2:29:42,  1.11it/s]Episodes:   0%|          | 30/10000 [00:19<2:21:15,  1.18it/s]Episodes:   0%|          | 31/10000 [00:20<3:06:21,  1.12s/it]Episodes:   0%|          | 32/10000 [00:22<3:26:54,  1.25s/it]Episodes:   0%|          | 33/10000 [00:23<3:21:38,  1.21s/it]Episodes:   0%|          | 34/10000 [00:25<3:36:01,  1.30s/it]Episodes:   0%|          | 35/10000 [00:26<3:21:03,  1.21s/it]Episodes:   0%|          | 36/10000 [00:27<3:29:20,  1.26s/it]Episodes:   0%|          | 37/10000 [00:28<2:57:44,  1.07s/it]Episodes:   0%|          | 38/10000 [00:29<3:24:34,  1.23s/it]Episodes:   0%|          | 39/10000 [00:32<4:23:26,  1.59s/it]Episodes:   0%|          | 40/10000 [00:34<4:59:11,  1.80s/it]Episodes:   0%|          | 41/10000 [00:35<4:17:52,  1.55s/it]Episodes:   0%|          | 42/10000 [00:36<3:49:50,  1.38s/it]Episodes:   0%|          | 43/10000 [00:37<3:28:12,  1.25s/it]Episodes:   0%|          | 44/10000 [00:38<3:08:01,  1.13s/it]Episodes:   0%|          | 45/10000 [00:42<5:29:19,  1.98s/it]Episodes:   0%|          | 46/10000 [00:43<5:08:18,  1.86s/it]Episodes:   0%|          | 47/10000 [00:44<4:15:48,  1.54s/it]Episodes:   0%|          | 48/10000 [00:45<3:32:52,  1.28s/it]Episodes:   0%|          | 49/10000 [00:46<3:10:25,  1.15s/it]Episodes:   0%|          | 50/10000 [00:47<3:05:44,  1.12s/it]Episodes:   1%|          | 51/10000 [00:48<3:13:32,  1.17s/it]Episodes:   1%|          | 52/10000 [00:50<3:55:45,  1.42s/it]Episodes:   1%|          | 53/10000 [00:51<3:56:59,  1.43s/it]Episodes:   1%|          | 54/10000 [00:52<3:16:39,  1.19s/it]Episodes:   1%|          | 55/10000 [00:53<2:54:05,  1.05s/it]Episodes:   1%|          | 56/10000 [00:54<2:56:01,  1.06s/it]Episodes:   1%|          | 57/10000 [00:55<2:43:25,  1.01it/s]Episodes:   1%|          | 58/10000 [00:56<3:20:07,  1.21s/it]Episodes:   1%|          | 59/10000 [00:59<4:47:50,  1.74s/it]Episodes:   1%|          | 60/10000 [01:02<5:28:26,  1.98s/it]Episodes:   1%|          | 61/10000 [01:03<4:59:10,  1.81s/it]Episodes:   1%|          | 62/10000 [01:04<4:30:45,  1.63s/it]Episodes:   1%|          | 63/10000 [01:06<4:11:39,  1.52s/it]Episodes:   1%|          | 64/10000 [01:07<3:36:56,  1.31s/it]Episodes:   1%|          | 65/10000 [01:08<3:58:57,  1.44s/it]Episodes:   1%|          | 66/10000 [01:10<4:34:05,  1.66s/it]Episodes:   1%|          | 67/10000 [01:12<4:22:06,  1.58s/it]Episodes:   1%|          | 68/10000 [01:14<4:56:01,  1.79s/it]Episodes:   1%|          | 69/10000 [01:17<5:57:23,  2.16s/it]Episodes:   1%|          | 70/10000 [01:19<5:48:21,  2.10s/it]Episodes:   1%|          | 71/10000 [01:24<8:20:17,  3.02s/it]Episodes:   1%|          | 72/10000 [01:26<7:06:10,  2.58s/it]Episodes:   1%|          | 73/10000 [01:27<6:06:51,  2.22s/it]Episodes:   1%|          | 74/10000 [01:28<5:17:43,  1.92s/it]Episodes:   1%|          | 75/10000 [01:30<4:40:42,  1.70s/it]Episodes:   1%|          | 76/10000 [01:31<4:40:26,  1.70s/it]Episodes:   1%|          | 77/10000 [01:34<5:30:27,  2.00s/it]Episodes:   1%|          | 78/10000 [01:37<6:16:26,  2.28s/it]Episodes:   1%|          | 79/10000 [01:40<6:31:40,  2.37s/it]Episodes:   1%|          | 80/10000 [01:42<6:50:16,  2.48s/it]Episodes:   1%|          | 81/10000 [01:44<5:56:44,  2.16s/it]Episodes:   1%|          | 82/10000 [01:45<5:23:03,  1.95s/it]Episodes:   1%|          | 83/10000 [01:47<5:08:01,  1.86s/it]Episodes:   1%|          | 84/10000 [01:48<4:39:26,  1.69s/it]Episodes:   1%|          | 85/10000 [01:50<4:55:41,  1.79s/it]Episodes:   1%|          | 86/10000 [01:51<4:23:54,  1.60s/it]Episodes:   1%|          | 87/10000 [01:52<4:05:21,  1.49s/it]Episodes:   1%|          | 88/10000 [01:54<4:28:07,  1.62s/it]Episodes:   1%|          | 89/10000 [01:56<4:25:46,  1.61s/it]Episodes:   1%|          | 90/10000 [01:59<5:10:59,  1.88s/it]Episodes:   1%|          | 91/10000 [01:59<4:25:11,  1.61s/it]Episodes:   1%|          | 92/10000 [02:01<4:39:17,  1.69s/it]Episodes:   1%|          | 93/10000 [02:03<4:55:14,  1.79s/it]Episodes:   1%|          | 94/10000 [02:10<9:14:26,  3.36s/it]Episodes:   1%|          | 95/10000 [02:11<7:16:06,  2.64s/it]Episodes:   1%|          | 96/10000 [02:13<6:06:35,  2.22s/it]Episodes:   1%|          | 97/10000 [02:14<5:29:34,  2.00s/it]Episodes:   1%|          | 98/10000 [02:15<4:54:56,  1.79s/it]Episodes:   1%|          | 99/10000 [02:17<4:46:20,  1.74s/it]Episodes:   1%|          | 100/10000 [02:20<6:01:57,  2.19s/it]Episodes:   1%|          | 101/10000 [02:30<12:39:57,  4.61s/it]Episodes:   1%|          | 102/10000 [02:34<11:41:35,  4.25s/it]Episodes:   1%|          | 103/10000 [02:36<10:04:47,  3.67s/it]Episodes:   1%|          | 104/10000 [02:40<10:07:19,  3.68s/it]Episodes:   1%|          | 105/10000 [02:44<10:29:19,  3.82s/it]Episodes:   1%|          | 106/10000 [02:49<11:13:26,  4.08s/it]Episodes:   1%|          | 107/10000 [02:51<9:44:39,  3.55s/it] Episodes:   1%|          | 108/10000 [02:53<8:18:42,  3.02s/it]Episodes:   1%|          | 109/10000 [02:56<8:46:50,  3.20s/it]Episodes:   1%|          | 110/10000 [03:00<9:12:45,  3.35s/it]Episodes:   1%|          | 111/10000 [03:02<8:06:49,  2.95s/it]Episodes:   1%|          | 112/10000 [03:04<7:15:19,  2.64s/it]Episodes:   1%|          | 113/10000 [03:12<11:31:20,  4.20s/it]Episodes:   1%|          | 114/10000 [03:14<9:25:52,  3.43s/it] Episodes:   1%|          | 115/10000 [03:15<7:39:14,  2.79s/it]Episodes:   1%|          | 116/10000 [03:17<6:45:09,  2.46s/it]Episodes:   1%|          | 117/10000 [03:18<6:17:52,  2.29s/it]Episodes:   1%|          | 118/10000 [03:21<6:07:00,  2.23s/it]Episodes:   1%|          | 119/10000 [03:22<5:47:37,  2.11s/it]Episodes:   1%|          | 120/10000 [03:25<5:57:05,  2.17s/it]Episodes:   1%|          | 121/10000 [03:27<6:05:45,  2.22s/it]Episodes:   1%|          | 122/10000 [03:31<7:48:59,  2.85s/it]Episodes:   1%|          | 123/10000 [03:38<11:00:02,  4.01s/it]Episodes:   1%|          | 124/10000 [03:42<11:11:21,  4.08s/it]Episodes:   1%|▏         | 125/10000 [03:49<13:32:39,  4.94s/it]Episodes:   1%|▏         | 126/10000 [03:55<14:17:34,  5.21s/it]Episodes:   1%|▏         | 127/10000 [04:06<18:55:32,  6.90s/it]Episodes:   1%|▏         | 128/10000 [04:19<23:57:54,  8.74s/it]Episodes:   1%|▏         | 129/10000 [04:23<19:41:22,  7.18s/it]Episodes:   1%|▏         | 130/10000 [04:25<16:00:33,  5.84s/it]Episodes:   1%|▏         | 131/10000 [04:27<12:47:31,  4.67s/it]Episodes:   1%|▏         | 132/10000 [04:29<10:48:20,  3.94s/it]Episodes:   1%|▏         | 133/10000 [04:32<9:33:57,  3.49s/it] Episodes:   1%|▏         | 134/10000 [04:34<8:44:16,  3.19s/it]Episodes:   1%|▏         | 135/10000 [04:36<7:48:47,  2.85s/it]Episodes:   1%|▏         | 136/10000 [04:39<7:35:24,  2.77s/it]Episodes:   1%|▏         | 137/10000 [04:42<7:55:06,  2.89s/it]Episodes:   1%|▏         | 138/10000 [04:45<7:40:12,  2.80s/it]Episodes:   1%|▏         | 139/10000 [04:47<6:53:14,  2.51s/it]Episodes:   1%|▏         | 140/10000 [04:49<7:07:18,  2.60s/it]Episodes:   1%|▏         | 141/10000 [04:53<7:38:01,  2.79s/it]Episodes:   1%|▏         | 142/10000 [04:56<8:10:54,  2.99s/it]Episodes:   1%|▏         | 143/10000 [05:03<11:43:12,  4.28s/it]Episodes:   1%|▏         | 144/10000 [05:07<11:23:02,  4.16s/it]Episodes:   1%|▏         | 145/10000 [05:10<10:38:21,  3.89s/it]Episodes:   1%|▏         | 146/10000 [05:14<10:18:49,  3.77s/it]Episodes:   1%|▏         | 147/10000 [05:18<10:33:34,  3.86s/it]Episodes:   1%|▏         | 148/10000 [05:20<9:17:04,  3.39s/it] Episodes:   1%|▏         | 149/10000 [05:24<9:30:47,  3.48s/it]Episodes:   2%|▏         | 150/10000 [05:31<12:23:50,  4.53s/it]Episodes:   2%|▏         | 151/10000 [05:36<12:50:56,  4.70s/it]Episodes:   2%|▏         | 152/10000 [05:45<16:08:20,  5.90s/it]Episodes:   2%|▏         | 153/10000 [05:48<13:48:09,  5.05s/it]Episodes:   2%|▏         | 154/10000 [05:52<12:48:01,  4.68s/it]Episodes:   2%|▏         | 155/10000 [05:55<12:00:45,  4.39s/it]Episodes:   2%|▏         | 156/10000 [06:00<12:11:08,  4.46s/it]Episodes:   2%|▏         | 157/10000 [06:03<11:17:18,  4.13s/it]Episodes:   2%|▏         | 158/10000 [06:08<11:37:25,  4.25s/it]Episodes:   2%|▏         | 159/10000 [06:11<10:24:55,  3.81s/it]Episodes:   2%|▏         | 160/10000 [06:15<11:00:44,  4.03s/it]Episodes:   2%|▏         | 161/10000 [06:21<12:15:23,  4.48s/it]Episodes:   2%|▏         | 162/10000 [06:24<11:31:49,  4.22s/it]Episodes:   2%|▏         | 163/10000 [06:30<12:27:57,  4.56s/it]Episodes:   2%|▏         | 164/10000 [06:34<12:11:31,  4.46s/it]Episodes:   2%|▏         | 165/10000 [06:38<11:25:22,  4.18s/it]Episodes:   2%|▏         | 166/10000 [06:42<11:59:02,  4.39s/it]Episodes:   2%|▏         | 167/10000 [06:49<13:41:14,  5.01s/it]Episodes:   2%|▏         | 168/10000 [06:53<12:58:08,  4.75s/it]Episodes:   2%|▏         | 169/10000 [06:57<12:31:29,  4.59s/it]Episodes:   2%|▏         | 170/10000 [07:02<12:26:15,  4.56s/it]Episodes:   2%|▏         | 171/10000 [07:06<12:11:59,  4.47s/it]Episodes:   2%|▏         | 172/10000 [07:09<10:39:42,  3.91s/it]Episodes:   2%|▏         | 173/10000 [07:12<10:09:30,  3.72s/it]Episodes:   2%|▏         | 174/10000 [07:16<10:29:39,  3.84s/it]Episodes:   2%|▏         | 175/10000 [07:22<12:17:42,  4.51s/it]Episodes:   2%|▏         | 176/10000 [07:26<11:52:49,  4.35s/it]Episodes:   2%|▏         | 177/10000 [07:32<13:08:28,  4.82s/it]Episodes:   2%|▏         | 178/10000 [07:37<13:01:48,  4.78s/it]Episodes:   2%|▏         | 179/10000 [07:39<10:59:22,  4.03s/it]Episodes:   2%|▏         | 180/10000 [07:43<11:02:11,  4.05s/it]Episodes:   2%|▏         | 181/10000 [07:48<11:59:28,  4.40s/it]Episodes:   2%|▏         | 182/10000 [07:53<12:07:41,  4.45s/it]Episodes:   2%|▏         | 183/10000 [07:59<13:21:23,  4.90s/it]Episodes:   2%|▏         | 184/10000 [08:03<12:34:45,  4.61s/it]Episodes:   2%|▏         | 185/10000 [08:09<14:03:51,  5.16s/it]Episodes:   2%|▏         | 186/10000 [08:16<15:47:13,  5.79s/it]Episodes:   2%|▏         | 187/10000 [08:20<14:03:06,  5.16s/it]Episodes:   2%|▏         | 188/10000 [08:26<14:57:28,  5.49s/it]Episodes:   2%|▏         | 189/10000 [08:35<17:32:42,  6.44s/it]Episodes:   2%|▏         | 190/10000 [08:39<15:15:13,  5.60s/it]Episodes:   2%|▏         | 191/10000 [08:42<13:37:16,  5.00s/it]Episodes:   2%|▏         | 192/10000 [08:49<14:48:32,  5.44s/it]Episodes:   2%|▏         | 193/10000 [08:53<14:00:17,  5.14s/it]Episodes:   2%|▏         | 194/10000 [09:04<18:56:18,  6.95s/it]Episodes:   2%|▏         | 195/10000 [09:10<17:47:52,  6.53s/it]Episodes:   2%|▏         | 196/10000 [09:20<20:51:54,  7.66s/it]Episodes:   2%|▏         | 197/10000 [09:25<18:27:52,  6.78s/it]Episodes:   2%|▏         | 198/10000 [09:33<19:32:12,  7.18s/it]Episodes:   2%|▏         | 199/10000 [09:41<20:15:44,  7.44s/it]Episodes:   2%|▏         | 200/10000 [09:48<20:04:14,  7.37s/it]Episodes:   2%|▏         | 201/10000 [09:58<21:41:59,  7.97s/it]Episodes:   2%|▏         | 202/10000 [10:05<21:40:07,  7.96s/it]Episodes:   2%|▏         | 203/10000 [10:17<24:23:00,  8.96s/it]Episodes:   2%|▏         | 204/10000 [10:27<25:12:00,  9.26s/it]Episodes:   2%|▏         | 205/10000 [10:38<26:34:57,  9.77s/it]Episodes:   2%|▏         | 206/10000 [10:46<25:11:50,  9.26s/it]Episodes:   2%|▏         | 207/10000 [10:54<24:33:01,  9.02s/it]Episodes:   2%|▏         | 208/10000 [11:04<24:57:59,  9.18s/it]Episodes:   2%|▏         | 209/10000 [11:14<25:51:46,  9.51s/it]Episodes:   2%|▏         | 210/10000 [11:19<21:46:36,  8.01s/it]Episodes:   2%|▏         | 211/10000 [11:23<18:34:31,  6.83s/it]Episodes:   2%|▏         | 212/10000 [11:26<16:07:31,  5.93s/it]Episodes:   2%|▏         | 213/10000 [11:30<13:59:25,  5.15s/it]Episodes:   2%|▏         | 214/10000 [11:34<13:35:40,  5.00s/it]Episodes:   2%|▏         | 215/10000 [11:40<13:50:36,  5.09s/it]Episodes:   2%|▏         | 216/10000 [11:45<13:47:41,  5.08s/it]Episodes:   2%|▏         | 217/10000 [11:53<16:09:08,  5.94s/it]Episodes:   2%|▏         | 218/10000 [11:58<15:51:38,  5.84s/it]Episodes:   2%|▏         | 219/10000 [12:08<18:48:44,  6.92s/it]Episodes:   2%|▏         | 220/10000 [12:18<21:38:40,  7.97s/it]Episodes:   2%|▏         | 221/10000 [12:30<25:04:45,  9.23s/it]Episodes:   2%|▏         | 222/10000 [12:37<22:47:44,  8.39s/it]Episodes:   2%|▏         | 223/10000 [12:51<27:43:07, 10.21s/it]Episodes:   2%|▏         | 224/10000 [12:58<25:10:29,  9.27s/it]Episodes:   2%|▏         | 225/10000 [13:05<22:52:04,  8.42s/it]Episodes:   2%|▏         | 226/10000 [13:09<19:21:11,  7.13s/it]Episodes:   2%|▏         | 227/10000 [13:14<17:32:00,  6.46s/it]Episodes:   2%|▏         | 228/10000 [13:20<17:10:54,  6.33s/it]Episodes:   2%|▏         | 229/10000 [13:25<16:07:31,  5.94s/it]Episodes:   2%|▏         | 230/10000 [13:32<16:44:17,  6.17s/it]Episodes:   2%|▏         | 231/10000 [13:39<17:51:27,  6.58s/it]Episodes:   2%|▏         | 232/10000 [13:47<19:01:49,  7.01s/it]Episodes:   2%|▏         | 233/10000 [13:55<19:37:26,  7.23s/it]Episodes:   2%|▏         | 234/10000 [14:12<27:24:17, 10.10s/it]Episodes:   2%|▏         | 235/10000 [14:22<27:32:47, 10.16s/it]Episodes:   2%|▏         | 236/10000 [14:35<30:08:50, 11.12s/it]Episodes:   2%|▏         | 237/10000 [14:50<33:18:37, 12.28s/it]Episodes:   2%|▏         | 238/10000 [14:59<30:20:58, 11.19s/it]Episodes:   2%|▏         | 239/10000 [15:12<31:37:21, 11.66s/it]Episodes:   2%|▏         | 240/10000 [15:28<35:25:45, 13.07s/it]Episodes:   2%|▏         | 241/10000 [15:41<35:25:02, 13.07s/it]Episodes:   2%|▏         | 242/10000 [16:05<43:47:17, 16.15s/it]Episodes:   2%|▏         | 243/10000 [16:18<41:28:08, 15.30s/it]Episodes:   2%|▏         | 244/10000 [16:35<42:38:58, 15.74s/it]Episodes:   2%|▏         | 245/10000 [16:50<42:30:13, 15.69s/it]Episodes:   2%|▏         | 246/10000 [17:22<55:29:24, 20.48s/it]Episodes:   2%|▏         | 247/10000 [17:45<57:50:48, 21.35s/it]Episodes:   2%|▏         | 248/10000 [18:19<68:04:14, 25.13s/it]Episodes:   2%|▏         | 249/10000 [18:55<76:40:11, 28.31s/it]Episodes:   2%|▎         | 250/10000 [19:15<69:44:04, 25.75s/it]Episodes:   3%|▎         | 251/10000 [19:51<78:26:04, 28.96s/it]Episodes:   3%|▎         | 252/10000 [20:25<82:43:26, 30.55s/it]Episodes:   3%|▎         | 253/10000 [21:02<87:56:19, 32.48s/it]Episodes:   3%|▎         | 254/10000 [21:37<89:38:14, 33.11s/it]Episodes:   3%|▎         | 255/10000 [22:03<83:47:21, 30.95s/it]Episodes:   3%|▎         | 256/10000 [22:39<87:46:14, 32.43s/it]Episodes:   3%|▎         | 257/10000 [23:16<91:54:59, 33.96s/it]Episodes:   3%|▎         | 258/10000 [23:54<94:39:28, 34.98s/it]Episodes:   3%|▎         | 259/10000 [24:28<94:07:52, 34.79s/it]Episodes:   3%|▎         | 260/10000 [25:07<97:50:26, 36.16s/it]Episodes:   3%|▎         | 261/10000 [25:47<100:47:50, 37.26s/it]Episodes:   3%|▎         | 262/10000 [26:14<92:34:27, 34.22s/it] Episodes:   3%|▎         | 263/10000 [26:38<84:24:50, 31.21s/it]
+Episodes:   0%|          | 1/10000 [00:04<11:22:12,  4.09s/it]Episodes:   0%|          | 2/10000 [00:04<5:24:28,  1.95s/it] Episodes:   0%|          | 3/10000 [00:04<3:23:27,  1.22s/it]Episodes:   0%|          | 4/10000 [00:05<2:24:31,  1.15it/s]Episodes:   0%|          | 5/10000 [00:05<1:51:39,  1.49it/s]Episodes:   0%|          | 6/10000 [00:05<1:35:19,  1.75it/s]Episodes:   0%|          | 7/10000 [00:06<1:19:58,  2.08it/s]Episodes:   0%|          | 8/10000 [00:06<1:29:18,  1.86it/s]Episodes:   0%|          | 9/10000 [00:09<2:57:16,  1.06s/it]Episodes:   0%|          | 10/10000 [00:10<3:01:44,  1.09s/it]Episodes:   0%|          | 11/10000 [00:11<3:20:15,  1.20s/it]Episodes:   0%|          | 12/10000 [00:12<2:40:16,  1.04it/s]Episodes:   0%|          | 13/10000 [00:12<2:20:23,  1.19it/s]Episodes:   0%|          | 14/10000 [00:13<2:22:49,  1.17it/s]Episodes:   0%|          | 15/10000 [00:14<2:20:20,  1.19it/s]Episodes:   0%|          | 16/10000 [00:15<2:18:56,  1.20it/s]Episodes:   0%|          | 17/10000 [00:15<2:05:23,  1.33it/s]Episodes:   0%|          | 18/10000 [00:17<2:34:38,  1.08it/s]Episodes:   0%|          | 19/10000 [00:17<2:32:46,  1.09it/s]Episodes:   0%|          | 20/10000 [00:18<2:18:58,  1.20it/s]Episodes:   0%|          | 21/10000 [00:20<3:21:35,  1.21s/it]Episodes:   0%|          | 22/10000 [00:21<2:56:49,  1.06s/it]Episodes:   0%|          | 23/10000 [00:22<2:43:54,  1.01it/s]Episodes:   0%|          | 24/10000 [00:22<2:20:23,  1.18it/s]Episodes:   0%|          | 25/10000 [00:25<3:56:06,  1.42s/it]Episodes:   0%|          | 26/10000 [00:27<4:27:47,  1.61s/it]Episodes:   0%|          | 27/10000 [00:29<4:33:20,  1.64s/it]Episodes:   0%|          | 28/10000 [00:30<3:57:01,  1.43s/it]Episodes:   0%|          | 29/10000 [00:30<3:24:19,  1.23s/it]Episodes:   0%|          | 30/10000 [00:31<2:46:58,  1.00s/it]Episodes:   0%|          | 31/10000 [00:31<2:21:12,  1.18it/s]Episodes:   0%|          | 32/10000 [00:32<2:06:00,  1.32it/s]Episodes:   0%|          | 33/10000 [00:33<2:10:17,  1.27it/s]Episodes:   0%|          | 34/10000 [00:34<2:13:29,  1.24it/s]Episodes:   0%|          | 35/10000 [00:34<2:01:06,  1.37it/s]Episodes:   0%|          | 36/10000 [00:36<2:45:10,  1.01it/s]Episodes:   0%|          | 37/10000 [00:37<2:53:51,  1.05s/it]Episodes:   0%|          | 38/10000 [00:38<2:25:43,  1.14it/s]Episodes:   0%|          | 39/10000 [00:38<2:19:31,  1.19it/s]Episodes:   0%|          | 40/10000 [00:39<2:16:04,  1.22it/s]Episodes:   0%|          | 41/10000 [00:40<2:13:34,  1.24it/s]Episodes:   0%|          | 42/10000 [00:43<4:04:19,  1.47s/it]Episodes:   0%|          | 43/10000 [00:45<4:15:37,  1.54s/it]Episodes:   0%|          | 44/10000 [00:45<3:31:01,  1.27s/it]Episodes:   0%|          | 45/10000 [00:46<2:48:45,  1.02s/it]Episodes:   0%|          | 46/10000 [00:46<2:37:45,  1.05it/s]Episodes:   0%|          | 47/10000 [00:48<2:45:00,  1.01it/s]Episodes:   0%|          | 48/10000 [00:48<2:38:45,  1.04it/s]Episodes:   0%|          | 49/10000 [00:49<2:13:58,  1.24it/s]Episodes:   0%|          | 50/10000 [00:50<2:14:25,  1.23it/s]Episodes:   1%|          | 51/10000 [00:51<2:31:34,  1.09it/s]Episodes:   1%|          | 52/10000 [00:54<4:00:45,  1.45s/it]Episodes:   1%|          | 53/10000 [01:00<8:13:11,  2.97s/it]Episodes:   1%|          | 54/10000 [01:01<6:26:30,  2.33s/it]Episodes:   1%|          | 55/10000 [01:02<5:15:27,  1.90s/it]Episodes:   1%|          | 56/10000 [01:03<4:22:29,  1.58s/it]Episodes:   1%|          | 57/10000 [01:03<3:32:41,  1.28s/it]Episodes:   1%|          | 58/10000 [01:06<4:31:48,  1.64s/it]Episodes:   1%|          | 59/10000 [01:06<3:38:57,  1.32s/it]Episodes:   1%|          | 60/10000 [01:07<3:03:40,  1.11s/it]Episodes:   1%|          | 61/10000 [01:08<2:45:20,  1.00it/s]Episodes:   1%|          | 62/10000 [01:09<3:22:12,  1.22s/it]Episodes:   1%|          | 63/10000 [01:15<6:55:30,  2.51s/it]Episodes:   1%|          | 64/10000 [01:20<9:05:14,  3.29s/it]Episodes:   1%|          | 65/10000 [01:22<8:12:14,  2.97s/it]Episodes:   1%|          | 66/10000 [01:23<6:38:12,  2.41s/it]Episodes:   1%|          | 67/10000 [01:24<5:04:51,  1.84s/it]Episodes:   1%|          | 68/10000 [01:24<3:55:37,  1.42s/it]Episodes:   1%|          | 69/10000 [01:26<3:52:44,  1.41s/it]Episodes:   1%|          | 70/10000 [01:28<4:33:21,  1.65s/it]Episodes:   1%|          | 71/10000 [01:30<4:55:11,  1.78s/it]Episodes:   1%|          | 72/10000 [01:31<4:40:02,  1.69s/it]Episodes:   1%|          | 73/10000 [01:33<4:53:55,  1.78s/it]Episodes:   1%|          | 74/10000 [01:35<4:36:39,  1.67s/it]Episodes:   1%|          | 75/10000 [01:38<6:04:27,  2.20s/it]Episodes:   1%|          | 76/10000 [01:44<9:20:24,  3.39s/it]Episodes:   1%|          | 77/10000 [01:50<10:55:45,  3.97s/it]Episodes:   1%|          | 78/10000 [01:51<8:27:19,  3.07s/it] Episodes:   1%|          | 79/10000 [01:58<11:45:30,  4.27s/it]Episodes:   1%|          | 80/10000 [02:01<10:32:21,  3.82s/it]Episodes:   1%|          | 81/10000 [02:03<9:41:14,  3.52s/it] Episodes:   1%|          | 82/10000 [02:05<8:17:27,  3.01s/it]Episodes:   1%|          | 83/10000 [02:07<7:02:52,  2.56s/it]Episodes:   1%|          | 84/10000 [02:11<8:19:51,  3.02s/it]Episodes:   1%|          | 85/10000 [02:11<6:10:49,  2.24s/it]Episodes:   1%|          | 86/10000 [02:12<4:43:54,  1.72s/it]Episodes:   1%|          | 87/10000 [02:12<3:47:45,  1.38s/it]Episodes:   1%|          | 88/10000 [02:13<3:01:11,  1.10s/it]Episodes:   1%|          | 89/10000 [02:14<3:00:27,  1.09s/it]Episodes:   1%|          | 90/10000 [02:21<8:03:21,  2.93s/it]Episodes:   1%|          | 91/10000 [02:23<7:25:55,  2.70s/it]Episodes:   1%|          | 92/10000 [02:24<6:02:50,  2.20s/it]Episodes:   1%|          | 93/10000 [02:25<5:02:51,  1.83s/it]Episodes:   1%|          | 94/10000 [02:27<5:19:42,  1.94s/it]Episodes:   1%|          | 95/10000 [02:31<7:03:27,  2.57s/it]Episodes:   1%|          | 96/10000 [02:32<5:37:46,  2.05s/it]Episodes:   1%|          | 97/10000 [02:35<6:33:11,  2.38s/it]Episodes:   1%|          | 98/10000 [02:36<4:55:40,  1.79s/it]Episodes:   1%|          | 99/10000 [02:36<3:45:59,  1.37s/it]Episodes:   1%|          | 100/10000 [02:37<3:02:04,  1.10s/it]Episodes:   1%|          | 101/10000 [02:37<2:37:50,  1.05it/s]Episodes:   1%|          | 102/10000 [02:38<2:28:26,  1.11it/s]Episodes:   1%|          | 103/10000 [02:38<2:01:26,  1.36it/s]Episodes:   1%|          | 104/10000 [02:39<1:47:25,  1.54it/s]Episodes:   1%|          | 105/10000 [02:40<2:08:55,  1.28it/s]Episodes:   1%|          | 106/10000 [02:41<2:13:19,  1.24it/s]Episodes:   1%|          | 107/10000 [02:47<6:27:10,  2.35s/it]Episodes:   1%|          | 108/10000 [02:47<4:50:26,  1.76s/it]Episodes:   1%|          | 109/10000 [02:47<3:37:41,  1.32s/it]Episodes:   1%|          | 110/10000 [02:48<3:07:30,  1.14s/it]Episodes:   1%|          | 111/10000 [02:49<2:28:33,  1.11it/s]Episodes:   1%|          | 112/10000 [02:49<2:06:51,  1.30it/s]Episodes:   1%|          | 113/10000 [02:50<1:59:03,  1.38it/s]Episodes:   1%|          | 114/10000 [02:50<1:43:55,  1.59it/s]Episodes:   1%|          | 115/10000 [02:52<2:59:54,  1.09s/it]Episodes:   1%|          | 116/10000 [02:58<7:01:46,  2.56s/it]Episodes:   1%|          | 117/10000 [02:59<5:24:00,  1.97s/it]Episodes:   1%|          | 118/10000 [02:59<4:07:48,  1.50s/it]Episodes:   1%|          | 119/10000 [03:00<3:12:34,  1.17s/it]Episodes:   1%|          | 120/10000 [03:00<2:36:49,  1.05it/s]Episodes:   1%|          | 121/10000 [03:01<2:21:35,  1.16it/s]Episodes:   1%|          | 122/10000 [03:01<2:14:23,  1.23it/s]Episodes:   1%|          | 123/10000 [03:06<4:57:43,  1.81s/it]Episodes:   1%|          | 124/10000 [03:06<3:48:54,  1.39s/it]Episodes:   1%|▏         | 125/10000 [03:08<4:36:29,  1.68s/it]Episodes:   1%|▏         | 126/10000 [03:09<3:37:25,  1.32s/it]Episodes:   1%|▏         | 127/10000 [03:12<5:06:22,  1.86s/it]Episodes:   1%|▏         | 128/10000 [03:16<7:10:17,  2.62s/it]Episodes:   1%|▏         | 129/10000 [03:17<5:28:02,  1.99s/it]Episodes:   1%|▏         | 130/10000 [03:21<7:07:33,  2.60s/it]Episodes:   1%|▏         | 131/10000 [03:22<6:04:31,  2.22s/it]Episodes:   1%|▏         | 132/10000 [03:26<7:48:27,  2.85s/it]Episodes:   1%|▏         | 133/10000 [03:29<7:17:49,  2.66s/it]Episodes:   1%|▏         | 134/10000 [03:33<8:25:20,  3.07s/it]Episodes:   1%|▏         | 135/10000 [03:33<6:14:10,  2.28s/it]Episodes:   1%|▏         | 136/10000 [03:37<7:56:11,  2.90s/it]Episodes:   1%|▏         | 137/10000 [03:42<9:18:36,  3.40s/it]Episodes:   1%|▏         | 138/10000 [03:45<9:09:58,  3.35s/it]Episodes:   1%|▏         | 139/10000 [03:50<10:29:40,  3.83s/it]Episodes:   1%|▏         | 140/10000 [03:51<7:43:10,  2.82s/it] Episodes:   1%|▏         | 141/10000 [03:56<9:40:15,  3.53s/it]Episodes:   1%|▏         | 142/10000 [04:04<13:47:01,  5.03s/it]Episodes:   1%|▏         | 143/10000 [04:05<10:05:45,  3.69s/it]Episodes:   1%|▏         | 144/10000 [04:05<7:27:52,  2.73s/it] Episodes:   1%|▏         | 145/10000 [04:06<5:35:42,  2.04s/it]Episodes:   1%|▏         | 146/10000 [04:11<7:58:21,  2.91s/it]Episodes:   1%|▏         | 147/10000 [04:21<13:32:25,  4.95s/it]Episodes:   1%|▏         | 148/10000 [04:21<9:47:52,  3.58s/it] Episodes:   1%|▏         | 149/10000 [04:27<11:41:38,  4.27s/it]Episodes:   2%|▏         | 150/10000 [04:32<12:28:25,  4.56s/it]Episodes:   2%|▏         | 151/10000 [04:33<9:05:55,  3.33s/it] Episodes:   2%|▏         | 152/10000 [04:36<9:34:26,  3.50s/it]Episodes:   2%|▏         | 153/10000 [04:43<12:22:01,  4.52s/it]Episodes:   2%|▏         | 154/10000 [04:49<13:02:59,  4.77s/it]Episodes:   2%|▏         | 155/10000 [04:57<16:00:23,  5.85s/it]Episodes:   2%|▏         | 156/10000 [05:02<15:13:38,  5.57s/it]Episodes:   2%|▏         | 157/10000 [05:05<13:17:32,  4.86s/it]Episodes:   2%|▏         | 158/10000 [05:06<9:37:27,  3.52s/it] Episodes:   2%|▏         | 159/10000 [05:11<11:18:50,  4.14s/it]Episodes:   2%|▏         | 160/10000 [05:17<12:26:52,  4.55s/it]Episodes:   2%|▏         | 161/10000 [05:26<16:22:39,  5.99s/it]Episodes:   2%|▏         | 162/10000 [05:27<12:34:23,  4.60s/it]Episodes:   2%|▏         | 163/10000 [05:29<9:54:57,  3.63s/it] Episodes:   2%|▏         | 164/10000 [05:32<9:53:04,  3.62s/it]Episodes:   2%|▏         | 165/10000 [05:34<8:06:10,  2.97s/it]Episodes:   2%|▏         | 166/10000 [05:39<9:50:21,  3.60s/it]Episodes:   2%|▏         | 167/10000 [05:40<8:03:00,  2.95s/it]Episodes:   2%|▏         | 168/10000 [05:45<9:38:18,  3.53s/it]Episodes:   2%|▏         | 169/10000 [05:50<10:53:19,  3.99s/it]Episodes:   2%|▏         | 170/10000 [06:00<15:37:18,  5.72s/it]Episodes:   2%|▏         | 171/10000 [06:00<11:19:57,  4.15s/it]Episodes:   2%|▏         | 172/10000 [06:01<8:11:40,  3.00s/it] Episodes:   2%|▏         | 173/10000 [06:10<13:26:09,  4.92s/it]Episodes:   2%|▏         | 174/10000 [06:20<17:19:07,  6.35s/it]Episodes:   2%|▏         | 175/10000 [06:27<18:15:54,  6.69s/it]Episodes:   2%|▏         | 176/10000 [06:28<13:04:43,  4.79s/it]Episodes:   2%|▏         | 177/10000 [06:28<9:29:48,  3.48s/it] Episodes:   2%|▏         | 178/10000 [06:29<6:57:56,  2.55s/it]Episodes:   2%|▏         | 179/10000 [06:29<5:16:25,  1.93s/it]Episodes:   2%|▏         | 180/10000 [06:39<11:35:20,  4.25s/it]Episodes:   2%|▏         | 181/10000 [06:41<10:18:52,  3.78s/it]Episodes:   2%|▏         | 182/10000 [06:42<7:33:28,  2.77s/it] Episodes:   2%|▏         | 183/10000 [06:47<9:10:08,  3.36s/it]Episodes:   2%|▏         | 184/10000 [06:49<8:04:27,  2.96s/it]Episodes:   2%|▏         | 185/10000 [06:49<6:20:24,  2.33s/it]Episodes:   2%|▏         | 186/10000 [06:50<5:00:52,  1.84s/it]Episodes:   2%|▏         | 187/10000 [06:51<4:17:10,  1.57s/it]Episodes:   2%|▏         | 188/10000 [06:52<3:45:11,  1.38s/it]Episodes:   2%|▏         | 189/10000 [06:53<3:53:05,  1.43s/it]Episodes:   2%|▏         | 190/10000 [07:03<10:44:16,  3.94s/it]Episodes:   2%|▏         | 191/10000 [07:13<15:28:41,  5.68s/it]Episodes:   2%|▏         | 192/10000 [07:19<15:27:40,  5.68s/it]Episodes:   2%|▏         | 193/10000 [07:25<16:18:38,  5.99s/it]Episodes:   2%|▏         | 194/10000 [07:26<11:40:33,  4.29s/it]Episodes:   2%|▏         | 195/10000 [07:26<8:29:40,  3.12s/it] Episodes:   2%|▏         | 196/10000 [07:27<6:15:28,  2.30s/it]Episodes:   2%|▏         | 197/10000 [07:27<4:56:17,  1.81s/it]Episodes:   2%|▏         | 198/10000 [07:31<6:36:23,  2.43s/it]Episodes:   2%|▏         | 199/10000 [07:31<4:56:21,  1.81s/it]Episodes:   2%|▏         | 200/10000 [07:32<4:04:04,  1.49s/it]Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Episode 0 Reward: 62.0
+Moving average of last 10% of episodes: 62.0
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Episodes:   2%|▏         | 201/10000 [07:36<5:33:42,  2.04s/it]Episodes:   2%|▏         | 202/10000 [07:36<4:34:34,  1.68s/it]Episodes:   2%|▏         | 203/10000 [07:41<6:51:49,  2.52s/it]Episodes:   2%|▏         | 204/10000 [07:50<12:40:06,  4.66s/it]Episodes:   2%|▏         | 205/10000 [07:52<9:47:35,  3.60s/it] Episodes:   2%|▏         | 206/10000 [07:53<7:45:00,  2.85s/it]Episodes:   2%|▏         | 207/10000 [07:53<5:46:23,  2.12s/it]Episodes:   2%|▏         | 208/10000 [07:58<8:12:57,  3.02s/it]Episodes:   2%|▏         | 209/10000 [08:06<12:20:56,  4.54s/it]Episodes:   2%|▏         | 210/10000 [08:07<8:54:38,  3.28s/it] Episodes:   2%|▏         | 211/10000 [08:14<12:01:26,  4.42s/it]Episodes:   2%|▏         | 212/10000 [08:14<8:42:37,  3.20s/it] Episodes:   2%|▏         | 213/10000 [08:24<14:04:22,  5.18s/it]Episodes:   2%|▏         | 214/10000 [08:28<13:10:32,  4.85s/it]Episodes:   2%|▏         | 215/10000 [08:28<9:28:59,  3.49s/it] Episodes:   2%|▏         | 216/10000 [08:29<6:53:56,  2.54s/it]Episodes:   2%|▏         | 217/10000 [08:29<5:05:33,  1.87s/it]Episodes:   2%|▏         | 218/10000 [08:29<3:56:15,  1.45s/it]Episodes:   2%|▏         | 219/10000 [08:30<3:13:23,  1.19s/it]Episodes:   2%|▏         | 220/10000 [08:40<10:16:23,  3.78s/it]Episodes:   2%|▏         | 221/10000 [08:49<14:21:04,  5.28s/it]Episodes:   2%|▏         | 222/10000 [08:49<10:33:10,  3.89s/it]Episodes:   2%|▏         | 223/10000 [08:55<12:05:53,  4.45s/it]Episodes:   2%|▏         | 224/10000 [09:01<13:01:31,  4.80s/it]Episodes:   2%|▏         | 225/10000 [09:06<13:42:33,  5.05s/it]Episodes:   2%|▏         | 226/10000 [09:07<9:49:56,  3.62s/it] Episodes:   2%|▏         | 227/10000 [09:07<7:10:02,  2.64s/it]Episodes:   2%|▏         | 228/10000 [09:07<5:26:16,  2.00s/it]Episodes:   2%|▏         | 229/10000 [09:17<11:45:16,  4.33s/it]Episodes:   2%|▏         | 230/10000 [09:18<8:32:31,  3.15s/it] Episodes:   2%|▏         | 231/10000 [09:23<10:42:54,  3.95s/it]Episodes:   2%|▏         | 232/10000 [09:29<12:13:03,  4.50s/it]Episodes:   2%|▏         | 233/10000 [09:36<14:29:08,  5.34s/it]Episodes:   2%|▏         | 234/10000 [09:40<12:42:47,  4.69s/it]Episodes:   2%|▏         | 235/10000 [09:40<9:09:32,  3.38s/it] Episodes:   2%|▏         | 236/10000 [09:47<12:03:02,  4.44s/it]Episodes:   2%|▏         | 237/10000 [09:57<16:21:36,  6.03s/it]Episodes:   2%|▏         | 238/10000 [09:57<11:48:07,  4.35s/it]Episodes:   2%|▏         | 239/10000 [10:03<13:28:42,  4.97s/it]Episodes:   2%|▏         | 240/10000 [10:11<15:26:16,  5.69s/it]Episodes:   2%|▏         | 241/10000 [10:11<11:05:42,  4.09s/it]Episodes:   2%|▏         | 242/10000 [10:15<10:49:49,  4.00s/it]Episodes:   2%|▏         | 243/10000 [10:16<8:45:18,  3.23s/it] Episodes:   2%|▏         | 244/10000 [10:19<8:04:41,  2.98s/it]Episodes:   2%|▏         | 245/10000 [10:26<11:09:54,  4.12s/it]Episodes:   2%|▏         | 246/10000 [10:35<15:43:27,  5.80s/it]Episodes:   2%|▏         | 247/10000 [10:45<18:55:37,  6.99s/it]Episodes:   2%|▏         | 248/10000 [10:45<13:34:03,  5.01s/it]Episodes:   2%|▏         | 249/10000 [10:55<17:24:37,  6.43s/it]Episodes:   2%|▎         | 250/10000 [11:05<20:05:12,  7.42s/it]Episodes:   3%|▎         | 251/10000 [11:05<14:23:31,  5.31s/it]Episodes:   3%|▎         | 252/10000 [11:15<17:56:55,  6.63s/it]Episodes:   3%|▎         | 253/10000 [11:22<18:19:21,  6.77s/it]Episodes:   3%|▎         | 254/10000 [11:22<13:03:31,  4.82s/it]Episodes:   3%|▎         | 255/10000 [11:28<13:56:50,  5.15s/it]Episodes:   3%|▎         | 256/10000 [11:33<13:10:44,  4.87s/it]Episodes:   3%|▎         | 257/10000 [11:33<9:29:04,  3.50s/it] Episodes:   3%|▎         | 258/10000 [11:33<6:55:41,  2.56s/it]Episodes:   3%|▎         | 259/10000 [11:34<5:06:28,  1.89s/it]Episodes:   3%|▎         | 260/10000 [11:34<3:56:36,  1.46s/it]Episodes:   3%|▎         | 261/10000 [11:40<7:55:32,  2.93s/it]Episodes:   3%|▎         | 262/10000 [11:47<10:43:27,  3.96s/it]Episodes:   3%|▎         | 263/10000 [11:54<13:13:25,  4.89s/it]Episodes:   3%|▎         | 264/10000 [11:58<12:59:45,  4.81s/it]Episodes:   3%|▎         | 265/10000 [12:04<13:57:17,  5.16s/it]Episodes:   3%|▎         | 266/10000 [12:11<15:09:15,  5.60s/it]Episodes:   3%|▎         | 267/10000 [12:16<14:34:46,  5.39s/it]Episodes:   3%|▎         | 268/10000 [12:22<15:22:18,  5.69s/it]Episodes:   3%|▎         | 269/10000 [12:32<18:38:58,  6.90s/it]Episodes:   3%|▎         | 270/10000 [12:42<20:59:30,  7.77s/it]Episodes:   3%|▎         | 271/10000 [12:52<22:36:27,  8.37s/it]Episodes:   3%|▎         | 272/10000 [13:01<23:40:18,  8.76s/it]Episodes:   3%|▎         | 273/10000 [13:09<22:37:55,  8.38s/it]Episodes:   3%|▎         | 274/10000 [13:18<23:44:56,  8.79s/it]Episodes:   3%|▎         | 275/10000 [13:28<24:29:44,  9.07s/it]Episodes:   3%|▎         | 276/10000 [13:38<25:02:43,  9.27s/it]Episodes:   3%|▎         | 277/10000 [13:48<25:23:58,  9.40s/it]Episodes:   3%|▎         | 278/10000 [13:52<21:39:29,  8.02s/it]Episodes:   3%|▎         | 279/10000 [14:02<22:59:02,  8.51s/it]Episodes:   3%|▎         | 280/10000 [14:12<23:56:00,  8.86s/it]Episodes:   3%|▎         | 281/10000 [14:21<24:35:57,  9.11s/it]Episodes:   3%|▎         | 282/10000 [14:31<25:07:11,  9.31s/it]Episodes:   3%|▎         | 283/10000 [14:41<25:30:50,  9.45s/it]Episodes:   3%|▎         | 284/10000 [14:51<25:48:59,  9.57s/it]Episodes:   3%|▎         | 285/10000 [15:01<25:55:04,  9.60s/it]Episodes:   3%|▎         | 286/10000 [15:10<25:58:39,  9.63s/it]Episodes:   3%|▎         | 287/10000 [15:20<26:01:27,  9.65s/it]Episodes:   3%|▎         | 288/10000 [15:30<26:05:30,  9.67s/it]Episodes:   3%|▎         | 289/10000 [15:39<26:08:31,  9.69s/it]Episodes:   3%|▎         | 290/10000 [15:49<26:08:10,  9.69s/it]Episodes:   3%|▎         | 291/10000 [15:59<26:08:53,  9.70s/it]Episodes:   3%|▎         | 292/10000 [16:09<26:14:33,  9.73s/it]Episodes:   3%|▎         | 293/10000 [16:18<26:14:38,  9.73s/it]Episodes:   3%|▎         | 294/10000 [16:28<26:19:55,  9.77s/it]Episodes:   3%|▎         | 295/10000 [16:30<19:56:02,  7.39s/it]Episodes:   3%|▎         | 296/10000 [16:35<18:20:39,  6.81s/it]Episodes:   3%|▎         | 297/10000 [16:36<13:06:04,  4.86s/it]Episodes:   3%|▎         | 298/10000 [16:36<9:22:55,  3.48s/it] Episodes:   3%|▎         | 299/10000 [16:36<6:54:31,  2.56s/it]Episodes:   3%|▎         | 300/10000 [16:46<12:42:47,  4.72s/it]Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Trained model saved at saved_models/a2c_model.pt
+Episodes:   3%|▎         | 301/10000 [16:56<16:48:48,  6.24s/it]Episodes:   3%|▎         | 302/10000 [17:06<19:36:09,  7.28s/it]Episodes:   3%|▎         | 303/10000 [17:15<21:33:26,  8.00s/it]Episodes:   3%|▎         | 304/10000 [17:25<22:54:47,  8.51s/it]Episodes:   3%|▎         | 305/10000 [17:35<23:53:10,  8.87s/it]Episodes:   3%|▎         | 306/10000 [17:45<24:35:17,  9.13s/it]Episodes:   3%|▎         | 307/10000 [17:54<25:04:03,  9.31s/it]Episodes:   3%|▎         | 308/10000 [18:04<25:26:01,  9.45s/it]Episodes:   3%|▎         | 309/10000 [18:14<25:41:14,  9.54s/it]Episodes:   3%|▎         | 310/10000 [18:23<25:47:31,  9.58s/it]Episodes:   3%|▎         | 311/10000 [18:30<23:01:59,  8.56s/it]Episodes:   3%|▎         | 312/10000 [18:35<20:16:53,  7.54s/it]Episodes:   3%|▎         | 313/10000 [18:41<19:12:21,  7.14s/it]Episodes:   3%|▎         | 314/10000 [18:46<17:35:57,  6.54s/it]Episodes:   3%|▎         | 315/10000 [18:52<17:20:52,  6.45s/it]Episodes:   3%|▎         | 316/10000 [19:01<18:57:40,  7.05s/it]Episodes:   3%|▎         | 317/10000 [19:11<21:07:44,  7.86s/it]Episodes:   3%|▎         | 318/10000 [19:20<22:39:20,  8.42s/it]Episodes:   3%|▎         | 319/10000 [19:21<16:07:04,  5.99s/it]Episodes:   3%|▎         | 320/10000 [19:27<16:07:19,  6.00s/it]

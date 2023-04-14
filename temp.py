@@ -7,33 +7,22 @@ from tqdm import tqdm
 import numpy as np
 import wandb
 from collections import deque
+from time import time as t
 
 from a2c import A2CAgent
 from utils import calculate_novelty_exploration_efficiency, calculate_entropy_exploration_efficiency, calculate_coverage_exploration_efficiency
 
-import os
-import gym
-import torch
-from a2c_VDP import A2CAgent
-import wandb
-
-# Initialize WandB
-wandb.init(project="A2C", entity="naddeok")
-wandb.config.episodes = episodes = int(1e4)
-wandb.config.max_time_steps = max_time_steps = 300 
-
-# Get the run name
-run_name = wandb.run.name
-
 # Hyperparameters
+episodes = int(1e4)
 epsilon = 0.1
+max_time_steps = 300 
 save_freq = int(1e2) # save model every n episodes
 render_freq = int(2.5e3) # render every n episodes
-model_path = f"saved_models/a2c_model_{run_name}.pt"
-output_path = f"results/a2c_model_{run_name}.mp4"
+model_path = "saved_models/a2c_model.pt"
+output_path = 'results/a2c_model.mp4'
 
 # Initialize GPU usage
-gpu_number = "5"
+gpu_number = "3"
 if gpu_number:
     os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
     os.environ["CUDA_VISIBLE_DEVICES"] = gpu_number
@@ -53,22 +42,31 @@ else:
 # Initialize agent
 agent = A2CAgent(env.observation_space.shape[0], env.action_space.n, device=device)
 
+# Initialize WandB
+wandb.init(project="A2C", entity="naddeok")
+wandb.config.episodes = episodes
+wandb.config.max_time_steps = max_time_steps
+
 # Initialize storage
 frames = []
-# episode_rewards = deque(maxlen=int(0.1*episodes))
+episode_rewards = deque(maxlen=int(0.1*episodes))
 # visited_states = set() # keep track of visited states
-step = 0
 
 # Train
 for i_episode in tqdm(range(episodes),desc="Episodes"):
+    a=t()
     state, info = env.reset()
     episode_reward = 0
     done = False
     frame_number = 0
     time_step = 0
+    
+    setuptime = t()-a
     while not done and time_step < max_time_steps:
         # Episode Step
+        a=t()
         action, logits = agent.act(state, return_logits=True)
+        actiontime = t()-a
 
         # Epsilon Random Exploration
         if np.random.uniform() < epsilon:
@@ -76,34 +74,42 @@ for i_episode in tqdm(range(episodes),desc="Episodes"):
             action = env.action_space.sample()
 
         # Episode step
+        a=t()
         next_state, reward, done, _, _ = env.step(action)
-
+        envtime=t()-a
         # calculate exploration efficiency
         # visited_states.add(tuple(state))
         # novelty_based_exploration_efficiency = calculate_novelty_exploration_efficiency(next_state, visited_states)
+        a=t()
         entropy_based_exploration_efficiency = calculate_entropy_exploration_efficiency(logits)
+        entropytime= t()-a
 
         # Backward pass
+        a=t()
         actor_loss, critic_loss = agent.update(state, action, reward, next_state, done)
-
+        backtime=t()-a
+        
         # Store
-        step += 1
         state = next_state
         episode_reward += reward
         time_step += 1
 
         wandb.log({
                 "i_episode": i_episode,
-                "step": step,
-                "entropy_based_exploration_efficiency": entropy_based_exploration_efficiency,
-                "actor_loss": actor_loss,
-                "critic_loss": critic_loss
+                "setuptime": setuptime,
+                "actiontime": actiontime,
+                "envtime": envtime,
+                "entropytime": entropytime,
+                "backtime": backtime
             })
         
         # Log
         if done or time_step >= max_time_steps:
             # Calculate moving average
-            # episode_rewards.append(episode_reward)
+            a=t()
+            episode_rewards.append(episode_reward)
+            eprewardstime=t()-a
+
             # moving_avg = np.mean(episode_rewards)
 
             # Calculate coverage
@@ -111,14 +117,15 @@ for i_episode in tqdm(range(episodes),desc="Episodes"):
             
             # Log
             wandb.log({
-                "i_episode": i_episode,
+                # "i_episode": i_episode,
                 # "novelty_based_exploration_efficiency": novelty_based_exploration_efficiency,
-                # "entropy_based_exploration_efficiency": entropy_based_exploration_efficiency,
+                "entropy_based_exploration_efficiency": entropy_based_exploration_efficiency,
                 # "coverage_based_exploration_efficiency": coverage_based_exploration_efficiency,
                 "episode_reward": episode_reward,
                 # "moving_average": moving_avg,
-                # "actor_loss": actor_loss,
-                # "critic_loss": critic_loss
+                "actor_loss": actor_loss,
+                "critic_loss": critic_loss,
+                "episode_rewards_time":eprewardstime
             })
 
         # Display

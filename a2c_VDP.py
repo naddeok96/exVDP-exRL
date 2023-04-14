@@ -21,6 +21,7 @@ Date: 4/12/2023
 # Imports
 import torch
 import torch.nn as nn
+import torch.optim as optim
 import torch.nn.functional as F
 from torch.distributions import Categorical
 
@@ -136,7 +137,10 @@ class RVLinearlayer(nn.Module):
         device = self.w_mu.device
         batch_size = mu_in.size(0)
 
-        mu_out = torch.matmul(self.w_mu.transpose(1, 0), mu_in.view(batch_size, self.size_in, 1)) + self.b_mu
+        # Reshape
+        mu_in_reshaped = mu_in.view(batch_size, self.size_in, 1)
+
+        mu_out = torch.matmul(self.w_mu.transpose(1, 0), mu_in_reshaped) + self.b_mu
 
         # Perform a reparameterization trick
         W_Sigma = torch.log(1. + torch.exp(self.w_sigma))
@@ -147,12 +151,16 @@ class RVLinearlayer(nn.Module):
         B_Sigma = torch.diag_embed(B_Sigma)
 
         # Calculate Sigma_out
-        mu_in_t_W_Sigma_mu_in = torch.bmm(torch.matmul(W_Sigma, mu_in.transpose(2, 1).unsqueeze(-1)).squeeze(-1), mu_in).squeeze()
+        mu_in_t_W_Sigma_mu_in = torch.bmm(torch.matmul(W_Sigma, mu_in_reshaped.transpose(2, 1).unsqueeze(-1)).squeeze(-1), mu_in_reshaped).squeeze()
 
         if sigma_in is not None:
             tr_W_Sigma_and_sigma_in = torch.matmul(W_Sigma.view(self.size_out, -1), sigma_in.view(-1, batch_size)).view(batch_size, self.size_out)
             mu_w_t_sigma_in_mu_w = torch.matmul(torch.matmul(self.w_mu.t(), sigma_in), self.w_mu)
-            Sigma_out = (torch.diag_embed(tr_W_Sigma_and_sigma_in) + mu_w_t_sigma_in_mu_w + torch.diag_embed(mu_in_t_W_Sigma_mu_in)) + B_Sigma
+
+            if torch.prod(torch.tensor(tr_W_Sigma_and_sigma_in.shape)) == 1:
+                Sigma_out = torch.tensor(tr_W_Sigma_and_sigma_in.item() + mu_w_t_sigma_in_mu_w.item() + mu_in_t_W_Sigma_mu_in.item() + B_Sigma.item())
+            else:
+                Sigma_out = (torch.diag_embed(tr_W_Sigma_and_sigma_in) + mu_w_t_sigma_in_mu_w + torch.diag_embed(mu_in_t_W_Sigma_mu_in)) + B_Sigma
             
         else:
             Sigma_out = torch.diag_embed(mu_in_t_W_Sigma_mu_in) + B_Sigma
@@ -220,23 +228,29 @@ class ActorCritic(nn.Module):
         self.actor = RVLinearlayer(128, num_actions) # nn.Linear(128, num_actions)
         self.critic = RVLinearlayer(128, 1) # nn.Linear(128, 1)
 
-    def forward(self, x):
-        # Embed
-        m, s, kl_1 = self.fc1(x, None) # x = self.relu(self.fc1(x))
-        m, s = self.relu_1(m, s)
+    def forward(self, x, return_uncertainty=False):
+        # Feature embedding
+        m, s, kl_1 = self.fc1(x.view(1, -1), None) # x = self.relu(self.fc1(x))
+        m, s = self.relu(m, s)
 
         m, s, kl_2 = self.fc2(m, s) # x = self.relu(self.fc2(x))
-        m, s = self.relu_1(m, s)
+        m, s = self.relu(m, s)
+
+        feature_kl = kl_1 + kl_2
 
         # Actor and Critic
         logits, actor_sigma, actor_kl = self.actor(m, s)
         value, critic_sigma, critic_kl = self.critic(m, s)
 
-        return logits, value
+        if return_uncertainty:
+            return logits.view(-1), value.view(-1), actor_sigma, critic_sigma, actor_kl, critic_kl, feature_kl
+        else:
+            return logits.view(-1), value.view(-1)
 
 class A2CAgent:
-    def __init__(self, input_shape, num_actions, gamma=0.99, lr=0.001, device='cpu', pretrained_weights=None):
+    def __init__(self, input_shape, num_actions, gamma=0.99, lr=0.001, kl_factor=0.001, device='cpu', pretrained_weights=None):
         self.gamma = gamma
+        self.kl_factor = kl_factor
         self.device = device
         self.model = ActorCritic(input_shape, num_actions).to(self.device)
         self.optimizer = optim.Adam(self.model.parameters(), lr=lr)
@@ -255,27 +269,32 @@ class A2CAgent:
         else:
             return action.item()
 
-    def update(self, states, actions, rewards, next_states, dones):
+    def update(self, states, actions, rewards, next_states, dones, max_grad_norm=0.5):
         states = torch.FloatTensor(states).to(self.device)
         actions = torch.FloatTensor([actions]).to(self.device)
         rewards = torch.FloatTensor([rewards]).to(self.device)
         next_states = torch.FloatTensor(next_states).to(self.device)
 
-        _, values = self.model(states)
+        _, values, _, _, actor_kl, critic_kl, feature_kl = self.model(states, return_uncertainty=True)
         _, next_values = self.model(next_states)
 
         deltas = rewards + self.gamma * next_values * (1 - dones) - values
 
         critic_loss = deltas.pow(2).mean()
+        total_critic_loss = critic_loss + self.kl_factor * (feature_kl + critic_kl)
         self.optimizer.zero_grad()
-        critic_loss.backward()
+        total_critic_loss.backward()
+        torch.nn.utils.clip_grad_norm_(self.model.parameters(), max_grad_norm)
         self.optimizer.step()
 
-        logits, _ = self.model(states)
+        logits, _, _, _, actor_kl, critic_kl, feature_kl = self.model(states, return_uncertainty=True)
         dist = Categorical(logits=logits)
         log_probs = dist.log_prob(actions)
         actor_loss = -(log_probs * deltas.detach()).mean()
+        total_actor_loss = actor_loss + self.kl_factor * (feature_kl + actor_kl)
         self.optimizer.zero_grad()
-        actor_loss.backward()
+        total_actor_loss.backward()
+        torch.nn.utils.clip_grad_norm_(self.model.parameters(), max_grad_norm)
         self.optimizer.step()
 
+        return total_actor_loss, total_critic_loss, actor_loss, critic_loss, actor_kl, critic_kl, feature_kl

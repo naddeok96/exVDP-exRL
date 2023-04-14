@@ -54,7 +54,8 @@ class A2CAgent:
         _, values = self.model(states)
         _, next_values = self.model(next_states)
 
-        deltas = rewards + self.gamma * next_values * (1 - dones) - values
+        # Critic Update
+        deltas = (rewards + (1 - dones) * (self.gamma * next_values)) - values
 
         critic_loss = deltas.pow(2).mean()
         self.optimizer.zero_grad()
@@ -68,4 +69,6 @@ class A2CAgent:
         self.optimizer.zero_grad()
         actor_loss.backward()
         self.optimizer.step()
+
+        return actor_loss.item(), critic_loss.item()
 
