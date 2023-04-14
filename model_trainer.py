@@ -3,7 +3,7 @@ This script will train a model and save it
 '''
 # Imports
 import torch
-import pickle
+import time
 from data_setup import Data
 import torch.nn.functional as F
 from tqdm import tqdm
@@ -21,10 +21,10 @@ def train(net, data, gpu, n_epochs, learning_rate, batch_size, attack_type, epsi
 
 
     #Loop for n_epochs
-    for epoch in tqdm(range(n_epochs), desc='Training'):   
-        for inputs, labels in train_loader:
+    for epoch in tqdm(range(n_epochs), desc='Epochs'):   
+        for inputs, labels in tqdm(train_loader, desc='Batches'):
             # Flatten input
-            inputs = inputs.reshape(-1, 28*28, 1)
+            inputs = inputs.view(-1, 28*28, 1)
 
             # Convert labels to one hot encoding
             labels_one_hot = F.one_hot(labels, num_classes=10).float()
@@ -44,7 +44,7 @@ def train(net, data, gpu, n_epochs, learning_rate, batch_size, attack_type, epsi
 
             # Get loss
             if kl_factor:
-                log_loss = nll_gaussian(labels_one_hot, outputs, sigma.clamp(min=-1e+10, max=1e+10), len(train_loader.dataset.classes), batch_size)
+                log_loss = nll_gaussian(y_test=labels_one_hot, y_pred_mean=outputs, y_pred_sd=sigma.clamp(min=-1e+10, max=1e+10), num_labels=len(train_loader.dataset.classes))
                 total_loss = log_loss + kl_factor * kl_loss
             else:
                 total_loss = F.mse_loss(labels_one_hot, outputs)
@@ -53,9 +53,9 @@ def train(net, data, gpu, n_epochs, learning_rate, batch_size, attack_type, epsi
             total_loss.backward()
             optimizer.step()
         
-        if epoch % test_freq == 0:
-            accuracy = test(net, data, gpu, kl_factor)
-            print("Epoch: ", epoch + 1 , "\tLoss: ", total_loss.item(), "\tAcc:", accuracy)    
+        # if epoch % test_freq == 0:
+        #     accuracy = test(net, data, gpu, kl_factor)
+        #     print("Epoch: ", epoch + 1 , "\tLoss: ", total_loss.item(), "\tAcc:", accuracy)    
 
     return net 
 
@@ -79,7 +79,7 @@ def test(net, data, gpu, kl_factor):
 
         #Forward pass
         if kl_factor:
-            outputs, sigma, kl_loss = net(inputs)
+            outputs, _, _ = net(inputs)
         else:
             outputs = net(inputs.squeeze())
 
@@ -97,16 +97,17 @@ def main():
     # Machine parameters
     seed       = 3
     gpu        = True
-    gpu_number = "4"
+    gpu_number = "2"
 
     # Training parameters
     n_epochs        = 5
-    batch_size      = 124
+    batch_size      = 32
     learning_rate   = 0.001
-    kl_factor       = None
+    kl_factor       = 0.001
     test_freq       = 10
 
     # Model parameters
+    hidden_dim = 124
     pretrained_weights_filename = None # "model_weights/VDP_MLP_model.pth"
     save_model                  = True
 
@@ -143,9 +144,9 @@ def main():
 
     # Initalize Network
     if kl_factor:
-        net = exVDPMLP(input_dim=784, hidden_dim=124, output_dim=10)
+        net = exVDPMLP(input_dim=784, hidden_dim=hidden_dim, output_dim=10)
     else:
-        net = MLP(input_dim=784, hidden_dim=124, output_dim=10)
+        net = MLP(input_dim=784, hidden_dim=hidden_dim, output_dim=10)
     
     net.eval()
 
@@ -162,7 +163,9 @@ def main():
 
     # Fit Model
     if n_epochs > 0:
+        start_time = time.time()
         net = train(net, data, gpu, n_epochs, learning_rate, batch_size, attack_type, epsilon, kl_factor, test_freq)
+        print("Training took ", time.time() - start_time, "s")
 
     # Calculate accuracy on test set
     accuracy = test(net, data, gpu, kl_factor)

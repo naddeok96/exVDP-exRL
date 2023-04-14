@@ -10,7 +10,7 @@ from tqdm import tqdm
 
 from data_setup import Data
 from torch_MLP import MLP
-from torch_exVDP_MLP import exVDPMLP, nll_gaussian
+from torch_exVDP_MLP import exVDPMLP
 
 def add_gaussian_noise(image):
     # Collect device
@@ -32,7 +32,7 @@ def add_gaussian_noise(image):
     return noisy_image
 
 # Push to GPU if necessary
-gpu_number = "4"
+gpu_number = "6"
 if gpu_number:
     import os
     os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
@@ -46,7 +46,7 @@ net_VDP = exVDPMLP(input_dim=784, hidden_dim=124, output_dim=10)
 net_MLP = MLP(input_dim=784, hidden_dim=124, output_dim=10)
 
 # Load the model weights
-net_VDP.load_state_dict(torch.load('model_weights/VDP_MLP_model.pth', map_location=torch.device('cpu')))
+net_VDP.load_state_dict(torch.load('model_weights/exVDP_w_acc_94.pt', map_location=torch.device('cpu')))
 net_MLP.load_state_dict(torch.load('model_weights/MLP_w_acc_97.pt', map_location=torch.device('cpu')))
 
 # Set the models to evaluation mode

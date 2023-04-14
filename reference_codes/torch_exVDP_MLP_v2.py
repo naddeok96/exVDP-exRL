@@ -99,22 +99,42 @@ def compute_kl_loss(mu, sigma):
         itself, `k` is the dimension of the Gaussian distribution (i.e., the number of features), and `det(sigma)`
         is the determinant of the covariance matrix.
     """
-    
+    device = mu.device
+    import time
+    a = time.time()
+
     kl_losses = []
     for i in range(mu.size(1)):
         mu_i = mu[:, i].unsqueeze(1)
         sigma_i = sigma[i, :, :]
-        sigma_i_det = torch.det(sigma_i)
         
         term1 = torch.matmul(mu_i.t(), mu_i)
         term2 = torch.trace(sigma_i)
         term3 = mu_i.size(0)
-        term4 = torch.log(sigma_i_det) if sigma_i_det.item() > 0 else -1e3
+        term4 = torch.slogdet(sigma_i)[1].item()
         
         # compute the KL divergence
         kl_losses.append(0.5 * (term1 + term2 - term3 - term4))
-        
-    return sum(kl_losses)
+
+    kl_loss = sum(kl_losses)
+    print("Orginal KL: ", kl_loss, time.time() - a)   
+
+    # # New Version
+    # #------------------------------------------------------------------------------------------------------#
+    # a = time.time()
+
+    # # calculate the KL divergence
+    # k = torch.tensor(mu.size(0)).view(-1, 1).to(device)
+    # trace_sigma = torch.diagonal(sigma, dim1=-2, dim2=-1).sum(-1).view(-1, 1)
+    # mu_sq = torch.bmm(mu.t().unsqueeze(1), mu.t().unsqueeze(2)).view(-1, 1)
+    # logdet_sigma = torch.slogdet(sigma)[1].view(-1, 1)
+    # kl_loss2 = 0.5 * (trace_sigma + mu_sq - k - logdet_sigma).sum()
+    
+    # print("New KL: ", kl_loss2, time.time() - a)
+    # #------------------------------------------------------------------------------------------------------#
+
+
+    return kl_loss
 
 class RVLinearlayer(nn.Module):
     """
@@ -171,6 +191,8 @@ class RVLinearlayer(nn.Module):
         B_Sigma = torch.diag_embed(B_Sigma)
 
         # Calculate Sigma_out
+        import time
+        a = time.time()
         Sigma_out = torch.empty((batch_size, self.size_out, self.size_out)).to(device)
         for i in range(self.size_out):
             mu_i = self.w_mu[:, i].expand(batch_size, -1).unsqueeze(1)
@@ -184,10 +206,33 @@ class RVLinearlayer(nn.Module):
                 mu_in_t_sigma_i_mu_in = torch.bmm(mu_in.transpose(2, 1), torch.bmm(sigma_i, mu_in)).view(-1) if i == j else torch.zeros(batch_size).to(device)
             
                 Sigma_out[:, i, j] = tr_sigma_i_and_sigma_in + mu_w_i_t_sigma_in_mu_w_j + mu_in_t_sigma_i_mu_in
-                
+        
         # Add Reparameterized b_sigma
         for i in range(Sigma_out.size(0)):
             Sigma_out[i] = Sigma_out[i] + B_Sigma
+
+        print("Original Sigma_out FC", time.time() - a)
+
+        # # New Version
+        # #------------------------------------------------------------------------------#
+
+        # a = time.time()
+        # # Calculate diagonal elements
+        # tr_W_Sigma_and_sigma_in = torch.matmul(W_Sigma.view(self.size_out, -1), sigma_in.view(-1, batch_size)).view(batch_size, self.size_out)
+        # mu_w_t_sigma_in_mu_w = torch.matmul(torch.matmul(self.w_mu.t(), sigma_in), self.w_mu)
+        # mu_in_t_W_Sigma_mu_in = torch.bmm(torch.matmul(W_Sigma, mu_in.transpose(2, 1).unsqueeze(-1)).squeeze(-1), mu_in).squeeze()
+        # Sigma_out2 = (torch.diag_embed(tr_W_Sigma_and_sigma_in) + mu_w_t_sigma_in_mu_w + torch.diag_embed(mu_in_t_W_Sigma_mu_in)) + B_Sigma
+        # print("New FC", time.time() - a)
+
+        # # Check if equal
+        # eps = 1e-3  # tolerance for equality check
+        # equal = torch.isclose(Sigma_out, Sigma_out2, rtol=eps, atol=eps).all().item()
+
+        # if equal:
+        #     print("Sigma_out and Sigma_out2 are equal within 0.001.")
+        # else:
+        #     print("Sigma_out and Sigma_out2 are NOT equal within 0.001.")
+        # #------------------------------------------------------------------------------#
         
         # KL loss
         kl_loss = compute_kl_loss(self.w_mu, W_Sigma)
@@ -253,7 +298,11 @@ class RVSoftmax(nn.Module):
         
     def softmax(self, x):
         # Apply softmax function along feature dimension
-        return torch.softmax(x, dim=-1)      
+        return torch.softmax(x, dim=-1)     
+
+    def softmax2(self, x):
+        # Apply softmax function along feature dimension
+        return torch.softmax(x, dim=1)      
         
     def forward(self, mu_in, Sigma_in):
         """
@@ -277,6 +326,9 @@ class RVSoftmax(nn.Module):
         # Mean
         mu_out = self.softmax(mu_in.view(batch_size, feature_size))  # shape: [batch_size, output_size]
 
+        import time
+        a = time.time()
+
         # Compute jacobian
         jac = torch.empty((batch_size, feature_size, feature_size)).to(device)
         for i in range(batch_size):
@@ -285,6 +337,30 @@ class RVSoftmax(nn.Module):
         # Compute covariance
         Sigma_out = torch.bmm(jac, torch.bmm(Sigma_in, jac.permute(0, 2, 1)))
         
+        print("Original Jac:", time.time() - a)
+
+
+        # New Version
+        #----------------------------------------------------------------------------#
+        a = time.time()
+        # Compute Jacobian
+        jac2 = torch.diagonal(torch.autograd.functional.jacobian(self.softmax2, mu_in.view(batch_size, -1), create_graph=True, strict=True), dim1=0, dim2=2).permute(2, 0, 1)
+      
+        # Compute covariance
+        Sigma_out2 = torch.bmm(jac2, torch.bmm(Sigma_in, jac2.transpose(1, 2)))
+        #----------------------------------------------------------------------------#
+        print("New Jac:", time.time() - a)
+
+        # Check if equal
+        eps = 1e-3  # tolerance for equality check
+        equal = torch.isclose(Sigma_out, Sigma_out2, rtol=eps, atol=eps).all().item()
+
+        if equal:
+            print("Sigma_out and Sigma_out2 are equal within 0.001.")
+        else:
+            print("Sigma_out and Sigma_out2 are NOT equal within 0.001.")
+        #----------------------------------------------------------------------------#
+
         return mu_out, Sigma_out
 
 class exVDPMLP(nn.Module):
