@@ -12,7 +12,6 @@ import torch.optim as optim
 import numpy as np
 import random
 from collections import deque
-import copy
 
 
 def nll_gaussian(y_test, y_pred_mean, y_pred_sd, num_labels):
@@ -241,8 +240,8 @@ class VDPDQNAgent:
         self.update_target_model()
         self.optimizer = optim.Adam(self.model.parameters(), lr=self.learning_rate)
 
-    def remember(self, state, action, reward, next_state, done):
-        self.memory.append((state, action, reward, next_state, done))
+    def remember(self, state, action, rewards, next_state, done):
+        self.memory.append((state, action, rewards, next_state, done))
 
     def act(self, state):
         if np.random.rand() <= self.epsilon:
@@ -260,22 +259,19 @@ class VDPDQNAgent:
         states, actions, rewards, next_states, dones = zip(*minibatch)
         states = torch.FloatTensor(states).to(self.device)
         actions = torch.LongTensor(actions).unsqueeze(1).to(self.device)
-        rewards = torch.FloatTensor(rewards).to(self.device)
-        next_states = torch.FloatTensor(next_states).to(self.device)
-        dones = torch.BoolTensor(dones).to(self.device)
+        rewards = torch.FloatTensor(torch.stack(rewards,dim=0)).to(self.device)
+        next_states = torch.FloatTensor(torch.stack(next_states,dim=0)).to(self.device)
+        dones = torch.FloatTensor(torch.stack(dones,dim=0)).to(self.device)
 
         current_q_values, current_q_sigmas, current_kl_losses = self.model(states)
-        current_action_q_value = current_q_values.squeeze().gather(1, actions.type(torch.int64))
 
-        next_q_values, _, _ = self.target_model(next_states)
-        next_action_q_value = next_q_values.squeeze().max(1)[0].detach().unsqueeze(-1)
 
-        target_action_q_value = rewards.unsqueeze(-1) + (1 - dones.float().unsqueeze(-1)) * self.gamma * next_action_q_value
+        target_q_values = torch.zeros_like(current_q_values)
+        for i in range(next_states.size(1)):
+            next_q_values_i, _, _ = self.target_model(next_states[:,i,:])
+            next_action_q_value_i = next_q_values_i.squeeze().max(1)[0].detach().squeeze()
 
-        target_q_values = current_q_values.clone().detach()
-        idx = torch.arange(actions.shape[0]).unsqueeze(1).to(self.device)
-        idx = torch.cat([idx, actions], dim=1)
-        target_q_values[idx[:, 0], idx[:, 1], 0] = target_action_q_value.squeeze()
+            target_q_values[:,i,0] = rewards[:,i] + (1 - dones[:,i]) * self.gamma * next_action_q_value_i
 
         loss = nll_gaussian(target_q_values, current_q_values, current_q_sigmas, self.action_size)
         total_loss = loss + self.kl_factor*sum(current_kl_losses)
