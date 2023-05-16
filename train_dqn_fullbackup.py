@@ -1,5 +1,7 @@
 import torch
-import gym
+import sys
+sys.path.append("..")
+import kyus_gym.gym as gym
 import os
 import wandb
 from copy import deepcopy
@@ -16,23 +18,21 @@ def train(env, agent, batch_size=32, episodes=500, max_steps=200):
         for step in range(max_steps):
 
             # Rollout one step for every action from the initial state
-            action = agent.act(state)
-
             next_states = torch.zeros(env.action_space.n, env.observation_space.shape[0])
-            rewards = torch.zeros(env.action_space.n)
-            dones = torch.zeros(env.action_space.n)
+            rewards     = torch.zeros(env.action_space.n)
+            dones       = torch.zeros(env.action_space.n)
             for action_i in range(env.action_space.n):
-                env.state = state
+                env.reset(state = state)
                 next_state_i, reward_i, done_i, _, _ = env.step(action_i)
 
-                next_states[action_i,:] = torch.tensor(next_state_i)
-                rewards[action_i] = reward_i if not done_i else -100
-                dones[action_i] = done_i
+                next_states[action_i,:] = torch.tensor(next_state_i, dtype=torch.float32)
+                rewards[action_i] = -100 if done_i else reward_i
+                dones[action_i] = done_i 
 
-                if action_i == action:
-                    next_state = deepcopy(next_state_i)
-                    reward = deepcopy(reward_i)
-                    done = deepcopy(done_i)
+            # Take actual step
+            action = agent.act(state)
+            env.reset(state = state)
+            next_state, reward, done, _, _ = env.step(action)
 
             total_reward += reward
 
@@ -44,14 +44,10 @@ def train(env, agent, batch_size=32, episodes=500, max_steps=200):
             else:
                 total_loss, loss, current_kl_losses, prev_epsilon  = agent.replay(batch_size)
 
-            if done or step == max_steps - 1:
-                agent.update_target_model()
-                print(f"Episode: {e+1}/{episodes}, Score: {total_reward}, Epsilon: {agent.epsilon:.2f}")
-                break
-
             # Log
             if agent.kl_factor == 0:
                 wandb.log({
+                    "epsilon":agent.epsilon,
                     "i_episode": e,
                     "step": step,
                     "total_reward": total_reward,
@@ -60,6 +56,7 @@ def train(env, agent, batch_size=32, episodes=500, max_steps=200):
                 })
             else:
                 wandb.log({
+                    "epsilon":agent.epsilon,
                     "i_episode": e,
                     "step": step,
                     "total_reward": total_reward,
@@ -71,9 +68,14 @@ def train(env, agent, batch_size=32, episodes=500, max_steps=200):
                     "prev_epsilon": prev_epsilon,
                 })
 
+            if done or step == max_steps - 1:
+                agent.update_target_model()
+                print(f"Episode: {e+1}/{episodes}, Score: {total_reward}, Epsilon: {agent.epsilon:.2f}")
+                break
+
         if total_reward >= max_steps:
             num_success += 1
-            if num_success >= 10:
+            if num_success >= 100:
                 print(f"CartPole solved in {e+1} episodes!")
                 break
 
@@ -89,7 +91,7 @@ if __name__ == "__main__":
         device = torch.device("cpu")
 
     # Initialize WandB
-    wandb.init(project="DQN CartPole", entity="naddeok") #, mode="disabled")
+    wandb.init(project="DQN CartPole", entity="naddeok")#, mode="disabled")
     wandb.config.fc1_size = fc1_size = 128
     wandb.config.fc2_size = fc2_size = 128  
     wandb.config.kl_factor = kl_factor = 0.001
@@ -97,12 +99,12 @@ if __name__ == "__main__":
     wandb.config.gamma = gamma                  = 0.99
     wandb.config.epsilon = epsilon              = 1.0
     wandb.config.epsilon_min = epsilon_min      = 0.01
-    wandb.config.epsilon_decay = epsilon_decay  = 0.995
+    wandb.config.epsilon_decay = epsilon_decay  = 0.99995 # 0.995
     wandb.config.learning_rate = learning_rate  = 0.0001
     wandb.config.memory_size = memory_size      = 10000
 
-    wandb.config.batch_size = batch_size    = 32
-    wandb.config.episodes = episodes        = 1000
+    wandb.config.batch_size = batch_size    = 128
+    wandb.config.episodes = episodes        = 10000
     wandb.config.max_steps = max_steps      = 300
 
     env = gym.make("CartPole-v1")

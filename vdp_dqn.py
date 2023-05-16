@@ -115,10 +115,12 @@ class RVLinearlayer(nn.Module):
         self.b_sigma    = nn.Parameter(torch.Tensor(size_out,))
 
         # initialize weights and biases using normal and uniform distributions
-        nn.init.normal_(self.w_mu, mean=0.0, std=0.00005)
-        nn.init.uniform_(self.w_sigma, a=-12.0, b=-2.0)
-        nn.init.normal_(self.b_mu, mean=0.0, std=0.00005)
+        nn.init.uniform_(self.w_mu, a=-(1/size_in)**(1/2), b=(1/size_in)**(1/2))
+        nn.init.uniform_(self.b_mu, a=-(1/size_in)**(1/2), b=(1/size_in)**(1/2))
+        nn.init.uniform_(self.w_sigma, a=-12, b=-2.0)
         nn.init.uniform_(self.b_sigma, a=-12.0, b=-2.0)
+        # nn.init.normal_(self.w_mu, mean=0.0, std=0.00005)
+        # nn.init.normal_(self.b_mu, mean=0.0, std=0.00005)
 
     def forward(self, mu_in, sigma_in):
         
@@ -265,9 +267,8 @@ class VDPDQNAgent:
 
         current_q_values, current_q_sigmas, current_kl_losses = self.model(states)
 
-
         target_q_values = torch.zeros_like(current_q_values)
-        for i in range(next_states.size(1)):
+        for i in range(self.action_size):
             next_q_values_i, _, _ = self.target_model(next_states[:,i,:])
             next_action_q_value_i = next_q_values_i.squeeze().max(1)[0].detach().squeeze()
 
@@ -287,3 +288,6 @@ class VDPDQNAgent:
         
     def update_target_model(self):
         self.target_model.load_state_dict(self.model.state_dict())
+
+    def save(self, path = "saved_models/vdp_dqn.pt"):
+        torch.save(self.model.state_dict(), path)

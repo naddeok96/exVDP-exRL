@@ -79,3 +79,6 @@ class DQNAgent:
         
     def update_target_model(self):
         self.target_model.load_state_dict(self.model.state_dict())
+
+    def save(self, path = "saved_models/dqn.pt"):
+        torch.save(self.model.state_dict(), path)
