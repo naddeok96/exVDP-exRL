@@ -4,6 +4,7 @@ import torch.optim as optim
 import numpy as np
 import random
 from collections import deque
+from datetime import datetime
 
 class DQN(nn.Module):
     def __init__(self, input_dim, output_dim, fc1_size=128, fc2_size=128):
@@ -80,5 +81,13 @@ class DQNAgent:
     def update_target_model(self):
         self.target_model.load_state_dict(self.model.state_dict())
 
-    def save(self, path = "saved_models/dqn.pt"):
+    def save(self, path = None):
+        if path is None:
+            current_time = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+            path = path = "saved_models/dqn_"  + current_time + ".pt"
+            
         torch.save(self.model.state_dict(), path)
+        
+    def load_model(self, filename):
+        self.model.load_state_dict(torch.load(filename))
+        self.update_target_model()
