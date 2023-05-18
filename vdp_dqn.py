@@ -12,6 +12,7 @@ import torch.optim as optim
 import numpy as np
 import random
 from collections import deque
+from datetime import datetime
 
 
 def nll_gaussian(y_test, y_pred_mean, y_pred_sd, num_labels):
@@ -289,5 +290,21 @@ class VDPDQNAgent:
     def update_target_model(self):
         self.target_model.load_state_dict(self.model.state_dict())
 
-    def save(self, path = "saved_models/vdp_dqn.pt"):
+    def get_covariance_matrices(self):
+        layer_magnitudes = {}
+        for name, param in self.model.named_parameters():
+            if 'sigma' in name.lower():
+                layer_magnitude = torch.norm(param).item()
+                layer_magnitudes[name] = layer_magnitude.item()
+        return layer_magnitudes
+                
+    def save(self, path = None):
+        if path is None:
+            current_time = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+            path = path = "saved_models/vdp_dqn_"  + current_time + ".pt"
+            
         torch.save(self.model.state_dict(), path)
+        
+    def load_model(self, filename):
+        self.model.load_state_dict(torch.load(filename))
+        self.update_target_model()
