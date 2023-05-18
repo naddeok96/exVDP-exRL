@@ -2,8 +2,1322 @@ wandb: Currently logged in as: naddeok. Use `wandb login --relogin` to force rel
 wandb: wandb version 0.15.2 is available!  To upgrade, please run:
 wandb:  $ pip install wandb --upgrade
 wandb: Tracking run with wandb version 0.15.1
-wandb: Run data is saved locally in /home/naddeok5/exVDP-exRL/wandb/run-20230515_165139-lmswx4i9
+wandb: Run data is saved locally in /home/naddeok5/exVDP-exRL/wandb/run-20230515_234333-kz871rjp
 wandb: Run `wandb offline` to turn off syncing.
-wandb: Syncing run still-bush-34
-wandb: ⭐️ View project at https://wandb.ai/naddeok/DQN%20CartPole
-wandb: 🚀 View run at https://wandb.ai/naddeok/DQN%20CartPole/runs/lmswx4i9
+wandb: Syncing run dutiful-lake-48
+wandb: ⭐️ View project at https://wandb.ai/naddeok/Guassian%20DQN%20CartPole
+wandb: 🚀 View run at https://wandb.ai/naddeok/Guassian%20DQN%20CartPole/runs/kz871rjp
+/home/naddeok5/envs/vdprl/src/gym/gym/utils/passive_env_checker.py:233: DeprecationWarning: `np.bool8` is a deprecated alias for `np.bool_`.  (Deprecated NumPy 1.24)
+  if not isinstance(terminated, (bool, np.bool8)):
+wandb: Waiting for W&B process to finish... (success).
+wandb: - 0.008 MB of 0.008 MB uploaded (0.000 MB deduped)wandb: \ 0.008 MB of 0.014 MB uploaded (0.000 MB deduped)wandb: | 0.008 MB of 0.014 MB uploaded (0.000 MB deduped)wandb: 
+wandb: Run history:
+wandb: mean_reward ▁
+wandb: 
+wandb: Run summary:
+wandb: mean_reward 18.27
+wandb: 
+wandb: 🚀 View run dutiful-lake-48 at: https://wandb.ai/naddeok/Guassian%20DQN%20CartPole/runs/kz871rjp
+wandb: Synced 5 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20230515_234333-kz871rjp/logs
+wandb: - Waiting for wandb.init()...wandb: \ Waiting for wandb.init()...wandb: wandb version 0.15.2 is available!  To upgrade, please run:
+wandb:  $ pip install wandb --upgrade
+wandb: Tracking run with wandb version 0.15.1
+wandb: Run data is saved locally in /home/naddeok5/exVDP-exRL/wandb/run-20230515_234339-8qkyh3r2
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run sweet-sponge-49
+wandb: ⭐️ View project at https://wandb.ai/naddeok/Guassian%20DQN%20CartPole
+wandb: 🚀 View run at https://wandb.ai/naddeok/Guassian%20DQN%20CartPole/runs/8qkyh3r2
+Episode: 1/100, Score: 25.0, Epsilon: 0.00, SNR: 0.0001
+Episode: 2/100, Score: 17.0, Epsilon: 0.00, SNR: 0.0001
+Episode: 3/100, Score: 12.0, Epsilon: 0.00, SNR: 0.0001
+Episode: 4/100, Score: 31.0, Epsilon: 0.00, SNR: 0.0001
+Episode: 5/100, Score: 11.0, Epsilon: 0.00, SNR: 0.0001
+Episode: 6/100, Score: 12.0, Epsilon: 0.00, SNR: 0.0001
+Episode: 7/100, Score: 18.0, Epsilon: 0.00, SNR: 0.0001
+Episode: 8/100, Score: 14.0, Epsilon: 0.00, SNR: 0.0001
+Episode: 9/100, Score: 14.0, Epsilon: 0.00, SNR: 0.0001
+Episode: 10/100, Score: 20.0, Epsilon: 0.00, SNR: 0.0001
+Episode: 11/100, Score: 12.0, Epsilon: 0.00, SNR: 0.0001
+Episode: 12/100, Score: 10.0, Epsilon: 0.00, SNR: 0.0001
+Episode: 13/100, Score: 20.0, Epsilon: 0.00, SNR: 0.0001
+Episode: 14/100, Score: 11.0, Epsilon: 0.00, SNR: 0.0001
+Episode: 15/100, Score: 11.0, Epsilon: 0.00, SNR: 0.0001
+Episode: 16/100, Score: 19.0, Epsilon: 0.00, SNR: 0.0001
+Episode: 17/100, Score: 10.0, Epsilon: 0.00, SNR: 0.0001
+Episode: 18/100, Score: 34.0, Epsilon: 0.00, SNR: 0.0001
+Episode: 19/100, Score: 9.0, Epsilon: 0.00, SNR: 0.0001
+Episode: 20/100, Score: 11.0, Epsilon: 0.00, SNR: 0.0001
+Episode: 21/100, Score: 39.0, Epsilon: 0.00, SNR: 0.0001
+Episode: 22/100, Score: 10.0, Epsilon: 0.00, SNR: 0.0001
+Episode: 23/100, Score: 9.0, Epsilon: 0.00, SNR: 0.0001
+Episode: 24/100, Score: 10.0, Epsilon: 0.00, SNR: 0.0001
+Episode: 25/100, Score: 13.0, Epsilon: 0.00, SNR: 0.0001
+Episode: 26/100, Score: 21.0, Epsilon: 0.00, SNR: 0.0001
+Episode: 27/100, Score: 15.0, Epsilon: 0.00, SNR: 0.0001
+Episode: 28/100, Score: 12.0, Epsilon: 0.00, SNR: 0.0001
+Episode: 29/100, Score: 18.0, Epsilon: 0.00, SNR: 0.0001
+Episode: 30/100, Score: 13.0, Epsilon: 0.00, SNR: 0.0001
+Episode: 31/100, Score: 21.0, Epsilon: 0.00, SNR: 0.0001
+Episode: 32/100, Score: 10.0, Epsilon: 0.00, SNR: 0.0001
+Episode: 33/100, Score: 23.0, Epsilon: 0.00, SNR: 0.0001
+Episode: 34/100, Score: 17.0, Epsilon: 0.00, SNR: 0.0001
+Episode: 35/100, Score: 11.0, Epsilon: 0.00, SNR: 0.0001
+Episode: 36/100, Score: 28.0, Epsilon: 0.00, SNR: 0.0001
+Episode: 37/100, Score: 21.0, Epsilon: 0.00, SNR: 0.0001
+Episode: 38/100, Score: 12.0, Epsilon: 0.00, SNR: 0.0001
+Episode: 39/100, Score: 13.0, Epsilon: 0.00, SNR: 0.0001
+Episode: 40/100, Score: 11.0, Epsilon: 0.00, SNR: 0.0001
+Episode: 41/100, Score: 14.0, Epsilon: 0.00, SNR: 0.0001
+Episode: 42/100, Score: 18.0, Epsilon: 0.00, SNR: 0.0001
+Episode: 43/100, Score: 14.0, Epsilon: 0.00, SNR: 0.0001
+Episode: 44/100, Score: 58.0, Epsilon: 0.00, SNR: 0.0001
+Episode: 45/100, Score: 18.0, Epsilon: 0.00, SNR: 0.0001
+Episode: 46/100, Score: 49.0, Epsilon: 0.00, SNR: 0.0001
+Episode: 47/100, Score: 23.0, Epsilon: 0.00, SNR: 0.0001
+Episode: 48/100, Score: 33.0, Epsilon: 0.00, SNR: 0.0001
+Episode: 49/100, Score: 36.0, Epsilon: 0.00, SNR: 0.0001
+Episode: 50/100, Score: 22.0, Epsilon: 0.00, SNR: 0.0001
+Episode: 51/100, Score: 19.0, Epsilon: 0.00, SNR: 0.0001
+Episode: 52/100, Score: 22.0, Epsilon: 0.00, SNR: 0.0001
+Episode: 53/100, Score: 14.0, Epsilon: 0.00, SNR: 0.0001
+Episode: 54/100, Score: 27.0, Epsilon: 0.00, SNR: 0.0001
+Episode: 55/100, Score: 10.0, Epsilon: 0.00, SNR: 0.0001
+Episode: 56/100, Score: 13.0, Epsilon: 0.00, SNR: 0.0001
+Episode: 57/100, Score: 18.0, Epsilon: 0.00, SNR: 0.0001
+Episode: 58/100, Score: 16.0, Epsilon: 0.00, SNR: 0.0001
+Episode: 59/100, Score: 32.0, Epsilon: 0.00, SNR: 0.0001
+Episode: 60/100, Score: 14.0, Epsilon: 0.00, SNR: 0.0001
+Episode: 61/100, Score: 13.0, Epsilon: 0.00, SNR: 0.0001
+Episode: 62/100, Score: 12.0, Epsilon: 0.00, SNR: 0.0001
+Episode: 63/100, Score: 14.0, Epsilon: 0.00, SNR: 0.0001
+Episode: 64/100, Score: 12.0, Epsilon: 0.00, SNR: 0.0001
+Episode: 65/100, Score: 16.0, Epsilon: 0.00, SNR: 0.0001
+Episode: 66/100, Score: 10.0, Epsilon: 0.00, SNR: 0.0001
+Episode: 67/100, Score: 13.0, Epsilon: 0.00, SNR: 0.0001
+Episode: 68/100, Score: 8.0, Epsilon: 0.00, SNR: 0.0001
+Episode: 69/100, Score: 11.0, Epsilon: 0.00, SNR: 0.0001
+Episode: 70/100, Score: 10.0, Epsilon: 0.00, SNR: 0.0001
+Episode: 71/100, Score: 23.0, Epsilon: 0.00, SNR: 0.0001
+Episode: 72/100, Score: 11.0, Epsilon: 0.00, SNR: 0.0001
+Episode: 73/100, Score: 19.0, Epsilon: 0.00, SNR: 0.0001
+Episode: 74/100, Score: 9.0, Epsilon: 0.00, SNR: 0.0001
+Episode: 75/100, Score: 27.0, Epsilon: 0.00, SNR: 0.0001
+Episode: 76/100, Score: 40.0, Epsilon: 0.00, SNR: 0.0001
+Episode: 77/100, Score: 28.0, Epsilon: 0.00, SNR: 0.0001
+Episode: 78/100, Score: 13.0, Epsilon: 0.00, SNR: 0.0001
+Episode: 79/100, Score: 12.0, Epsilon: 0.00, SNR: 0.0001
+Episode: 80/100, Score: 12.0, Epsilon: 0.00, SNR: 0.0001
+Episode: 81/100, Score: 17.0, Epsilon: 0.00, SNR: 0.0001
+Episode: 82/100, Score: 36.0, Epsilon: 0.00, SNR: 0.0001
+Episode: 83/100, Score: 19.0, Epsilon: 0.00, SNR: 0.0001
+Episode: 84/100, Score: 20.0, Epsilon: 0.00, SNR: 0.0001
+Episode: 85/100, Score: 18.0, Epsilon: 0.00, SNR: 0.0001
+Episode: 86/100, Score: 9.0, Epsilon: 0.00, SNR: 0.0001
+Episode: 87/100, Score: 19.0, Epsilon: 0.00, SNR: 0.0001
+Episode: 88/100, Score: 11.0, Epsilon: 0.00, SNR: 0.0001
+Episode: 89/100, Score: 22.0, Epsilon: 0.00, SNR: 0.0001
+Episode: 90/100, Score: 56.0, Epsilon: 0.00, SNR: 0.0001
+Episode: 91/100, Score: 13.0, Epsilon: 0.00, SNR: 0.0001
+Episode: 92/100, Score: 18.0, Epsilon: 0.00, SNR: 0.0001
+Episode: 93/100, Score: 28.0, Epsilon: 0.00, SNR: 0.0001
+Episode: 94/100, Score: 24.0, Epsilon: 0.00, SNR: 0.0001
+Episode: 95/100, Score: 16.0, Epsilon: 0.00, SNR: 0.0001
+Episode: 96/100, Score: 12.0, Epsilon: 0.00, SNR: 0.0001
+Episode: 97/100, Score: 13.0, Epsilon: 0.00, SNR: 0.0001
+Episode: 98/100, Score: 12.0, Epsilon: 0.00, SNR: 0.0001
+Episode: 99/100, Score: 14.0, Epsilon: 0.00, SNR: 0.0001
+Episode: 100/100, Score: 19.0, Epsilon: 0.00, SNR: 0.0001
+Mean Total Reward: 18.27
+Episode: 1/100, Score: 21.0, Epsilon: 0.00, SNR: 0.001
+Episode: 2/100, Score: 14.0, Epsilon: 0.00, SNR: 0.001
+Episode: 3/100, Score: 12.0, Epsilon: 0.00, SNR: 0.001
+Episode: 4/100, Score: 13.0, Epsilon: 0.00, SNR: 0.001
+Episode: 5/100, Score: 31.0, Epsilon: 0.00, SNR: 0.001
+Episode: 6/100, Score: 21.0, Epsilon: 0.00, SNR: 0.001
+Episode: 7/100, Score: 24.0, Epsilon: 0.00, SNR: 0.001
+Episode: 8/100, Score: 18.0, Epsilon: 0.00, SNR: 0.001
+Episode: 9/100, Score: 14.0, Epsilon: 0.00, SNR: 0.001
+Episode: 10/100, Score: 79.0, Epsilon: 0.00, SNR: 0.001
+Episode: 11/100, Score: 12.0, Epsilon: 0.00, SNR: 0.001
+Episode: 12/100, Score: 14.0, Epsilon: 0.00, SNR: 0.001
+Episode: 13/100, Score: 27.0, Epsilon: 0.00, SNR: 0.001
+Episode: 14/100, Score: 11.0, Epsilon: 0.00, SNR: 0.001
+Episode: 15/100, Score: 10.0, Epsilon: 0.00, SNR: 0.001
+Episode: 16/100, Score: 42.0, Epsilon: 0.00, SNR: 0.001
+Episode: 17/100, Score: 16.0, Epsilon: 0.00, SNR: 0.001
+Episode: 18/100, Score: 9.0, Epsilon: 0.00, SNR: 0.001
+Episode: 19/100, Score: 17.0, Epsilon: 0.00, SNR: 0.001
+Episode: 20/100, Score: 36.0, Epsilon: 0.00, SNR: 0.001
+Episode: 21/100, Score: 10.0, Epsilon: 0.00, SNR: 0.001
+Episode: 22/100, Score: 13.0, Epsilon: 0.00, SNR: 0.001
+Episode: 23/100, Score: 15.0, Epsilon: 0.00, SNR: 0.001
+Episode: 24/100, Score: 10.0, Epsilon: 0.00, SNR: 0.001
+Episode: 25/100, Score: 13.0, Epsilon: 0.00, SNR: 0.001
+Episode: 26/100, Score: 10.0, Epsilon: 0.00, SNR: 0.001
+Episode: 27/100, Score: 15.0, Epsilon: 0.00, SNR: 0.001
+Episode: 28/100, Score: 9.0, Epsilon: 0.00, SNR: 0.001
+Episode: 29/100, Score: 10.0, Epsilon: 0.00, SNR: 0.001
+Episode: 30/100, Score: 19.0, Epsilon: 0.00, SNR: 0.001
+Episode: 31/100, Score: 27.0, Epsilon: 0.00, SNR: 0.001
+Episode: 32/100, Score: 18.0, Epsilon: 0.00, SNR: 0.001
+Episode: 33/100, Score: 13.0, Epsilon: 0.00, SNR: 0.001
+Episode: 34/100, Score: 23.0, Epsilon: 0.00, SNR: 0.001
+Episode: 35/100, Score: 12.0, Epsilon: 0.00, SNR: 0.001
+Episode: 36/100, Score: 14.0, Epsilon: 0.00, SNR: 0.001
+Episode: 37/100, Score: 20.0, Epsilon: 0.00, SNR: 0.001
+Episode: 38/100, Score: 21.0, Epsilon: 0.00, SNR: 0.001
+Episode: 39/100, Score: 14.0, Epsilon: 0.00, SNR: 0.001
+Episode: 40/100, Score: 26.0, Epsilon: 0.00, SNR: 0.001
+Episode: 41/100, Score: 14.0, Epsilon: 0.00, SNR: 0.001
+Episode: 42/100, Score: 13.0, Epsilon: 0.00, SNR: 0.001
+Episode: 43/100, Score: 10.0, Epsilon: 0.00, SNR: 0.001
+Episode: 44/100, Score: 10.0, Epsilon: 0.00, SNR: 0.001
+wandb: Waiting for W&B process to finish... (success).
+wandb: - 0.008 MB of 0.008 MB uploaded (0.000 MB deduped)wandb: \ 0.008 MB of 0.008 MB uploaded (0.000 MB deduped)wandb: 
+wandb: Run history:
+wandb: mean_reward ▁
+wandb: 
+wandb: Run summary:
+wandb: mean_reward 19.48
+wandb: 
+wandb: 🚀 View run sweet-sponge-49 at: https://wandb.ai/naddeok/Guassian%20DQN%20CartPole/runs/8qkyh3r2
+wandb: Synced 5 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20230515_234339-8qkyh3r2/logs
+wandb: - Waiting for wandb.init()...wandb: \ Waiting for wandb.init()...wandb: wandb version 0.15.2 is available!  To upgrade, please run:
+wandb:  $ pip install wandb --upgrade
+wandb: Tracking run with wandb version 0.15.1
+wandb: Run data is saved locally in /home/naddeok5/exVDP-exRL/wandb/run-20230515_234345-56jukz74
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run stoic-planet-50
+wandb: ⭐️ View project at https://wandb.ai/naddeok/Guassian%20DQN%20CartPole
+wandb: 🚀 View run at https://wandb.ai/naddeok/Guassian%20DQN%20CartPole/runs/56jukz74
+Episode: 45/100, Score: 25.0, Epsilon: 0.00, SNR: 0.001
+Episode: 46/100, Score: 12.0, Epsilon: 0.00, SNR: 0.001
+Episode: 47/100, Score: 31.0, Epsilon: 0.00, SNR: 0.001
+Episode: 48/100, Score: 9.0, Epsilon: 0.00, SNR: 0.001
+Episode: 49/100, Score: 20.0, Epsilon: 0.00, SNR: 0.001
+Episode: 50/100, Score: 16.0, Epsilon: 0.00, SNR: 0.001
+Episode: 51/100, Score: 34.0, Epsilon: 0.00, SNR: 0.001
+Episode: 52/100, Score: 27.0, Epsilon: 0.00, SNR: 0.001
+Episode: 53/100, Score: 16.0, Epsilon: 0.00, SNR: 0.001
+Episode: 54/100, Score: 20.0, Epsilon: 0.00, SNR: 0.001
+Episode: 55/100, Score: 32.0, Epsilon: 0.00, SNR: 0.001
+Episode: 56/100, Score: 33.0, Epsilon: 0.00, SNR: 0.001
+Episode: 57/100, Score: 16.0, Epsilon: 0.00, SNR: 0.001
+Episode: 58/100, Score: 14.0, Epsilon: 0.00, SNR: 0.001
+Episode: 59/100, Score: 21.0, Epsilon: 0.00, SNR: 0.001
+Episode: 60/100, Score: 19.0, Epsilon: 0.00, SNR: 0.001
+Episode: 61/100, Score: 22.0, Epsilon: 0.00, SNR: 0.001
+Episode: 62/100, Score: 22.0, Epsilon: 0.00, SNR: 0.001
+Episode: 63/100, Score: 17.0, Epsilon: 0.00, SNR: 0.001
+Episode: 64/100, Score: 21.0, Epsilon: 0.00, SNR: 0.001
+Episode: 65/100, Score: 12.0, Epsilon: 0.00, SNR: 0.001
+Episode: 66/100, Score: 50.0, Epsilon: 0.00, SNR: 0.001
+Episode: 67/100, Score: 23.0, Epsilon: 0.00, SNR: 0.001
+Episode: 68/100, Score: 18.0, Epsilon: 0.00, SNR: 0.001
+Episode: 69/100, Score: 15.0, Epsilon: 0.00, SNR: 0.001
+Episode: 70/100, Score: 32.0, Epsilon: 0.00, SNR: 0.001
+Episode: 71/100, Score: 18.0, Epsilon: 0.00, SNR: 0.001
+Episode: 72/100, Score: 13.0, Epsilon: 0.00, SNR: 0.001
+Episode: 73/100, Score: 28.0, Epsilon: 0.00, SNR: 0.001
+Episode: 74/100, Score: 23.0, Epsilon: 0.00, SNR: 0.001
+Episode: 75/100, Score: 15.0, Epsilon: 0.00, SNR: 0.001
+Episode: 76/100, Score: 25.0, Epsilon: 0.00, SNR: 0.001
+Episode: 77/100, Score: 12.0, Epsilon: 0.00, SNR: 0.001
+Episode: 78/100, Score: 15.0, Epsilon: 0.00, SNR: 0.001
+Episode: 79/100, Score: 13.0, Epsilon: 0.00, SNR: 0.001
+Episode: 80/100, Score: 23.0, Epsilon: 0.00, SNR: 0.001
+Episode: 81/100, Score: 16.0, Epsilon: 0.00, SNR: 0.001
+Episode: 82/100, Score: 22.0, Epsilon: 0.00, SNR: 0.001
+Episode: 83/100, Score: 10.0, Epsilon: 0.00, SNR: 0.001
+Episode: 84/100, Score: 23.0, Epsilon: 0.00, SNR: 0.001
+Episode: 85/100, Score: 13.0, Epsilon: 0.00, SNR: 0.001
+Episode: 86/100, Score: 42.0, Epsilon: 0.00, SNR: 0.001
+Episode: 87/100, Score: 13.0, Epsilon: 0.00, SNR: 0.001
+Episode: 88/100, Score: 12.0, Epsilon: 0.00, SNR: 0.001
+Episode: 89/100, Score: 20.0, Epsilon: 0.00, SNR: 0.001
+Episode: 90/100, Score: 13.0, Epsilon: 0.00, SNR: 0.001
+Episode: 91/100, Score: 16.0, Epsilon: 0.00, SNR: 0.001
+Episode: 92/100, Score: 21.0, Epsilon: 0.00, SNR: 0.001
+Episode: 93/100, Score: 26.0, Epsilon: 0.00, SNR: 0.001
+Episode: 94/100, Score: 20.0, Epsilon: 0.00, SNR: 0.001
+Episode: 95/100, Score: 37.0, Epsilon: 0.00, SNR: 0.001
+Episode: 96/100, Score: 22.0, Epsilon: 0.00, SNR: 0.001
+Episode: 97/100, Score: 16.0, Epsilon: 0.00, SNR: 0.001
+Episode: 98/100, Score: 12.0, Epsilon: 0.00, SNR: 0.001
+Episode: 99/100, Score: 12.0, Epsilon: 0.00, SNR: 0.001
+Episode: 100/100, Score: 20.0, Epsilon: 0.00, SNR: 0.001
+Mean Total Reward: 19.48
+Episode: 1/100, Score: 12.0, Epsilon: 0.00, SNR: 0.01
+Episode: 2/100, Score: 10.0, Epsilon: 0.00, SNR: 0.01
+Episode: 3/100, Score: 8.0, Epsilon: 0.00, SNR: 0.01
+Episode: 4/100, Score: 12.0, Epsilon: 0.00, SNR: 0.01
+Episode: 5/100, Score: 43.0, Epsilon: 0.00, SNR: 0.01
+Episode: 6/100, Score: 33.0, Epsilon: 0.00, SNR: 0.01
+Episode: 7/100, Score: 13.0, Epsilon: 0.00, SNR: 0.01
+Episode: 8/100, Score: 11.0, Epsilon: 0.00, SNR: 0.01
+Episode: 9/100, Score: 25.0, Epsilon: 0.00, SNR: 0.01
+Episode: 10/100, Score: 17.0, Epsilon: 0.00, SNR: 0.01
+Episode: 11/100, Score: 14.0, Epsilon: 0.00, SNR: 0.01
+Episode: 12/100, Score: 12.0, Epsilon: 0.00, SNR: 0.01
+Episode: 13/100, Score: 12.0, Epsilon: 0.00, SNR: 0.01
+Episode: 14/100, Score: 16.0, Epsilon: 0.00, SNR: 0.01
+Episode: 15/100, Score: 14.0, Epsilon: 0.00, SNR: 0.01
+Episode: 16/100, Score: 13.0, Epsilon: 0.00, SNR: 0.01
+Episode: 17/100, Score: 24.0, Epsilon: 0.00, SNR: 0.01
+Episode: 18/100, Score: 19.0, Epsilon: 0.00, SNR: 0.01
+Episode: 19/100, Score: 22.0, Epsilon: 0.00, SNR: 0.01
+Episode: 20/100, Score: 13.0, Epsilon: 0.00, SNR: 0.01
+Episode: 21/100, Score: 23.0, Epsilon: 0.00, SNR: 0.01
+Episode: 22/100, Score: 18.0, Epsilon: 0.00, SNR: 0.01
+Episode: 23/100, Score: 27.0, Epsilon: 0.00, SNR: 0.01
+Episode: 24/100, Score: 31.0, Epsilon: 0.00, SNR: 0.01
+Episode: 25/100, Score: 44.0, Epsilon: 0.00, SNR: 0.01
+Episode: 26/100, Score: 23.0, Epsilon: 0.00, SNR: 0.01
+Episode: 27/100, Score: 22.0, Epsilon: 0.00, SNR: 0.01
+Episode: 28/100, Score: 22.0, Epsilon: 0.00, SNR: 0.01
+Episode: 29/100, Score: 15.0, Epsilon: 0.00, SNR: 0.01
+Episode: 30/100, Score: 12.0, Epsilon: 0.00, SNR: 0.01
+Episode: 31/100, Score: 15.0, Epsilon: 0.00, SNR: 0.01
+Episode: 32/100, Score: 24.0, Epsilon: 0.00, SNR: 0.01
+Episode: 33/100, Score: 18.0, Epsilon: 0.00, SNR: 0.01
+Episode: 34/100, Score: 20.0, Epsilon: 0.00, SNR: 0.01
+Episode: 35/100, Score: 23.0, Epsilon: 0.00, SNR: 0.01
+Episode: 36/100, Score: 21.0, Epsilon: 0.00, SNR: 0.01
+Episode: 37/100, Score: 19.0, Epsilon: 0.00, SNR: 0.01
+Episode: 38/100, Score: 8.0, Epsilon: 0.00, SNR: 0.01
+Episode: 39/100, Score: 33.0, Epsilon: 0.00, SNR: 0.01
+Episode: 40/100, Score: 13.0, Epsilon: 0.00, SNR: 0.01
+Episode: 41/100, Score: 13.0, Epsilon: 0.00, SNR: 0.01
+Episode: 42/100, Score: 15.0, Epsilon: 0.00, SNR: 0.01
+Episode: 43/100, Score: 13.0, Epsilon: 0.00, SNR: 0.01
+Episode: 44/100, Score: 35.0, Epsilon: 0.00, SNR: 0.01
+Episode: 45/100, Score: 12.0, Epsilon: 0.00, SNR: 0.01
+Episode: 46/100, Score: 23.0, Epsilon: 0.00, SNR: 0.01
+Episode: 47/100, Score: 18.0, Epsilon: 0.00, SNR: 0.01
+Episode: 48/100, Score: 15.0, Epsilon: 0.00, SNR: 0.01
+Episode: 49/100, Score: 81.0, Epsilon: 0.00, SNR: 0.01
+Episode: 50/100, Score: 35.0, Epsilon: 0.00, SNR: 0.01
+Episode: 51/100, Score: 19.0, Epsilon: 0.00, SNR: 0.01
+Episode: 52/100, Score: 16.0, Epsilon: 0.00, SNR: 0.01
+Episode: 53/100, Score: 14.0, Epsilon: 0.00, SNR: 0.01
+Episode: 54/100, Score: 14.0, Epsilon: 0.00, SNR: 0.01
+Episode: 55/100, Score: 22.0, Epsilon: 0.00, SNR: 0.01
+Episode: 56/100, Score: 36.0, Epsilon: 0.00, SNR: 0.01
+Episode: 57/100, Score: 42.0, Epsilon: 0.00, SNR: 0.01
+Episode: 58/100, Score: 23.0, Epsilon: 0.00, SNR: 0.01
+Episode: 59/100, Score: 11.0, Epsilon: 0.00, SNR: 0.01
+Episode: 60/100, Score: 40.0, Epsilon: 0.00, SNR: 0.01
+Episode: 61/100, Score: 15.0, Epsilon: 0.00, SNR: 0.01
+Episode: 62/100, Score: 11.0, Epsilon: 0.00, SNR: 0.01
+Episode: 63/100, Score: 27.0, Epsilon: 0.00, SNR: 0.01
+Episode: 64/100, Score: 12.0, Epsilon: 0.00, SNR: 0.01
+Episode: 65/100, Score: 12.0, Epsilon: 0.00, SNR: 0.01
+Episode: 66/100, Score: 36.0, Epsilon: 0.00, SNR: 0.01
+Episode: 67/100, Score: 29.0, Epsilon: 0.00, SNR: 0.01
+Episode: 68/100, Score: 12.0, Epsilon: 0.00, SNR: 0.01
+Episode: 69/100, Score: 42.0, Epsilon: 0.00, SNR: 0.01
+Episode: 70/100, Score: 28.0, Epsilon: 0.00, SNR: 0.01
+Episode: 71/100, Score: 15.0, Epsilon: 0.00, SNR: 0.01
+Episode: 72/100, Score: 14.0, Epsilon: 0.00, SNR: 0.01
+Episode: 73/100, Score: 32.0, Epsilon: 0.00, SNR: 0.01
+Episode: 74/100, Score: 19.0, Epsilon: 0.00, SNR: 0.01
+Episode: 75/100, Score: 43.0, Epsilon: 0.00, SNR: 0.01
+Episode: 76/100, Score: 13.0, Epsilon: 0.00, SNR: 0.01
+Episode: 77/100, Score: 31.0, Epsilon: 0.00, SNR: 0.01
+Episode: 78/100, Score: 21.0, Epsilon: 0.00, SNR: 0.01
+Episode: 79/100, Score: 23.0, Epsilon: 0.00, SNR: 0.01
+Episode: 80/100, Score: 13.0, Epsilon: 0.00, SNR: 0.01
+Episode: 81/100, Score: 30.0, Epsilon: 0.00, SNR: 0.01
+Episode: 82/100, Score: 12.0, Epsilon: 0.00, SNR: 0.01
+Episode: 83/100, Score: 35.0, Epsilon: 0.00, SNR: 0.01
+Episode: 84/100, Score: 10.0, Epsilon: 0.00, SNR: 0.01
+Episode: 85/100, Score: 18.0, Epsilon: 0.00, SNR: 0.01
+Episode: 86/100, Score: 17.0, Epsilon: 0.00, SNR: 0.01
+Episode: 87/100, Score: 15.0, Epsilon: 0.00, SNR: 0.01
+Episode: 88/100, Score: 19.0, Epsilon: 0.00, SNR: 0.01
+Episode: 89/100, Score: 17.0, Epsilon: 0.00, SNR: 0.01
+Episode: 90/100, Score: 15.0, Epsilon: 0.00, SNR: 0.01
+Episode: 91/100, Score: 20.0, Epsilon: 0.00, SNR: 0.01
+wandb: Waiting for W&B process to finish... (success).
+wandb: - 0.008 MB of 0.008 MB uploaded (0.000 MB deduped)wandb: \ 0.008 MB of 0.008 MB uploaded (0.000 MB deduped)wandb: | 0.008 MB of 0.008 MB uploaded (0.000 MB deduped)wandb: 
+wandb: Run history:
+wandb: mean_reward ▁
+wandb: 
+wandb: Run summary:
+wandb: mean_reward 20.92
+wandb: 
+wandb: 🚀 View run stoic-planet-50 at: https://wandb.ai/naddeok/Guassian%20DQN%20CartPole/runs/56jukz74
+wandb: Synced 5 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20230515_234345-56jukz74/logs
+wandb: - Waiting for wandb.init()...wandb: \ Waiting for wandb.init()...wandb: wandb version 0.15.2 is available!  To upgrade, please run:
+wandb:  $ pip install wandb --upgrade
+wandb: Tracking run with wandb version 0.15.1
+wandb: Run data is saved locally in /home/naddeok5/exVDP-exRL/wandb/run-20230515_234352-gqc4lqbm
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run whole-wood-51
+wandb: ⭐️ View project at https://wandb.ai/naddeok/Guassian%20DQN%20CartPole
+wandb: 🚀 View run at https://wandb.ai/naddeok/Guassian%20DQN%20CartPole/runs/gqc4lqbm
+wandb: Waiting for W&B process to finish... (success).
+wandb: - 0.008 MB of 0.008 MB uploaded (0.000 MB deduped)wandb: \ 0.008 MB of 0.008 MB uploaded (0.000 MB deduped)wandb: 
+wandb: Run history:
+wandb: mean_reward ▁
+wandb: 
+wandb: Run summary:
+wandb: mean_reward 33.36
+wandb: 
+wandb: 🚀 View run whole-wood-51 at: https://wandb.ai/naddeok/Guassian%20DQN%20CartPole/runs/gqc4lqbm
+wandb: Synced 5 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20230515_234352-gqc4lqbm/logs
+wandb: - Waiting for wandb.init()...wandb: \ Waiting for wandb.init()...wandb: wandb version 0.15.2 is available!  To upgrade, please run:
+wandb:  $ pip install wandb --upgrade
+wandb: Tracking run with wandb version 0.15.1
+wandb: Run data is saved locally in /home/naddeok5/exVDP-exRL/wandb/run-20230515_234358-j11kdvyq
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run chocolate-river-52
+wandb: ⭐️ View project at https://wandb.ai/naddeok/Guassian%20DQN%20CartPole
+wandb: 🚀 View run at https://wandb.ai/naddeok/Guassian%20DQN%20CartPole/runs/j11kdvyq
+Episode: 92/100, Score: 11.0, Epsilon: 0.00, SNR: 0.01
+Episode: 93/100, Score: 20.0, Epsilon: 0.00, SNR: 0.01
+Episode: 94/100, Score: 43.0, Epsilon: 0.00, SNR: 0.01
+Episode: 95/100, Score: 13.0, Epsilon: 0.00, SNR: 0.01
+Episode: 96/100, Score: 16.0, Epsilon: 0.00, SNR: 0.01
+Episode: 97/100, Score: 10.0, Epsilon: 0.00, SNR: 0.01
+Episode: 98/100, Score: 12.0, Epsilon: 0.00, SNR: 0.01
+Episode: 99/100, Score: 20.0, Epsilon: 0.00, SNR: 0.01
+Episode: 100/100, Score: 20.0, Epsilon: 0.00, SNR: 0.01
+Mean Total Reward: 20.92
+Episode: 1/100, Score: 41.0, Epsilon: 0.00, SNR: 0.1
+Episode: 2/100, Score: 17.0, Epsilon: 0.00, SNR: 0.1
+Episode: 3/100, Score: 59.0, Epsilon: 0.00, SNR: 0.1
+Episode: 4/100, Score: 15.0, Epsilon: 0.00, SNR: 0.1
+Episode: 5/100, Score: 28.0, Epsilon: 0.00, SNR: 0.1
+Episode: 6/100, Score: 34.0, Epsilon: 0.00, SNR: 0.1
+Episode: 7/100, Score: 40.0, Epsilon: 0.00, SNR: 0.1
+Episode: 8/100, Score: 15.0, Epsilon: 0.00, SNR: 0.1
+Episode: 9/100, Score: 32.0, Epsilon: 0.00, SNR: 0.1
+Episode: 10/100, Score: 13.0, Epsilon: 0.00, SNR: 0.1
+Episode: 11/100, Score: 15.0, Epsilon: 0.00, SNR: 0.1
+Episode: 12/100, Score: 21.0, Epsilon: 0.00, SNR: 0.1
+Episode: 13/100, Score: 41.0, Epsilon: 0.00, SNR: 0.1
+Episode: 14/100, Score: 36.0, Epsilon: 0.00, SNR: 0.1
+Episode: 15/100, Score: 16.0, Epsilon: 0.00, SNR: 0.1
+Episode: 16/100, Score: 24.0, Epsilon: 0.00, SNR: 0.1
+Episode: 17/100, Score: 35.0, Epsilon: 0.00, SNR: 0.1
+Episode: 18/100, Score: 48.0, Epsilon: 0.00, SNR: 0.1
+Episode: 19/100, Score: 74.0, Epsilon: 0.00, SNR: 0.1
+Episode: 20/100, Score: 26.0, Epsilon: 0.00, SNR: 0.1
+Episode: 21/100, Score: 14.0, Epsilon: 0.00, SNR: 0.1
+Episode: 22/100, Score: 23.0, Epsilon: 0.00, SNR: 0.1
+Episode: 23/100, Score: 16.0, Epsilon: 0.00, SNR: 0.1
+Episode: 24/100, Score: 10.0, Epsilon: 0.00, SNR: 0.1
+Episode: 25/100, Score: 73.0, Epsilon: 0.00, SNR: 0.1
+Episode: 26/100, Score: 86.0, Epsilon: 0.00, SNR: 0.1
+Episode: 27/100, Score: 17.0, Epsilon: 0.00, SNR: 0.1
+Episode: 28/100, Score: 67.0, Epsilon: 0.00, SNR: 0.1
+Episode: 29/100, Score: 13.0, Epsilon: 0.00, SNR: 0.1
+Episode: 30/100, Score: 41.0, Epsilon: 0.00, SNR: 0.1
+Episode: 31/100, Score: 16.0, Epsilon: 0.00, SNR: 0.1
+Episode: 32/100, Score: 72.0, Epsilon: 0.00, SNR: 0.1
+Episode: 33/100, Score: 52.0, Epsilon: 0.00, SNR: 0.1
+Episode: 34/100, Score: 12.0, Epsilon: 0.00, SNR: 0.1
+Episode: 35/100, Score: 56.0, Epsilon: 0.00, SNR: 0.1
+Episode: 36/100, Score: 47.0, Epsilon: 0.00, SNR: 0.1
+Episode: 37/100, Score: 35.0, Epsilon: 0.00, SNR: 0.1
+Episode: 38/100, Score: 23.0, Epsilon: 0.00, SNR: 0.1
+Episode: 39/100, Score: 15.0, Epsilon: 0.00, SNR: 0.1
+Episode: 40/100, Score: 15.0, Epsilon: 0.00, SNR: 0.1
+Episode: 41/100, Score: 15.0, Epsilon: 0.00, SNR: 0.1
+Episode: 42/100, Score: 27.0, Epsilon: 0.00, SNR: 0.1
+Episode: 43/100, Score: 61.0, Epsilon: 0.00, SNR: 0.1
+Episode: 44/100, Score: 40.0, Epsilon: 0.00, SNR: 0.1
+Episode: 45/100, Score: 47.0, Epsilon: 0.00, SNR: 0.1
+Episode: 46/100, Score: 17.0, Epsilon: 0.00, SNR: 0.1
+Episode: 47/100, Score: 33.0, Epsilon: 0.00, SNR: 0.1
+Episode: 48/100, Score: 23.0, Epsilon: 0.00, SNR: 0.1
+Episode: 49/100, Score: 23.0, Epsilon: 0.00, SNR: 0.1
+Episode: 50/100, Score: 15.0, Epsilon: 0.00, SNR: 0.1
+Episode: 51/100, Score: 14.0, Epsilon: 0.00, SNR: 0.1
+Episode: 52/100, Score: 106.0, Epsilon: 0.00, SNR: 0.1
+Episode: 53/100, Score: 66.0, Epsilon: 0.00, SNR: 0.1
+Episode: 54/100, Score: 47.0, Epsilon: 0.00, SNR: 0.1
+Episode: 55/100, Score: 20.0, Epsilon: 0.00, SNR: 0.1
+Episode: 56/100, Score: 33.0, Epsilon: 0.00, SNR: 0.1
+Episode: 57/100, Score: 18.0, Epsilon: 0.00, SNR: 0.1
+Episode: 58/100, Score: 31.0, Epsilon: 0.00, SNR: 0.1
+Episode: 59/100, Score: 16.0, Epsilon: 0.00, SNR: 0.1
+Episode: 60/100, Score: 17.0, Epsilon: 0.00, SNR: 0.1
+Episode: 61/100, Score: 42.0, Epsilon: 0.00, SNR: 0.1
+Episode: 62/100, Score: 23.0, Epsilon: 0.00, SNR: 0.1
+Episode: 63/100, Score: 34.0, Epsilon: 0.00, SNR: 0.1
+Episode: 64/100, Score: 59.0, Epsilon: 0.00, SNR: 0.1
+Episode: 65/100, Score: 79.0, Epsilon: 0.00, SNR: 0.1
+Episode: 66/100, Score: 22.0, Epsilon: 0.00, SNR: 0.1
+Episode: 67/100, Score: 12.0, Epsilon: 0.00, SNR: 0.1
+Episode: 68/100, Score: 16.0, Epsilon: 0.00, SNR: 0.1
+Episode: 69/100, Score: 17.0, Epsilon: 0.00, SNR: 0.1
+Episode: 70/100, Score: 36.0, Epsilon: 0.00, SNR: 0.1
+Episode: 71/100, Score: 83.0, Epsilon: 0.00, SNR: 0.1
+Episode: 72/100, Score: 24.0, Epsilon: 0.00, SNR: 0.1
+Episode: 73/100, Score: 47.0, Epsilon: 0.00, SNR: 0.1
+Episode: 74/100, Score: 17.0, Epsilon: 0.00, SNR: 0.1
+Episode: 75/100, Score: 51.0, Epsilon: 0.00, SNR: 0.1
+Episode: 76/100, Score: 22.0, Epsilon: 0.00, SNR: 0.1
+Episode: 77/100, Score: 47.0, Epsilon: 0.00, SNR: 0.1
+Episode: 78/100, Score: 27.0, Epsilon: 0.00, SNR: 0.1
+Episode: 79/100, Score: 15.0, Epsilon: 0.00, SNR: 0.1
+Episode: 80/100, Score: 16.0, Epsilon: 0.00, SNR: 0.1
+Episode: 81/100, Score: 22.0, Epsilon: 0.00, SNR: 0.1
+Episode: 82/100, Score: 23.0, Epsilon: 0.00, SNR: 0.1
+Episode: 83/100, Score: 46.0, Epsilon: 0.00, SNR: 0.1
+Episode: 84/100, Score: 26.0, Epsilon: 0.00, SNR: 0.1
+Episode: 85/100, Score: 37.0, Epsilon: 0.00, SNR: 0.1
+Episode: 86/100, Score: 28.0, Epsilon: 0.00, SNR: 0.1
+Episode: 87/100, Score: 34.0, Epsilon: 0.00, SNR: 0.1
+Episode: 88/100, Score: 61.0, Epsilon: 0.00, SNR: 0.1
+Episode: 89/100, Score: 29.0, Epsilon: 0.00, SNR: 0.1
+Episode: 90/100, Score: 18.0, Epsilon: 0.00, SNR: 0.1
+Episode: 91/100, Score: 24.0, Epsilon: 0.00, SNR: 0.1
+Episode: 92/100, Score: 49.0, Epsilon: 0.00, SNR: 0.1
+Episode: 93/100, Score: 28.0, Epsilon: 0.00, SNR: 0.1
+Episode: 94/100, Score: 56.0, Epsilon: 0.00, SNR: 0.1
+Episode: 95/100, Score: 11.0, Epsilon: 0.00, SNR: 0.1
+Episode: 96/100, Score: 14.0, Epsilon: 0.00, SNR: 0.1
+Episode: 97/100, Score: 28.0, Epsilon: 0.00, SNR: 0.1
+Episode: 98/100, Score: 33.0, Epsilon: 0.00, SNR: 0.1
+Episode: 99/100, Score: 55.0, Epsilon: 0.00, SNR: 0.1
+Episode: 100/100, Score: 23.0, Epsilon: 0.00, SNR: 0.1
+Mean Total Reward: 33.36
+Episode: 1/100, Score: 12.0, Epsilon: 0.00, SNR: 0.25
+Episode: 2/100, Score: 30.0, Epsilon: 0.00, SNR: 0.25
+Episode: 3/100, Score: 37.0, Epsilon: 0.00, SNR: 0.25
+Episode: 4/100, Score: 85.0, Epsilon: 0.00, SNR: 0.25
+Episode: 5/100, Score: 67.0, Epsilon: 0.00, SNR: 0.25
+Episode: 6/100, Score: 35.0, Epsilon: 0.00, SNR: 0.25
+Episode: 7/100, Score: 17.0, Epsilon: 0.00, SNR: 0.25
+Episode: 8/100, Score: 11.0, Epsilon: 0.00, SNR: 0.25
+Episode: 9/100, Score: 16.0, Epsilon: 0.00, SNR: 0.25
+Episode: 10/100, Score: 17.0, Epsilon: 0.00, SNR: 0.25
+Episode: 11/100, Score: 38.0, Epsilon: 0.00, SNR: 0.25
+Episode: 12/100, Score: 15.0, Epsilon: 0.00, SNR: 0.25
+Episode: 13/100, Score: 30.0, Epsilon: 0.00, SNR: 0.25
+Episode: 14/100, Score: 92.0, Epsilon: 0.00, SNR: 0.25
+Episode: 15/100, Score: 14.0, Epsilon: 0.00, SNR: 0.25
+Episode: 16/100, Score: 79.0, Epsilon: 0.00, SNR: 0.25
+Episode: 17/100, Score: 27.0, Epsilon: 0.00, SNR: 0.25
+Episode: 18/100, Score: 29.0, Epsilon: 0.00, SNR: 0.25
+Episode: 19/100, Score: 34.0, Epsilon: 0.00, SNR: 0.25
+Episode: 20/100, Score: 51.0, Epsilon: 0.00, SNR: 0.25
+Episode: 21/100, Score: 90.0, Epsilon: 0.00, SNR: 0.25
+Episode: 22/100, Score: 71.0, Epsilon: 0.00, SNR: 0.25
+Episode: 23/100, Score: 36.0, Epsilon: 0.00, SNR: 0.25
+Episode: 24/100, Score: 124.0, Epsilon: 0.00, SNR: 0.25
+Episode: 25/100, Score: 28.0, Epsilon: 0.00, SNR: 0.25
+Episode: 26/100, Score: 78.0, Epsilon: 0.00, SNR: 0.25
+Episode: 27/100, Score: 24.0, Epsilon: 0.00, SNR: 0.25
+Episode: 28/100, Score: 26.0, Epsilon: 0.00, SNR: 0.25
+Episode: 29/100, Score: 17.0, Epsilon: 0.00, SNR: 0.25
+Episode: 30/100, Score: 59.0, Epsilon: 0.00, SNR: 0.25
+Episode: 31/100, Score: 11.0, Epsilon: 0.00, SNR: 0.25
+Episode: 32/100, Score: 53.0, Epsilon: 0.00, SNR: 0.25
+Episode: 33/100, Score: 12.0, Epsilon: 0.00, SNR: 0.25
+Episode: 34/100, Score: 16.0, Epsilon: 0.00, SNR: 0.25
+Episode: 35/100, Score: 11.0, Epsilon: 0.00, SNR: 0.25
+Episode: 36/100, Score: 11.0, Epsilon: 0.00, SNR: 0.25
+Episode: 37/100, Score: 44.0, Epsilon: 0.00, SNR: 0.25
+Episode: 38/100, Score: 40.0, Epsilon: 0.00, SNR: 0.25
+Episode: 39/100, Score: 15.0, Epsilon: 0.00, SNR: 0.25
+Episode: 40/100, Score: 31.0, Epsilon: 0.00, SNR: 0.25
+Episode: 41/100, Score: 58.0, Epsilon: 0.00, SNR: 0.25
+wandb: Waiting for W&B process to finish... (success).
+wandb: - 0.008 MB of 0.008 MB uploaded (0.000 MB deduped)wandb: \ 0.008 MB of 0.008 MB uploaded (0.000 MB deduped)wandb: | 0.008 MB of 0.008 MB uploaded (0.000 MB deduped)wandb: / 0.008 MB of 0.008 MB uploaded (0.000 MB deduped)wandb: - 0.008 MB of 0.008 MB uploaded (0.000 MB deduped)wandb: 
+wandb: Run history:
+wandb: mean_reward ▁
+wandb: 
+wandb: Run summary:
+wandb: mean_reward 40.56
+wandb: 
+wandb: 🚀 View run chocolate-river-52 at: https://wandb.ai/naddeok/Guassian%20DQN%20CartPole/runs/j11kdvyq
+wandb: Synced 5 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20230515_234358-j11kdvyq/logs
+wandb: - Waiting for wandb.init()...wandb: \ Waiting for wandb.init()...wandb: wandb version 0.15.2 is available!  To upgrade, please run:
+wandb:  $ pip install wandb --upgrade
+wandb: Tracking run with wandb version 0.15.1
+wandb: Run data is saved locally in /home/naddeok5/exVDP-exRL/wandb/run-20230515_234407-acwuuc5f
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run breezy-pond-53
+wandb: ⭐️ View project at https://wandb.ai/naddeok/Guassian%20DQN%20CartPole
+wandb: 🚀 View run at https://wandb.ai/naddeok/Guassian%20DQN%20CartPole/runs/acwuuc5f
+Episode: 42/100, Score: 44.0, Epsilon: 0.00, SNR: 0.25
+Episode: 43/100, Score: 39.0, Epsilon: 0.00, SNR: 0.25
+Episode: 44/100, Score: 52.0, Epsilon: 0.00, SNR: 0.25
+Episode: 45/100, Score: 26.0, Epsilon: 0.00, SNR: 0.25
+Episode: 46/100, Score: 73.0, Epsilon: 0.00, SNR: 0.25
+Episode: 47/100, Score: 33.0, Epsilon: 0.00, SNR: 0.25
+Episode: 48/100, Score: 43.0, Epsilon: 0.00, SNR: 0.25
+Episode: 49/100, Score: 28.0, Epsilon: 0.00, SNR: 0.25
+Episode: 50/100, Score: 38.0, Epsilon: 0.00, SNR: 0.25
+Episode: 51/100, Score: 68.0, Epsilon: 0.00, SNR: 0.25
+Episode: 52/100, Score: 28.0, Epsilon: 0.00, SNR: 0.25
+Episode: 53/100, Score: 21.0, Epsilon: 0.00, SNR: 0.25
+Episode: 54/100, Score: 39.0, Epsilon: 0.00, SNR: 0.25
+Episode: 55/100, Score: 44.0, Epsilon: 0.00, SNR: 0.25
+Episode: 56/100, Score: 22.0, Epsilon: 0.00, SNR: 0.25
+Episode: 57/100, Score: 46.0, Epsilon: 0.00, SNR: 0.25
+Episode: 58/100, Score: 43.0, Epsilon: 0.00, SNR: 0.25
+Episode: 59/100, Score: 30.0, Epsilon: 0.00, SNR: 0.25
+Episode: 60/100, Score: 64.0, Epsilon: 0.00, SNR: 0.25
+Episode: 61/100, Score: 69.0, Epsilon: 0.00, SNR: 0.25
+Episode: 62/100, Score: 11.0, Epsilon: 0.00, SNR: 0.25
+Episode: 63/100, Score: 89.0, Epsilon: 0.00, SNR: 0.25
+Episode: 64/100, Score: 61.0, Epsilon: 0.00, SNR: 0.25
+Episode: 65/100, Score: 49.0, Epsilon: 0.00, SNR: 0.25
+Episode: 66/100, Score: 83.0, Epsilon: 0.00, SNR: 0.25
+Episode: 67/100, Score: 26.0, Epsilon: 0.00, SNR: 0.25
+Episode: 68/100, Score: 11.0, Epsilon: 0.00, SNR: 0.25
+Episode: 69/100, Score: 20.0, Epsilon: 0.00, SNR: 0.25
+Episode: 70/100, Score: 29.0, Epsilon: 0.00, SNR: 0.25
+Episode: 71/100, Score: 23.0, Epsilon: 0.00, SNR: 0.25
+Episode: 72/100, Score: 48.0, Epsilon: 0.00, SNR: 0.25
+Episode: 73/100, Score: 74.0, Epsilon: 0.00, SNR: 0.25
+Episode: 74/100, Score: 34.0, Epsilon: 0.00, SNR: 0.25
+Episode: 75/100, Score: 48.0, Epsilon: 0.00, SNR: 0.25
+Episode: 76/100, Score: 28.0, Epsilon: 0.00, SNR: 0.25
+Episode: 77/100, Score: 36.0, Epsilon: 0.00, SNR: 0.25
+Episode: 78/100, Score: 44.0, Epsilon: 0.00, SNR: 0.25
+Episode: 79/100, Score: 29.0, Epsilon: 0.00, SNR: 0.25
+Episode: 80/100, Score: 65.0, Epsilon: 0.00, SNR: 0.25
+Episode: 81/100, Score: 27.0, Epsilon: 0.00, SNR: 0.25
+Episode: 82/100, Score: 23.0, Epsilon: 0.00, SNR: 0.25
+Episode: 83/100, Score: 14.0, Epsilon: 0.00, SNR: 0.25
+Episode: 84/100, Score: 15.0, Epsilon: 0.00, SNR: 0.25
+Episode: 85/100, Score: 21.0, Epsilon: 0.00, SNR: 0.25
+Episode: 86/100, Score: 55.0, Epsilon: 0.00, SNR: 0.25
+Episode: 87/100, Score: 44.0, Epsilon: 0.00, SNR: 0.25
+Episode: 88/100, Score: 71.0, Epsilon: 0.00, SNR: 0.25
+Episode: 89/100, Score: 25.0, Epsilon: 0.00, SNR: 0.25
+Episode: 90/100, Score: 82.0, Epsilon: 0.00, SNR: 0.25
+Episode: 91/100, Score: 74.0, Epsilon: 0.00, SNR: 0.25
+Episode: 92/100, Score: 17.0, Epsilon: 0.00, SNR: 0.25
+Episode: 93/100, Score: 15.0, Epsilon: 0.00, SNR: 0.25
+Episode: 94/100, Score: 45.0, Epsilon: 0.00, SNR: 0.25
+Episode: 95/100, Score: 80.0, Epsilon: 0.00, SNR: 0.25
+Episode: 96/100, Score: 52.0, Epsilon: 0.00, SNR: 0.25
+Episode: 97/100, Score: 12.0, Epsilon: 0.00, SNR: 0.25
+Episode: 98/100, Score: 15.0, Epsilon: 0.00, SNR: 0.25
+Episode: 99/100, Score: 43.0, Epsilon: 0.00, SNR: 0.25
+Episode: 100/100, Score: 77.0, Epsilon: 0.00, SNR: 0.25
+Mean Total Reward: 40.56
+Episode: 1/100, Score: 33.0, Epsilon: 0.00, SNR: 0.5
+Episode: 2/100, Score: 56.0, Epsilon: 0.00, SNR: 0.5
+Episode: 3/100, Score: 37.0, Epsilon: 0.00, SNR: 0.5
+Episode: 4/100, Score: 56.0, Epsilon: 0.00, SNR: 0.5
+Episode: 5/100, Score: 23.0, Epsilon: 0.00, SNR: 0.5
+Episode: 6/100, Score: 66.0, Epsilon: 0.00, SNR: 0.5
+Episode: 7/100, Score: 68.0, Epsilon: 0.00, SNR: 0.5
+Episode: 8/100, Score: 38.0, Epsilon: 0.00, SNR: 0.5
+Episode: 9/100, Score: 23.0, Epsilon: 0.00, SNR: 0.5
+Episode: 10/100, Score: 116.0, Epsilon: 0.00, SNR: 0.5
+Episode: 11/100, Score: 43.0, Epsilon: 0.00, SNR: 0.5
+Episode: 12/100, Score: 101.0, Epsilon: 0.00, SNR: 0.5
+Episode: 13/100, Score: 59.0, Epsilon: 0.00, SNR: 0.5
+Episode: 14/100, Score: 40.0, Epsilon: 0.00, SNR: 0.5
+Episode: 15/100, Score: 46.0, Epsilon: 0.00, SNR: 0.5
+Episode: 16/100, Score: 72.0, Epsilon: 0.00, SNR: 0.5
+Episode: 17/100, Score: 112.0, Epsilon: 0.00, SNR: 0.5
+Episode: 18/100, Score: 32.0, Epsilon: 0.00, SNR: 0.5
+Episode: 19/100, Score: 63.0, Epsilon: 0.00, SNR: 0.5
+Episode: 20/100, Score: 59.0, Epsilon: 0.00, SNR: 0.5
+Episode: 21/100, Score: 70.0, Epsilon: 0.00, SNR: 0.5
+Episode: 22/100, Score: 39.0, Epsilon: 0.00, SNR: 0.5
+Episode: 23/100, Score: 93.0, Epsilon: 0.00, SNR: 0.5
+Episode: 24/100, Score: 28.0, Epsilon: 0.00, SNR: 0.5
+Episode: 25/100, Score: 44.0, Epsilon: 0.00, SNR: 0.5
+Episode: 26/100, Score: 174.0, Epsilon: 0.00, SNR: 0.5
+Episode: 27/100, Score: 56.0, Epsilon: 0.00, SNR: 0.5
+Episode: 28/100, Score: 29.0, Epsilon: 0.00, SNR: 0.5
+Episode: 29/100, Score: 43.0, Epsilon: 0.00, SNR: 0.5
+Episode: 30/100, Score: 56.0, Epsilon: 0.00, SNR: 0.5
+Episode: 31/100, Score: 45.0, Epsilon: 0.00, SNR: 0.5
+Episode: 32/100, Score: 32.0, Epsilon: 0.00, SNR: 0.5
+Episode: 33/100, Score: 75.0, Epsilon: 0.00, SNR: 0.5
+Episode: 34/100, Score: 15.0, Epsilon: 0.00, SNR: 0.5
+Episode: 35/100, Score: 47.0, Epsilon: 0.00, SNR: 0.5
+Episode: 36/100, Score: 137.0, Epsilon: 0.00, SNR: 0.5
+Episode: 37/100, Score: 9.0, Epsilon: 0.00, SNR: 0.5
+Episode: 38/100, Score: 48.0, Epsilon: 0.00, SNR: 0.5
+Episode: 39/100, Score: 46.0, Epsilon: 0.00, SNR: 0.5
+Episode: 40/100, Score: 44.0, Epsilon: 0.00, SNR: 0.5
+Episode: 41/100, Score: 64.0, Epsilon: 0.00, SNR: 0.5
+Episode: 42/100, Score: 41.0, Epsilon: 0.00, SNR: 0.5
+Episode: 43/100, Score: 35.0, Epsilon: 0.00, SNR: 0.5
+Episode: 44/100, Score: 28.0, Epsilon: 0.00, SNR: 0.5
+Episode: 45/100, Score: 49.0, Epsilon: 0.00, SNR: 0.5
+Episode: 46/100, Score: 35.0, Epsilon: 0.00, SNR: 0.5
+Episode: 47/100, Score: 57.0, Epsilon: 0.00, SNR: 0.5
+Episode: 48/100, Score: 36.0, Epsilon: 0.00, SNR: 0.5
+Episode: 49/100, Score: 77.0, Epsilon: 0.00, SNR: 0.5
+Episode: 50/100, Score: 21.0, Epsilon: 0.00, SNR: 0.5
+Episode: 51/100, Score: 56.0, Epsilon: 0.00, SNR: 0.5
+Episode: 52/100, Score: 47.0, Epsilon: 0.00, SNR: 0.5
+Episode: 53/100, Score: 27.0, Epsilon: 0.00, SNR: 0.5
+Episode: 54/100, Score: 76.0, Epsilon: 0.00, SNR: 0.5
+Episode: 55/100, Score: 19.0, Epsilon: 0.00, SNR: 0.5
+Episode: 56/100, Score: 31.0, Epsilon: 0.00, SNR: 0.5
+Episode: 57/100, Score: 50.0, Epsilon: 0.00, SNR: 0.5
+Episode: 58/100, Score: 18.0, Epsilon: 0.00, SNR: 0.5
+Episode: 59/100, Score: 38.0, Epsilon: 0.00, SNR: 0.5
+Episode: 60/100, Score: 62.0, Epsilon: 0.00, SNR: 0.5
+Episode: 61/100, Score: 37.0, Epsilon: 0.00, SNR: 0.5
+Episode: 62/100, Score: 45.0, Epsilon: 0.00, SNR: 0.5
+Episode: 63/100, Score: 11.0, Epsilon: 0.00, SNR: 0.5
+Episode: 64/100, Score: 32.0, Epsilon: 0.00, SNR: 0.5
+Episode: 65/100, Score: 127.0, Epsilon: 0.00, SNR: 0.5
+Episode: 66/100, Score: 38.0, Epsilon: 0.00, SNR: 0.5
+Episode: 67/100, Score: 24.0, Epsilon: 0.00, SNR: 0.5
+Episode: 68/100, Score: 29.0, Epsilon: 0.00, SNR: 0.5
+Episode: 69/100, Score: 55.0, Epsilon: 0.00, SNR: 0.5
+Episode: 70/100, Score: 125.0, Epsilon: 0.00, SNR: 0.5
+Episode: 71/100, Score: 45.0, Epsilon: 0.00, SNR: 0.5
+Episode: 72/100, Score: 26.0, Epsilon: 0.00, SNR: 0.5
+Episode: 73/100, Score: 126.0, Epsilon: 0.00, SNR: 0.5
+Episode: 74/100, Score: 24.0, Epsilon: 0.00, SNR: 0.5
+Episode: 75/100, Score: 64.0, Epsilon: 0.00, SNR: 0.5
+Episode: 76/100, Score: 59.0, Epsilon: 0.00, SNR: 0.5
+Episode: 77/100, Score: 30.0, Epsilon: 0.00, SNR: 0.5
+Episode: 78/100, Score: 50.0, Epsilon: 0.00, SNR: 0.5
+Episode: 79/100, Score: 69.0, Epsilon: 0.00, SNR: 0.5
+Episode: 80/100, Score: 115.0, Epsilon: 0.00, SNR: 0.5
+Episode: 81/100, Score: 160.0, Epsilon: 0.00, SNR: 0.5
+Episode: 82/100, Score: 50.0, Epsilon: 0.00, SNR: 0.5
+Episode: 83/100, Score: 21.0, Epsilon: 0.00, SNR: 0.5
+Episode: 84/100, Score: 37.0, Epsilon: 0.00, SNR: 0.5
+Episode: 85/100, Score: 64.0, Epsilon: 0.00, SNR: 0.5
+Episode: 86/100, Score: 28.0, Epsilon: 0.00, SNR: 0.5
+Episode: 87/100, Score: 78.0, Epsilon: 0.00, SNR: 0.5
+Episode: 88/100, Score: 86.0, Epsilon: 0.00, SNR: 0.5
+Episode: 89/100, Score: 20.0, Epsilon: 0.00, SNR: 0.5
+Episode: 90/100, Score: 12.0, Epsilon: 0.00, SNR: 0.5
+Episode: 91/100, Score: 123.0, Epsilon: 0.00, SNR: 0.5
+wandb: Waiting for W&B process to finish... (success).
+wandb: 
+wandb: Run history:
+wandb: mean_reward ▁
+wandb: 
+wandb: Run summary:
+wandb: mean_reward 53.05
+wandb: 
+wandb: 🚀 View run breezy-pond-53 at: https://wandb.ai/naddeok/Guassian%20DQN%20CartPole/runs/acwuuc5f
+wandb: Synced 5 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20230515_234407-acwuuc5f/logs
+wandb: - Waiting for wandb.init()...wandb: \ Waiting for wandb.init()...wandb: wandb version 0.15.2 is available!  To upgrade, please run:
+wandb:  $ pip install wandb --upgrade
+wandb: Tracking run with wandb version 0.15.1
+wandb: Run data is saved locally in /home/naddeok5/exVDP-exRL/wandb/run-20230515_234415-7ji9s7yi
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run magic-snow-54
+wandb: ⭐️ View project at https://wandb.ai/naddeok/Guassian%20DQN%20CartPole
+wandb: 🚀 View run at https://wandb.ai/naddeok/Guassian%20DQN%20CartPole/runs/7ji9s7yi
+wandb: Waiting for W&B process to finish... (success).
+wandb: 
+wandb: Run history:
+wandb: mean_reward ▁
+wandb: 
+wandb: Run summary:
+wandb: mean_reward 63.03
+wandb: 
+wandb: 🚀 View run magic-snow-54 at: https://wandb.ai/naddeok/Guassian%20DQN%20CartPole/runs/7ji9s7yi
+wandb: Synced 5 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20230515_234415-7ji9s7yi/logs
+wandb: - Waiting for wandb.init()...wandb: \ Waiting for wandb.init()...wandb: wandb version 0.15.2 is available!  To upgrade, please run:
+wandb:  $ pip install wandb --upgrade
+wandb: Tracking run with wandb version 0.15.1
+wandb: Run data is saved locally in /home/naddeok5/exVDP-exRL/wandb/run-20230515_234423-7zas2zc3
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run sage-puddle-55
+wandb: ⭐️ View project at https://wandb.ai/naddeok/Guassian%20DQN%20CartPole
+wandb: 🚀 View run at https://wandb.ai/naddeok/Guassian%20DQN%20CartPole/runs/7zas2zc3
+Episode: 92/100, Score: 109.0, Epsilon: 0.00, SNR: 0.5
+Episode: 93/100, Score: 42.0, Epsilon: 0.00, SNR: 0.5
+Episode: 94/100, Score: 34.0, Epsilon: 0.00, SNR: 0.5
+Episode: 95/100, Score: 52.0, Epsilon: 0.00, SNR: 0.5
+Episode: 96/100, Score: 15.0, Epsilon: 0.00, SNR: 0.5
+Episode: 97/100, Score: 42.0, Epsilon: 0.00, SNR: 0.5
+Episode: 98/100, Score: 27.0, Epsilon: 0.00, SNR: 0.5
+Episode: 99/100, Score: 12.0, Epsilon: 0.00, SNR: 0.5
+Episode: 100/100, Score: 22.0, Epsilon: 0.00, SNR: 0.5
+Mean Total Reward: 53.05
+Episode: 1/100, Score: 126.0, Epsilon: 0.00, SNR: 0.75
+Episode: 2/100, Score: 36.0, Epsilon: 0.00, SNR: 0.75
+Episode: 3/100, Score: 72.0, Epsilon: 0.00, SNR: 0.75
+Episode: 4/100, Score: 88.0, Epsilon: 0.00, SNR: 0.75
+Episode: 5/100, Score: 95.0, Epsilon: 0.00, SNR: 0.75
+Episode: 6/100, Score: 300.0, Epsilon: 0.00, SNR: 0.75
+Episode: 7/100, Score: 18.0, Epsilon: 0.00, SNR: 0.75
+Episode: 8/100, Score: 22.0, Epsilon: 0.00, SNR: 0.75
+Episode: 9/100, Score: 28.0, Epsilon: 0.00, SNR: 0.75
+Episode: 10/100, Score: 123.0, Epsilon: 0.00, SNR: 0.75
+Episode: 11/100, Score: 55.0, Epsilon: 0.00, SNR: 0.75
+Episode: 12/100, Score: 11.0, Epsilon: 0.00, SNR: 0.75
+Episode: 13/100, Score: 13.0, Epsilon: 0.00, SNR: 0.75
+Episode: 14/100, Score: 181.0, Epsilon: 0.00, SNR: 0.75
+Episode: 15/100, Score: 91.0, Epsilon: 0.00, SNR: 0.75
+Episode: 16/100, Score: 24.0, Epsilon: 0.00, SNR: 0.75
+Episode: 17/100, Score: 58.0, Epsilon: 0.00, SNR: 0.75
+Episode: 18/100, Score: 22.0, Epsilon: 0.00, SNR: 0.75
+Episode: 19/100, Score: 110.0, Epsilon: 0.00, SNR: 0.75
+Episode: 20/100, Score: 49.0, Epsilon: 0.00, SNR: 0.75
+Episode: 21/100, Score: 32.0, Epsilon: 0.00, SNR: 0.75
+Episode: 22/100, Score: 129.0, Epsilon: 0.00, SNR: 0.75
+Episode: 23/100, Score: 37.0, Epsilon: 0.00, SNR: 0.75
+Episode: 24/100, Score: 112.0, Epsilon: 0.00, SNR: 0.75
+Episode: 25/100, Score: 107.0, Epsilon: 0.00, SNR: 0.75
+Episode: 26/100, Score: 68.0, Epsilon: 0.00, SNR: 0.75
+Episode: 27/100, Score: 148.0, Epsilon: 0.00, SNR: 0.75
+Episode: 28/100, Score: 82.0, Epsilon: 0.00, SNR: 0.75
+Episode: 29/100, Score: 85.0, Epsilon: 0.00, SNR: 0.75
+Episode: 30/100, Score: 117.0, Epsilon: 0.00, SNR: 0.75
+Episode: 31/100, Score: 33.0, Epsilon: 0.00, SNR: 0.75
+Episode: 32/100, Score: 67.0, Epsilon: 0.00, SNR: 0.75
+Episode: 33/100, Score: 146.0, Epsilon: 0.00, SNR: 0.75
+Episode: 34/100, Score: 15.0, Epsilon: 0.00, SNR: 0.75
+Episode: 35/100, Score: 116.0, Epsilon: 0.00, SNR: 0.75
+Episode: 36/100, Score: 32.0, Epsilon: 0.00, SNR: 0.75
+Episode: 37/100, Score: 72.0, Epsilon: 0.00, SNR: 0.75
+Episode: 38/100, Score: 24.0, Epsilon: 0.00, SNR: 0.75
+Episode: 39/100, Score: 51.0, Epsilon: 0.00, SNR: 0.75
+Episode: 40/100, Score: 90.0, Epsilon: 0.00, SNR: 0.75
+Episode: 41/100, Score: 14.0, Epsilon: 0.00, SNR: 0.75
+Episode: 42/100, Score: 50.0, Epsilon: 0.00, SNR: 0.75
+Episode: 43/100, Score: 78.0, Epsilon: 0.00, SNR: 0.75
+Episode: 44/100, Score: 52.0, Epsilon: 0.00, SNR: 0.75
+Episode: 45/100, Score: 38.0, Epsilon: 0.00, SNR: 0.75
+Episode: 46/100, Score: 32.0, Epsilon: 0.00, SNR: 0.75
+Episode: 47/100, Score: 42.0, Epsilon: 0.00, SNR: 0.75
+Episode: 48/100, Score: 64.0, Epsilon: 0.00, SNR: 0.75
+Episode: 49/100, Score: 107.0, Epsilon: 0.00, SNR: 0.75
+Episode: 50/100, Score: 13.0, Epsilon: 0.00, SNR: 0.75
+Episode: 51/100, Score: 83.0, Epsilon: 0.00, SNR: 0.75
+Episode: 52/100, Score: 101.0, Epsilon: 0.00, SNR: 0.75
+Episode: 53/100, Score: 167.0, Epsilon: 0.00, SNR: 0.75
+Episode: 54/100, Score: 82.0, Epsilon: 0.00, SNR: 0.75
+Episode: 55/100, Score: 32.0, Epsilon: 0.00, SNR: 0.75
+Episode: 56/100, Score: 38.0, Epsilon: 0.00, SNR: 0.75
+Episode: 57/100, Score: 40.0, Epsilon: 0.00, SNR: 0.75
+Episode: 58/100, Score: 54.0, Epsilon: 0.00, SNR: 0.75
+Episode: 59/100, Score: 24.0, Epsilon: 0.00, SNR: 0.75
+Episode: 60/100, Score: 58.0, Epsilon: 0.00, SNR: 0.75
+Episode: 61/100, Score: 40.0, Epsilon: 0.00, SNR: 0.75
+Episode: 62/100, Score: 21.0, Epsilon: 0.00, SNR: 0.75
+Episode: 63/100, Score: 32.0, Epsilon: 0.00, SNR: 0.75
+Episode: 64/100, Score: 59.0, Epsilon: 0.00, SNR: 0.75
+Episode: 65/100, Score: 27.0, Epsilon: 0.00, SNR: 0.75
+Episode: 66/100, Score: 35.0, Epsilon: 0.00, SNR: 0.75
+Episode: 67/100, Score: 43.0, Epsilon: 0.00, SNR: 0.75
+Episode: 68/100, Score: 30.0, Epsilon: 0.00, SNR: 0.75
+Episode: 69/100, Score: 48.0, Epsilon: 0.00, SNR: 0.75
+Episode: 70/100, Score: 69.0, Epsilon: 0.00, SNR: 0.75
+Episode: 71/100, Score: 92.0, Epsilon: 0.00, SNR: 0.75
+Episode: 72/100, Score: 37.0, Epsilon: 0.00, SNR: 0.75
+Episode: 73/100, Score: 60.0, Epsilon: 0.00, SNR: 0.75
+Episode: 74/100, Score: 37.0, Epsilon: 0.00, SNR: 0.75
+Episode: 75/100, Score: 80.0, Epsilon: 0.00, SNR: 0.75
+Episode: 76/100, Score: 24.0, Epsilon: 0.00, SNR: 0.75
+Episode: 77/100, Score: 40.0, Epsilon: 0.00, SNR: 0.75
+Episode: 78/100, Score: 49.0, Epsilon: 0.00, SNR: 0.75
+Episode: 79/100, Score: 38.0, Epsilon: 0.00, SNR: 0.75
+Episode: 80/100, Score: 12.0, Epsilon: 0.00, SNR: 0.75
+Episode: 81/100, Score: 25.0, Epsilon: 0.00, SNR: 0.75
+Episode: 82/100, Score: 194.0, Epsilon: 0.00, SNR: 0.75
+Episode: 83/100, Score: 34.0, Epsilon: 0.00, SNR: 0.75
+Episode: 84/100, Score: 57.0, Epsilon: 0.00, SNR: 0.75
+Episode: 85/100, Score: 19.0, Epsilon: 0.00, SNR: 0.75
+Episode: 86/100, Score: 148.0, Epsilon: 0.00, SNR: 0.75
+Episode: 87/100, Score: 38.0, Epsilon: 0.00, SNR: 0.75
+Episode: 88/100, Score: 45.0, Epsilon: 0.00, SNR: 0.75
+Episode: 89/100, Score: 137.0, Epsilon: 0.00, SNR: 0.75
+Episode: 90/100, Score: 58.0, Epsilon: 0.00, SNR: 0.75
+Episode: 91/100, Score: 38.0, Epsilon: 0.00, SNR: 0.75
+Episode: 92/100, Score: 30.0, Epsilon: 0.00, SNR: 0.75
+Episode: 93/100, Score: 32.0, Epsilon: 0.00, SNR: 0.75
+Episode: 94/100, Score: 65.0, Epsilon: 0.00, SNR: 0.75
+Episode: 95/100, Score: 76.0, Epsilon: 0.00, SNR: 0.75
+Episode: 96/100, Score: 22.0, Epsilon: 0.00, SNR: 0.75
+Episode: 97/100, Score: 24.0, Epsilon: 0.00, SNR: 0.75
+Episode: 98/100, Score: 30.0, Epsilon: 0.00, SNR: 0.75
+Episode: 99/100, Score: 77.0, Epsilon: 0.00, SNR: 0.75
+Episode: 100/100, Score: 27.0, Epsilon: 0.00, SNR: 0.75
+Mean Total Reward: 63.03
+Episode: 1/100, Score: 99.0, Epsilon: 0.00, SNR: 0.875
+Episode: 2/100, Score: 10.0, Epsilon: 0.00, SNR: 0.875
+Episode: 3/100, Score: 41.0, Epsilon: 0.00, SNR: 0.875
+Episode: 4/100, Score: 93.0, Epsilon: 0.00, SNR: 0.875
+Episode: 5/100, Score: 35.0, Epsilon: 0.00, SNR: 0.875
+Episode: 6/100, Score: 44.0, Epsilon: 0.00, SNR: 0.875
+Episode: 7/100, Score: 58.0, Epsilon: 0.00, SNR: 0.875
+Episode: 8/100, Score: 102.0, Epsilon: 0.00, SNR: 0.875
+Episode: 9/100, Score: 150.0, Epsilon: 0.00, SNR: 0.875
+Episode: 10/100, Score: 33.0, Epsilon: 0.00, SNR: 0.875
+Episode: 11/100, Score: 24.0, Epsilon: 0.00, SNR: 0.875
+Episode: 12/100, Score: 94.0, Epsilon: 0.00, SNR: 0.875
+Episode: 13/100, Score: 71.0, Epsilon: 0.00, SNR: 0.875
+Episode: 14/100, Score: 60.0, Epsilon: 0.00, SNR: 0.875
+Episode: 15/100, Score: 25.0, Epsilon: 0.00, SNR: 0.875
+Episode: 16/100, Score: 42.0, Epsilon: 0.00, SNR: 0.875
+Episode: 17/100, Score: 50.0, Epsilon: 0.00, SNR: 0.875
+Episode: 18/100, Score: 33.0, Epsilon: 0.00, SNR: 0.875
+Episode: 19/100, Score: 91.0, Epsilon: 0.00, SNR: 0.875
+Episode: 20/100, Score: 108.0, Epsilon: 0.00, SNR: 0.875
+Episode: 21/100, Score: 10.0, Epsilon: 0.00, SNR: 0.875
+Episode: 22/100, Score: 78.0, Epsilon: 0.00, SNR: 0.875
+Episode: 23/100, Score: 60.0, Epsilon: 0.00, SNR: 0.875
+Episode: 24/100, Score: 35.0, Epsilon: 0.00, SNR: 0.875
+Episode: 25/100, Score: 54.0, Epsilon: 0.00, SNR: 0.875
+Episode: 26/100, Score: 25.0, Epsilon: 0.00, SNR: 0.875
+Episode: 27/100, Score: 39.0, Epsilon: 0.00, SNR: 0.875
+Episode: 28/100, Score: 25.0, Epsilon: 0.00, SNR: 0.875
+Episode: 29/100, Score: 105.0, Epsilon: 0.00, SNR: 0.875
+Episode: 30/100, Score: 163.0, Epsilon: 0.00, SNR: 0.875
+Episode: 31/100, Score: 23.0, Epsilon: 0.00, SNR: 0.875
+Episode: 32/100, Score: 99.0, Epsilon: 0.00, SNR: 0.875
+Episode: 33/100, Score: 103.0, Epsilon: 0.00, SNR: 0.875
+Episode: 34/100, Score: 21.0, Epsilon: 0.00, SNR: 0.875
+Episode: 35/100, Score: 24.0, Epsilon: 0.00, SNR: 0.875
+Episode: 36/100, Score: 37.0, Epsilon: 0.00, SNR: 0.875
+Episode: 37/100, Score: 21.0, Epsilon: 0.00, SNR: 0.875
+Episode: 38/100, Score: 76.0, Epsilon: 0.00, SNR: 0.875
+wandb: Waiting for W&B process to finish... (success).
+wandb: 
+wandb: Run history:
+wandb: mean_reward ▁
+wandb: 
+wandb: Run summary:
+wandb: mean_reward 63.86
+wandb: 
+wandb: 🚀 View run sage-puddle-55 at: https://wandb.ai/naddeok/Guassian%20DQN%20CartPole/runs/7zas2zc3
+wandb: Synced 5 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20230515_234423-7zas2zc3/logs
+wandb: - Waiting for wandb.init()...wandb: \ Waiting for wandb.init()...wandb: wandb version 0.15.2 is available!  To upgrade, please run:
+wandb:  $ pip install wandb --upgrade
+wandb: Tracking run with wandb version 0.15.1
+wandb: Run data is saved locally in /home/naddeok5/exVDP-exRL/wandb/run-20230515_234431-2cw2szhu
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run atomic-disco-56
+wandb: ⭐️ View project at https://wandb.ai/naddeok/Guassian%20DQN%20CartPole
+wandb: 🚀 View run at https://wandb.ai/naddeok/Guassian%20DQN%20CartPole/runs/2cw2szhu
+Episode: 39/100, Score: 18.0, Epsilon: 0.00, SNR: 0.875
+Episode: 40/100, Score: 78.0, Epsilon: 0.00, SNR: 0.875
+Episode: 41/100, Score: 74.0, Epsilon: 0.00, SNR: 0.875
+Episode: 42/100, Score: 30.0, Epsilon: 0.00, SNR: 0.875
+Episode: 43/100, Score: 83.0, Epsilon: 0.00, SNR: 0.875
+Episode: 44/100, Score: 40.0, Epsilon: 0.00, SNR: 0.875
+Episode: 45/100, Score: 30.0, Epsilon: 0.00, SNR: 0.875
+Episode: 46/100, Score: 49.0, Epsilon: 0.00, SNR: 0.875
+Episode: 47/100, Score: 40.0, Epsilon: 0.00, SNR: 0.875
+Episode: 48/100, Score: 44.0, Epsilon: 0.00, SNR: 0.875
+Episode: 49/100, Score: 83.0, Epsilon: 0.00, SNR: 0.875
+Episode: 50/100, Score: 54.0, Epsilon: 0.00, SNR: 0.875
+Episode: 51/100, Score: 107.0, Epsilon: 0.00, SNR: 0.875
+Episode: 52/100, Score: 135.0, Epsilon: 0.00, SNR: 0.875
+Episode: 53/100, Score: 24.0, Epsilon: 0.00, SNR: 0.875
+Episode: 54/100, Score: 29.0, Epsilon: 0.00, SNR: 0.875
+Episode: 55/100, Score: 166.0, Epsilon: 0.00, SNR: 0.875
+Episode: 56/100, Score: 34.0, Epsilon: 0.00, SNR: 0.875
+Episode: 57/100, Score: 118.0, Epsilon: 0.00, SNR: 0.875
+Episode: 58/100, Score: 47.0, Epsilon: 0.00, SNR: 0.875
+Episode: 59/100, Score: 164.0, Epsilon: 0.00, SNR: 0.875
+Episode: 60/100, Score: 64.0, Epsilon: 0.00, SNR: 0.875
+Episode: 61/100, Score: 59.0, Epsilon: 0.00, SNR: 0.875
+Episode: 62/100, Score: 39.0, Epsilon: 0.00, SNR: 0.875
+Episode: 63/100, Score: 31.0, Epsilon: 0.00, SNR: 0.875
+Episode: 64/100, Score: 44.0, Epsilon: 0.00, SNR: 0.875
+Episode: 65/100, Score: 18.0, Epsilon: 0.00, SNR: 0.875
+Episode: 66/100, Score: 37.0, Epsilon: 0.00, SNR: 0.875
+Episode: 67/100, Score: 87.0, Epsilon: 0.00, SNR: 0.875
+Episode: 68/100, Score: 36.0, Epsilon: 0.00, SNR: 0.875
+Episode: 69/100, Score: 23.0, Epsilon: 0.00, SNR: 0.875
+Episode: 70/100, Score: 111.0, Epsilon: 0.00, SNR: 0.875
+Episode: 71/100, Score: 136.0, Epsilon: 0.00, SNR: 0.875
+Episode: 72/100, Score: 28.0, Epsilon: 0.00, SNR: 0.875
+Episode: 73/100, Score: 124.0, Epsilon: 0.00, SNR: 0.875
+Episode: 74/100, Score: 126.0, Epsilon: 0.00, SNR: 0.875
+Episode: 75/100, Score: 112.0, Epsilon: 0.00, SNR: 0.875
+Episode: 76/100, Score: 36.0, Epsilon: 0.00, SNR: 0.875
+Episode: 77/100, Score: 21.0, Epsilon: 0.00, SNR: 0.875
+Episode: 78/100, Score: 58.0, Epsilon: 0.00, SNR: 0.875
+Episode: 79/100, Score: 108.0, Epsilon: 0.00, SNR: 0.875
+Episode: 80/100, Score: 31.0, Epsilon: 0.00, SNR: 0.875
+Episode: 81/100, Score: 84.0, Epsilon: 0.00, SNR: 0.875
+Episode: 82/100, Score: 17.0, Epsilon: 0.00, SNR: 0.875
+Episode: 83/100, Score: 87.0, Epsilon: 0.00, SNR: 0.875
+Episode: 84/100, Score: 92.0, Epsilon: 0.00, SNR: 0.875
+Episode: 85/100, Score: 43.0, Epsilon: 0.00, SNR: 0.875
+Episode: 86/100, Score: 34.0, Epsilon: 0.00, SNR: 0.875
+Episode: 87/100, Score: 147.0, Epsilon: 0.00, SNR: 0.875
+Episode: 88/100, Score: 66.0, Epsilon: 0.00, SNR: 0.875
+Episode: 89/100, Score: 156.0, Epsilon: 0.00, SNR: 0.875
+Episode: 90/100, Score: 95.0, Epsilon: 0.00, SNR: 0.875
+Episode: 91/100, Score: 152.0, Epsilon: 0.00, SNR: 0.875
+Episode: 92/100, Score: 46.0, Epsilon: 0.00, SNR: 0.875
+Episode: 93/100, Score: 11.0, Epsilon: 0.00, SNR: 0.875
+Episode: 94/100, Score: 55.0, Epsilon: 0.00, SNR: 0.875
+Episode: 95/100, Score: 75.0, Epsilon: 0.00, SNR: 0.875
+Episode: 96/100, Score: 48.0, Epsilon: 0.00, SNR: 0.875
+Episode: 97/100, Score: 40.0, Epsilon: 0.00, SNR: 0.875
+Episode: 98/100, Score: 54.0, Epsilon: 0.00, SNR: 0.875
+Episode: 99/100, Score: 16.0, Epsilon: 0.00, SNR: 0.875
+Episode: 100/100, Score: 31.0, Epsilon: 0.00, SNR: 0.875
+Mean Total Reward: 63.86
+Episode: 1/100, Score: 129.0, Epsilon: 0.00, SNR: 1.0
+Episode: 2/100, Score: 18.0, Epsilon: 0.00, SNR: 1.0
+Episode: 3/100, Score: 75.0, Epsilon: 0.00, SNR: 1.0
+Episode: 4/100, Score: 42.0, Epsilon: 0.00, SNR: 1.0
+Episode: 5/100, Score: 31.0, Epsilon: 0.00, SNR: 1.0
+Episode: 6/100, Score: 21.0, Epsilon: 0.00, SNR: 1.0
+Episode: 7/100, Score: 69.0, Epsilon: 0.00, SNR: 1.0
+Episode: 8/100, Score: 21.0, Epsilon: 0.00, SNR: 1.0
+Episode: 9/100, Score: 22.0, Epsilon: 0.00, SNR: 1.0
+Episode: 10/100, Score: 74.0, Epsilon: 0.00, SNR: 1.0
+Episode: 11/100, Score: 40.0, Epsilon: 0.00, SNR: 1.0
+Episode: 12/100, Score: 161.0, Epsilon: 0.00, SNR: 1.0
+Episode: 13/100, Score: 43.0, Epsilon: 0.00, SNR: 1.0
+Episode: 14/100, Score: 58.0, Epsilon: 0.00, SNR: 1.0
+Episode: 15/100, Score: 68.0, Epsilon: 0.00, SNR: 1.0
+Episode: 16/100, Score: 65.0, Epsilon: 0.00, SNR: 1.0
+Episode: 17/100, Score: 41.0, Epsilon: 0.00, SNR: 1.0
+Episode: 18/100, Score: 192.0, Epsilon: 0.00, SNR: 1.0
+Episode: 19/100, Score: 18.0, Epsilon: 0.00, SNR: 1.0
+Episode: 20/100, Score: 26.0, Epsilon: 0.00, SNR: 1.0
+Episode: 21/100, Score: 61.0, Epsilon: 0.00, SNR: 1.0
+Episode: 22/100, Score: 24.0, Epsilon: 0.00, SNR: 1.0
+Episode: 23/100, Score: 58.0, Epsilon: 0.00, SNR: 1.0
+Episode: 24/100, Score: 29.0, Epsilon: 0.00, SNR: 1.0
+Episode: 25/100, Score: 59.0, Epsilon: 0.00, SNR: 1.0
+Episode: 26/100, Score: 37.0, Epsilon: 0.00, SNR: 1.0
+Episode: 27/100, Score: 58.0, Epsilon: 0.00, SNR: 1.0
+Episode: 28/100, Score: 41.0, Epsilon: 0.00, SNR: 1.0
+Episode: 29/100, Score: 30.0, Epsilon: 0.00, SNR: 1.0
+Episode: 30/100, Score: 44.0, Epsilon: 0.00, SNR: 1.0
+Episode: 31/100, Score: 208.0, Epsilon: 0.00, SNR: 1.0
+Episode: 32/100, Score: 20.0, Epsilon: 0.00, SNR: 1.0
+Episode: 33/100, Score: 41.0, Epsilon: 0.00, SNR: 1.0
+Episode: 34/100, Score: 38.0, Epsilon: 0.00, SNR: 1.0
+Episode: 35/100, Score: 60.0, Epsilon: 0.00, SNR: 1.0
+Episode: 36/100, Score: 34.0, Epsilon: 0.00, SNR: 1.0
+Episode: 37/100, Score: 38.0, Epsilon: 0.00, SNR: 1.0
+Episode: 38/100, Score: 106.0, Epsilon: 0.00, SNR: 1.0
+Episode: 39/100, Score: 57.0, Epsilon: 0.00, SNR: 1.0
+Episode: 40/100, Score: 21.0, Epsilon: 0.00, SNR: 1.0
+Episode: 41/100, Score: 41.0, Epsilon: 0.00, SNR: 1.0
+Episode: 42/100, Score: 23.0, Epsilon: 0.00, SNR: 1.0
+Episode: 43/100, Score: 47.0, Epsilon: 0.00, SNR: 1.0
+Episode: 44/100, Score: 26.0, Epsilon: 0.00, SNR: 1.0
+Episode: 45/100, Score: 42.0, Epsilon: 0.00, SNR: 1.0
+Episode: 46/100, Score: 16.0, Epsilon: 0.00, SNR: 1.0
+Episode: 47/100, Score: 53.0, Epsilon: 0.00, SNR: 1.0
+Episode: 48/100, Score: 262.0, Epsilon: 0.00, SNR: 1.0
+Episode: 49/100, Score: 36.0, Epsilon: 0.00, SNR: 1.0
+Episode: 50/100, Score: 132.0, Epsilon: 0.00, SNR: 1.0
+Episode: 51/100, Score: 44.0, Epsilon: 0.00, SNR: 1.0
+Episode: 52/100, Score: 17.0, Epsilon: 0.00, SNR: 1.0
+Episode: 53/100, Score: 36.0, Epsilon: 0.00, SNR: 1.0
+Episode: 54/100, Score: 57.0, Epsilon: 0.00, SNR: 1.0
+Episode: 55/100, Score: 123.0, Epsilon: 0.00, SNR: 1.0
+Episode: 56/100, Score: 66.0, Epsilon: 0.00, SNR: 1.0
+Episode: 57/100, Score: 86.0, Epsilon: 0.00, SNR: 1.0
+Episode: 58/100, Score: 81.0, Epsilon: 0.00, SNR: 1.0
+Episode: 59/100, Score: 163.0, Epsilon: 0.00, SNR: 1.0
+Episode: 60/100, Score: 256.0, Epsilon: 0.00, SNR: 1.0
+Episode: 61/100, Score: 35.0, Epsilon: 0.00, SNR: 1.0
+Episode: 62/100, Score: 69.0, Epsilon: 0.00, SNR: 1.0
+Episode: 63/100, Score: 26.0, Epsilon: 0.00, SNR: 1.0
+Episode: 64/100, Score: 157.0, Epsilon: 0.00, SNR: 1.0
+Episode: 65/100, Score: 51.0, Epsilon: 0.00, SNR: 1.0
+Episode: 66/100, Score: 30.0, Epsilon: 0.00, SNR: 1.0
+Episode: 67/100, Score: 32.0, Epsilon: 0.00, SNR: 1.0
+Episode: 68/100, Score: 22.0, Epsilon: 0.00, SNR: 1.0
+Episode: 69/100, Score: 32.0, Epsilon: 0.00, SNR: 1.0
+Episode: 70/100, Score: 19.0, Epsilon: 0.00, SNR: 1.0
+Episode: 71/100, Score: 61.0, Epsilon: 0.00, SNR: 1.0
+Episode: 72/100, Score: 50.0, Epsilon: 0.00, SNR: 1.0
+Episode: 73/100, Score: 142.0, Epsilon: 0.00, SNR: 1.0
+Episode: 74/100, Score: 72.0, Epsilon: 0.00, SNR: 1.0
+Episode: 75/100, Score: 90.0, Epsilon: 0.00, SNR: 1.0
+Episode: 76/100, Score: 55.0, Epsilon: 0.00, SNR: 1.0
+Episode: 77/100, Score: 50.0, Epsilon: 0.00, SNR: 1.0
+Episode: 78/100, Score: 42.0, Epsilon: 0.00, SNR: 1.0
+Episode: 79/100, Score: 46.0, Epsilon: 0.00, SNR: 1.0
+Episode: 80/100, Score: 124.0, Epsilon: 0.00, SNR: 1.0
+Episode: 81/100, Score: 35.0, Epsilon: 0.00, SNR: 1.0
+Episode: 82/100, Score: 66.0, Epsilon: 0.00, SNR: 1.0
+Episode: 83/100, Score: 105.0, Epsilon: 0.00, SNR: 1.0
+Episode: 84/100, Score: 16.0, Epsilon: 0.00, SNR: 1.0
+Episode: 85/100, Score: 48.0, Epsilon: 0.00, SNR: 1.0
+Episode: 86/100, Score: 28.0, Epsilon: 0.00, SNR: 1.0
+wandb: Waiting for W&B process to finish... (success).
+wandb: 
+wandb: Run history:
+wandb: mean_reward ▁
+wandb: 
+wandb: Run summary:
+wandb: mean_reward 62.42
+wandb: 
+wandb: 🚀 View run atomic-disco-56 at: https://wandb.ai/naddeok/Guassian%20DQN%20CartPole/runs/2cw2szhu
+wandb: Synced 5 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20230515_234431-2cw2szhu/logs
+wandb: - Waiting for wandb.init()...wandb: \ Waiting for wandb.init()...wandb: wandb version 0.15.2 is available!  To upgrade, please run:
+wandb:  $ pip install wandb --upgrade
+wandb: Tracking run with wandb version 0.15.1
+wandb: Run data is saved locally in /home/naddeok5/exVDP-exRL/wandb/run-20230515_234440-jm9dpmwd
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run decent-butterfly-57
+wandb: ⭐️ View project at https://wandb.ai/naddeok/Guassian%20DQN%20CartPole
+wandb: 🚀 View run at https://wandb.ai/naddeok/Guassian%20DQN%20CartPole/runs/jm9dpmwd
+wandb: Waiting for W&B process to finish... (success).
+wandb: 
+wandb: Run history:
+wandb: mean_reward ▁
+wandb: 
+wandb: Run summary:
+wandb: mean_reward 280.8
+wandb: 
+wandb: 🚀 View run decent-butterfly-57 at: https://wandb.ai/naddeok/Guassian%20DQN%20CartPole/runs/jm9dpmwd
+wandb: Synced 5 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20230515_234440-jm9dpmwd/logs
+wandb: - Waiting for wandb.init()...wandb: \ Waiting for wandb.init()...wandb: wandb version 0.15.2 is available!  To upgrade, please run:
+wandb:  $ pip install wandb --upgrade
+wandb: Tracking run with wandb version 0.15.1
+wandb: Run data is saved locally in /home/naddeok5/exVDP-exRL/wandb/run-20230515_234454-435rc1p4
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run floral-yogurt-58
+wandb: ⭐️ View project at https://wandb.ai/naddeok/Guassian%20DQN%20CartPole
+wandb: 🚀 View run at https://wandb.ai/naddeok/Guassian%20DQN%20CartPole/runs/435rc1p4
+Episode: 87/100, Score: 39.0, Epsilon: 0.00, SNR: 1.0
+Episode: 88/100, Score: 33.0, Epsilon: 0.00, SNR: 1.0
+Episode: 89/100, Score: 60.0, Epsilon: 0.00, SNR: 1.0
+Episode: 90/100, Score: 41.0, Epsilon: 0.00, SNR: 1.0
+Episode: 91/100, Score: 89.0, Epsilon: 0.00, SNR: 1.0
+Episode: 92/100, Score: 81.0, Epsilon: 0.00, SNR: 1.0
+Episode: 93/100, Score: 36.0, Epsilon: 0.00, SNR: 1.0
+Episode: 94/100, Score: 37.0, Epsilon: 0.00, SNR: 1.0
+Episode: 95/100, Score: 119.0, Epsilon: 0.00, SNR: 1.0
+Episode: 96/100, Score: 61.0, Epsilon: 0.00, SNR: 1.0
+Episode: 97/100, Score: 50.0, Epsilon: 0.00, SNR: 1.0
+Episode: 98/100, Score: 44.0, Epsilon: 0.00, SNR: 1.0
+Episode: 99/100, Score: 117.0, Epsilon: 0.00, SNR: 1.0
+Episode: 100/100, Score: 47.0, Epsilon: 0.00, SNR: 1.0
+Mean Total Reward: 62.42
+Episode: 1/100, Score: 300.0, Epsilon: 0.00, SNR: 10.0
+Episode: 2/100, Score: 300.0, Epsilon: 0.00, SNR: 10.0
+Episode: 3/100, Score: 300.0, Epsilon: 0.00, SNR: 10.0
+Episode: 4/100, Score: 300.0, Epsilon: 0.00, SNR: 10.0
+Episode: 5/100, Score: 300.0, Epsilon: 0.00, SNR: 10.0
+Episode: 6/100, Score: 300.0, Epsilon: 0.00, SNR: 10.0
+Episode: 7/100, Score: 300.0, Epsilon: 0.00, SNR: 10.0
+Episode: 8/100, Score: 300.0, Epsilon: 0.00, SNR: 10.0
+Episode: 9/100, Score: 300.0, Epsilon: 0.00, SNR: 10.0
+Episode: 10/100, Score: 300.0, Epsilon: 0.00, SNR: 10.0
+Episode: 11/100, Score: 300.0, Epsilon: 0.00, SNR: 10.0
+Episode: 12/100, Score: 300.0, Epsilon: 0.00, SNR: 10.0
+Episode: 13/100, Score: 300.0, Epsilon: 0.00, SNR: 10.0
+Episode: 14/100, Score: 300.0, Epsilon: 0.00, SNR: 10.0
+Episode: 15/100, Score: 300.0, Epsilon: 0.00, SNR: 10.0
+Episode: 16/100, Score: 300.0, Epsilon: 0.00, SNR: 10.0
+Episode: 17/100, Score: 300.0, Epsilon: 0.00, SNR: 10.0
+Episode: 18/100, Score: 300.0, Epsilon: 0.00, SNR: 10.0
+Episode: 19/100, Score: 300.0, Epsilon: 0.00, SNR: 10.0
+Episode: 20/100, Score: 21.0, Epsilon: 0.00, SNR: 10.0
+Episode: 21/100, Score: 300.0, Epsilon: 0.00, SNR: 10.0
+Episode: 22/100, Score: 300.0, Epsilon: 0.00, SNR: 10.0
+Episode: 23/100, Score: 300.0, Epsilon: 0.00, SNR: 10.0
+Episode: 24/100, Score: 103.0, Epsilon: 0.00, SNR: 10.0
+Episode: 25/100, Score: 300.0, Epsilon: 0.00, SNR: 10.0
+Episode: 26/100, Score: 300.0, Epsilon: 0.00, SNR: 10.0
+Episode: 27/100, Score: 300.0, Epsilon: 0.00, SNR: 10.0
+Episode: 28/100, Score: 300.0, Epsilon: 0.00, SNR: 10.0
+Episode: 29/100, Score: 300.0, Epsilon: 0.00, SNR: 10.0
+Episode: 30/100, Score: 300.0, Epsilon: 0.00, SNR: 10.0
+Episode: 31/100, Score: 300.0, Epsilon: 0.00, SNR: 10.0
+Episode: 32/100, Score: 300.0, Epsilon: 0.00, SNR: 10.0
+Episode: 33/100, Score: 109.0, Epsilon: 0.00, SNR: 10.0
+Episode: 34/100, Score: 300.0, Epsilon: 0.00, SNR: 10.0
+Episode: 35/100, Score: 300.0, Epsilon: 0.00, SNR: 10.0
+Episode: 36/100, Score: 300.0, Epsilon: 0.00, SNR: 10.0
+Episode: 37/100, Score: 300.0, Epsilon: 0.00, SNR: 10.0
+Episode: 38/100, Score: 300.0, Epsilon: 0.00, SNR: 10.0
+Episode: 39/100, Score: 300.0, Epsilon: 0.00, SNR: 10.0
+Episode: 40/100, Score: 39.0, Epsilon: 0.00, SNR: 10.0
+Episode: 41/100, Score: 300.0, Epsilon: 0.00, SNR: 10.0
+Episode: 42/100, Score: 300.0, Epsilon: 0.00, SNR: 10.0
+Episode: 43/100, Score: 300.0, Epsilon: 0.00, SNR: 10.0
+Episode: 44/100, Score: 300.0, Epsilon: 0.00, SNR: 10.0
+Episode: 45/100, Score: 300.0, Epsilon: 0.00, SNR: 10.0
+Episode: 46/100, Score: 300.0, Epsilon: 0.00, SNR: 10.0
+Episode: 47/100, Score: 300.0, Epsilon: 0.00, SNR: 10.0
+Episode: 48/100, Score: 300.0, Epsilon: 0.00, SNR: 10.0
+Episode: 49/100, Score: 300.0, Epsilon: 0.00, SNR: 10.0
+Episode: 50/100, Score: 300.0, Epsilon: 0.00, SNR: 10.0
+Episode: 51/100, Score: 300.0, Epsilon: 0.00, SNR: 10.0
+Episode: 52/100, Score: 200.0, Epsilon: 0.00, SNR: 10.0
+Episode: 53/100, Score: 218.0, Epsilon: 0.00, SNR: 10.0
+Episode: 54/100, Score: 300.0, Epsilon: 0.00, SNR: 10.0
+Episode: 55/100, Score: 300.0, Epsilon: 0.00, SNR: 10.0
+Episode: 56/100, Score: 300.0, Epsilon: 0.00, SNR: 10.0
+Episode: 57/100, Score: 300.0, Epsilon: 0.00, SNR: 10.0
+Episode: 58/100, Score: 65.0, Epsilon: 0.00, SNR: 10.0
+Episode: 59/100, Score: 108.0, Epsilon: 0.00, SNR: 10.0
+Episode: 60/100, Score: 300.0, Epsilon: 0.00, SNR: 10.0
+Episode: 61/100, Score: 300.0, Epsilon: 0.00, SNR: 10.0
+Episode: 62/100, Score: 300.0, Epsilon: 0.00, SNR: 10.0
+Episode: 63/100, Score: 300.0, Epsilon: 0.00, SNR: 10.0
+Episode: 64/100, Score: 300.0, Epsilon: 0.00, SNR: 10.0
+Episode: 65/100, Score: 264.0, Epsilon: 0.00, SNR: 10.0
+Episode: 66/100, Score: 245.0, Epsilon: 0.00, SNR: 10.0
+Episode: 67/100, Score: 300.0, Epsilon: 0.00, SNR: 10.0
+Episode: 68/100, Score: 300.0, Epsilon: 0.00, SNR: 10.0
+Episode: 69/100, Score: 300.0, Epsilon: 0.00, SNR: 10.0
+Episode: 70/100, Score: 300.0, Epsilon: 0.00, SNR: 10.0
+Episode: 71/100, Score: 300.0, Epsilon: 0.00, SNR: 10.0
+Episode: 72/100, Score: 300.0, Epsilon: 0.00, SNR: 10.0
+Episode: 73/100, Score: 300.0, Epsilon: 0.00, SNR: 10.0
+Episode: 74/100, Score: 300.0, Epsilon: 0.00, SNR: 10.0
+Episode: 75/100, Score: 300.0, Epsilon: 0.00, SNR: 10.0
+Episode: 76/100, Score: 300.0, Epsilon: 0.00, SNR: 10.0
+Episode: 77/100, Score: 300.0, Epsilon: 0.00, SNR: 10.0
+Episode: 78/100, Score: 300.0, Epsilon: 0.00, SNR: 10.0
+Episode: 79/100, Score: 300.0, Epsilon: 0.00, SNR: 10.0
+Episode: 80/100, Score: 300.0, Epsilon: 0.00, SNR: 10.0
+Episode: 81/100, Score: 300.0, Epsilon: 0.00, SNR: 10.0
+Episode: 82/100, Score: 300.0, Epsilon: 0.00, SNR: 10.0
+Episode: 83/100, Score: 300.0, Epsilon: 0.00, SNR: 10.0
+Episode: 84/100, Score: 300.0, Epsilon: 0.00, SNR: 10.0
+Episode: 85/100, Score: 300.0, Epsilon: 0.00, SNR: 10.0
+Episode: 86/100, Score: 300.0, Epsilon: 0.00, SNR: 10.0
+Episode: 87/100, Score: 199.0, Epsilon: 0.00, SNR: 10.0
+Episode: 88/100, Score: 300.0, Epsilon: 0.00, SNR: 10.0
+Episode: 89/100, Score: 300.0, Epsilon: 0.00, SNR: 10.0
+Episode: 90/100, Score: 300.0, Epsilon: 0.00, SNR: 10.0
+Episode: 91/100, Score: 300.0, Epsilon: 0.00, SNR: 10.0
+Episode: 92/100, Score: 300.0, Epsilon: 0.00, SNR: 10.0
+Episode: 93/100, Score: 300.0, Epsilon: 0.00, SNR: 10.0
+Episode: 94/100, Score: 300.0, Epsilon: 0.00, SNR: 10.0
+Episode: 95/100, Score: 300.0, Epsilon: 0.00, SNR: 10.0
+Episode: 96/100, Score: 300.0, Epsilon: 0.00, SNR: 10.0
+Episode: 97/100, Score: 300.0, Epsilon: 0.00, SNR: 10.0
+Episode: 98/100, Score: 109.0, Epsilon: 0.00, SNR: 10.0
+Episode: 99/100, Score: 300.0, Epsilon: 0.00, SNR: 10.0
+Episode: 100/100, Score: 300.0, Epsilon: 0.00, SNR: 10.0
+Mean Total Reward: 280.8
+Episode: 1/100, Score: 300.0, Epsilon: 0.00, SNR: 100
+Episode: 2/100, Score: 300.0, Epsilon: 0.00, SNR: 100
+Episode: 3/100, Score: 300.0, Epsilon: 0.00, SNR: 100
+Episode: 4/100, Score: 300.0, Epsilon: 0.00, SNR: 100
+Episode: 5/100, Score: 300.0, Epsilon: 0.00, SNR: 100
+Episode: 6/100, Score: 300.0, Epsilon: 0.00, SNR: 100
+Episode: 7/100, Score: 300.0, Epsilon: 0.00, SNR: 100
+Episode: 8/100, Score: 300.0, Epsilon: 0.00, SNR: 100
+Episode: 9/100, Score: 300.0, Epsilon: 0.00, SNR: 100
+Episode: 10/100, Score: 300.0, Epsilon: 0.00, SNR: 100
+Episode: 11/100, Score: 300.0, Epsilon: 0.00, SNR: 100
+Episode: 12/100, Score: 300.0, Epsilon: 0.00, SNR: 100
+Episode: 13/100, Score: 300.0, Epsilon: 0.00, SNR: 100
+Episode: 14/100, Score: 300.0, Epsilon: 0.00, SNR: 100
+Episode: 15/100, Score: 300.0, Epsilon: 0.00, SNR: 100
+Episode: 16/100, Score: 300.0, Epsilon: 0.00, SNR: 100
+Episode: 17/100, Score: 300.0, Epsilon: 0.00, SNR: 100
+Episode: 18/100, Score: 300.0, Epsilon: 0.00, SNR: 100
+Episode: 19/100, Score: 300.0, Epsilon: 0.00, SNR: 100
+Episode: 20/100, Score: 300.0, Epsilon: 0.00, SNR: 100
+Episode: 21/100, Score: 300.0, Epsilon: 0.00, SNR: 100
+Episode: 22/100, Score: 300.0, Epsilon: 0.00, SNR: 100
+Episode: 23/100, Score: 300.0, Epsilon: 0.00, SNR: 100
+Episode: 24/100, Score: 300.0, Epsilon: 0.00, SNR: 100
+Episode: 25/100, Score: 300.0, Epsilon: 0.00, SNR: 100
+Episode: 26/100, Score: 300.0, Epsilon: 0.00, SNR: 100
+Episode: 27/100, Score: 300.0, Epsilon: 0.00, SNR: 100
+Episode: 28/100, Score: 300.0, Epsilon: 0.00, SNR: 100
+Episode: 29/100, Score: 300.0, Epsilon: 0.00, SNR: 100
+Episode: 30/100, Score: 300.0, Epsilon: 0.00, SNR: 100
+Episode: 31/100, Score: 300.0, Epsilon: 0.00, SNR: 100
+Episode: 32/100, Score: 300.0, Epsilon: 0.00, SNR: 100
+wandb: Waiting for W&B process to finish... (success).
+wandb: 
+wandb: Run history:
+wandb: mean_reward ▁
+wandb: 
+wandb: Run summary:
+wandb: mean_reward 300.0
+wandb: 
+wandb: 🚀 View run floral-yogurt-58 at: https://wandb.ai/naddeok/Guassian%20DQN%20CartPole/runs/435rc1p4
+wandb: Synced 5 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20230515_234454-435rc1p4/logs
+Episode: 33/100, Score: 300.0, Epsilon: 0.00, SNR: 100
+Episode: 34/100, Score: 300.0, Epsilon: 0.00, SNR: 100
+Episode: 35/100, Score: 300.0, Epsilon: 0.00, SNR: 100
+Episode: 36/100, Score: 300.0, Epsilon: 0.00, SNR: 100
+Episode: 37/100, Score: 300.0, Epsilon: 0.00, SNR: 100
+Episode: 38/100, Score: 300.0, Epsilon: 0.00, SNR: 100
+Episode: 39/100, Score: 300.0, Epsilon: 0.00, SNR: 100
+Episode: 40/100, Score: 300.0, Epsilon: 0.00, SNR: 100
+Episode: 41/100, Score: 300.0, Epsilon: 0.00, SNR: 100
+Episode: 42/100, Score: 300.0, Epsilon: 0.00, SNR: 100
+Episode: 43/100, Score: 300.0, Epsilon: 0.00, SNR: 100
+Episode: 44/100, Score: 300.0, Epsilon: 0.00, SNR: 100
+Episode: 45/100, Score: 300.0, Epsilon: 0.00, SNR: 100
+Episode: 46/100, Score: 300.0, Epsilon: 0.00, SNR: 100
+Episode: 47/100, Score: 300.0, Epsilon: 0.00, SNR: 100
+Episode: 48/100, Score: 300.0, Epsilon: 0.00, SNR: 100
+Episode: 49/100, Score: 300.0, Epsilon: 0.00, SNR: 100
+Episode: 50/100, Score: 300.0, Epsilon: 0.00, SNR: 100
+Episode: 51/100, Score: 300.0, Epsilon: 0.00, SNR: 100
+Episode: 52/100, Score: 300.0, Epsilon: 0.00, SNR: 100
+Episode: 53/100, Score: 300.0, Epsilon: 0.00, SNR: 100
+Episode: 54/100, Score: 300.0, Epsilon: 0.00, SNR: 100
+Episode: 55/100, Score: 300.0, Epsilon: 0.00, SNR: 100
+Episode: 56/100, Score: 300.0, Epsilon: 0.00, SNR: 100
+Episode: 57/100, Score: 300.0, Epsilon: 0.00, SNR: 100
+Episode: 58/100, Score: 300.0, Epsilon: 0.00, SNR: 100
+Episode: 59/100, Score: 300.0, Epsilon: 0.00, SNR: 100
+Episode: 60/100, Score: 300.0, Epsilon: 0.00, SNR: 100
+Episode: 61/100, Score: 300.0, Epsilon: 0.00, SNR: 100
+Episode: 62/100, Score: 300.0, Epsilon: 0.00, SNR: 100
+Episode: 63/100, Score: 300.0, Epsilon: 0.00, SNR: 100
+Episode: 64/100, Score: 300.0, Epsilon: 0.00, SNR: 100
+Episode: 65/100, Score: 300.0, Epsilon: 0.00, SNR: 100
+Episode: 66/100, Score: 300.0, Epsilon: 0.00, SNR: 100
+Episode: 67/100, Score: 300.0, Epsilon: 0.00, SNR: 100
+Episode: 68/100, Score: 300.0, Epsilon: 0.00, SNR: 100
+Episode: 69/100, Score: 300.0, Epsilon: 0.00, SNR: 100
+Episode: 70/100, Score: 300.0, Epsilon: 0.00, SNR: 100
+Episode: 71/100, Score: 300.0, Epsilon: 0.00, SNR: 100
+Episode: 72/100, Score: 300.0, Epsilon: 0.00, SNR: 100
+Episode: 73/100, Score: 300.0, Epsilon: 0.00, SNR: 100
+Episode: 74/100, Score: 300.0, Epsilon: 0.00, SNR: 100
+Episode: 75/100, Score: 300.0, Epsilon: 0.00, SNR: 100
+Episode: 76/100, Score: 300.0, Epsilon: 0.00, SNR: 100
+Episode: 77/100, Score: 300.0, Epsilon: 0.00, SNR: 100
+Episode: 78/100, Score: 300.0, Epsilon: 0.00, SNR: 100
+Episode: 79/100, Score: 300.0, Epsilon: 0.00, SNR: 100
+Episode: 80/100, Score: 300.0, Epsilon: 0.00, SNR: 100
+Episode: 81/100, Score: 300.0, Epsilon: 0.00, SNR: 100
+Episode: 82/100, Score: 300.0, Epsilon: 0.00, SNR: 100
+Episode: 83/100, Score: 300.0, Epsilon: 0.00, SNR: 100
+Episode: 84/100, Score: 300.0, Epsilon: 0.00, SNR: 100
+Episode: 85/100, Score: 300.0, Epsilon: 0.00, SNR: 100
+Episode: 86/100, Score: 300.0, Epsilon: 0.00, SNR: 100
+Episode: 87/100, Score: 300.0, Epsilon: 0.00, SNR: 100
+Episode: 88/100, Score: 300.0, Epsilon: 0.00, SNR: 100
+Episode: 89/100, Score: 300.0, Epsilon: 0.00, SNR: 100
+Episode: 90/100, Score: 300.0, Epsilon: 0.00, SNR: 100
+Episode: 91/100, Score: 300.0, Epsilon: 0.00, SNR: 100
+Episode: 92/100, Score: 300.0, Epsilon: 0.00, SNR: 100
+Episode: 93/100, Score: 300.0, Epsilon: 0.00, SNR: 100
+Episode: 94/100, Score: 300.0, Epsilon: 0.00, SNR: 100
+Episode: 95/100, Score: 300.0, Epsilon: 0.00, SNR: 100
+Episode: 96/100, Score: 300.0, Epsilon: 0.00, SNR: 100
+Episode: 97/100, Score: 300.0, Epsilon: 0.00, SNR: 100
+Episode: 98/100, Score: 300.0, Epsilon: 0.00, SNR: 100
+Episode: 99/100, Score: 300.0, Epsilon: 0.00, SNR: 100
+Episode: 100/100, Score: 300.0, Epsilon: 0.00, SNR: 100
+Mean Total Reward: 300.0
