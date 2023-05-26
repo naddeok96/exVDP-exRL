@@ -15,7 +15,7 @@ from collections import deque
 from datetime import datetime
 
 
-def nll_gaussian(y_test, y_pred_mean, y_pred_sd, num_labels):
+def nll_gaussian(y_test, y_pred_mean, y_pred_sd, num_labels, return_components=False):
     """
     Compute the negative log-likelihood of a Gaussian distribution.
 
@@ -49,11 +49,15 @@ def nll_gaussian(y_test, y_pred_mean, y_pred_sd, num_labels):
     ms1 = torch.mean(torch.squeeze(torch.matmul(mu_sigma, mu_)))
 
     # Second term is log determinant
-    ms2 = torch.mean(torch.linalg.slogdet(y_pred_sd_ns)[1])
+    ms2 = -torch.mean(torch.linalg.slogdet(y_pred_sd_ns)[1])
 
     # Compute the mean
-    ms = 0.5 * ms1 + 0.5 * ms2
-    return ms
+    ms = (ms1 + ms2)/2
+
+    if return_components:
+        return ms, ms1, ms2
+    else:   
+        return ms
 
 def compute_kl_loss(mu, sigma):
     """
@@ -126,7 +130,6 @@ class RVLinearlayer(nn.Module):
     def forward(self, mu_in, sigma_in):
         
         # Extract stats
-        device = self.w_mu.device
         batch_size = mu_in.size(0)
 
         mu_out = torch.matmul(self.w_mu.transpose(1, 0), mu_in.view(batch_size, self.size_in, 1)) + self.b_mu
@@ -151,9 +154,10 @@ class RVLinearlayer(nn.Module):
             Sigma_out = torch.diag_embed(mu_in_t_W_Sigma_mu_in) + B_Sigma
       
         # KL loss
-        kl_loss = compute_kl_loss(self.w_mu, W_Sigma)
+        w_kl_loss = compute_kl_loss(self.w_mu, W_Sigma)
+        b_kl_loss = compute_kl_loss(self.b_mu, B_Sigma)
         
-        return mu_out, Sigma_out , kl_loss
+        return mu_out, Sigma_out , w_kl_loss, b_kl_loss
 
 class RVNonLinearFunc(nn.Module):
     """
@@ -214,17 +218,35 @@ class VDPDQN(nn.Module):
 
         self.relu   = RVNonLinearFunc(func = torch.nn.functional.relu)
 
-    def forward(self, x):
-        m, s, kl_1 = self.fc1(x, None)
-        m, s = self.relu(m, s)
-        m, s, kl_2  = self.fc2(m, s)
-        m, s = self.relu(m, s)
-        m, s, kl_3 = self.fc3(m, s)
+    def forward(self, x, return_sigmas = False):
+        m, s1, w_kl_1, b_kl_1 = self.fc1(x, None)
+        m, s2 = self.relu(m, s1)
+        m, s3, w_kl_2, b_kl_2  = self.fc2(m, s2)
+        m, s4 = self.relu(m, s3)
+        m, s5, w_kl_3, b_kl_3 = self.fc3(m, s4)
 
-        return m, s, [kl_1, kl_2, kl_3]
+        kl_losses = {"w" : {"fc1": w_kl_1,
+                                "fc2": w_kl_2,
+                                "fc3": w_kl_3},
+                          "b" : {"fc1": b_kl_1,
+                                 "fc2": b_kl_2,
+                                 "fc3": b_kl_3},   
+                         }
+
+        if not return_sigmas:
+            return m, s5, kl_losses
+        else:   
+            sigmas = {"fc1" : torch.norm(s1).item(),
+                      "relu1": torch.norm(s2).item(),
+                      "fc2" : torch.norm(s3).item(),
+                      "relu2" : torch.norm(s4).item(),
+                      "fc3" : torch.norm(s5).item()}
+            
+            return m, s5, kl_losses, sigmas
+            
 
 class VDPDQNAgent:
-    def __init__(self, state_size, action_size, fc1_size=128, fc2_size=128, device='cpu', gamma=0.99, epsilon=1.0, epsilon_min=0.01, epsilon_decay=0.995, learning_rate=0.001, kl_factor=0.0001, memory_size=10000):
+    def __init__(self, state_size, action_size, fc1_size=128, fc2_size=128, device='cpu', gamma=0.99, epsilon=1.0, epsilon_min=0.01, epsilon_decay=0.995, learning_rate=0.001, kl_w_factor=0.0001, kl1_w_factor = 1, kl2_w_factor = 1, kl3_w_factor = 1, kl_b_factor=0.0001, kl1_b_factor = 1, kl2_b_factor = 1, kl3_b_factor = 1, memory_size=10000):
         self.state_size = state_size
         self.action_size = action_size
         self.memory_size = memory_size
@@ -234,7 +256,17 @@ class VDPDQNAgent:
         self.epsilon_min = epsilon_min 
         self.epsilon_decay = epsilon_decay
         self.learning_rate = learning_rate
-        self.kl_factor = kl_factor
+
+        self.kl_w_factor = kl_w_factor
+        self.kl1_w_factor = kl1_w_factor
+        self.kl2_w_factor = kl2_w_factor
+        self.kl3_w_factor = kl3_w_factor
+
+        self.kl_b_factor = kl_b_factor
+        self.kl1_b_factor = kl1_b_factor
+        self.kl2_b_factor = kl2_b_factor
+        self.kl3_b_factor = kl3_b_factor
+
         self.device = device
         self.fc1_size = fc1_size
         self.fc2_size = fc2_size
@@ -254,9 +286,12 @@ class VDPDQNAgent:
         q_values, _, _ = self.model(state)
         return torch.argmax(q_values).item()
 
-    def replay(self, batch_size):
+    def replay(self, batch_size, return_uncertainty_values = False):
         if len(self.memory) < batch_size:
-            return None, None, 3*[None], None
+            if return_uncertainty_values:
+                return None, None, None, None, None, None, None, None, None, None
+            else:
+                return None, None, None, None
         
         minibatch = random.sample(self.memory, batch_size)
         states, actions, rewards, next_states, dones = zip(*minibatch)
@@ -266,7 +301,10 @@ class VDPDQNAgent:
         next_states = torch.FloatTensor(torch.stack(next_states,dim=0)).to(self.device)
         dones = torch.FloatTensor(torch.stack(dones,dim=0)).to(self.device)
 
-        current_q_values, current_q_sigmas, current_kl_losses = self.model(states)
+        if return_uncertainty_values:
+            current_q_values, current_q_sigmas, current_kl_losses, predictive_sigmas = self.model(states, return_sigmas = return_uncertainty_values)
+        else:
+            current_q_values, current_q_sigmas, current_kl_losses = self.model(states)
 
         target_q_values = torch.zeros_like(current_q_values)
         for i in range(self.action_size):
@@ -275,8 +313,11 @@ class VDPDQNAgent:
 
             target_q_values[:,i,0] = rewards[:,i] + (1 - dones[:,i]) * self.gamma * next_action_q_value_i
 
-        loss = nll_gaussian(target_q_values, current_q_values, current_q_sigmas, self.action_size)
-        total_loss = loss + self.kl_factor*sum(current_kl_losses)
+        nll_loss, error_over_sigma, log_determinant = nll_gaussian(target_q_values, current_q_values, current_q_sigmas, self.action_size, return_components = return_uncertainty_values)
+        nll_loss = nll_loss + 8
+        weighted_w_kl_loss = self.kl_w_factor * (self.kl1_w_factor*current_kl_losses["w"]["fc1"] + self.kl2_w_factor*current_kl_losses["w"]["fc2"] + self.kl3_w_factor*current_kl_losses["w"]["fc3"])
+        weighted_b_kl_loss = self.kl_b_factor * (self.kl1_b_factor*current_kl_losses["b"]["fc1"] + self.kl2_b_factor*current_kl_losses["b"]["fc2"] + self.kl3_b_factor*current_kl_losses["b"]["fc3"])
+        total_loss = nll_loss + weighted_w_kl_loss + weighted_b_kl_loss
         self.optimizer.zero_grad()
         total_loss.backward()
         self.optimizer.step()
@@ -285,7 +326,11 @@ class VDPDQNAgent:
         if self.epsilon > self.epsilon_min:
             self.epsilon = self.epsilon_decay * self.epsilon
 
-        return total_loss, loss, current_kl_losses, prev_epsilon
+        if return_uncertainty_values:
+            model_sigmas = self.get_covariance_matrices()
+            return total_loss, nll_loss, weighted_w_kl_loss, weighted_b_kl_loss, current_kl_losses, prev_epsilon, model_sigmas, predictive_sigmas, error_over_sigma, log_determinant
+        else:
+            return total_loss, nll_loss, current_kl_losses, prev_epsilon
         
     def update_target_model(self):
         self.target_model.load_state_dict(self.model.state_dict())
@@ -295,13 +340,13 @@ class VDPDQNAgent:
         for name, param in self.model.named_parameters():
             if 'sigma' in name.lower():
                 layer_magnitude = torch.norm(param).item()
-                layer_magnitudes[name] = layer_magnitude.item()
+                layer_magnitudes[name] = layer_magnitude
         return layer_magnitudes
                 
     def save(self, path = None):
         if path is None:
             current_time = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-            path = path = "saved_models/vdp_dqn_"  + current_time + ".pt"
+            path = "saved_models/vdp_dqn_"  + current_time + ".pt"
             
         torch.save(self.model.state_dict(), path)
         

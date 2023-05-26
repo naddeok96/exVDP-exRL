@@ -1,344 +1,679 @@
 wandb: Currently logged in as: naddeok. Use `wandb login --relogin` to force relogin
+wandb: wandb version 0.15.3 is available!  To upgrade, please run:
+wandb:  $ pip install wandb --upgrade
 wandb: Tracking run with wandb version 0.14.2
-wandb: Run data is saved locally in /home/naddeok5/exVDP-exRL/wandb/run-20230413_173855-o1lf4bhz
+wandb: Run data is saved locally in /home/naddeok5/exVDP-exRL/wandb/run-20230525_003507-9ymclim4
 wandb: Run `wandb offline` to turn off syncing.
-wandb: Syncing run skilled-vortex-14
-wandb: ⭐️ View project at https://wandb.ai/naddeok/A2C
-wandb: 🚀 View run at https://wandb.ai/naddeok/A2C/runs/o1lf4bhz
-Episodes:   0%|          | 0/10000 [00:00<?, ?it/s]/home/naddeok5/envs/vdprl/lib/python3.8/site-packages/gym/utils/passive_env_checker.py:233: DeprecationWarning: `np.bool8` is a deprecated alias for `np.bool_`.  (Deprecated NumPy 1.24)
-  if not isinstance(terminated, (bool, np.bool8)):
-Episodes:   0%|          | 1/10000 [00:04<11:22:12,  4.09s/it]Episodes:   0%|          | 2/10000 [00:04<5:24:28,  1.95s/it] Episodes:   0%|          | 3/10000 [00:04<3:23:27,  1.22s/it]Episodes:   0%|          | 4/10000 [00:05<2:24:31,  1.15it/s]Episodes:   0%|          | 5/10000 [00:05<1:51:39,  1.49it/s]Episodes:   0%|          | 6/10000 [00:05<1:35:19,  1.75it/s]Episodes:   0%|          | 7/10000 [00:06<1:19:58,  2.08it/s]Episodes:   0%|          | 8/10000 [00:06<1:29:18,  1.86it/s]Episodes:   0%|          | 9/10000 [00:09<2:57:16,  1.06s/it]Episodes:   0%|          | 10/10000 [00:10<3:01:44,  1.09s/it]Episodes:   0%|          | 11/10000 [00:11<3:20:15,  1.20s/it]Episodes:   0%|          | 12/10000 [00:12<2:40:16,  1.04it/s]Episodes:   0%|          | 13/10000 [00:12<2:20:23,  1.19it/s]Episodes:   0%|          | 14/10000 [00:13<2:22:49,  1.17it/s]Episodes:   0%|          | 15/10000 [00:14<2:20:20,  1.19it/s]Episodes:   0%|          | 16/10000 [00:15<2:18:56,  1.20it/s]Episodes:   0%|          | 17/10000 [00:15<2:05:23,  1.33it/s]Episodes:   0%|          | 18/10000 [00:17<2:34:38,  1.08it/s]Episodes:   0%|          | 19/10000 [00:17<2:32:46,  1.09it/s]Episodes:   0%|          | 20/10000 [00:18<2:18:58,  1.20it/s]Episodes:   0%|          | 21/10000 [00:20<3:21:35,  1.21s/it]Episodes:   0%|          | 22/10000 [00:21<2:56:49,  1.06s/it]Episodes:   0%|          | 23/10000 [00:22<2:43:54,  1.01it/s]Episodes:   0%|          | 24/10000 [00:22<2:20:23,  1.18it/s]Episodes:   0%|          | 25/10000 [00:25<3:56:06,  1.42s/it]Episodes:   0%|          | 26/10000 [00:27<4:27:47,  1.61s/it]Episodes:   0%|          | 27/10000 [00:29<4:33:20,  1.64s/it]Episodes:   0%|          | 28/10000 [00:30<3:57:01,  1.43s/it]Episodes:   0%|          | 29/10000 [00:30<3:24:19,  1.23s/it]Episodes:   0%|          | 30/10000 [00:31<2:46:58,  1.00s/it]Episodes:   0%|          | 31/10000 [00:31<2:21:12,  1.18it/s]Episodes:   0%|          | 32/10000 [00:32<2:06:00,  1.32it/s]Episodes:   0%|          | 33/10000 [00:33<2:10:17,  1.27it/s]Episodes:   0%|          | 34/10000 [00:34<2:13:29,  1.24it/s]Episodes:   0%|          | 35/10000 [00:34<2:01:06,  1.37it/s]Episodes:   0%|          | 36/10000 [00:36<2:45:10,  1.01it/s]Episodes:   0%|          | 37/10000 [00:37<2:53:51,  1.05s/it]Episodes:   0%|          | 38/10000 [00:38<2:25:43,  1.14it/s]Episodes:   0%|          | 39/10000 [00:38<2:19:31,  1.19it/s]Episodes:   0%|          | 40/10000 [00:39<2:16:04,  1.22it/s]Episodes:   0%|          | 41/10000 [00:40<2:13:34,  1.24it/s]Episodes:   0%|          | 42/10000 [00:43<4:04:19,  1.47s/it]Episodes:   0%|          | 43/10000 [00:45<4:15:37,  1.54s/it]Episodes:   0%|          | 44/10000 [00:45<3:31:01,  1.27s/it]Episodes:   0%|          | 45/10000 [00:46<2:48:45,  1.02s/it]Episodes:   0%|          | 46/10000 [00:46<2:37:45,  1.05it/s]Episodes:   0%|          | 47/10000 [00:48<2:45:00,  1.01it/s]Episodes:   0%|          | 48/10000 [00:48<2:38:45,  1.04it/s]Episodes:   0%|          | 49/10000 [00:49<2:13:58,  1.24it/s]Episodes:   0%|          | 50/10000 [00:50<2:14:25,  1.23it/s]Episodes:   1%|          | 51/10000 [00:51<2:31:34,  1.09it/s]Episodes:   1%|          | 52/10000 [00:54<4:00:45,  1.45s/it]Episodes:   1%|          | 53/10000 [01:00<8:13:11,  2.97s/it]Episodes:   1%|          | 54/10000 [01:01<6:26:30,  2.33s/it]Episodes:   1%|          | 55/10000 [01:02<5:15:27,  1.90s/it]Episodes:   1%|          | 56/10000 [01:03<4:22:29,  1.58s/it]Episodes:   1%|          | 57/10000 [01:03<3:32:41,  1.28s/it]Episodes:   1%|          | 58/10000 [01:06<4:31:48,  1.64s/it]Episodes:   1%|          | 59/10000 [01:06<3:38:57,  1.32s/it]Episodes:   1%|          | 60/10000 [01:07<3:03:40,  1.11s/it]Episodes:   1%|          | 61/10000 [01:08<2:45:20,  1.00it/s]Episodes:   1%|          | 62/10000 [01:09<3:22:12,  1.22s/it]Episodes:   1%|          | 63/10000 [01:15<6:55:30,  2.51s/it]Episodes:   1%|          | 64/10000 [01:20<9:05:14,  3.29s/it]Episodes:   1%|          | 65/10000 [01:22<8:12:14,  2.97s/it]Episodes:   1%|          | 66/10000 [01:23<6:38:12,  2.41s/it]Episodes:   1%|          | 67/10000 [01:24<5:04:51,  1.84s/it]Episodes:   1%|          | 68/10000 [01:24<3:55:37,  1.42s/it]Episodes:   1%|          | 69/10000 [01:26<3:52:44,  1.41s/it]Episodes:   1%|          | 70/10000 [01:28<4:33:21,  1.65s/it]Episodes:   1%|          | 71/10000 [01:30<4:55:11,  1.78s/it]Episodes:   1%|          | 72/10000 [01:31<4:40:02,  1.69s/it]Episodes:   1%|          | 73/10000 [01:33<4:53:55,  1.78s/it]Episodes:   1%|          | 74/10000 [01:35<4:36:39,  1.67s/it]Episodes:   1%|          | 75/10000 [01:38<6:04:27,  2.20s/it]Episodes:   1%|          | 76/10000 [01:44<9:20:24,  3.39s/it]Episodes:   1%|          | 77/10000 [01:50<10:55:45,  3.97s/it]Episodes:   1%|          | 78/10000 [01:51<8:27:19,  3.07s/it] Episodes:   1%|          | 79/10000 [01:58<11:45:30,  4.27s/it]Episodes:   1%|          | 80/10000 [02:01<10:32:21,  3.82s/it]Episodes:   1%|          | 81/10000 [02:03<9:41:14,  3.52s/it] Episodes:   1%|          | 82/10000 [02:05<8:17:27,  3.01s/it]Episodes:   1%|          | 83/10000 [02:07<7:02:52,  2.56s/it]Episodes:   1%|          | 84/10000 [02:11<8:19:51,  3.02s/it]Episodes:   1%|          | 85/10000 [02:11<6:10:49,  2.24s/it]Episodes:   1%|          | 86/10000 [02:12<4:43:54,  1.72s/it]Episodes:   1%|          | 87/10000 [02:12<3:47:45,  1.38s/it]Episodes:   1%|          | 88/10000 [02:13<3:01:11,  1.10s/it]Episodes:   1%|          | 89/10000 [02:14<3:00:27,  1.09s/it]Episodes:   1%|          | 90/10000 [02:21<8:03:21,  2.93s/it]Episodes:   1%|          | 91/10000 [02:23<7:25:55,  2.70s/it]Episodes:   1%|          | 92/10000 [02:24<6:02:50,  2.20s/it]Episodes:   1%|          | 93/10000 [02:25<5:02:51,  1.83s/it]Episodes:   1%|          | 94/10000 [02:27<5:19:42,  1.94s/it]Episodes:   1%|          | 95/10000 [02:31<7:03:27,  2.57s/it]Episodes:   1%|          | 96/10000 [02:32<5:37:46,  2.05s/it]Episodes:   1%|          | 97/10000 [02:35<6:33:11,  2.38s/it]Episodes:   1%|          | 98/10000 [02:36<4:55:40,  1.79s/it]Episodes:   1%|          | 99/10000 [02:36<3:45:59,  1.37s/it]Episodes:   1%|          | 100/10000 [02:37<3:02:04,  1.10s/it]Episodes:   1%|          | 101/10000 [02:37<2:37:50,  1.05it/s]Episodes:   1%|          | 102/10000 [02:38<2:28:26,  1.11it/s]Episodes:   1%|          | 103/10000 [02:38<2:01:26,  1.36it/s]Episodes:   1%|          | 104/10000 [02:39<1:47:25,  1.54it/s]Episodes:   1%|          | 105/10000 [02:40<2:08:55,  1.28it/s]Episodes:   1%|          | 106/10000 [02:41<2:13:19,  1.24it/s]Episodes:   1%|          | 107/10000 [02:47<6:27:10,  2.35s/it]Episodes:   1%|          | 108/10000 [02:47<4:50:26,  1.76s/it]Episodes:   1%|          | 109/10000 [02:47<3:37:41,  1.32s/it]Episodes:   1%|          | 110/10000 [02:48<3:07:30,  1.14s/it]Episodes:   1%|          | 111/10000 [02:49<2:28:33,  1.11it/s]Episodes:   1%|          | 112/10000 [02:49<2:06:51,  1.30it/s]Episodes:   1%|          | 113/10000 [02:50<1:59:03,  1.38it/s]Episodes:   1%|          | 114/10000 [02:50<1:43:55,  1.59it/s]Episodes:   1%|          | 115/10000 [02:52<2:59:54,  1.09s/it]Episodes:   1%|          | 116/10000 [02:58<7:01:46,  2.56s/it]Episodes:   1%|          | 117/10000 [02:59<5:24:00,  1.97s/it]Episodes:   1%|          | 118/10000 [02:59<4:07:48,  1.50s/it]Episodes:   1%|          | 119/10000 [03:00<3:12:34,  1.17s/it]Episodes:   1%|          | 120/10000 [03:00<2:36:49,  1.05it/s]Episodes:   1%|          | 121/10000 [03:01<2:21:35,  1.16it/s]Episodes:   1%|          | 122/10000 [03:01<2:14:23,  1.23it/s]Episodes:   1%|          | 123/10000 [03:06<4:57:43,  1.81s/it]Episodes:   1%|          | 124/10000 [03:06<3:48:54,  1.39s/it]Episodes:   1%|▏         | 125/10000 [03:08<4:36:29,  1.68s/it]Episodes:   1%|▏         | 126/10000 [03:09<3:37:25,  1.32s/it]Episodes:   1%|▏         | 127/10000 [03:12<5:06:22,  1.86s/it]Episodes:   1%|▏         | 128/10000 [03:16<7:10:17,  2.62s/it]Episodes:   1%|▏         | 129/10000 [03:17<5:28:02,  1.99s/it]Episodes:   1%|▏         | 130/10000 [03:21<7:07:33,  2.60s/it]Episodes:   1%|▏         | 131/10000 [03:22<6:04:31,  2.22s/it]Episodes:   1%|▏         | 132/10000 [03:26<7:48:27,  2.85s/it]Episodes:   1%|▏         | 133/10000 [03:29<7:17:49,  2.66s/it]Episodes:   1%|▏         | 134/10000 [03:33<8:25:20,  3.07s/it]Episodes:   1%|▏         | 135/10000 [03:33<6:14:10,  2.28s/it]Episodes:   1%|▏         | 136/10000 [03:37<7:56:11,  2.90s/it]Episodes:   1%|▏         | 137/10000 [03:42<9:18:36,  3.40s/it]Episodes:   1%|▏         | 138/10000 [03:45<9:09:58,  3.35s/it]Episodes:   1%|▏         | 139/10000 [03:50<10:29:40,  3.83s/it]Episodes:   1%|▏         | 140/10000 [03:51<7:43:10,  2.82s/it] Episodes:   1%|▏         | 141/10000 [03:56<9:40:15,  3.53s/it]Episodes:   1%|▏         | 142/10000 [04:04<13:47:01,  5.03s/it]Episodes:   1%|▏         | 143/10000 [04:05<10:05:45,  3.69s/it]Episodes:   1%|▏         | 144/10000 [04:05<7:27:52,  2.73s/it] Episodes:   1%|▏         | 145/10000 [04:06<5:35:42,  2.04s/it]Episodes:   1%|▏         | 146/10000 [04:11<7:58:21,  2.91s/it]Episodes:   1%|▏         | 147/10000 [04:21<13:32:25,  4.95s/it]Episodes:   1%|▏         | 148/10000 [04:21<9:47:52,  3.58s/it] Episodes:   1%|▏         | 149/10000 [04:27<11:41:38,  4.27s/it]Episodes:   2%|▏         | 150/10000 [04:32<12:28:25,  4.56s/it]Episodes:   2%|▏         | 151/10000 [04:33<9:05:55,  3.33s/it] Episodes:   2%|▏         | 152/10000 [04:36<9:34:26,  3.50s/it]Episodes:   2%|▏         | 153/10000 [04:43<12:22:01,  4.52s/it]Episodes:   2%|▏         | 154/10000 [04:49<13:02:59,  4.77s/it]Episodes:   2%|▏         | 155/10000 [04:57<16:00:23,  5.85s/it]Episodes:   2%|▏         | 156/10000 [05:02<15:13:38,  5.57s/it]Episodes:   2%|▏         | 157/10000 [05:05<13:17:32,  4.86s/it]Episodes:   2%|▏         | 158/10000 [05:06<9:37:27,  3.52s/it] Episodes:   2%|▏         | 159/10000 [05:11<11:18:50,  4.14s/it]Episodes:   2%|▏         | 160/10000 [05:17<12:26:52,  4.55s/it]Episodes:   2%|▏         | 161/10000 [05:26<16:22:39,  5.99s/it]Episodes:   2%|▏         | 162/10000 [05:27<12:34:23,  4.60s/it]Episodes:   2%|▏         | 163/10000 [05:29<9:54:57,  3.63s/it] Episodes:   2%|▏         | 164/10000 [05:32<9:53:04,  3.62s/it]Episodes:   2%|▏         | 165/10000 [05:34<8:06:10,  2.97s/it]Episodes:   2%|▏         | 166/10000 [05:39<9:50:21,  3.60s/it]Episodes:   2%|▏         | 167/10000 [05:40<8:03:00,  2.95s/it]Episodes:   2%|▏         | 168/10000 [05:45<9:38:18,  3.53s/it]Episodes:   2%|▏         | 169/10000 [05:50<10:53:19,  3.99s/it]Episodes:   2%|▏         | 170/10000 [06:00<15:37:18,  5.72s/it]Episodes:   2%|▏         | 171/10000 [06:00<11:19:57,  4.15s/it]Episodes:   2%|▏         | 172/10000 [06:01<8:11:40,  3.00s/it] Episodes:   2%|▏         | 173/10000 [06:10<13:26:09,  4.92s/it]Episodes:   2%|▏         | 174/10000 [06:20<17:19:07,  6.35s/it]Episodes:   2%|▏         | 175/10000 [06:27<18:15:54,  6.69s/it]Episodes:   2%|▏         | 176/10000 [06:28<13:04:43,  4.79s/it]Episodes:   2%|▏         | 177/10000 [06:28<9:29:48,  3.48s/it] Episodes:   2%|▏         | 178/10000 [06:29<6:57:56,  2.55s/it]Episodes:   2%|▏         | 179/10000 [06:29<5:16:25,  1.93s/it]Episodes:   2%|▏         | 180/10000 [06:39<11:35:20,  4.25s/it]Episodes:   2%|▏         | 181/10000 [06:41<10:18:52,  3.78s/it]Episodes:   2%|▏         | 182/10000 [06:42<7:33:28,  2.77s/it] Episodes:   2%|▏         | 183/10000 [06:47<9:10:08,  3.36s/it]Episodes:   2%|▏         | 184/10000 [06:49<8:04:27,  2.96s/it]Episodes:   2%|▏         | 185/10000 [06:49<6:20:24,  2.33s/it]Episodes:   2%|▏         | 186/10000 [06:50<5:00:52,  1.84s/it]Episodes:   2%|▏         | 187/10000 [06:51<4:17:10,  1.57s/it]Episodes:   2%|▏         | 188/10000 [06:52<3:45:11,  1.38s/it]Episodes:   2%|▏         | 189/10000 [06:53<3:53:05,  1.43s/it]Episodes:   2%|▏         | 190/10000 [07:03<10:44:16,  3.94s/it]Episodes:   2%|▏         | 191/10000 [07:13<15:28:41,  5.68s/it]Episodes:   2%|▏         | 192/10000 [07:19<15:27:40,  5.68s/it]Episodes:   2%|▏         | 193/10000 [07:25<16:18:38,  5.99s/it]Episodes:   2%|▏         | 194/10000 [07:26<11:40:33,  4.29s/it]Episodes:   2%|▏         | 195/10000 [07:26<8:29:40,  3.12s/it] Episodes:   2%|▏         | 196/10000 [07:27<6:15:28,  2.30s/it]Episodes:   2%|▏         | 197/10000 [07:27<4:56:17,  1.81s/it]Episodes:   2%|▏         | 198/10000 [07:31<6:36:23,  2.43s/it]Episodes:   2%|▏         | 199/10000 [07:31<4:56:21,  1.81s/it]Episodes:   2%|▏         | 200/10000 [07:32<4:04:04,  1.49s/it]Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Episode 0 Reward: 62.0
-Moving average of last 10% of episodes: 62.0
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Episodes:   2%|▏         | 201/10000 [07:36<5:33:42,  2.04s/it]Episodes:   2%|▏         | 202/10000 [07:36<4:34:34,  1.68s/it]Episodes:   2%|▏         | 203/10000 [07:41<6:51:49,  2.52s/it]Episodes:   2%|▏         | 204/10000 [07:50<12:40:06,  4.66s/it]Episodes:   2%|▏         | 205/10000 [07:52<9:47:35,  3.60s/it] Episodes:   2%|▏         | 206/10000 [07:53<7:45:00,  2.85s/it]Episodes:   2%|▏         | 207/10000 [07:53<5:46:23,  2.12s/it]Episodes:   2%|▏         | 208/10000 [07:58<8:12:57,  3.02s/it]Episodes:   2%|▏         | 209/10000 [08:06<12:20:56,  4.54s/it]Episodes:   2%|▏         | 210/10000 [08:07<8:54:38,  3.28s/it] Episodes:   2%|▏         | 211/10000 [08:14<12:01:26,  4.42s/it]Episodes:   2%|▏         | 212/10000 [08:14<8:42:37,  3.20s/it] Episodes:   2%|▏         | 213/10000 [08:24<14:04:22,  5.18s/it]Episodes:   2%|▏         | 214/10000 [08:28<13:10:32,  4.85s/it]Episodes:   2%|▏         | 215/10000 [08:28<9:28:59,  3.49s/it] Episodes:   2%|▏         | 216/10000 [08:29<6:53:56,  2.54s/it]Episodes:   2%|▏         | 217/10000 [08:29<5:05:33,  1.87s/it]Episodes:   2%|▏         | 218/10000 [08:29<3:56:15,  1.45s/it]Episodes:   2%|▏         | 219/10000 [08:30<3:13:23,  1.19s/it]Episodes:   2%|▏         | 220/10000 [08:40<10:16:23,  3.78s/it]Episodes:   2%|▏         | 221/10000 [08:49<14:21:04,  5.28s/it]Episodes:   2%|▏         | 222/10000 [08:49<10:33:10,  3.89s/it]Episodes:   2%|▏         | 223/10000 [08:55<12:05:53,  4.45s/it]Episodes:   2%|▏         | 224/10000 [09:01<13:01:31,  4.80s/it]Episodes:   2%|▏         | 225/10000 [09:06<13:42:33,  5.05s/it]Episodes:   2%|▏         | 226/10000 [09:07<9:49:56,  3.62s/it] Episodes:   2%|▏         | 227/10000 [09:07<7:10:02,  2.64s/it]Episodes:   2%|▏         | 228/10000 [09:07<5:26:16,  2.00s/it]Episodes:   2%|▏         | 229/10000 [09:17<11:45:16,  4.33s/it]Episodes:   2%|▏         | 230/10000 [09:18<8:32:31,  3.15s/it] Episodes:   2%|▏         | 231/10000 [09:23<10:42:54,  3.95s/it]Episodes:   2%|▏         | 232/10000 [09:29<12:13:03,  4.50s/it]Episodes:   2%|▏         | 233/10000 [09:36<14:29:08,  5.34s/it]Episodes:   2%|▏         | 234/10000 [09:40<12:42:47,  4.69s/it]Episodes:   2%|▏         | 235/10000 [09:40<9:09:32,  3.38s/it] Episodes:   2%|▏         | 236/10000 [09:47<12:03:02,  4.44s/it]Episodes:   2%|▏         | 237/10000 [09:57<16:21:36,  6.03s/it]Episodes:   2%|▏         | 238/10000 [09:57<11:48:07,  4.35s/it]Episodes:   2%|▏         | 239/10000 [10:03<13:28:42,  4.97s/it]Episodes:   2%|▏         | 240/10000 [10:11<15:26:16,  5.69s/it]Episodes:   2%|▏         | 241/10000 [10:11<11:05:42,  4.09s/it]Episodes:   2%|▏         | 242/10000 [10:15<10:49:49,  4.00s/it]Episodes:   2%|▏         | 243/10000 [10:16<8:45:18,  3.23s/it] Episodes:   2%|▏         | 244/10000 [10:19<8:04:41,  2.98s/it]Episodes:   2%|▏         | 245/10000 [10:26<11:09:54,  4.12s/it]Episodes:   2%|▏         | 246/10000 [10:35<15:43:27,  5.80s/it]Episodes:   2%|▏         | 247/10000 [10:45<18:55:37,  6.99s/it]Episodes:   2%|▏         | 248/10000 [10:45<13:34:03,  5.01s/it]Episodes:   2%|▏         | 249/10000 [10:55<17:24:37,  6.43s/it]Episodes:   2%|▎         | 250/10000 [11:05<20:05:12,  7.42s/it]Episodes:   3%|▎         | 251/10000 [11:05<14:23:31,  5.31s/it]Episodes:   3%|▎         | 252/10000 [11:15<17:56:55,  6.63s/it]Episodes:   3%|▎         | 253/10000 [11:22<18:19:21,  6.77s/it]Episodes:   3%|▎         | 254/10000 [11:22<13:03:31,  4.82s/it]Episodes:   3%|▎         | 255/10000 [11:28<13:56:50,  5.15s/it]Episodes:   3%|▎         | 256/10000 [11:33<13:10:44,  4.87s/it]Episodes:   3%|▎         | 257/10000 [11:33<9:29:04,  3.50s/it] Episodes:   3%|▎         | 258/10000 [11:33<6:55:41,  2.56s/it]Episodes:   3%|▎         | 259/10000 [11:34<5:06:28,  1.89s/it]Episodes:   3%|▎         | 260/10000 [11:34<3:56:36,  1.46s/it]Episodes:   3%|▎         | 261/10000 [11:40<7:55:32,  2.93s/it]Episodes:   3%|▎         | 262/10000 [11:47<10:43:27,  3.96s/it]Episodes:   3%|▎         | 263/10000 [11:54<13:13:25,  4.89s/it]Episodes:   3%|▎         | 264/10000 [11:58<12:59:45,  4.81s/it]Episodes:   3%|▎         | 265/10000 [12:04<13:57:17,  5.16s/it]Episodes:   3%|▎         | 266/10000 [12:11<15:09:15,  5.60s/it]Episodes:   3%|▎         | 267/10000 [12:16<14:34:46,  5.39s/it]Episodes:   3%|▎         | 268/10000 [12:22<15:22:18,  5.69s/it]Episodes:   3%|▎         | 269/10000 [12:32<18:38:58,  6.90s/it]Episodes:   3%|▎         | 270/10000 [12:42<20:59:30,  7.77s/it]Episodes:   3%|▎         | 271/10000 [12:52<22:36:27,  8.37s/it]Episodes:   3%|▎         | 272/10000 [13:01<23:40:18,  8.76s/it]Episodes:   3%|▎         | 273/10000 [13:09<22:37:55,  8.38s/it]Episodes:   3%|▎         | 274/10000 [13:18<23:44:56,  8.79s/it]Episodes:   3%|▎         | 275/10000 [13:28<24:29:44,  9.07s/it]Episodes:   3%|▎         | 276/10000 [13:38<25:02:43,  9.27s/it]Episodes:   3%|▎         | 277/10000 [13:48<25:23:58,  9.40s/it]Episodes:   3%|▎         | 278/10000 [13:52<21:39:29,  8.02s/it]Episodes:   3%|▎         | 279/10000 [14:02<22:59:02,  8.51s/it]Episodes:   3%|▎         | 280/10000 [14:12<23:56:00,  8.86s/it]Episodes:   3%|▎         | 281/10000 [14:21<24:35:57,  9.11s/it]Episodes:   3%|▎         | 282/10000 [14:31<25:07:11,  9.31s/it]Episodes:   3%|▎         | 283/10000 [14:41<25:30:50,  9.45s/it]Episodes:   3%|▎         | 284/10000 [14:51<25:48:59,  9.57s/it]Episodes:   3%|▎         | 285/10000 [15:01<25:55:04,  9.60s/it]Episodes:   3%|▎         | 286/10000 [15:10<25:58:39,  9.63s/it]Episodes:   3%|▎         | 287/10000 [15:20<26:01:27,  9.65s/it]Episodes:   3%|▎         | 288/10000 [15:30<26:05:30,  9.67s/it]Episodes:   3%|▎         | 289/10000 [15:39<26:08:31,  9.69s/it]Episodes:   3%|▎         | 290/10000 [15:49<26:08:10,  9.69s/it]Episodes:   3%|▎         | 291/10000 [15:59<26:08:53,  9.70s/it]Episodes:   3%|▎         | 292/10000 [16:09<26:14:33,  9.73s/it]Episodes:   3%|▎         | 293/10000 [16:18<26:14:38,  9.73s/it]Episodes:   3%|▎         | 294/10000 [16:28<26:19:55,  9.77s/it]Episodes:   3%|▎         | 295/10000 [16:30<19:56:02,  7.39s/it]Episodes:   3%|▎         | 296/10000 [16:35<18:20:39,  6.81s/it]Episodes:   3%|▎         | 297/10000 [16:36<13:06:04,  4.86s/it]Episodes:   3%|▎         | 298/10000 [16:36<9:22:55,  3.48s/it] Episodes:   3%|▎         | 299/10000 [16:36<6:54:31,  2.56s/it]Episodes:   3%|▎         | 300/10000 [16:46<12:42:47,  4.72s/it]Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Trained model saved at saved_models/a2c_model.pt
-Episodes:   3%|▎         | 301/10000 [16:56<16:48:48,  6.24s/it]Episodes:   3%|▎         | 302/10000 [17:06<19:36:09,  7.28s/it]Episodes:   3%|▎         | 303/10000 [17:15<21:33:26,  8.00s/it]Episodes:   3%|▎         | 304/10000 [17:25<22:54:47,  8.51s/it]Episodes:   3%|▎         | 305/10000 [17:35<23:53:10,  8.87s/it]Episodes:   3%|▎         | 306/10000 [17:45<24:35:17,  9.13s/it]Episodes:   3%|▎         | 307/10000 [17:54<25:04:03,  9.31s/it]Episodes:   3%|▎         | 308/10000 [18:04<25:26:01,  9.45s/it]Episodes:   3%|▎         | 309/10000 [18:14<25:41:14,  9.54s/it]Episodes:   3%|▎         | 310/10000 [18:23<25:47:31,  9.58s/it]Episodes:   3%|▎         | 311/10000 [18:30<23:01:59,  8.56s/it]Episodes:   3%|▎         | 312/10000 [18:35<20:16:53,  7.54s/it]Episodes:   3%|▎         | 313/10000 [18:41<19:12:21,  7.14s/it]Episodes:   3%|▎         | 314/10000 [18:46<17:35:57,  6.54s/it]Episodes:   3%|▎         | 315/10000 [18:52<17:20:52,  6.45s/it]Episodes:   3%|▎         | 316/10000 [19:01<18:57:40,  7.05s/it]Episodes:   3%|▎         | 317/10000 [19:11<21:07:44,  7.86s/it]Episodes:   3%|▎         | 318/10000 [19:20<22:39:20,  8.42s/it]Episodes:   3%|▎         | 319/10000 [19:21<16:07:04,  5.99s/it]Episodes:   3%|▎         | 320/10000 [19:27<16:07:19,  6.00s/it]
+wandb: Syncing run faithful-surf-2
+wandb: ⭐️ View project at https://wandb.ai/naddeok/VDP%20DQN%20Acrobot%20-%20Negative
+wandb: 🚀 View run at https://wandb.ai/naddeok/VDP%20DQN%20Acrobot%20-%20Negative/runs/9ymclim4
+Episode: 1/10000, Score: -300.0, Epsilon: 1.00
+Episode: 2/10000, Score: -300.0, Epsilon: 1.00
+Episode: 3/10000, Score: -300.0, Epsilon: 1.00
+Episode: 4/10000, Score: -300.0, Epsilon: 0.99
+Episode: 5/10000, Score: -300.0, Epsilon: 0.98
+Episode: 6/10000, Score: -300.0, Epsilon: 0.96
+Episode: 7/10000, Score: -300.0, Epsilon: 0.95
+Episode: 8/10000, Score: -300.0, Epsilon: 0.93
+Episode: 9/10000, Score: -300.0, Epsilon: 0.92
+Episode: 10/10000, Score: -300.0, Epsilon: 0.91
+Episode: 11/10000, Score: -300.0, Epsilon: 0.89
+Episode: 12/10000, Score: -300.0, Epsilon: 0.88
+Episode: 13/10000, Score: -300.0, Epsilon: 0.87
+Episode: 14/10000, Score: -300.0, Epsilon: 0.85
+Episode: 15/10000, Score: -300.0, Epsilon: 0.84
+Episode: 16/10000, Score: -300.0, Epsilon: 0.83
+Episode: 17/10000, Score: -300.0, Epsilon: 0.82
+Episode: 18/10000, Score: -300.0, Epsilon: 0.80
+Episode: 19/10000, Score: -300.0, Epsilon: 0.79
+Episode: 20/10000, Score: -300.0, Epsilon: 0.78
+Episode: 21/10000, Score: -300.0, Epsilon: 0.77
+Episode: 22/10000, Score: -300.0, Epsilon: 0.76
+Episode: 23/10000, Score: -300.0, Epsilon: 0.75
+Episode: 24/10000, Score: -300.0, Epsilon: 0.73
+Episode: 25/10000, Score: -300.0, Epsilon: 0.72
+Episode: 26/10000, Score: -300.0, Epsilon: 0.71
+Episode: 27/10000, Score: -300.0, Epsilon: 0.70
+Episode: 28/10000, Score: -300.0, Epsilon: 0.69
+Episode: 29/10000, Score: -300.0, Epsilon: 0.68
+Episode: 30/10000, Score: -300.0, Epsilon: 0.67
+Episode: 31/10000, Score: -300.0, Epsilon: 0.66
+Episode: 32/10000, Score: -300.0, Epsilon: 0.65
+Episode: 33/10000, Score: -300.0, Epsilon: 0.64
+Episode: 34/10000, Score: -300.0, Epsilon: 0.63
+Episode: 35/10000, Score: -300.0, Epsilon: 0.62
+Episode: 36/10000, Score: -300.0, Epsilon: 0.61
+Episode: 37/10000, Score: -300.0, Epsilon: 0.60
+Episode: 38/10000, Score: -300.0, Epsilon: 0.60
+Episode: 39/10000, Score: -300.0, Epsilon: 0.59
+Episode: 40/10000, Score: -300.0, Epsilon: 0.58
+Episode: 41/10000, Score: -300.0, Epsilon: 0.57
+Episode: 42/10000, Score: -300.0, Epsilon: 0.56
+Episode: 43/10000, Score: -300.0, Epsilon: 0.55
+Episode: 44/10000, Score: -300.0, Epsilon: 0.54
+Episode: 45/10000, Score: -300.0, Epsilon: 0.54
+Episode: 46/10000, Score: -300.0, Epsilon: 0.53
+Episode: 47/10000, Score: -300.0, Epsilon: 0.52
+Episode: 48/10000, Score: -300.0, Epsilon: 0.51
+Episode: 49/10000, Score: -300.0, Epsilon: 0.50
+Episode: 50/10000, Score: -300.0, Epsilon: 0.50
+Episode: 51/10000, Score: -300.0, Epsilon: 0.49
+Episode: 52/10000, Score: -300.0, Epsilon: 0.48
+Episode: 53/10000, Score: -300.0, Epsilon: 0.48
+Episode: 54/10000, Score: -300.0, Epsilon: 0.47
+Episode: 55/10000, Score: -300.0, Epsilon: 0.46
+Episode: 56/10000, Score: -300.0, Epsilon: 0.45
+Episode: 57/10000, Score: -300.0, Epsilon: 0.45
+Episode: 58/10000, Score: -300.0, Epsilon: 0.44
+Episode: 59/10000, Score: -300.0, Epsilon: 0.43
+Episode: 60/10000, Score: -300.0, Epsilon: 0.43
+Episode: 61/10000, Score: -300.0, Epsilon: 0.42
+Episode: 62/10000, Score: -300.0, Epsilon: 0.42
+Episode: 63/10000, Score: -300.0, Epsilon: 0.41
+Episode: 64/10000, Score: -300.0, Epsilon: 0.40
+Episode: 65/10000, Score: -300.0, Epsilon: 0.40
+Episode: 66/10000, Score: -300.0, Epsilon: 0.39
+Episode: 67/10000, Score: -300.0, Epsilon: 0.39
+Episode: 68/10000, Score: -300.0, Epsilon: 0.38
+Episode: 69/10000, Score: -300.0, Epsilon: 0.37
+Episode: 70/10000, Score: -300.0, Epsilon: 0.37
+Episode: 71/10000, Score: -300.0, Epsilon: 0.36
+Episode: 72/10000, Score: -300.0, Epsilon: 0.36
+Episode: 73/10000, Score: -300.0, Epsilon: 0.35
+Episode: 74/10000, Score: -300.0, Epsilon: 0.35
+Episode: 75/10000, Score: -300.0, Epsilon: 0.34
+Episode: 76/10000, Score: -300.0, Epsilon: 0.34
+Episode: 77/10000, Score: -300.0, Epsilon: 0.33
+Episode: 78/10000, Score: -300.0, Epsilon: 0.33
+Episode: 79/10000, Score: -300.0, Epsilon: 0.32
+Episode: 80/10000, Score: -300.0, Epsilon: 0.32
+Episode: 81/10000, Score: -300.0, Epsilon: 0.31
+Episode: 82/10000, Score: -300.0, Epsilon: 0.31
+Episode: 83/10000, Score: -300.0, Epsilon: 0.30
+Episode: 84/10000, Score: -300.0, Epsilon: 0.30
+Episode: 85/10000, Score: -300.0, Epsilon: 0.29
+Episode: 86/10000, Score: -300.0, Epsilon: 0.29
+Episode: 87/10000, Score: -300.0, Epsilon: 0.29
+Episode: 88/10000, Score: -300.0, Epsilon: 0.28
+Episode: 89/10000, Score: -300.0, Epsilon: 0.28
+Episode: 90/10000, Score: -300.0, Epsilon: 0.27
+Episode: 91/10000, Score: -300.0, Epsilon: 0.27
+Episode: 92/10000, Score: -300.0, Epsilon: 0.26
+Episode: 93/10000, Score: -300.0, Epsilon: 0.26
+Episode: 94/10000, Score: -300.0, Epsilon: 0.26
+Episode: 95/10000, Score: -300.0, Epsilon: 0.25
+Episode: 96/10000, Score: -300.0, Epsilon: 0.25
+Episode: 97/10000, Score: -300.0, Epsilon: 0.25
+Episode: 98/10000, Score: -300.0, Epsilon: 0.24
+Episode: 99/10000, Score: -300.0, Epsilon: 0.24
+Episode: 100/10000, Score: -300.0, Epsilon: 0.23
+LunarLander solved in 100 episodes!
+Episode: 101/10000, Score: -300.0, Epsilon: 0.23
+Episode: 102/10000, Score: -300.0, Epsilon: 0.23
+Episode: 103/10000, Score: -300.0, Epsilon: 0.22
+Episode: 104/10000, Score: -300.0, Epsilon: 0.22
+Episode: 105/10000, Score: -300.0, Epsilon: 0.22
+Episode: 106/10000, Score: -300.0, Epsilon: 0.21
+Episode: 107/10000, Score: -300.0, Epsilon: 0.21
+Episode: 108/10000, Score: -300.0, Epsilon: 0.21
+Episode: 109/10000, Score: -300.0, Epsilon: 0.21
+Episode: 110/10000, Score: -300.0, Epsilon: 0.20
+Episode: 111/10000, Score: -300.0, Epsilon: 0.20
+Episode: 112/10000, Score: -300.0, Epsilon: 0.20
+Episode: 113/10000, Score: -300.0, Epsilon: 0.19
+Episode: 114/10000, Score: -300.0, Epsilon: 0.19
+Episode: 115/10000, Score: -300.0, Epsilon: 0.19
+Episode: 116/10000, Score: -300.0, Epsilon: 0.18
+Episode: 117/10000, Score: -300.0, Epsilon: 0.18
+Episode: 118/10000, Score: -300.0, Epsilon: 0.18
+Episode: 119/10000, Score: -300.0, Epsilon: 0.18
+Episode: 120/10000, Score: -300.0, Epsilon: 0.17
+Episode: 121/10000, Score: -300.0, Epsilon: 0.17
+Episode: 122/10000, Score: -300.0, Epsilon: 0.17
+Episode: 123/10000, Score: -300.0, Epsilon: 0.17
+Episode: 124/10000, Score: -300.0, Epsilon: 0.16
+Episode: 125/10000, Score: -300.0, Epsilon: 0.16
+Episode: 126/10000, Score: -300.0, Epsilon: 0.16
+Episode: 127/10000, Score: -300.0, Epsilon: 0.16
+Episode: 128/10000, Score: -300.0, Epsilon: 0.15
+Episode: 129/10000, Score: -300.0, Epsilon: 0.15
+Episode: 130/10000, Score: -300.0, Epsilon: 0.15
+Episode: 131/10000, Score: -300.0, Epsilon: 0.15
+Episode: 132/10000, Score: -300.0, Epsilon: 0.15
+Episode: 133/10000, Score: -300.0, Epsilon: 0.14
+Episode: 134/10000, Score: -300.0, Epsilon: 0.14
+Episode: 135/10000, Score: -300.0, Epsilon: 0.14
+Episode: 136/10000, Score: -300.0, Epsilon: 0.14
+Episode: 137/10000, Score: -300.0, Epsilon: 0.13
+Episode: 138/10000, Score: -300.0, Epsilon: 0.13
+Episode: 139/10000, Score: -300.0, Epsilon: 0.13
+Episode: 140/10000, Score: -300.0, Epsilon: 0.13
+Episode: 141/10000, Score: -300.0, Epsilon: 0.13
+Episode: 142/10000, Score: -300.0, Epsilon: 0.13
+Episode: 143/10000, Score: -300.0, Epsilon: 0.12
+Episode: 144/10000, Score: -300.0, Epsilon: 0.12
+Episode: 145/10000, Score: -300.0, Epsilon: 0.12
+Episode: 146/10000, Score: -300.0, Epsilon: 0.12
+Episode: 147/10000, Score: -300.0, Epsilon: 0.12
+Episode: 148/10000, Score: -300.0, Epsilon: 0.11
+Episode: 149/10000, Score: -300.0, Epsilon: 0.11
+Episode: 150/10000, Score: -300.0, Epsilon: 0.11
+Episode: 151/10000, Score: -300.0, Epsilon: 0.11
+Episode: 152/10000, Score: -300.0, Epsilon: 0.11
+Episode: 153/10000, Score: -300.0, Epsilon: 0.11
+Episode: 154/10000, Score: -300.0, Epsilon: 0.10
+Episode: 155/10000, Score: -300.0, Epsilon: 0.10
+Episode: 156/10000, Score: -300.0, Epsilon: 0.10
+Episode: 157/10000, Score: -300.0, Epsilon: 0.10
+Episode: 158/10000, Score: -300.0, Epsilon: 0.10
+Episode: 159/10000, Score: -300.0, Epsilon: 0.10
+Episode: 160/10000, Score: -300.0, Epsilon: 0.10
+Episode: 161/10000, Score: -300.0, Epsilon: 0.09
+Episode: 162/10000, Score: -300.0, Epsilon: 0.09
+Episode: 163/10000, Score: -300.0, Epsilon: 0.09
+Episode: 164/10000, Score: -300.0, Epsilon: 0.09
+Episode: 165/10000, Score: -300.0, Epsilon: 0.09
+Episode: 166/10000, Score: -300.0, Epsilon: 0.09
+Episode: 167/10000, Score: -300.0, Epsilon: 0.09
+Episode: 168/10000, Score: -300.0, Epsilon: 0.08
+Episode: 169/10000, Score: -300.0, Epsilon: 0.08
+Episode: 170/10000, Score: -300.0, Epsilon: 0.08
+Episode: 171/10000, Score: -300.0, Epsilon: 0.08
+Episode: 172/10000, Score: -300.0, Epsilon: 0.08
+Episode: 173/10000, Score: -300.0, Epsilon: 0.08
+Episode: 174/10000, Score: -300.0, Epsilon: 0.08
+Episode: 175/10000, Score: -300.0, Epsilon: 0.08
+Episode: 176/10000, Score: -300.0, Epsilon: 0.08
+Episode: 177/10000, Score: -300.0, Epsilon: 0.07
+Episode: 178/10000, Score: -300.0, Epsilon: 0.07
+Episode: 179/10000, Score: -300.0, Epsilon: 0.07
+Episode: 180/10000, Score: -300.0, Epsilon: 0.07
+Episode: 181/10000, Score: -300.0, Epsilon: 0.07
+Episode: 182/10000, Score: -300.0, Epsilon: 0.07
+Episode: 183/10000, Score: -300.0, Epsilon: 0.07
+Episode: 184/10000, Score: -300.0, Epsilon: 0.07
+Episode: 185/10000, Score: -300.0, Epsilon: 0.07
+Episode: 186/10000, Score: -300.0, Epsilon: 0.06
+Episode: 187/10000, Score: -300.0, Epsilon: 0.06
+Episode: 188/10000, Score: -300.0, Epsilon: 0.06
+Episode: 189/10000, Score: -300.0, Epsilon: 0.06
+Episode: 190/10000, Score: -300.0, Epsilon: 0.06
+Episode: 191/10000, Score: -300.0, Epsilon: 0.06
+Episode: 192/10000, Score: -300.0, Epsilon: 0.06
+Episode: 193/10000, Score: -300.0, Epsilon: 0.06
+Episode: 194/10000, Score: -300.0, Epsilon: 0.06
+Episode: 195/10000, Score: -300.0, Epsilon: 0.06
+Episode: 196/10000, Score: -300.0, Epsilon: 0.06
+Episode: 197/10000, Score: -300.0, Epsilon: 0.05
+Episode: 198/10000, Score: -300.0, Epsilon: 0.05
+Episode: 199/10000, Score: -300.0, Epsilon: 0.05
+Episode: 200/10000, Score: -300.0, Epsilon: 0.05
+Episode: 201/10000, Score: -300.0, Epsilon: 0.05
+Episode: 202/10000, Score: -300.0, Epsilon: 0.05
+Episode: 203/10000, Score: -300.0, Epsilon: 0.05
+Episode: 204/10000, Score: -300.0, Epsilon: 0.05
+Episode: 205/10000, Score: -300.0, Epsilon: 0.05
+Episode: 206/10000, Score: -300.0, Epsilon: 0.05
+Episode: 207/10000, Score: -300.0, Epsilon: 0.05
+Episode: 208/10000, Score: -300.0, Epsilon: 0.05
+Episode: 209/10000, Score: -300.0, Epsilon: 0.05
+Episode: 210/10000, Score: -300.0, Epsilon: 0.05
+Episode: 211/10000, Score: -300.0, Epsilon: 0.04
+Episode: 212/10000, Score: -300.0, Epsilon: 0.04
+Episode: 213/10000, Score: -300.0, Epsilon: 0.04
+Episode: 214/10000, Score: -300.0, Epsilon: 0.04
+Episode: 215/10000, Score: -300.0, Epsilon: 0.04
+Episode: 216/10000, Score: -300.0, Epsilon: 0.04
+Episode: 217/10000, Score: -300.0, Epsilon: 0.04
+Episode: 218/10000, Score: -300.0, Epsilon: 0.04
+Episode: 219/10000, Score: -300.0, Epsilon: 0.04
+Episode: 220/10000, Score: -300.0, Epsilon: 0.04
+Episode: 221/10000, Score: -300.0, Epsilon: 0.04
+Episode: 222/10000, Score: -300.0, Epsilon: 0.04
+Episode: 223/10000, Score: -300.0, Epsilon: 0.04
+Episode: 224/10000, Score: -300.0, Epsilon: 0.04
+Episode: 225/10000, Score: -300.0, Epsilon: 0.04
+Episode: 226/10000, Score: -300.0, Epsilon: 0.04
+Episode: 227/10000, Score: -300.0, Epsilon: 0.03
+Episode: 228/10000, Score: -300.0, Epsilon: 0.03
+Episode: 229/10000, Score: -300.0, Epsilon: 0.03
+Episode: 230/10000, Score: -300.0, Epsilon: 0.03
+Episode: 231/10000, Score: -300.0, Epsilon: 0.03
+Episode: 232/10000, Score: -300.0, Epsilon: 0.03
+Episode: 233/10000, Score: -300.0, Epsilon: 0.03
+Episode: 234/10000, Score: -300.0, Epsilon: 0.03
+Episode: 235/10000, Score: -300.0, Epsilon: 0.03
+Episode: 236/10000, Score: -300.0, Epsilon: 0.03
+Episode: 237/10000, Score: -300.0, Epsilon: 0.03
+Episode: 238/10000, Score: -300.0, Epsilon: 0.03
+Episode: 239/10000, Score: -300.0, Epsilon: 0.03
+Episode: 240/10000, Score: -300.0, Epsilon: 0.03
+Episode: 241/10000, Score: -300.0, Epsilon: 0.03
+Episode: 242/10000, Score: -300.0, Epsilon: 0.03
+Episode: 243/10000, Score: -300.0, Epsilon: 0.03
+Episode: 244/10000, Score: -300.0, Epsilon: 0.03
+Episode: 245/10000, Score: -300.0, Epsilon: 0.03
+Episode: 246/10000, Score: -300.0, Epsilon: 0.03
+Episode: 247/10000, Score: -300.0, Epsilon: 0.03
+Episode: 248/10000, Score: -300.0, Epsilon: 0.03
+Episode: 249/10000, Score: -300.0, Epsilon: 0.03
+Episode: 250/10000, Score: -300.0, Epsilon: 0.02
+Episode: 251/10000, Score: -300.0, Epsilon: 0.02
+Episode: 252/10000, Score: -300.0, Epsilon: 0.02
+Episode: 253/10000, Score: -300.0, Epsilon: 0.02
+Episode: 254/10000, Score: -300.0, Epsilon: 0.02
+Episode: 255/10000, Score: -300.0, Epsilon: 0.02
+Episode: 256/10000, Score: -300.0, Epsilon: 0.02
+Episode: 257/10000, Score: -300.0, Epsilon: 0.02
+Episode: 258/10000, Score: -300.0, Epsilon: 0.02
+Episode: 259/10000, Score: -300.0, Epsilon: 0.02
+Episode: 260/10000, Score: -300.0, Epsilon: 0.02
+Episode: 261/10000, Score: -300.0, Epsilon: 0.02
+Episode: 262/10000, Score: -300.0, Epsilon: 0.02
+Episode: 263/10000, Score: -300.0, Epsilon: 0.02
+Episode: 264/10000, Score: -300.0, Epsilon: 0.02
+Episode: 265/10000, Score: -300.0, Epsilon: 0.02
+Episode: 266/10000, Score: -300.0, Epsilon: 0.02
+Episode: 267/10000, Score: -300.0, Epsilon: 0.02
+Episode: 268/10000, Score: -300.0, Epsilon: 0.02
+Episode: 269/10000, Score: -300.0, Epsilon: 0.02
+Episode: 270/10000, Score: -300.0, Epsilon: 0.02
+Episode: 271/10000, Score: -300.0, Epsilon: 0.02
+Episode: 272/10000, Score: -300.0, Epsilon: 0.02
+Episode: 273/10000, Score: -300.0, Epsilon: 0.02
+Episode: 274/10000, Score: -300.0, Epsilon: 0.02
+Episode: 275/10000, Score: -300.0, Epsilon: 0.02
+Episode: 276/10000, Score: -300.0, Epsilon: 0.02
+Episode: 277/10000, Score: -300.0, Epsilon: 0.02
+Episode: 278/10000, Score: -300.0, Epsilon: 0.02
+Episode: 279/10000, Score: -300.0, Epsilon: 0.02
+Episode: 280/10000, Score: -300.0, Epsilon: 0.02
+Episode: 281/10000, Score: -300.0, Epsilon: 0.02
+Episode: 282/10000, Score: -300.0, Epsilon: 0.02
+Episode: 283/10000, Score: -300.0, Epsilon: 0.02
+Episode: 284/10000, Score: -300.0, Epsilon: 0.01
+Episode: 285/10000, Score: -300.0, Epsilon: 0.01
+Episode: 286/10000, Score: -300.0, Epsilon: 0.01
+Episode: 287/10000, Score: -300.0, Epsilon: 0.01
+Episode: 288/10000, Score: -300.0, Epsilon: 0.01
+Episode: 289/10000, Score: -300.0, Epsilon: 0.01
+Episode: 290/10000, Score: -300.0, Epsilon: 0.01
+Episode: 291/10000, Score: -300.0, Epsilon: 0.01
+Episode: 292/10000, Score: -300.0, Epsilon: 0.01
+Episode: 293/10000, Score: -300.0, Epsilon: 0.01
+Episode: 294/10000, Score: -300.0, Epsilon: 0.01
+Episode: 295/10000, Score: -300.0, Epsilon: 0.01
+Episode: 296/10000, Score: -300.0, Epsilon: 0.01
+Episode: 297/10000, Score: -300.0, Epsilon: 0.01
+Episode: 298/10000, Score: -300.0, Epsilon: 0.01
+Episode: 299/10000, Score: -300.0, Epsilon: 0.01
+Episode: 300/10000, Score: -300.0, Epsilon: 0.01
+Episode: 301/10000, Score: -300.0, Epsilon: 0.01
+Episode: 302/10000, Score: -300.0, Epsilon: 0.01
+Episode: 303/10000, Score: -300.0, Epsilon: 0.01
+Episode: 304/10000, Score: -300.0, Epsilon: 0.01
+Episode: 305/10000, Score: -300.0, Epsilon: 0.01
+Episode: 306/10000, Score: -300.0, Epsilon: 0.01
+Episode: 307/10000, Score: -300.0, Epsilon: 0.01
+Episode: 308/10000, Score: -300.0, Epsilon: 0.01
+Episode: 309/10000, Score: -300.0, Epsilon: 0.01
+Episode: 310/10000, Score: -300.0, Epsilon: 0.01
+Episode: 311/10000, Score: -300.0, Epsilon: 0.01
+Episode: 312/10000, Score: -300.0, Epsilon: 0.01
+Episode: 313/10000, Score: -300.0, Epsilon: 0.01
+Episode: 314/10000, Score: -300.0, Epsilon: 0.01
+Episode: 315/10000, Score: -300.0, Epsilon: 0.01
+Episode: 316/10000, Score: -300.0, Epsilon: 0.01
+Episode: 317/10000, Score: -300.0, Epsilon: 0.01
+Episode: 318/10000, Score: -300.0, Epsilon: 0.01
+Episode: 319/10000, Score: -300.0, Epsilon: 0.01
+Episode: 320/10000, Score: -300.0, Epsilon: 0.01
+Episode: 321/10000, Score: -300.0, Epsilon: 0.01
+Episode: 322/10000, Score: -300.0, Epsilon: 0.01
+Episode: 323/10000, Score: -300.0, Epsilon: 0.01
+Episode: 324/10000, Score: -300.0, Epsilon: 0.01
+Episode: 325/10000, Score: -300.0, Epsilon: 0.01
+Episode: 326/10000, Score: -300.0, Epsilon: 0.01
+Episode: 327/10000, Score: -300.0, Epsilon: 0.01
+Episode: 328/10000, Score: -300.0, Epsilon: 0.01
+Episode: 329/10000, Score: -300.0, Epsilon: 0.01
+Episode: 330/10000, Score: -300.0, Epsilon: 0.01
+Episode: 331/10000, Score: -300.0, Epsilon: 0.01
+Episode: 332/10000, Score: -300.0, Epsilon: 0.01
+Episode: 333/10000, Score: -300.0, Epsilon: 0.01
+Episode: 334/10000, Score: -300.0, Epsilon: 0.01
+Episode: 335/10000, Score: -300.0, Epsilon: 0.01
+Episode: 336/10000, Score: -300.0, Epsilon: 0.01
+Episode: 337/10000, Score: -300.0, Epsilon: 0.01
+Episode: 338/10000, Score: -300.0, Epsilon: 0.01
+Episode: 339/10000, Score: -300.0, Epsilon: 0.01
+Episode: 340/10000, Score: -300.0, Epsilon: 0.01
+Episode: 341/10000, Score: -300.0, Epsilon: 0.01
+Episode: 342/10000, Score: -300.0, Epsilon: 0.01
+Episode: 343/10000, Score: -300.0, Epsilon: 0.01
+Episode: 344/10000, Score: -300.0, Epsilon: 0.01
+Episode: 345/10000, Score: -300.0, Epsilon: 0.01
+Episode: 346/10000, Score: -300.0, Epsilon: 0.01
+Episode: 347/10000, Score: -300.0, Epsilon: 0.01
+Episode: 348/10000, Score: -300.0, Epsilon: 0.01
+Episode: 349/10000, Score: -300.0, Epsilon: 0.01
+Episode: 350/10000, Score: -300.0, Epsilon: 0.01
+Episode: 351/10000, Score: -300.0, Epsilon: 0.01
+Episode: 352/10000, Score: -300.0, Epsilon: 0.01
+Episode: 353/10000, Score: -300.0, Epsilon: 0.01
+Episode: 354/10000, Score: -300.0, Epsilon: 0.01
+Episode: 355/10000, Score: -300.0, Epsilon: 0.01
+Episode: 356/10000, Score: -300.0, Epsilon: 0.01
+Episode: 357/10000, Score: -300.0, Epsilon: 0.01
+Episode: 358/10000, Score: -300.0, Epsilon: 0.01
+Episode: 359/10000, Score: -300.0, Epsilon: 0.01
+Episode: 360/10000, Score: -300.0, Epsilon: 0.01
+Episode: 361/10000, Score: -300.0, Epsilon: 0.01
+Episode: 362/10000, Score: -300.0, Epsilon: 0.01
+Episode: 363/10000, Score: -300.0, Epsilon: 0.01
+Episode: 364/10000, Score: -300.0, Epsilon: 0.01
+Episode: 365/10000, Score: -300.0, Epsilon: 0.01
+Episode: 366/10000, Score: -300.0, Epsilon: 0.01
+Episode: 367/10000, Score: -300.0, Epsilon: 0.01
+Episode: 368/10000, Score: -300.0, Epsilon: 0.01
+Episode: 369/10000, Score: -300.0, Epsilon: 0.01
+Episode: 370/10000, Score: -300.0, Epsilon: 0.01
+Episode: 371/10000, Score: -300.0, Epsilon: 0.01
+Episode: 372/10000, Score: -300.0, Epsilon: 0.01
+Episode: 373/10000, Score: -300.0, Epsilon: 0.01
+Episode: 374/10000, Score: -300.0, Epsilon: 0.01
+Episode: 375/10000, Score: -300.0, Epsilon: 0.01
+Episode: 376/10000, Score: -300.0, Epsilon: 0.01
+Episode: 377/10000, Score: -300.0, Epsilon: 0.01
+Episode: 378/10000, Score: -300.0, Epsilon: 0.01
+Episode: 379/10000, Score: -300.0, Epsilon: 0.01
+Episode: 380/10000, Score: -300.0, Epsilon: 0.01
+Episode: 381/10000, Score: -300.0, Epsilon: 0.01
+Episode: 382/10000, Score: -300.0, Epsilon: 0.01
+Episode: 383/10000, Score: -300.0, Epsilon: 0.01
+Episode: 384/10000, Score: -300.0, Epsilon: 0.01
+Episode: 385/10000, Score: -300.0, Epsilon: 0.01
+Episode: 386/10000, Score: -300.0, Epsilon: 0.01
+Episode: 387/10000, Score: -300.0, Epsilon: 0.01
+Episode: 388/10000, Score: -300.0, Epsilon: 0.01
+Episode: 389/10000, Score: -300.0, Epsilon: 0.01
+Episode: 390/10000, Score: -300.0, Epsilon: 0.01
+Episode: 391/10000, Score: -300.0, Epsilon: 0.01
+Episode: 392/10000, Score: -300.0, Epsilon: 0.01
+Episode: 393/10000, Score: -300.0, Epsilon: 0.01
+Episode: 394/10000, Score: -300.0, Epsilon: 0.01
+Episode: 395/10000, Score: -300.0, Epsilon: 0.01
+Episode: 396/10000, Score: -300.0, Epsilon: 0.01
+Episode: 397/10000, Score: -300.0, Epsilon: 0.01
+Episode: 398/10000, Score: -300.0, Epsilon: 0.01
+Episode: 399/10000, Score: -300.0, Epsilon: 0.01
+Episode: 400/10000, Score: -300.0, Epsilon: 0.01
+Episode: 401/10000, Score: -300.0, Epsilon: 0.01
+Episode: 402/10000, Score: -300.0, Epsilon: 0.01
+Episode: 403/10000, Score: -300.0, Epsilon: 0.01
+Episode: 404/10000, Score: -300.0, Epsilon: 0.01
+Episode: 405/10000, Score: -300.0, Epsilon: 0.01
+Episode: 406/10000, Score: -300.0, Epsilon: 0.01
+Episode: 407/10000, Score: -300.0, Epsilon: 0.01
+Episode: 408/10000, Score: -300.0, Epsilon: 0.01
+Episode: 409/10000, Score: -300.0, Epsilon: 0.01
+Episode: 410/10000, Score: -300.0, Epsilon: 0.01
+Episode: 411/10000, Score: -300.0, Epsilon: 0.01
+Episode: 412/10000, Score: -300.0, Epsilon: 0.01
+Episode: 413/10000, Score: -300.0, Epsilon: 0.01
+Episode: 414/10000, Score: -300.0, Epsilon: 0.01
+Episode: 415/10000, Score: -300.0, Epsilon: 0.01
+Episode: 416/10000, Score: -300.0, Epsilon: 0.01
+Episode: 417/10000, Score: -300.0, Epsilon: 0.01
+Episode: 418/10000, Score: -300.0, Epsilon: 0.01
+Episode: 419/10000, Score: -300.0, Epsilon: 0.01
+Episode: 420/10000, Score: -300.0, Epsilon: 0.01
+Episode: 421/10000, Score: -300.0, Epsilon: 0.01
+Episode: 422/10000, Score: -300.0, Epsilon: 0.01
+Episode: 423/10000, Score: -300.0, Epsilon: 0.01
+Episode: 424/10000, Score: -300.0, Epsilon: 0.01
+Episode: 425/10000, Score: -300.0, Epsilon: 0.01
+Episode: 426/10000, Score: -300.0, Epsilon: 0.01
+Episode: 427/10000, Score: -300.0, Epsilon: 0.01
+Episode: 428/10000, Score: -300.0, Epsilon: 0.01
+Episode: 429/10000, Score: -300.0, Epsilon: 0.01
+Episode: 430/10000, Score: -300.0, Epsilon: 0.01
+Episode: 431/10000, Score: -300.0, Epsilon: 0.01
+Episode: 432/10000, Score: -300.0, Epsilon: 0.01
+Episode: 433/10000, Score: -300.0, Epsilon: 0.01
+Episode: 434/10000, Score: -300.0, Epsilon: 0.01
+Episode: 435/10000, Score: -300.0, Epsilon: 0.01
+Episode: 436/10000, Score: -300.0, Epsilon: 0.01
+Episode: 437/10000, Score: -300.0, Epsilon: 0.01
+Episode: 438/10000, Score: -300.0, Epsilon: 0.01
+Episode: 439/10000, Score: -300.0, Epsilon: 0.01
+Episode: 440/10000, Score: -300.0, Epsilon: 0.01
+Episode: 441/10000, Score: -300.0, Epsilon: 0.01
+Episode: 442/10000, Score: -300.0, Epsilon: 0.01
+Episode: 443/10000, Score: -300.0, Epsilon: 0.01
+Episode: 444/10000, Score: -300.0, Epsilon: 0.01
+Episode: 445/10000, Score: -300.0, Epsilon: 0.01
+Episode: 446/10000, Score: -300.0, Epsilon: 0.01
+Episode: 447/10000, Score: -300.0, Epsilon: 0.01
+Episode: 448/10000, Score: -300.0, Epsilon: 0.01
+Episode: 449/10000, Score: -300.0, Epsilon: 0.01
+Episode: 450/10000, Score: -300.0, Epsilon: 0.01
+Episode: 451/10000, Score: -300.0, Epsilon: 0.01
+Episode: 452/10000, Score: -300.0, Epsilon: 0.01
+Episode: 453/10000, Score: -300.0, Epsilon: 0.01
+Episode: 454/10000, Score: -300.0, Epsilon: 0.01
+Episode: 455/10000, Score: -300.0, Epsilon: 0.01
+Episode: 456/10000, Score: -300.0, Epsilon: 0.01
+Episode: 457/10000, Score: -300.0, Epsilon: 0.01
+Episode: 458/10000, Score: -300.0, Epsilon: 0.01
+Episode: 459/10000, Score: -300.0, Epsilon: 0.01
+Episode: 460/10000, Score: -300.0, Epsilon: 0.01
+Episode: 461/10000, Score: -300.0, Epsilon: 0.01
+Episode: 462/10000, Score: -300.0, Epsilon: 0.01
+Episode: 463/10000, Score: -300.0, Epsilon: 0.01
+Episode: 464/10000, Score: -300.0, Epsilon: 0.01
+Episode: 465/10000, Score: -300.0, Epsilon: 0.01
+Episode: 466/10000, Score: -300.0, Epsilon: 0.01
+Episode: 467/10000, Score: -300.0, Epsilon: 0.01
+Episode: 468/10000, Score: -300.0, Epsilon: 0.01
+Episode: 469/10000, Score: -300.0, Epsilon: 0.01
+Episode: 470/10000, Score: -300.0, Epsilon: 0.01
+Episode: 471/10000, Score: -300.0, Epsilon: 0.01
+Episode: 472/10000, Score: -300.0, Epsilon: 0.01
+Episode: 473/10000, Score: -300.0, Epsilon: 0.01
+Episode: 474/10000, Score: -300.0, Epsilon: 0.01
+Episode: 475/10000, Score: -300.0, Epsilon: 0.01
+Episode: 476/10000, Score: -300.0, Epsilon: 0.01
+Episode: 477/10000, Score: -300.0, Epsilon: 0.01
+Episode: 478/10000, Score: -300.0, Epsilon: 0.01
+Episode: 479/10000, Score: -300.0, Epsilon: 0.01
+Episode: 480/10000, Score: -300.0, Epsilon: 0.01
+Episode: 481/10000, Score: -300.0, Epsilon: 0.01
+Episode: 482/10000, Score: -300.0, Epsilon: 0.01
+Episode: 483/10000, Score: -300.0, Epsilon: 0.01
+Episode: 484/10000, Score: -300.0, Epsilon: 0.01
+Episode: 485/10000, Score: -300.0, Epsilon: 0.01
+Episode: 486/10000, Score: -300.0, Epsilon: 0.01
+Episode: 487/10000, Score: -300.0, Epsilon: 0.01
+Episode: 488/10000, Score: -300.0, Epsilon: 0.01
+Episode: 489/10000, Score: -300.0, Epsilon: 0.01
+Episode: 490/10000, Score: -300.0, Epsilon: 0.01
+Episode: 491/10000, Score: -300.0, Epsilon: 0.01
+Episode: 492/10000, Score: -300.0, Epsilon: 0.01
+Episode: 493/10000, Score: -300.0, Epsilon: 0.01
+Episode: 494/10000, Score: -300.0, Epsilon: 0.01
+Episode: 495/10000, Score: -300.0, Epsilon: 0.01
+Episode: 496/10000, Score: -300.0, Epsilon: 0.01
+Episode: 497/10000, Score: -300.0, Epsilon: 0.01
+Episode: 498/10000, Score: -300.0, Epsilon: 0.01
+Episode: 499/10000, Score: -300.0, Epsilon: 0.01
+Episode: 500/10000, Score: -300.0, Epsilon: 0.01
+Episode: 501/10000, Score: -300.0, Epsilon: 0.01
+Episode: 502/10000, Score: -300.0, Epsilon: 0.01
+Episode: 503/10000, Score: -300.0, Epsilon: 0.01
+Episode: 504/10000, Score: -300.0, Epsilon: 0.01
+Episode: 505/10000, Score: -300.0, Epsilon: 0.01
+Episode: 506/10000, Score: -300.0, Epsilon: 0.01
+Episode: 507/10000, Score: -300.0, Epsilon: 0.01
+Episode: 508/10000, Score: -300.0, Epsilon: 0.01
+Episode: 509/10000, Score: -300.0, Epsilon: 0.01
+Episode: 510/10000, Score: -300.0, Epsilon: 0.01
+Episode: 511/10000, Score: -300.0, Epsilon: 0.01
+Episode: 512/10000, Score: -300.0, Epsilon: 0.01
+Episode: 513/10000, Score: -300.0, Epsilon: 0.01
+Episode: 514/10000, Score: -300.0, Epsilon: 0.01
+Episode: 515/10000, Score: -300.0, Epsilon: 0.01
+Episode: 516/10000, Score: -300.0, Epsilon: 0.01
+Episode: 517/10000, Score: -300.0, Epsilon: 0.01
+Episode: 518/10000, Score: -300.0, Epsilon: 0.01
+Episode: 519/10000, Score: -300.0, Epsilon: 0.01
+Episode: 520/10000, Score: -300.0, Epsilon: 0.01
+Episode: 521/10000, Score: -300.0, Epsilon: 0.01
+Episode: 522/10000, Score: -300.0, Epsilon: 0.01
+Episode: 523/10000, Score: -300.0, Epsilon: 0.01
+Episode: 524/10000, Score: -300.0, Epsilon: 0.01
+Episode: 525/10000, Score: -300.0, Epsilon: 0.01
+Episode: 526/10000, Score: -300.0, Epsilon: 0.01
+Episode: 527/10000, Score: -300.0, Epsilon: 0.01
+Episode: 528/10000, Score: -300.0, Epsilon: 0.01
+Episode: 529/10000, Score: -300.0, Epsilon: 0.01
+Episode: 530/10000, Score: -300.0, Epsilon: 0.01
+Episode: 531/10000, Score: -300.0, Epsilon: 0.01
+Episode: 532/10000, Score: -300.0, Epsilon: 0.01
+Episode: 533/10000, Score: -300.0, Epsilon: 0.01
+Episode: 534/10000, Score: -300.0, Epsilon: 0.01
+Episode: 535/10000, Score: -300.0, Epsilon: 0.01
+Episode: 536/10000, Score: -300.0, Epsilon: 0.01
+Episode: 537/10000, Score: -300.0, Epsilon: 0.01
+Episode: 538/10000, Score: -300.0, Epsilon: 0.01
+Episode: 539/10000, Score: -300.0, Epsilon: 0.01
+Episode: 540/10000, Score: -300.0, Epsilon: 0.01
+Episode: 541/10000, Score: -300.0, Epsilon: 0.01
+Episode: 542/10000, Score: -300.0, Epsilon: 0.01
+Episode: 543/10000, Score: -300.0, Epsilon: 0.01
+Episode: 544/10000, Score: -300.0, Epsilon: 0.01
+Episode: 545/10000, Score: -300.0, Epsilon: 0.01
+Episode: 546/10000, Score: -300.0, Epsilon: 0.01
+Episode: 547/10000, Score: -300.0, Epsilon: 0.01
+Episode: 548/10000, Score: -300.0, Epsilon: 0.01
+Episode: 549/10000, Score: -300.0, Epsilon: 0.01
+Episode: 550/10000, Score: -300.0, Epsilon: 0.01
+Episode: 551/10000, Score: -300.0, Epsilon: 0.01
+Episode: 552/10000, Score: -300.0, Epsilon: 0.01
+Episode: 553/10000, Score: -300.0, Epsilon: 0.01
+Episode: 554/10000, Score: -300.0, Epsilon: 0.01
+Episode: 555/10000, Score: -300.0, Epsilon: 0.01
+Episode: 556/10000, Score: -300.0, Epsilon: 0.01
+Episode: 557/10000, Score: -300.0, Epsilon: 0.01
+Episode: 558/10000, Score: -300.0, Epsilon: 0.01
+Episode: 559/10000, Score: -300.0, Epsilon: 0.01
+Episode: 560/10000, Score: -300.0, Epsilon: 0.01
+Episode: 561/10000, Score: -300.0, Epsilon: 0.01
+Episode: 562/10000, Score: -300.0, Epsilon: 0.01
+Episode: 563/10000, Score: -300.0, Epsilon: 0.01
+Episode: 564/10000, Score: -300.0, Epsilon: 0.01
+Episode: 565/10000, Score: -300.0, Epsilon: 0.01
+Episode: 566/10000, Score: -300.0, Epsilon: 0.01
+Episode: 567/10000, Score: -300.0, Epsilon: 0.01
+Episode: 568/10000, Score: -300.0, Epsilon: 0.01
+Episode: 569/10000, Score: -300.0, Epsilon: 0.01
+Episode: 570/10000, Score: -300.0, Epsilon: 0.01
+Episode: 571/10000, Score: -300.0, Epsilon: 0.01
+Episode: 572/10000, Score: -300.0, Epsilon: 0.01
+Episode: 573/10000, Score: -300.0, Epsilon: 0.01
+Episode: 574/10000, Score: -300.0, Epsilon: 0.01
+Episode: 575/10000, Score: -300.0, Epsilon: 0.01
+Episode: 576/10000, Score: -300.0, Epsilon: 0.01
+Episode: 577/10000, Score: -300.0, Epsilon: 0.01
+Episode: 578/10000, Score: -300.0, Epsilon: 0.01
+Episode: 579/10000, Score: -300.0, Epsilon: 0.01
+Episode: 580/10000, Score: -300.0, Epsilon: 0.01
+Episode: 581/10000, Score: -300.0, Epsilon: 0.01
+Episode: 582/10000, Score: -300.0, Epsilon: 0.01
+Episode: 583/10000, Score: -300.0, Epsilon: 0.01
+Episode: 584/10000, Score: -300.0, Epsilon: 0.01
+Episode: 585/10000, Score: -300.0, Epsilon: 0.01
+Episode: 586/10000, Score: -300.0, Epsilon: 0.01
+Episode: 587/10000, Score: -300.0, Epsilon: 0.01
+Episode: 588/10000, Score: -300.0, Epsilon: 0.01
+Episode: 589/10000, Score: -300.0, Epsilon: 0.01
+Episode: 590/10000, Score: -300.0, Epsilon: 0.01
+Episode: 591/10000, Score: -300.0, Epsilon: 0.01
+Episode: 592/10000, Score: -300.0, Epsilon: 0.01
+Episode: 593/10000, Score: -300.0, Epsilon: 0.01
+Episode: 594/10000, Score: -300.0, Epsilon: 0.01
+Episode: 595/10000, Score: -300.0, Epsilon: 0.01
+Episode: 596/10000, Score: -300.0, Epsilon: 0.01
+Episode: 597/10000, Score: -300.0, Epsilon: 0.01
+Episode: 598/10000, Score: -300.0, Epsilon: 0.01
+Episode: 599/10000, Score: -300.0, Epsilon: 0.01
+Episode: 600/10000, Score: -300.0, Epsilon: 0.01
+Episode: 601/10000, Score: -300.0, Epsilon: 0.01
+Episode: 602/10000, Score: -300.0, Epsilon: 0.01
+Episode: 603/10000, Score: -300.0, Epsilon: 0.01
+Episode: 604/10000, Score: -300.0, Epsilon: 0.01
+Episode: 605/10000, Score: -300.0, Epsilon: 0.01
+Episode: 606/10000, Score: -300.0, Epsilon: 0.01
+Episode: 607/10000, Score: -300.0, Epsilon: 0.01
+Episode: 608/10000, Score: -300.0, Epsilon: 0.01
+Episode: 609/10000, Score: -300.0, Epsilon: 0.01
+Episode: 610/10000, Score: -300.0, Epsilon: 0.01
+Episode: 611/10000, Score: -300.0, Epsilon: 0.01
+Episode: 612/10000, Score: -300.0, Epsilon: 0.01
+Episode: 613/10000, Score: -300.0, Epsilon: 0.01
+Episode: 614/10000, Score: -300.0, Epsilon: 0.01
+Episode: 615/10000, Score: -300.0, Epsilon: 0.01
+Episode: 616/10000, Score: -300.0, Epsilon: 0.01
+Episode: 617/10000, Score: -300.0, Epsilon: 0.01
+Episode: 618/10000, Score: -300.0, Epsilon: 0.01
+Episode: 619/10000, Score: -300.0, Epsilon: 0.01
+Episode: 620/10000, Score: -300.0, Epsilon: 0.01
+Episode: 621/10000, Score: -300.0, Epsilon: 0.01
+Episode: 622/10000, Score: -300.0, Epsilon: 0.01
+Episode: 623/10000, Score: -300.0, Epsilon: 0.01
+Episode: 624/10000, Score: -300.0, Epsilon: 0.01
+Episode: 625/10000, Score: -300.0, Epsilon: 0.01
+Episode: 626/10000, Score: -300.0, Epsilon: 0.01
+Episode: 627/10000, Score: -300.0, Epsilon: 0.01
+Episode: 628/10000, Score: -300.0, Epsilon: 0.01
+Episode: 629/10000, Score: -300.0, Epsilon: 0.01
+Episode: 630/10000, Score: -300.0, Epsilon: 0.01
+Episode: 631/10000, Score: -300.0, Epsilon: 0.01
+Episode: 632/10000, Score: -300.0, Epsilon: 0.01
+Episode: 633/10000, Score: -300.0, Epsilon: 0.01
+Episode: 634/10000, Score: -300.0, Epsilon: 0.01
+Episode: 635/10000, Score: -300.0, Epsilon: 0.01
+Episode: 636/10000, Score: -300.0, Epsilon: 0.01
+Episode: 637/10000, Score: -300.0, Epsilon: 0.01
+Episode: 638/10000, Score: -300.0, Epsilon: 0.01
+Episode: 639/10000, Score: -300.0, Epsilon: 0.01
+Episode: 640/10000, Score: -300.0, Epsilon: 0.01
+Episode: 641/10000, Score: -300.0, Epsilon: 0.01
+Episode: 642/10000, Score: -300.0, Epsilon: 0.01
+Episode: 643/10000, Score: -300.0, Epsilon: 0.01
+Episode: 644/10000, Score: -300.0, Epsilon: 0.01
+Episode: 645/10000, Score: -300.0, Epsilon: 0.01
+Episode: 646/10000, Score: -300.0, Epsilon: 0.01
+Episode: 647/10000, Score: -300.0, Epsilon: 0.01
+Episode: 648/10000, Score: -300.0, Epsilon: 0.01
+Episode: 649/10000, Score: -300.0, Epsilon: 0.01
+Episode: 650/10000, Score: -300.0, Epsilon: 0.01
+Episode: 651/10000, Score: -300.0, Epsilon: 0.01
+Episode: 652/10000, Score: -300.0, Epsilon: 0.01
+Episode: 653/10000, Score: -300.0, Epsilon: 0.01
+Episode: 654/10000, Score: -300.0, Epsilon: 0.01
+Episode: 655/10000, Score: -300.0, Epsilon: 0.01
+Episode: 656/10000, Score: -300.0, Epsilon: 0.01
+Episode: 657/10000, Score: -300.0, Epsilon: 0.01
+Episode: 658/10000, Score: -300.0, Epsilon: 0.01
+Episode: 659/10000, Score: -300.0, Epsilon: 0.01
+Episode: 660/10000, Score: -300.0, Epsilon: 0.01
+Episode: 661/10000, Score: -300.0, Epsilon: 0.01
+Episode: 662/10000, Score: -300.0, Epsilon: 0.01
+Episode: 663/10000, Score: -300.0, Epsilon: 0.01
+Episode: 664/10000, Score: -300.0, Epsilon: 0.01
+Episode: 665/10000, Score: -300.0, Epsilon: 0.01
+Episode: 666/10000, Score: -300.0, Epsilon: 0.01
+Episode: 667/10000, Score: -300.0, Epsilon: 0.01
+Episode: 668/10000, Score: -300.0, Epsilon: 0.01
+Episode: 669/10000, Score: -300.0, Epsilon: 0.01
