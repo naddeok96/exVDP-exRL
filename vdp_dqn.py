@@ -49,7 +49,7 @@ def nll_gaussian(y_test, y_pred_mean, y_pred_sd, num_labels, return_components=F
     ms1 = torch.mean(torch.squeeze(torch.matmul(mu_sigma, mu_)))
 
     # Second term is log determinant
-    ms2 = -torch.mean(torch.linalg.slogdet(y_pred_sd_ns)[1])
+    ms2 = torch.mean(torch.linalg.slogdet(y_pred_sd_ns)[1])
 
     # Compute the mean
     ms = (ms1 + ms2) / 2
@@ -321,7 +321,7 @@ class VDPDQNAgent:
         
         # weighted_predictive_sigmas = self.pred_factor * (self.pred_fc1_factor*predictive_sigmas["fc1"] + self.pred_relu1_factor*predictive_sigmas["relu1"] + self.pred_fc2_factor*predictive_sigmas["fc2"] + self.pred_relu2_factor*predictive_sigmas["relu2"] + self.pred_fc3_factor*predictive_sigmas["fc3"])
         weighted_predictive_sigmas = 0.001 * (predictive_sigmas["fc1"] + predictive_sigmas["relu1"] + (1/1600)*predictive_sigmas["fc2"] + (1/1600)*predictive_sigmas["relu2"] + (1/5e6)*predictive_sigmas["fc3"])
-        total_loss = nll_loss + weighted_w_kl_loss + weighted_b_kl_loss + min(5, weighted_predictive_sigmas)
+        total_loss = nll_loss + weighted_w_kl_loss + weighted_b_kl_loss + weighted_predictive_sigmas
         
         self.optimizer.zero_grad()
         total_loss.backward()

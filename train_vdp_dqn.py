@@ -88,7 +88,7 @@ def train(env, agent, batch_size=32, episodes=500, max_steps=200, target_reward=
 if __name__ == "__main__":
 
     # Initialize GPU usage
-    gpu_number = "2"
+    gpu_number = "1"
     if gpu_number:
         os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
         os.environ["CUDA_VISIBLE_DEVICES"] = gpu_number
