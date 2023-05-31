@@ -225,12 +225,12 @@ class VDPDQN(nn.Module):
         m, s4 = self.relu(m, s3)
         m, s5, w_kl_3, b_kl_3 = self.fc3(m, s4)
 
-        kl_losses = {"w" : {"fc1": w_kl_1,
+        kl_losses = {   "w" : { "fc1": w_kl_1,
                                 "fc2": w_kl_2,
                                 "fc3": w_kl_3},
-                          "b" : {"fc1": b_kl_1,
-                                 "fc2": b_kl_2,
-                                 "fc3": b_kl_3},   
+                        "b" : { "fc1": b_kl_1,
+                                "fc2": b_kl_2,
+                                "fc3": b_kl_3},   
                          }
 
         if not return_sigmas:
@@ -314,7 +314,7 @@ class VDPDQNAgent:
             target_q_values[:,i,0] = rewards[:,i] + (1 - dones[:,i]) * self.gamma * next_action_q_value_i
 
         nll_loss, error_over_sigma, log_determinant = nll_gaussian(target_q_values, current_q_values, current_q_sigmas, self.action_size, return_components = return_uncertainty_values)
-        nll_loss = nll_loss + 8
+        # nll_loss = nll_loss + 10
         weighted_w_kl_loss = self.kl_w_factor * (self.kl1_w_factor*current_kl_losses["w"]["fc1"] + self.kl2_w_factor*current_kl_losses["w"]["fc2"] + self.kl3_w_factor*current_kl_losses["w"]["fc3"])
         weighted_b_kl_loss = self.kl_b_factor * (self.kl1_b_factor*current_kl_losses["b"]["fc1"] + self.kl2_b_factor*current_kl_losses["b"]["fc2"] + self.kl3_b_factor*current_kl_losses["b"]["fc3"])
         total_loss = nll_loss + weighted_w_kl_loss + weighted_b_kl_loss
