@@ -49,7 +49,7 @@ def nll_gaussian(y_test, y_pred_mean, y_pred_sd, num_labels, return_components=F
     ms1 = torch.mean(torch.squeeze(torch.matmul(mu_sigma, mu_)))
 
     # Second term is log determinant
-    ms2 = -torch.mean(torch.linalg.slogdet(y_pred_sd_ns)[1])
+    ms2 = torch.mean(torch.linalg.slogdet(y_pred_sd_ns)[1])
 
     # Compute the mean
     ms = (ms1 + ms2)/2
