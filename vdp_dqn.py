@@ -52,7 +52,7 @@ def nll_gaussian(y_test, y_pred_mean, y_pred_sd, num_labels, return_components=F
     ms2 = -torch.mean(torch.linalg.slogdet(y_pred_sd_ns)[1])
 
     # Compute the mean
-    ms = (ms1 + ms2)/2
+    ms = (ms1 + ms2) / 2
 
     if return_components:
         return ms, ms1, ms2
@@ -289,7 +289,7 @@ class VDPDQNAgent:
     def replay(self, batch_size, return_uncertainty_values = False):
         if len(self.memory) < batch_size:
             if return_uncertainty_values:
-                return None, None, None, None, None, None, None, None, None, None
+                return None, None, None, None, None, None, None, None, None, None, None
             else:
                 return None, None, None, None
         
@@ -315,9 +315,14 @@ class VDPDQNAgent:
 
         nll_loss, error_over_sigma, log_determinant = nll_gaussian(target_q_values, current_q_values, current_q_sigmas, self.action_size, return_components = return_uncertainty_values)
         nll_loss = nll_loss + 8
+        
         weighted_w_kl_loss = self.kl_w_factor * (self.kl1_w_factor*current_kl_losses["w"]["fc1"] + self.kl2_w_factor*current_kl_losses["w"]["fc2"] + self.kl3_w_factor*current_kl_losses["w"]["fc3"])
         weighted_b_kl_loss = self.kl_b_factor * (self.kl1_b_factor*current_kl_losses["b"]["fc1"] + self.kl2_b_factor*current_kl_losses["b"]["fc2"] + self.kl3_b_factor*current_kl_losses["b"]["fc3"])
-        total_loss = nll_loss + weighted_w_kl_loss + weighted_b_kl_loss
+        
+        # weighted_predictive_sigmas = self.pred_factor * (self.pred_fc1_factor*predictive_sigmas["fc1"] + self.pred_relu1_factor*predictive_sigmas["relu1"] + self.pred_fc2_factor*predictive_sigmas["fc2"] + self.pred_relu2_factor*predictive_sigmas["relu2"] + self.pred_fc3_factor*predictive_sigmas["fc3"])
+        weighted_predictive_sigmas = 0.001 * (predictive_sigmas["fc1"] + predictive_sigmas["relu1"] + (1/1600)*predictive_sigmas["fc2"] + (1/1600)*predictive_sigmas["relu2"] + (1/5e6)*predictive_sigmas["fc3"])
+        total_loss = nll_loss + weighted_w_kl_loss + weighted_b_kl_loss + min(5, weighted_predictive_sigmas)
+        
         self.optimizer.zero_grad()
         total_loss.backward()
         self.optimizer.step()
@@ -328,7 +333,7 @@ class VDPDQNAgent:
 
         if return_uncertainty_values:
             model_sigmas = self.get_covariance_matrices()
-            return total_loss, nll_loss, weighted_w_kl_loss, weighted_b_kl_loss, current_kl_losses, prev_epsilon, model_sigmas, predictive_sigmas, error_over_sigma, log_determinant
+            return total_loss, nll_loss, weighted_w_kl_loss, weighted_b_kl_loss, weighted_predictive_sigmas, current_kl_losses, prev_epsilon, model_sigmas, predictive_sigmas, error_over_sigma, log_determinant
         else:
             return total_loss, nll_loss, current_kl_losses, prev_epsilon
         

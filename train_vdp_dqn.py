@@ -43,7 +43,7 @@ def train(env, agent, batch_size=32, episodes=500, max_steps=200, target_reward=
             state = next_state
             internal_state = env.state
 
-            total_loss, nll_loss, weighted_w_kl_loss, weighted_b_kl_loss, current_kl_losses, prev_epsilon, model_sigmas, predictive_sigmas, error_over_sigma, log_determinant  = agent.replay(batch_size, return_uncertainty_values = True)
+            total_loss, nll_loss, weighted_w_kl_loss, weighted_b_kl_loss, weighted_predictive_sigmas, current_kl_losses, prev_epsilon, model_sigmas, predictive_sigmas, error_over_sigma, log_determinant  = agent.replay(batch_size, return_uncertainty_values = True)
             
             # Log
             wandb.log({
@@ -52,6 +52,7 @@ def train(env, agent, batch_size=32, episodes=500, max_steps=200, target_reward=
                 "nll_loss": nll_loss,
                 "weighted_w_kl_loss": weighted_w_kl_loss,
                 "weighted_b_kl_loss": weighted_b_kl_loss,
+                "weighted_predictive_sigmas" : weighted_predictive_sigmas,
                 "total_loss" : total_loss, 
                 "kl_losses" : current_kl_losses,
                 "prev_epsilon" : prev_epsilon,
@@ -87,7 +88,7 @@ def train(env, agent, batch_size=32, episodes=500, max_steps=200, target_reward=
 if __name__ == "__main__":
 
     # Initialize GPU usage
-    gpu_number = "0"
+    gpu_number = "2"
     if gpu_number:
         os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
         os.environ["CUDA_VISIBLE_DEVICES"] = gpu_number
@@ -96,9 +97,9 @@ if __name__ == "__main__":
         device = torch.device("cpu")
 
     # Initialize WandB
-    wandb.init(project="VDP DQN Acrobot - Fresh", entity="naddeok", mode="disabled")
-    wandb.config.fc1_size = fc1_size = 512
-    wandb.config.fc2_size = fc2_size = 256
+    wandb.init(project="VDP DQN Acrobot - Model Sigmas", entity="naddeok")# mode="disabled")
+    wandb.config.fc1_size = fc1_size = 128
+    wandb.config.fc2_size = fc2_size = 128
 
     wandb.config.kl_w_factor = kl_w_factor = 0.01
     wandb.config.kl1_w_factor = kl1_w_factor = 1/18
@@ -117,8 +118,8 @@ if __name__ == "__main__":
     wandb.config.learning_rate = learning_rate  = 0.0001
     wandb.config.memory_size = memory_size      = 10000
 
-    wandb.config.batch_size = batch_size    = 64
-    wandb.config.episodes = episodes        = 100000
+    wandb.config.batch_size = batch_size    = 128
+    wandb.config.episodes = episodes        = 10000
     wandb.config.max_steps = max_steps      = 300
     wandb.config.target_reward = target_reward = -100
     wandb.config.target_successes = target_successes = 100
