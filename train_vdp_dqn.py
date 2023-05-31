@@ -79,7 +79,7 @@ def train(env, agent, batch_size=32, episodes=500, max_steps=200, target_reward=
             num_success = 0
 
         if num_success == target_successes:
-            print(f"LunarLander solved in {e+1} episodes!")
+            print(f"Solved in {e+1} episodes!")
                 
             agent.save("saved_models/" + wandb.run.project + "_" + wandb.run.name + "_vdp_dqn_at_100_successes.pt")
 
