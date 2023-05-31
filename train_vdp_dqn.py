@@ -37,11 +37,13 @@ def train(env, agent, batch_size=32, episodes=500, max_steps=200, target_reward=
             env.state = internal_state
             next_state, reward, done, _, _ = env.step(action)
 
+            # Update system
+            state = next_state
+            internal_state = env.state
+
             total_reward += reward
 
             agent.remember(state, action, rewards, next_states, dones)
-            state = next_state
-            internal_state = env.state
 
             total_loss, nll_loss, weighted_w_kl_loss, weighted_b_kl_loss, current_kl_losses, prev_epsilon, model_sigmas, predictive_sigmas, error_over_sigma, log_determinant  = agent.replay(batch_size, return_uncertainty_values = True)
             
@@ -87,7 +89,7 @@ def train(env, agent, batch_size=32, episodes=500, max_steps=200, target_reward=
 if __name__ == "__main__":
 
     # Initialize GPU usage
-    gpu_number = "0"
+    gpu_number = "1"
     if gpu_number:
         os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
         os.environ["CUDA_VISIBLE_DEVICES"] = gpu_number
@@ -96,9 +98,9 @@ if __name__ == "__main__":
         device = torch.device("cpu")
 
     # Initialize WandB
-    wandb.init(project="VDP DQN Acrobot - Fresh", entity="naddeok", mode="disabled")
-    wandb.config.fc1_size = fc1_size = 512
-    wandb.config.fc2_size = fc2_size = 256
+    wandb.init(project="VDP DQN Acrobot - GeoMean", entity="naddeok") # mode="disabled")
+    wandb.config.fc1_size = fc1_size = 128
+    wandb.config.fc2_size = fc2_size = 128
 
     wandb.config.kl_w_factor = kl_w_factor = 0.01
     wandb.config.kl1_w_factor = kl1_w_factor = 1/18
@@ -112,8 +114,8 @@ if __name__ == "__main__":
 
     wandb.config.gamma= gamma                  = 0.99
     wandb.config.epsilon = epsilon              = 1.0
-    wandb.config.epsilon_min = epsilon_min      = 0.01
-    wandb.config.epsilon_decay = epsilon_decay  = 0.99995 # 0.995
+    wandb.config.epsilon_min = epsilon_min      = 0.001
+    wandb.config.epsilon_decay = epsilon_decay  = 0.9995 # 0.995
     wandb.config.learning_rate = learning_rate  = 0.0001
     wandb.config.memory_size = memory_size      = 10000
 

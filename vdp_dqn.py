@@ -314,10 +314,11 @@ class VDPDQNAgent:
             target_q_values[:,i,0] = rewards[:,i] + (1 - dones[:,i]) * self.gamma * next_action_q_value_i
 
         nll_loss, error_over_sigma, log_determinant = nll_gaussian(target_q_values, current_q_values, current_q_sigmas, self.action_size, return_components = return_uncertainty_values)
-        nll_loss = nll_loss + 8
+        nll_loss = nll_loss + 1000
         weighted_w_kl_loss = self.kl_w_factor * (self.kl1_w_factor*current_kl_losses["w"]["fc1"] + self.kl2_w_factor*current_kl_losses["w"]["fc2"] + self.kl3_w_factor*current_kl_losses["w"]["fc3"])
         weighted_b_kl_loss = self.kl_b_factor * (self.kl1_b_factor*current_kl_losses["b"]["fc1"] + self.kl2_b_factor*current_kl_losses["b"]["fc2"] + self.kl3_b_factor*current_kl_losses["b"]["fc3"])
-        total_loss = nll_loss + weighted_w_kl_loss + weighted_b_kl_loss
+        
+        total_loss = (nll_loss * current_kl_losses["w"]["fc1"] * current_kl_losses["w"]["fc2"] * current_kl_losses["w"]["fc3"] * current_kl_losses["b"]["fc1"] * current_kl_losses["b"]["fc2"] * current_kl_losses["b"]["fc3"])**(1/7)
         self.optimizer.zero_grad()
         total_loss.backward()
         self.optimizer.step()
