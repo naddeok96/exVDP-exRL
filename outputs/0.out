@@ -2,8 +2,8 @@ wandb: Currently logged in as: naddeok. Use `wandb login --relogin` to force rel
 wandb: wandb version 0.15.3 is available!  To upgrade, please run:
 wandb:  $ pip install wandb --upgrade
 wandb: Tracking run with wandb version 0.14.2
-wandb: Run data is saved locally in /home/naddeok5/exVDP-exRL/wandb/run-20230531_134119-gexjd5yo
+wandb: Run data is saved locally in /home/naddeok5/exVDP-exRL/wandb/run-20230531_161925-6kfsjrjl
 wandb: Run `wandb offline` to turn off syncing.
-wandb: Syncing run wobbly-disco-1
+wandb: Syncing run sandy-sky-4
 wandb: ⭐️ View project at https://wandb.ai/naddeok/VDP%20DQN%20Acrobot%20-%20GeoMean
-wandb: 🚀 View run at https://wandb.ai/naddeok/VDP%20DQN%20Acrobot%20-%20GeoMean/runs/gexjd5yo
+wandb: 🚀 View run at https://wandb.ai/naddeok/VDP%20DQN%20Acrobot%20-%20GeoMean/runs/6kfsjrjl
