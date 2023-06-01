@@ -88,7 +88,7 @@ def train(env, agent, batch_size=32, episodes=500, max_steps=200, target_reward=
 if __name__ == "__main__":
 
     # Initialize GPU usage
-    gpu_number = "1"
+    gpu_number = "7"
     if gpu_number:
         os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
         os.environ["CUDA_VISIBLE_DEVICES"] = gpu_number
@@ -97,8 +97,8 @@ if __name__ == "__main__":
         device = torch.device("cpu")
 
     # Initialize WandB
-    wandb.init(project="VDP DQN Acrobot - Model Sigmas", entity="naddeok")# mode="disabled")
-    wandb.config.fc1_size = fc1_size = 128
+    wandb.init(project="VDP DQN Acrobot - Model Sigmas", entity="naddeok") # mode="disabled")
+    wandb.config.fc1_size = fc1_size = 256
     wandb.config.fc2_size = fc2_size = 128
 
     wandb.config.kl_w_factor = kl_w_factor = 0.01
