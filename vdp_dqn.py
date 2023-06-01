@@ -93,7 +93,7 @@ def compute_kl_loss(mu, sigma):
     trace_sigma = torch.diagonal(sigma, dim1=-2, dim2=-1).sum(-1).view(-1, 1)
     mu_sq = torch.bmm(mu.t().unsqueeze(1), mu.t().unsqueeze(2)).view(-1, 1)
     logdet_sigma = torch.slogdet(sigma)[1].view(-1, 1)
-    kl_loss = 0.5 * max(0, (trace_sigma + mu_sq - k - logdet_sigma).sum())
+    kl_loss = 0.5 * max(0.0001, (trace_sigma + mu_sq - k - logdet_sigma).sum())
 
     if (trace_sigma + mu_sq - k - logdet_sigma).sum() < 0:
         print(trace_sigma, mu_sq, k, logdet_sigma)
