@@ -5,6 +5,7 @@ Date: 5/3/2023
 """
 
 # Imports
+import math
 import numpy as np
 import torch
 import torch.nn as nn
@@ -92,7 +93,10 @@ def compute_kl_loss(mu, sigma):
     trace_sigma = torch.diagonal(sigma, dim1=-2, dim2=-1).sum(-1).view(-1, 1)
     mu_sq = torch.bmm(mu.t().unsqueeze(1), mu.t().unsqueeze(2)).view(-1, 1)
     logdet_sigma = torch.slogdet(sigma)[1].view(-1, 1)
-    kl_loss = 0.5 * (trace_sigma + mu_sq - k - logdet_sigma).sum()
+    kl_loss = 0.5 * max(0, (trace_sigma + mu_sq - k - logdet_sigma).sum())
+
+    if (trace_sigma + mu_sq - k - logdet_sigma).sum() < 0:
+        print(trace_sigma, mu_sq, k, logdet_sigma)
     
     return kl_loss
 
@@ -286,7 +290,7 @@ class VDPDQNAgent:
         q_values, _, _ = self.model(state)
         return torch.argmax(q_values).item()
 
-    def replay(self, batch_size, return_uncertainty_values = False):
+    def replay(self, batch_size, return_uncertainty_values=False):
         if len(self.memory) < batch_size:
             if return_uncertainty_values:
                 return None, None, None, None, None, None, None, None, None, None
@@ -302,7 +306,7 @@ class VDPDQNAgent:
         dones = torch.FloatTensor(torch.stack(dones,dim=0)).to(self.device)
 
         if return_uncertainty_values:
-            current_q_values, current_q_sigmas, current_kl_losses, predictive_sigmas = self.model(states, return_sigmas = return_uncertainty_values)
+            current_q_values, current_q_sigmas, current_kl_losses, predictive_sigmas = self.model(states, return_sigmas=True)
         else:
             current_q_values, current_q_sigmas, current_kl_losses = self.model(states)
 
@@ -313,15 +317,22 @@ class VDPDQNAgent:
 
             target_q_values[:,i,0] = rewards[:,i] + (1 - dones[:,i]) * self.gamma * next_action_q_value_i
 
-        nll_loss, error_over_sigma, log_determinant = nll_gaussian(target_q_values, current_q_values, current_q_sigmas, self.action_size, return_components = return_uncertainty_values)
-        nll_loss = nll_loss + 1000
+        nll_loss, error_over_sigma, log_determinant = nll_gaussian(target_q_values, current_q_values, current_q_sigmas, self.action_size, return_components=return_uncertainty_values)
+        nll_loss = nll_loss + 1000 # Offset to keep nll_loss positve ie nll_loss + c where c is a constant
+         
         weighted_w_kl_loss = self.kl_w_factor * (self.kl1_w_factor*current_kl_losses["w"]["fc1"] + self.kl2_w_factor*current_kl_losses["w"]["fc2"] + self.kl3_w_factor*current_kl_losses["w"]["fc3"])
         weighted_b_kl_loss = self.kl_b_factor * (self.kl1_b_factor*current_kl_losses["b"]["fc1"] + self.kl2_b_factor*current_kl_losses["b"]["fc2"] + self.kl3_b_factor*current_kl_losses["b"]["fc3"])
         
+        
         total_loss = (nll_loss * current_kl_losses["w"]["fc1"] * current_kl_losses["w"]["fc2"] * current_kl_losses["w"]["fc3"] * current_kl_losses["b"]["fc1"] * current_kl_losses["b"]["fc2"] * current_kl_losses["b"]["fc3"])**(1/7)
-        self.optimizer.zero_grad()
-        total_loss.backward()
-        self.optimizer.step()
+        
+        if math.isnan(total_loss):
+            print("nll_loss: ", nll_loss)
+            print("current_kl_losses", current_kl_losses)
+        else:
+            self.optimizer.zero_grad()
+            total_loss.backward()
+            self.optimizer.step()
 
         prev_epsilon = self.epsilon
         if self.epsilon > self.epsilon_min:

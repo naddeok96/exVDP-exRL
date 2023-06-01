@@ -49,7 +49,7 @@ def train(env, agent, batch_size=32, episodes=500, max_steps=200, target_reward=
             
             # Log
             wandb.log({
-                "epsilon":agent.epsilon,
+                "epsilon": agent.epsilon,
                 "total_reward": total_reward,
                 "nll_loss": nll_loss,
                 "weighted_w_kl_loss": weighted_w_kl_loss,
@@ -80,7 +80,7 @@ def train(env, agent, batch_size=32, episodes=500, max_steps=200, target_reward=
             num_success = 0
 
         if num_success == target_successes:
-            print(f"LunarLander solved in {e+1} episodes!")
+            print(f"Solved in {e+1} episodes!")
                 
             agent.save("saved_models/" + wandb.run.project + "_" + wandb.run.name + "_vdp_dqn_at_100_successes.pt")
 
@@ -89,7 +89,7 @@ def train(env, agent, batch_size=32, episodes=500, max_steps=200, target_reward=
 if __name__ == "__main__":
 
     # Initialize GPU usage
-    gpu_number = "0"
+    gpu_number = "1"
     if gpu_number:
         os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
         os.environ["CUDA_VISIBLE_DEVICES"] = gpu_number
@@ -115,11 +115,11 @@ if __name__ == "__main__":
     wandb.config.gamma= gamma                  = 0.99
     wandb.config.epsilon = epsilon              = 1.0
     wandb.config.epsilon_min = epsilon_min      = 0.001
-    wandb.config.epsilon_decay = epsilon_decay  = 0.9995 # 0.995
+    wandb.config.epsilon_decay = epsilon_decay  = 0.99995 # 0.995
     wandb.config.learning_rate = learning_rate  = 0.0001
     wandb.config.memory_size = memory_size      = 10000
 
-    wandb.config.batch_size = batch_size    = 64
+    wandb.config.batch_size = batch_size    = 128
     wandb.config.episodes = episodes        = 100000
     wandb.config.max_steps = max_steps      = 300
     wandb.config.target_reward = target_reward = -100
