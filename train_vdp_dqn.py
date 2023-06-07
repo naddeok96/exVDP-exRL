@@ -48,7 +48,7 @@ def train(env, agent, batch_size=32, episodes=500, max_steps=200, target_reward=
             # Log
             wandb.log({
                 "epsilon":agent.epsilon,
-                "total_reward": total_reward,
+                "action" : action,
                 "nll_loss": nll_loss,
                 "weighted_w_kl_loss": weighted_w_kl_loss,
                 "weighted_b_kl_loss": weighted_b_kl_loss,
@@ -82,12 +82,15 @@ def train(env, agent, batch_size=32, episodes=500, max_steps=200, target_reward=
                 
             agent.save("saved_models/" + wandb.run.project + "_" + wandb.run.name + "_vdp_dqn_at_100_successes.pt")
 
+        if e % 1000 == 0:
+            agent.save("saved_models/" + wandb.run.project + "_" + wandb.run.name + "_vdp_dqn_at_" + str(e) + "_episodes.pt")
+
     agent.save("saved_models/" + wandb.run.project + "_" + wandb.run.name + "_vdp_dqn.pt")
 
 if __name__ == "__main__":
 
     # Initialize GPU usage
-    gpu_number = "1"
+    gpu_number = "0"
     if gpu_number:
         os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
         os.environ["CUDA_VISIBLE_DEVICES"] = gpu_number
@@ -96,7 +99,7 @@ if __name__ == "__main__":
         device = torch.device("cpu")
 
     # Initialize WandB
-    wandb.init(project="VDP DQN Acrobot - Fresh", entity="naddeok") #, mode="disabled")
+    wandb.init(project="VDP DQN Acrobot - Freshest", entity="naddeok") #, mode="disabled")
     wandb.config.fc1_size = fc1_size = 128
     wandb.config.fc2_size = fc2_size = 128
 
@@ -123,9 +126,7 @@ if __name__ == "__main__":
     wandb.config.target_reward = target_reward = -100
     wandb.config.target_successes = target_successes = 100
 
-    # env = kyus_gym.make( "LunarLander-v2") # "CartPole-v1") #
     env = gym.make("Acrobot-v1")
-    # env = Acrobot()
     state_size = env.observation_space.shape[0]
     action_size = env.action_space.n
 

@@ -334,6 +334,7 @@ class VDPDQNAgent:
         
     def update_target_model(self):
         self.target_model.load_state_dict(self.model.state_dict())
+        self.target_model.eval()
 
     def get_covariance_matrices(self):
         layer_magnitudes = {}
@@ -352,4 +353,5 @@ class VDPDQNAgent:
         
     def load_model(self, filename):
         self.model.load_state_dict(torch.load(filename))
+        self.model.eval()
         self.update_target_model()

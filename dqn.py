@@ -90,4 +90,5 @@ class DQNAgent:
         
     def load_model(self, filename):
         self.model.load_state_dict(torch.load(filename))
+        self.model.to(self.device)
         self.update_target_model()
