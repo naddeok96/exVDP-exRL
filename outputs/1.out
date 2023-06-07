@@ -1,9 +1,9 @@
 wandb: Currently logged in as: naddeok. Use `wandb login --relogin` to force relogin
-wandb: wandb version 0.15.3 is available!  To upgrade, please run:
+wandb: wandb version 0.15.4 is available!  To upgrade, please run:
 wandb:  $ pip install wandb --upgrade
 wandb: Tracking run with wandb version 0.14.2
-wandb: Run data is saved locally in /home/naddeok5/exVDP-exRL/wandb/run-20230531_162130-dxv3fvwm
+wandb: Run data is saved locally in /home/naddeok5/exVDP-exRL/wandb/run-20230606_230433-wo5x6iy1
 wandb: Run `wandb offline` to turn off syncing.
-wandb: Syncing run giddy-silence-3
-wandb: ⭐️ View project at https://wandb.ai/naddeok/VDP%20DQN%20Acrobot%20-%20Model%20Sigmas
-wandb: 🚀 View run at https://wandb.ai/naddeok/VDP%20DQN%20Acrobot%20-%20Model%20Sigmas/runs/dxv3fvwm
+wandb: Syncing run atomic-spaceship-11
+wandb: ⭐️ View project at https://wandb.ai/naddeok/VDP%20DQN%20Acrobot%20-%20Epsilon%20Explore
+wandb: 🚀 View run at https://wandb.ai/naddeok/VDP%20DQN%20Acrobot%20-%20Epsilon%20Explore/runs/wo5x6iy1

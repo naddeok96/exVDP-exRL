@@ -244,17 +244,14 @@ class VDPDQN(nn.Module):
             
             return m, s5, kl_losses, sigmas
             
-
 class VDPDQNAgent:
-    def __init__(self, state_size, action_size, fc1_size=128, fc2_size=128, device='cpu', gamma=0.99, epsilon=1.0, epsilon_min=0.01, epsilon_decay=0.995, learning_rate=0.001, kl_w_factor=0.0001, kl1_w_factor = 1, kl2_w_factor = 1, kl3_w_factor = 1, kl_b_factor=0.0001, kl1_b_factor = 1, kl2_b_factor = 1, kl3_b_factor = 1, memory_size=10000):
+    def __init__(self, state_size, action_size, fc1_size=128, fc2_size=128, device='cpu', gamma=0.99, k=0.1, learning_rate=0.001, kl_w_factor=0.0001, kl1_w_factor = 1, kl2_w_factor = 1, kl3_w_factor = 1, kl_b_factor=0.0001, kl1_b_factor = 1, kl2_b_factor = 1, kl3_b_factor = 1, memory_size=10000):
         self.state_size = state_size
         self.action_size = action_size
         self.memory_size = memory_size
         self.memory = deque(maxlen=memory_size)
         self.gamma = gamma
-        self.epsilon = epsilon
-        self.epsilon_min = epsilon_min 
-        self.epsilon_decay = epsilon_decay
+        self.k = k
         self.learning_rate = learning_rate
 
         self.kl_w_factor = kl_w_factor
@@ -278,20 +275,30 @@ class VDPDQNAgent:
     def remember(self, state, action, rewards, next_state, done):
         self.memory.append((state, action, rewards, next_state, done))
 
-    def act(self, state):
-        if np.random.rand() <= self.epsilon:
-            return random.randrange(self.action_size)
-        
+    def act(self, state, return_sigma = False):
+     
         state = torch.FloatTensor(state).unsqueeze(0).to(self.device)
-        q_values, _, _ = self.model(state)
-        return torch.argmax(q_values).item()
+        q_values, q_sigmas, _ = self.model(state)
+
+        self.epsilon = self.get_epsilon(q_sigmas)
+
+        if return_sigma:
+            if np.random.rand() <= self.epsilon:
+                return random.randrange(self.action_size), q_sigmas
+            else:
+                return torch.argmax(q_values).item(), q_sigmas
+        else:
+            if np.random.rand() <= self.epsilon:
+                return random.randrange(self.action_size)
+            else:
+                return torch.argmax(q_values).item()
 
     def replay(self, batch_size, return_uncertainty_values = False):
         if len(self.memory) < batch_size:
             if return_uncertainty_values:
                 return None, None, None, None, None, None, None, None, None, None, None
             else:
-                return None, None, None, None
+                return None, None, None
         
         minibatch = random.sample(self.memory, batch_size)
         states, actions, rewards, next_states, dones = zip(*minibatch)
@@ -321,21 +328,26 @@ class VDPDQNAgent:
         
         # weighted_predictive_sigmas = self.pred_factor * (self.pred_fc1_factor*predictive_sigmas["fc1"] + self.pred_relu1_factor*predictive_sigmas["relu1"] + self.pred_fc2_factor*predictive_sigmas["fc2"] + self.pred_relu2_factor*predictive_sigmas["relu2"] + self.pred_fc3_factor*predictive_sigmas["fc3"])
         weighted_predictive_sigmas = 0.1 * (predictive_sigmas["fc1"] + predictive_sigmas["relu1"] + (1/1600)*predictive_sigmas["fc2"] + (1/1600)*predictive_sigmas["relu2"] + (1/5e6)*predictive_sigmas["fc3"])
-        total_loss = nll_loss + weighted_w_kl_loss + weighted_b_kl_loss + weighted_predictive_sigmas
+        total_loss = nll_loss + weighted_w_kl_loss + weighted_b_kl_loss # + weighted_predictive_sigmas
         
         self.optimizer.zero_grad()
         total_loss.backward()
         self.optimizer.step()
 
-        prev_epsilon = self.epsilon
-        if self.epsilon > self.epsilon_min:
-            self.epsilon = self.epsilon_decay * self.epsilon
-
         if return_uncertainty_values:
             model_sigmas = self.get_covariance_matrices()
-            return total_loss, nll_loss, weighted_w_kl_loss, weighted_b_kl_loss, weighted_predictive_sigmas, current_kl_losses, prev_epsilon, model_sigmas, predictive_sigmas, error_over_sigma, log_determinant
+            return total_loss, nll_loss, weighted_w_kl_loss, weighted_b_kl_loss, weighted_predictive_sigmas, current_kl_losses, model_sigmas, predictive_sigmas, error_over_sigma, log_determinant, len(self.memory)
         else:
-            return total_loss, nll_loss, current_kl_losses, prev_epsilon
+            return total_loss, nll_loss, current_kl_losses
+        
+    def get_epsilon(self, q_sigmas):
+        # Calculate the determinants of Sigma matrices
+        det_sigmas = torch.linalg.det(q_sigmas)
+        
+        # Calculate ε using the equation: ε = 1 / (1 + exp(-k * |det(Sigma)|))
+        epsilon = 1 - torch.exp(-self.k * det_sigmas)
+        
+        return epsilon.item()
         
     def update_target_model(self):
         self.target_model.load_state_dict(self.model.state_dict())

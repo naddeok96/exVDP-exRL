@@ -26,20 +26,25 @@ def train(env, agent, batch_size=32, episodes=500, max_steps=200, target_reward=
 
             loss, prev_epsilon = agent.replay(batch_size)
 
-            if done or step == max_steps - 1:
-                agent.update_target_model()
-                print(f"Episode: {e+1}/{episodes}, Score: {total_reward}, Epsilon: {agent.epsilon:.2f}")
-                break
-
             # Log
             wandb.log({
-                "total_reward": total_reward,
-                "i_episode": e,
                 "step": step,
                 "total_reward": total_reward,
                 "loss": loss,
                 "prev_epsilon": prev_epsilon,
+                "action" : action
             })
+
+            if done or step == max_steps - 1:
+                wandb.log({
+                    "total_reward": total_reward,
+                    "i_episode": e
+                })
+
+
+                agent.update_target_model()
+                print(f"Episode: {e+1}/{episodes}, Score: {total_reward}, Epsilon: {agent.epsilon:.2f}")
+                break
 
         if total_reward <= target_reward:
             num_success += 1
@@ -55,7 +60,7 @@ def train(env, agent, batch_size=32, episodes=500, max_steps=200, target_reward=
 if __name__ == "__main__":
 
     # Initialize GPU usage
-    gpu_number = "0"
+    gpu_number = "1"
     if gpu_number:
         os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
         os.environ["CUDA_VISIBLE_DEVICES"] = gpu_number

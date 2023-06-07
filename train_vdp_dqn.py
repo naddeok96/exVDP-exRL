@@ -33,7 +33,7 @@ def train(env, agent, batch_size=32, episodes=500, max_steps=200, target_reward=
                 dones[action_i] = done_i 
 
             # Take actual step
-            action = agent.act(state)
+            action, q_sigma = agent.act(state, return_sigma=True)
             env.state = internal_state
             next_state, reward, done, _, _ = env.step(action)
 
@@ -43,12 +43,13 @@ def train(env, agent, batch_size=32, episodes=500, max_steps=200, target_reward=
             state = next_state
             internal_state = env.state
 
-            total_loss, nll_loss, weighted_w_kl_loss, weighted_b_kl_loss, weighted_predictive_sigmas, current_kl_losses, prev_epsilon, model_sigmas, predictive_sigmas, error_over_sigma, log_determinant  = agent.replay(batch_size, return_uncertainty_values = True)
+            total_loss, nll_loss, weighted_w_kl_loss, weighted_b_kl_loss, weighted_predictive_sigmas, current_kl_losses, model_sigmas, predictive_sigmas, error_over_sigma, log_determinant  = agent.replay(batch_size, return_uncertainty_values = True)
             
             # Log
             wandb.log({
                 "action": action,
-                "epsilon":agent.epsilon,
+                "epsilon": agent.epsilon,
+                "det sigma": torch.linalg.det(q_sigma),
                 "total_reward": total_reward,
                 "nll_loss": nll_loss,
                 "weighted_w_kl_loss": weighted_w_kl_loss,
@@ -56,7 +57,6 @@ def train(env, agent, batch_size=32, episodes=500, max_steps=200, target_reward=
                 "weighted_predictive_sigmas" : weighted_predictive_sigmas,
                 "total_loss" : total_loss, 
                 "kl_losses" : current_kl_losses,
-                "prev_epsilon" : prev_epsilon,
                 "model_sigmas" :  model_sigmas,
                 "predictive_sigmas" : predictive_sigmas,
                 "error_over_sigma": error_over_sigma,
@@ -89,7 +89,7 @@ def train(env, agent, batch_size=32, episodes=500, max_steps=200, target_reward=
 if __name__ == "__main__":
 
     # Initialize GPU usage
-    gpu_number = "0"
+    gpu_number = "5"
     if gpu_number:
         os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
         os.environ["CUDA_VISIBLE_DEVICES"] = gpu_number
@@ -98,7 +98,7 @@ if __name__ == "__main__":
         device = torch.device("cpu")
 
     # Initialize WandB
-    wandb.init(project="VDP DQN Acrobot - Model Sigmas", entity="naddeok") # mode="disabled")
+    wandb.init(project="VDP DQN Acrobot - Epsilon Explore", entity="naddeok") # mode="disabled")
     wandb.config.fc1_size = fc1_size = 256
     wandb.config.fc2_size = fc2_size = 128
 
@@ -112,10 +112,8 @@ if __name__ == "__main__":
     wandb.config.kl2_b_factor = kl2_b_factor = 1/55
     wandb.config.kl3_b_factor = kl3_b_factor = 1/9.365
 
-    wandb.config.gamma= gamma                  = 0.99
-    wandb.config.epsilon = epsilon              = 1.0
-    wandb.config.epsilon_min = epsilon_min      = 0.01
-    wandb.config.epsilon_decay = epsilon_decay  = 0.99995 # 0.995
+    wandb.config.gamma= gamma                   = 0.99
+    wandb.config.k = k                          = 3
     wandb.config.learning_rate = learning_rate  = 0.0001
     wandb.config.memory_size = memory_size      = 10000
 
@@ -131,6 +129,6 @@ if __name__ == "__main__":
     state_size = env.observation_space.shape[0]
     action_size = env.action_space.n
 
-    agent = VDPDQNAgent(state_size, action_size, kl_w_factor = kl_w_factor, kl1_w_factor = kl1_w_factor, kl2_w_factor = kl2_w_factor, kl3_w_factor = kl3_w_factor, kl_b_factor = kl_b_factor, kl1_b_factor = kl1_b_factor, kl2_b_factor = kl2_b_factor, kl3_b_factor = kl3_b_factor, fc1_size=fc1_size, fc2_size=fc2_size, device=device, gamma=gamma, epsilon=epsilon, epsilon_min=epsilon_min, epsilon_decay=epsilon_decay, learning_rate=learning_rate, memory_size=memory_size)
+    agent = VDPDQNAgent(state_size, action_size, kl_w_factor = kl_w_factor, kl1_w_factor = kl1_w_factor, kl2_w_factor = kl2_w_factor, kl3_w_factor = kl3_w_factor, kl_b_factor = kl_b_factor, kl1_b_factor = kl1_b_factor, kl2_b_factor = kl2_b_factor, kl3_b_factor = kl3_b_factor, fc1_size=fc1_size, fc2_size=fc2_size, device=device, gamma=gamma, k = k, learning_rate=learning_rate, memory_size=memory_size)
 
     train(env, agent, batch_size, episodes, max_steps, target_reward, target_successes)
