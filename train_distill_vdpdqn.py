@@ -9,48 +9,31 @@ from copy import deepcopy
 from vdp_dqn import VDPDQNAgent
 from dqn import DQNAgent
 
-def train(env, vdp_env, agent, vdp_agent, batch_size=32, episodes=500, max_steps=200, target_reward=-100, target_successes=100):
+def train(env, agent, vdp_agent, batch_size=32, episodes=500, max_steps=200, target_reward=-100, target_successes=100):
     num_success = 0
     for e in range(episodes):
         state, _ = env.reset()
-        internal_state = env.state
 
         total_reward = 0
 
         for step in range(max_steps):
 
-            # Rollout one step for every action from the initial state
-            next_states = torch.zeros(env.action_space.n, env.observation_space.shape[0])
-            rewards     = torch.zeros(env.action_space.n)
-            dones       = torch.zeros(env.action_space.n)
-            for action_i in range(env.action_space.n):
-                vdp_env.reset()
-                vdp_env.state = internal_state
-
-                next_state_i, reward_i, done_i, _, _ = vdp_env.step(action_i)
-
-                next_states[action_i,:] = torch.tensor(next_state_i, dtype=torch.float32)
-                rewards[action_i] = -10 if done_i else reward_i
-                dones[action_i] = done_i 
-
             # Take actual step
-            action = agent.act(state)
+            action, q_values = agent.act(state, return_q_values=True)
             next_state, reward, done, _, _ = env.step(action)
 
             total_reward += reward
-            _, q_sigma = vdp_agent.act(state, return_sigma=True)
 
-            vdp_agent.remember(state, action, rewards, next_states, dones)
+            vdp_agent.distill_remember(state, q_values)
             state = next_state
-            internal_state = env.state
 
-            total_loss, nll_loss, weighted_w_kl_loss, weighted_b_kl_loss, weighted_predictive_sigmas, current_kl_losses, model_sigmas, predictive_sigmas, error_over_sigma, log_determinant, num_experience  = vdp_agent.replay(batch_size, return_uncertainty_values = True)
+            total_loss, nll_loss, weighted_w_kl_loss, weighted_b_kl_loss, weighted_predictive_sigmas, current_kl_losses, model_sigmas, predictive_sigmas, mse, error_over_sigma, log_determinant, num_experience  = vdp_agent.distill_replay(batch_size, return_uncertainty_values = True)
             
             # Log
             wandb.log({
                 "action": action,
                 "epsilon": agent.epsilon,
-                "det sigma": torch.linalg.det(q_sigma),
+                "mse": mse,
                 "total_reward": total_reward,
                 "nll_loss": nll_loss,
                 "weighted_w_kl_loss": weighted_w_kl_loss,
@@ -73,7 +56,7 @@ def train(env, vdp_env, agent, vdp_agent, batch_size=32, episodes=500, max_steps
                 })
 
                 vdp_agent.update_target_model()
-                print(f"Episode: {e+1}/{episodes}, Score: {total_reward}, Epsilon: {agent.epsilon:.2f}")
+                print(f"Episode: {e+1}/{episodes}, Score: {mse}, Epsilon: {agent.epsilon:.2f}")
                 break
 
         if total_reward >= target_reward:
@@ -86,7 +69,7 @@ def train(env, vdp_env, agent, vdp_agent, batch_size=32, episodes=500, max_steps
                 
             vdp_agent.save("saved_models/" + wandb.run.project + "_" + wandb.run.name + "_vdp_dqn_at_100_successes.pt")
 
-        if e % 50 == 0:
+        if e % 100 == 0:
             vdp_agent.save("saved_models/" + wandb.run.project + "_" + wandb.run.name + "_vdp_dqn_at_" + str(e) + "_episodes.pt")
     
     vdp_agent.save("saved_models/" + wandb.run.project + "_" + wandb.run.name + "_vdp_dqn.pt")
@@ -94,7 +77,7 @@ def train(env, vdp_env, agent, vdp_agent, batch_size=32, episodes=500, max_steps
 if __name__ == "__main__":
 
     # Initialize GPU usage
-    gpu_number = "1"
+    gpu_number = "6"
     if gpu_number:
         os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
         os.environ["CUDA_VISIBLE_DEVICES"] = gpu_number
@@ -103,7 +86,7 @@ if __name__ == "__main__":
         device = torch.device("cpu")
 
     # Initialize WandB
-    wandb.init(project="VDP DQN Acrobot - True Off Policy", entity="naddeok") # mode="disabled")
+    wandb.init(project="VDP DQN Acrobot - Distill - MSE", entity="naddeok") # mode="disabled")
     wandb.config.fc1_size = fc1_size = 256
     wandb.config.fc2_size = fc2_size = 128
 
@@ -137,6 +120,5 @@ if __name__ == "__main__":
 
     vdp_agent = VDPDQNAgent(state_size, action_size, kl_w_factor = kl_w_factor, kl1_w_factor = kl1_w_factor, kl2_w_factor = kl2_w_factor, kl3_w_factor = kl3_w_factor, kl_b_factor = kl_b_factor, kl1_b_factor = kl1_b_factor, kl2_b_factor = kl2_b_factor, kl3_b_factor = kl3_b_factor, fc1_size=fc1_size, fc2_size=fc2_size, device=device, gamma=gamma, k = k, learning_rate=learning_rate, memory_size=memory_size)
     # vdp_agent.load_model("saved_models/VDP DQN Acrobot - True Off Policy_worldly-serenity-7_vdp_dqn_at_650_episodes.pt")
-    vdp_env = gym.make("Acrobot-v1")
 
-    train(env, vdp_env, agent, vdp_agent, batch_size, episodes, max_steps, target_reward, target_successes)
+    train(env, agent, vdp_agent, batch_size, episodes, max_steps, target_reward, target_successes)

@@ -5,6 +5,7 @@ import torch
 import os
 import wandb
 
+from vdp_dqn import VDPDQNAgent
 from dqn import DQNAgent
 
 def train(env, agent, batch_size=32, episodes=500, max_steps=200, target_reward=-100, target_successes=100):
@@ -28,11 +29,7 @@ def train(env, agent, batch_size=32, episodes=500, max_steps=200, target_reward=
 
             # Log
             wandb.log({
-                "step": step,
-                "total_reward": total_reward,
                 "action" : action
-                # "loss": loss,
-                # "prev_epsilon": prev_epsilon,
             })
 
             if done or step == max_steps - 1:
@@ -53,14 +50,14 @@ def train(env, agent, batch_size=32, episodes=500, max_steps=200, target_reward=
 
         if num_success == target_successes:
             print(f"Acrobot solved in {e+1} episodes!")
-            agent.save("saved_models/" + wandb.run.project + "_" + wandb.run.name + "_dqn_at_100_successes.pt")
+    #         agent.save("saved_models/" + wandb.run.project + "_" + wandb.run.name + "_dqn_at_100_successes.pt")
 
-    agent.save("saved_models/" + wandb.run.project + "_" + wandb.run.name + "_dqn.pt")
+    # agent.save("saved_models/" + wandb.run.project + "_" + wandb.run.name + "_dqn.pt")
 
 if __name__ == "__main__":
 
     # Initialize GPU usage
-    gpu_number = "1"
+    gpu_number = "6"
     if gpu_number:
         os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
         os.environ["CUDA_VISIBLE_DEVICES"] = gpu_number
@@ -69,8 +66,8 @@ if __name__ == "__main__":
         device = torch.device("cpu")
 
     # Initialize WandB
-    wandb.init(project="DQN Acrobot", entity="naddeok") #, mode="disabled")
-    wandb.config.fc1_size = fc1_size = 128
+    wandb.init(project="VDP DQN Acrobot - Distill MSE Test", entity="naddeok") #, mode="disabled")
+    wandb.config.fc1_size = fc1_size = 256
     wandb.config.fc2_size = fc2_size = 128  
 
     wandb.config.gamma = gamma                  = 0.99
@@ -90,8 +87,8 @@ if __name__ == "__main__":
     state_size = env.observation_space.shape[0]
     action_size = env.action_space.n
 
-    agent = DQNAgent(state_size, action_size, fc1_size=fc1_size, fc2_size=fc2_size, device=device, gamma=gamma,epsilon=epsilon, epsilon_min=epsilon_min, epsilon_decay=epsilon_decay, learning_rate=learning_rate, memory_size=memory_size)
-    agent.load_model("saved_models/DQN Acrobot_olive-pyramid-9_dqn_at_converge.pt")
+    agent = VDPDQNAgent(state_size, action_size, k=0, fc1_size=fc1_size, fc2_size=fc2_size, explore=False, device=device)
+    agent.load_model("saved_models/VDP DQN Acrobot - Distill - MSE_peachy-snowflake-2_vdp_dqn.pt")
 
     # Standard train
     train(env, agent, batch_size, episodes, max_steps, target_reward, target_successes)
