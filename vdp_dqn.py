@@ -13,7 +13,8 @@ import numpy as np
 import random
 from collections import deque
 from datetime import datetime
-
+import math
+import time
 
 def nll_gaussian(y_test, y_pred_mean, y_pred_sd, num_labels, return_components=False):
     """
@@ -42,22 +43,23 @@ def nll_gaussian(y_test, y_pred_mean, y_pred_sd, num_labels, return_components=F
     y_pred_sd_inv = torch.linalg.inv(y_pred_sd_ns)
 
     # Calculate error
-    mu_ = y_pred_mean - y_test
+    error = y_pred_mean - y_test
+    mse = (error**2).mean().item()
 
     # First term is error over sigma
-    mu_sigma = torch.matmul(mu_.permute(0,2,1), y_pred_sd_inv)
-    ms1 = torch.mean(torch.squeeze(torch.matmul(mu_sigma, mu_)))
+    mu_sigma = torch.matmul(error.permute(0,2,1), y_pred_sd_inv)
+    error_over_sigma = torch.mean(torch.squeeze(torch.matmul(mu_sigma, error)))
 
     # Second term is log determinant
-    ms2 = torch.mean(torch.linalg.slogdet(y_pred_sd_ns)[1])
+    log_det = torch.mean(torch.linalg.slogdet(y_pred_sd_ns)[1])
 
     # Compute the mean
-    ms = (ms1 + ms2)/2
+    nll_loss = (error_over_sigma + log_det) / 2
 
     if return_components:
-        return ms, ms1, ms2
+        return nll_loss, mse, error_over_sigma, log_det
     else:   
-        return ms
+        return nll_loss
 
 def compute_kl_loss(mu, sigma):
     """
@@ -132,12 +134,22 @@ class RVLinearlayer(nn.Module):
         # Extract stats
         batch_size = mu_in.size(0)
 
+        # Declare device
+        device = mu_in.device
+
         mu_out = torch.matmul(self.w_mu.transpose(1, 0), mu_in.view(batch_size, self.size_in, 1)) + self.b_mu
 
         # Perform a reparameterization trick
         W_Sigma = torch.log(1. + torch.exp(self.w_sigma))
         B_Sigma = torch.log(1. + torch.exp(self.b_sigma))
-        
+
+        # Numerical stability
+        NS = torch.full((W_Sigma.size(0), W_Sigma.size(1)), 1e-6).to(device)
+        W_Sigma = W_Sigma + NS
+
+        NS = torch.full((B_Sigma.size()), 1e-6).to(device)
+        B_Sigma = B_Sigma + NS
+
         # Creat diagonal matrices
         W_Sigma = torch.diag_embed(W_Sigma)
         B_Sigma = torch.diag_embed(B_Sigma)
@@ -191,7 +203,7 @@ class RVNonLinearFunc(nn.Module):
         mu_out = self.func(mu_in)
 
         # Compute the derivative of the ReLU activation function with respect to the input mean
-        gradi = torch.autograd.grad(mu_out, mu_in, grad_outputs=torch.ones_like(mu_out), create_graph=True)[0].view(batch_size,-1)
+        gradi = torch.autograd.grad(mu_out, mu_in, grad_outputs=torch.ones_like(mu_out), create_graph=True, retain_graph=True)[0].view(batch_size,-1)
 
         # add an extra dimension to gradi at position 2 and 1
         grad1 = gradi.unsqueeze(dim=2)
@@ -244,17 +256,18 @@ class VDPDQN(nn.Module):
             
             return m, s5, kl_losses, sigmas
             
-
 class VDPDQNAgent:
-    def __init__(self, state_size, action_size, fc1_size=128, fc2_size=128, device='cpu', gamma=0.99, epsilon=1.0, epsilon_min=0.01, epsilon_decay=0.995, learning_rate=0.001, kl_w_factor=0.0001, kl1_w_factor = 1, kl2_w_factor = 1, kl3_w_factor = 1, kl_b_factor=0.0001, kl1_b_factor = 1, kl2_b_factor = 1, kl3_b_factor = 1, memory_size=10000):
+    def __init__(self, state_size, action_size, fc1_size=128, fc2_size=128, device='cpu', gamma=0.99, k=0.1, epsilon=1.0, epsilon_min=0.01, epsilon_decay=0.9995, explore=True, learning_rate=0.001, kl_w_factor=0.0001, kl1_w_factor = 1, kl2_w_factor = 1, kl3_w_factor = 1, kl_b_factor=0.0001, kl1_b_factor = 1, kl2_b_factor = 1, kl3_b_factor = 1, memory_size=10000, teacher_model=None):
         self.state_size = state_size
         self.action_size = action_size
         self.memory_size = memory_size
         self.memory = deque(maxlen=memory_size)
         self.gamma = gamma
-        self.epsilon = epsilon
-        self.epsilon_min = epsilon_min 
+        self.epsilon = epsilon    
+        self.epsilon_min = epsilon_min
         self.epsilon_decay = epsilon_decay
+        self.k = k
+        self.explore = explore
         self.learning_rate = learning_rate
 
         self.kl_w_factor = kl_w_factor
@@ -271,27 +284,44 @@ class VDPDQNAgent:
         self.fc1_size = fc1_size
         self.fc2_size = fc2_size
         self.model = VDPDQN(state_size, action_size, fc1_size, fc2_size).to(self.device)
+        self.teacher_model = teacher_model
         self.target_model = VDPDQN(state_size, action_size, fc1_size, fc2_size).to(self.device)
         self.update_target_model()
-        self.optimizer = optim.Adam(self.model.parameters(), lr=self.learning_rate)
+        self.optimizer = optim.SGD(self.model.parameters(), lr=self.learning_rate)
 
     def remember(self, state, action, rewards, next_state, done):
         self.memory.append((state, action, rewards, next_state, done))
 
-    def act(self, state):
-        if np.random.rand() <= self.epsilon:
-            return random.randrange(self.action_size)
-        
+    def distill_remember(self, state, q_values):
+        self.memory.append((state, q_values))
+
+    def act(self, state, return_sigma = False, use_uncert_epsilon = False):
+     
         state = torch.FloatTensor(state).unsqueeze(0).to(self.device)
-        q_values, _, _ = self.model(state)
-        return torch.argmax(q_values).item()
+        q_values, q_sigmas, _ = self.model(state)
+
+        if use_uncert_epsilon:
+            self.epsilon = self.get_epsilon(q_sigmas)
+        else:
+            if self.epsilon > self.epsilon_min:
+                self.epsilon = self.epsilon_decay * self.epsilon
+
+        if self.explore and np.random.rand() <= self.epsilon:
+            action = random.randrange(self.action_size)
+        else:
+            action = torch.argmax(q_values).item()
+
+        if return_sigma:
+            return action, q_values, q_sigmas
+        else:
+            return action
 
     def replay(self, batch_size, return_uncertainty_values = False):
         if len(self.memory) < batch_size:
             if return_uncertainty_values:
-                return None, None, None, None, None, None, None, None, None, None
+                return None, None, None, None, None, None, None, None, None, None, None
             else:
-                return None, None, None, None
+                return None, None, None
         
         minibatch = random.sample(self.memory, batch_size)
         states, actions, rewards, next_states, dones = zip(*minibatch)
@@ -313,24 +343,155 @@ class VDPDQNAgent:
 
             target_q_values[:,i,0] = rewards[:,i] + (1 - dones[:,i]) * self.gamma * next_action_q_value_i
 
-        nll_loss, error_over_sigma, log_determinant = nll_gaussian(target_q_values, current_q_values, current_q_sigmas, self.action_size, return_components = return_uncertainty_values)
-        # nll_loss = nll_loss + 10
+        nll_loss, error_over_sigma, log_determinant = nll_gaussian(y_test=target_q_values, 
+                                                                   y_pred_mean=current_q_values, 
+                                                                   y_pred_sd=current_q_sigmas, 
+                                                                   num_labels=self.action_size, 
+                                                                   return_components=return_uncertainty_values)
+        nll_loss = nll_loss + 10 # Offset to keep positive
+        
         weighted_w_kl_loss = self.kl_w_factor * (self.kl1_w_factor*current_kl_losses["w"]["fc1"] + self.kl2_w_factor*current_kl_losses["w"]["fc2"] + self.kl3_w_factor*current_kl_losses["w"]["fc3"])
         weighted_b_kl_loss = self.kl_b_factor * (self.kl1_b_factor*current_kl_losses["b"]["fc1"] + self.kl2_b_factor*current_kl_losses["b"]["fc2"] + self.kl3_b_factor*current_kl_losses["b"]["fc3"])
-        total_loss = nll_loss + weighted_w_kl_loss + weighted_b_kl_loss
+        
+        # weighted_predictive_sigmas = self.pred_factor * (self.pred_fc1_factor*predictive_sigmas["fc1"] + self.pred_relu1_factor*predictive_sigmas["relu1"] + self.pred_fc2_factor*predictive_sigmas["fc2"] + self.pred_relu2_factor*predictive_sigmas["relu2"] + self.pred_fc3_factor*predictive_sigmas["fc3"])
+        weighted_predictive_sigmas = 0.1 * (predictive_sigmas["fc1"] + predictive_sigmas["relu1"] + (1/1600)*predictive_sigmas["fc2"] + (1/1600)*predictive_sigmas["relu2"] + (1/5e6)*predictive_sigmas["fc3"])
+        total_loss = nll_loss + weighted_w_kl_loss + weighted_b_kl_loss # + weighted_predictive_sigmas
+        
+        if torch.isnan(total_loss):
+            print("The loss is NaN") 
+            for i in range(24 * 60 * 60):
+                time.sleep(1)
+
         self.optimizer.zero_grad()
         total_loss.backward()
-        self.optimizer.step()
 
-        prev_epsilon = self.epsilon
-        if self.epsilon > self.epsilon_min:
-            self.epsilon = self.epsilon_decay * self.epsilon
+        if [torch.isnan(param.grad).any().item() for name, param in self.model.named_parameters() if "fc3.w_sigma" in name ][0]:
+            print("The loss is NaN") 
+            for i in range(24 * 60 * 60):
+                time.sleep(1)
+
+        self.optimizer.step()
 
         if return_uncertainty_values:
             model_sigmas = self.get_covariance_matrices()
-            return total_loss, nll_loss, weighted_w_kl_loss, weighted_b_kl_loss, current_kl_losses, prev_epsilon, model_sigmas, predictive_sigmas, error_over_sigma, log_determinant
+            return total_loss, nll_loss, weighted_w_kl_loss, weighted_b_kl_loss, weighted_predictive_sigmas, current_kl_losses, model_sigmas, predictive_sigmas, error_over_sigma, log_determinant, len(self.memory)
         else:
-            return total_loss, nll_loss, current_kl_losses, prev_epsilon
+            return total_loss, nll_loss, current_kl_losses
+        
+    def distill_replay(self, batch_size, return_uncertainty_values = False):
+        if len(self.memory) < batch_size:
+            if return_uncertainty_values:
+                return None, None, None, None, None, None, None, None, None, None, None, None
+            else:
+                return None, None, None
+        
+        minibatch = random.sample(self.memory, batch_size)
+        states, target_q_values = zip(*minibatch)
+        states = torch.FloatTensor(states).to(self.device)
+        target_q_values = torch.stack(target_q_values,dim=0).permute(0,2,1)
+
+        if return_uncertainty_values:
+            current_q_values, current_q_sigmas, current_kl_losses, predictive_sigmas = self.model(states, return_sigmas=return_uncertainty_values)
+        else:
+            current_q_values, current_q_sigmas, current_kl_losses = self.model(states)
+
+        nll_loss, mse, error_over_sigma, log_determinant = nll_gaussian(  y_test=target_q_values, 
+                                                                            y_pred_mean=current_q_values, 
+                                                                            y_pred_sd=current_q_sigmas, 
+                                                                            num_labels=self.action_size, 
+                                                                            return_components=return_uncertainty_values)
+        nll_loss = nll_loss + 10 # Offset to keep positive
+        
+        weighted_w_kl_loss = self.kl_w_factor * (self.kl1_w_factor*current_kl_losses["w"]["fc1"] + self.kl2_w_factor*current_kl_losses["w"]["fc2"] + self.kl3_w_factor*current_kl_losses["w"]["fc3"])
+        weighted_b_kl_loss = self.kl_b_factor * (self.kl1_b_factor*current_kl_losses["b"]["fc1"] + self.kl2_b_factor*current_kl_losses["b"]["fc2"] + self.kl3_b_factor*current_kl_losses["b"]["fc3"])
+        
+        # weighted_predictive_sigmas = self.pred_factor * (self.pred_fc1_factor*predictive_sigmas["fc1"] + self.pred_relu1_factor*predictive_sigmas["relu1"] + self.pred_fc2_factor*predictive_sigmas["fc2"] + self.pred_relu2_factor*predictive_sigmas["relu2"] + self.pred_fc3_factor*predictive_sigmas["fc3"])
+        weighted_predictive_sigmas = 0.1 * (predictive_sigmas["fc1"] + predictive_sigmas["relu1"] + (1/1600)*predictive_sigmas["fc2"] + (1/1600)*predictive_sigmas["relu2"] + (1/5e6)*predictive_sigmas["fc3"])
+        total_loss = nll_loss + weighted_w_kl_loss + weighted_b_kl_loss + 0.01*mse# + weighted_predictive_sigmas
+        
+        if torch.isnan(total_loss):
+            print("The loss is NaN") 
+            for i in range(24 * 60 * 60):
+                time.sleep(1)
+
+        self.optimizer.zero_grad()
+        total_loss.backward(retain_graph=True)
+
+        if [torch.isnan(param.grad).any().item() for name, param in self.model.named_parameters() if "fc3.w_sigma" in name ][0]:
+            print("The loss is NaN") 
+            for i in range(24 * 60 * 60):
+                time.sleep(1)
+
+        self.optimizer.step()
+
+        if return_uncertainty_values:
+            model_sigmas = self.get_covariance_matrices()
+            return total_loss, nll_loss, weighted_w_kl_loss, weighted_b_kl_loss, weighted_predictive_sigmas, current_kl_losses, model_sigmas, predictive_sigmas, mse, error_over_sigma, log_determinant, len(self.memory)
+        else:
+            return total_loss, nll_loss, current_kl_losses
+        
+    def replay_distill_from_target(self, batch_size):
+        if len(self.memory) < batch_size:
+            return 12*[None]
+        
+        minibatch = random.sample(self.memory, batch_size)
+        states, actions, rewards, next_states, dones = zip(*minibatch)
+        states = torch.FloatTensor(states).to(self.device)
+        actions = torch.LongTensor(actions).unsqueeze(1).to(self.device)
+        rewards = torch.FloatTensor(rewards).to(self.device)
+        next_states = torch.FloatTensor(next_states).to(self.device)
+        dones = torch.BoolTensor(dones).to(self.device)
+
+        current_q_values, current_q_sigmas, current_kl_losses, predictive_sigmas = self.model(states, return_sigmas=True)
+        next_q_values, _, _, _ = self.target_model(next_states, return_sigmas=True)
+        one_step_target_q_values = rewards + (1 - dones.float()) * self.gamma * next_q_values.max(1)[0].detach().squeeze()
+
+        target_q_values, _, _, _ = self.target_model(next_states, return_sigmas=True)
+        mask = torch.zeros_like(target_q_values, dtype=torch.bool)
+        mask[torch.arange(target_q_values.size(0)), actions.squeeze(), :] = True
+        target_q_values[mask] = one_step_target_q_values
+
+        nll_loss, mse, error_over_sigma, log_determinant = nll_gaussian(y_test              = target_q_values,
+                                                                        y_pred_mean         = current_q_values,
+                                                                        y_pred_sd           = current_q_sigmas,
+                                                                        num_labels          = self.action_size,
+                                                                        return_components   = True)
+        nll_loss = nll_loss + 10 # Offset to keep positive
+        
+        weighted_w_kl_loss = self.kl_w_factor * (self.kl1_w_factor*current_kl_losses["w"]["fc1"] + self.kl2_w_factor*current_kl_losses["w"]["fc2"] + self.kl3_w_factor*current_kl_losses["w"]["fc3"])
+        weighted_b_kl_loss = self.kl_b_factor * (self.kl1_b_factor*current_kl_losses["b"]["fc1"] + self.kl2_b_factor*current_kl_losses["b"]["fc2"] + self.kl3_b_factor*current_kl_losses["b"]["fc3"])
+        
+        # weighted_predictive_sigmas = self.pred_factor * (self.pred_fc1_factor*predictive_sigmas["fc1"] + self.pred_relu1_factor*predictive_sigmas["relu1"] + self.pred_fc2_factor*predictive_sigmas["fc2"] + self.pred_relu2_factor*predictive_sigmas["relu2"] + self.pred_fc3_factor*predictive_sigmas["fc3"])
+        weighted_predictive_sigmas = 0.1 * (predictive_sigmas["fc1"] + predictive_sigmas["relu1"] + (1/1600)*predictive_sigmas["fc2"] + (1/1600)*predictive_sigmas["relu2"] + (1/5e6)*predictive_sigmas["fc3"])
+        total_loss = nll_loss + weighted_w_kl_loss + weighted_b_kl_loss
+        
+        if torch.isnan(total_loss):
+            print("The loss is NaN") 
+            for i in range(24 * 60 * 60):
+                time.sleep(1)
+
+        self.optimizer.zero_grad()
+        total_loss.backward(retain_graph=True)
+
+        if [torch.isnan(param.grad).any().item() for name, param in self.model.named_parameters() if "fc3.w_sigma" in name ][0]:
+            print("The loss is NaN") 
+            for i in range(24 * 60 * 60):
+                time.sleep(1)
+
+        self.optimizer.step()
+
+        model_sigmas = self.get_covariance_matrices()
+        return total_loss, nll_loss, weighted_w_kl_loss, weighted_b_kl_loss, weighted_predictive_sigmas, current_kl_losses, model_sigmas, predictive_sigmas, mse, error_over_sigma, log_determinant, len(self.memory)
+        
+
+    def get_epsilon(self, q_sigmas):
+        # Calculate the determinants of Sigma matrices
+        det_sigmas = torch.linalg.det(q_sigmas)
+        
+        # Calculate ε using the equation: ε = (1 - exp(-k * |det(Sigma)|))
+        epsilon = 1 - torch.exp(-self.k * det_sigmas)
+        
+        return epsilon.item()
         
     def update_target_model(self):
         self.target_model.load_state_dict(self.model.state_dict())
@@ -353,5 +514,5 @@ class VDPDQNAgent:
         
     def load_model(self, filename):
         self.model.load_state_dict(torch.load(filename))
-        self.model.eval()
+        self.model.to(self.device)
         self.update_target_model()

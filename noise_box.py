@@ -1,8 +1,9 @@
 import numpy as np
 
 class NoiseGenerator:
-    def __init__(self, snr=None):
+    def __init__(self, snr=None, noise_type=None):
         self.snr = snr
+        self.noise_type = noise_type
     
     def add_gaussian_noise(self, data, magnitude=None):
         """
@@ -36,7 +37,7 @@ class NoiseGenerator:
         noise = np.random.uniform(-magnitude, magnitude, data.shape)
         return data + noise
     
-    def add_salt_and_pepper_noise(self, data, probability, magnitude=None):
+    def add_salt_and_pepper_noise(self, data, probability=None, magnitude=None):
         """
         Adds salt and pepper noise to the data.
 
@@ -50,6 +51,10 @@ class NoiseGenerator:
         """
         if magnitude is None:
             magnitude = self._calculate_noise_magnitude(data)
+
+        if probability is None:
+            probability = self._set_probability_from_snr(data)
+
         mask = np.random.random(data.shape) < probability
         noise = np.random.choice([-magnitude, magnitude], data.shape) * mask
         return data + noise
@@ -89,7 +94,7 @@ class NoiseGenerator:
         noise = np.random.normal(0, 1, data.shape) * mask
         return data + noise
     
-    def add_perlin_noise(self, data, scale, octaves, persistence):
+    def add_perlin_noise(self, data, scale=None, octaves=None, persistence=None):
         """
         Adds Perlin noise to the data.
 
@@ -101,11 +106,39 @@ class NoiseGenerator:
         Returns:
             numpy.ndarray: Noisy data.
         """
+        if scale is None:
+            scale = self.generate_scale_from_snr()
+        if octaves is None:
+            octaves = self.generate_octaves_from_snr()
+        if persistence is None:
+            persistence = self.generate_persistence_from_snr()
+        
         noise = np.zeros(data.shape)
         for octave in range(octaves):
             freq = 2 ** octave
             noise += self.perlin_noise(data * freq / scale) / freq ** persistence
         return data + noise
+
+    def generate_scale_from_snr(self):
+        # SNR-based scaling
+        scale_factor = np.interp(self.snr, [0, 100], [1.0, 0.1])
+        scale = np.random.uniform(0.1, 1.0) * scale_factor
+
+        return scale
+
+    def generate_octaves_from_snr(self):
+        # SNR-based octaves
+        max_octaves = int(np.interp(self.snr, [0, 100], [1, 6]))
+        octaves = np.random.randint(1, max_octaves + 1)
+
+        return octaves
+
+    def generate_persistence_from_snr(self):
+
+        # SNR-based persistence
+        persistence = np.interp(self.snr, [0, 100], [0.9, 0.1])
+
+        return persistence
 
     def perlin_noise(self, coord):
         """
@@ -171,6 +204,19 @@ class NoiseGenerator:
         signal_power = np.mean(data ** 2)
         noise_power = signal_power / (10 ** (self.snr / 10))
         return np.sqrt(noise_power)
+    
+    def _set_probability_from_snr(self, data):
+        # Convert SNR from dB to linear scale
+        noise_variance = np.var(data) / (10**(self.snr/10))
+
+        # Normalize the noise variance
+        max_possible_noise = (np.max(data)/2)**2
+        normalized_variance = noise_variance / max_possible_noise
+
+        # Set the probability based on the normalized noise variance
+        probability = normalized_variance
+
+        return probability
 
     def _calculate_noise_levels(self, data):
         """
@@ -204,3 +250,25 @@ class NoiseGenerator:
         noise_power = signal_power / (10 ** (self.snr / 10))
         return noise_power / np.var(data)
 
+    def add_noise(self, data):
+        assert self.noise_type in ["gaussian", "uniform", "salt_and_pepper", "quantization", "sparse_coding", "perlin"], self.noise_type + " is not a valid noise type, please enter a valid noise type"
+
+        if self.noise_type == "gaussian":
+            dirty_data = self.add_gaussian_noise(data)
+
+        elif self.noise_type == "uniform":
+            dirty_data = self.add_uniform_noise(data)
+
+        elif self.noise_type == "salt_and_pepper":
+            dirty_data = self.add_salt_and_pepper_noise(data)
+
+        elif self.noise_type == "quantization":
+            dirty_data = self.add_quantization_noise(data)
+
+        elif self.noise_type == "sparse_coding":
+            dirty_data = self.add_sparse_coding_noise(data)
+
+        elif self.noise_type == "perlin":
+            dirty_data = self.add_perlin_noise(data)
+
+        return dirty_data

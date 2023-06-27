@@ -80,6 +80,7 @@ class DQNAgent:
         
     def update_target_model(self):
         self.target_model.load_state_dict(self.model.state_dict())
+        self.target_model.eval()
 
     def save(self, path = None):
         if path is None:

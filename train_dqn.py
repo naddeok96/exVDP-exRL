@@ -32,20 +32,25 @@ def train(env, agent, batch_size=32, episodes=500, max_steps=200, target_reward=
 
             loss, prev_epsilon = agent.replay(batch_size)
 
+            # Log
+            wandb.log({
+                "step": step,
+                "total_reward": total_reward,
+                "loss": loss,
+                "prev_epsilon": prev_epsilon,
+                "action" : action
+            })
+
             if done or step == max_steps - 1:
-                 # Log
                 wandb.log({
                     "total_reward": total_reward,
-                    "i_episode": e,
-                    "loss": loss,
-                    "epsilon": agent.epsilon,
+                    "i_episode": e
                 })
+
 
                 agent.update_target_model()
                 print(f"Episode: {e+1}/{episodes}, Score: {total_reward}, Epsilon: {agent.epsilon:.2f}")
                 break
-
-               
 
         if total_reward <= target_reward:
             num_success += 1
