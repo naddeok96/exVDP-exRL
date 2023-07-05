@@ -22,12 +22,13 @@ class DQN(nn.Module):
         return self.fc3(x)
 
 class DQNAgent:
-    def __init__(self, state_size, action_size, fc1_size=128, fc2_size=128, device='cpu', gamma=0.99, epsilon=1.0, epsilon_min=0.01, epsilon_decay=0.995, learning_rate=0.001, memory_size=10000):
+    def __init__(self, state_size, action_size, fc1_size=128, fc2_size=128, device='cpu', gamma=0.99, explore=True, epsilon=1.0, epsilon_min=0.01, epsilon_decay=0.995, learning_rate=0.001, memory_size=10000):
         self.state_size = state_size
         self.action_size = action_size
         self.memory_size = memory_size
         self.memory = deque(maxlen=memory_size)
         self.gamma = gamma
+        self.explore = explore
         self.epsilon = epsilon
         self.epsilon_min = epsilon_min 
         self.epsilon_decay = epsilon_decay
@@ -43,13 +44,18 @@ class DQNAgent:
     def remember(self, state, action, reward, next_state, done):
         self.memory.append((state, action, reward, next_state, done))
 
-    def act(self, state):
-        if np.random.rand() <= self.epsilon:
+    def act(self, state, return_q_values=False):
+        if np.random.rand() <= self.epsilon and self.explore:
             return random.randrange(self.action_size)
         
         state = torch.FloatTensor(state).unsqueeze(0).to(self.device)
         q_values = self.model(state)
-        return torch.argmax(q_values).item()
+        action = torch.argmax(q_values).item()
+        
+        if return_q_values:
+            return action, q_values
+        else:
+            return action
 
     def replay(self, batch_size):
         if len(self.memory) < batch_size:
