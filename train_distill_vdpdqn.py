@@ -69,7 +69,7 @@ def train(env, agent, vdp_agent, batch_size=32, episodes=500, max_steps=200, tar
                 
             vdp_agent.save("saved_models/" + wandb.run.project + "_" + wandb.run.name + "_vdp_dqn_at_100_successes.pt")
 
-        if e % 100 == 0:
+        if e % 1000 == 0:
             vdp_agent.save("saved_models/" + wandb.run.project + "_" + wandb.run.name + "_vdp_dqn_at_" + str(e) + "_episodes.pt")
     
     vdp_agent.save("saved_models/" + wandb.run.project + "_" + wandb.run.name + "_vdp_dqn.pt")
@@ -77,7 +77,7 @@ def train(env, agent, vdp_agent, batch_size=32, episodes=500, max_steps=200, tar
 if __name__ == "__main__":
 
     # Initialize GPU usage
-    gpu_number = "6"
+    gpu_number = "0"
     if gpu_number:
         os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
         os.environ["CUDA_VISIBLE_DEVICES"] = gpu_number
@@ -86,8 +86,8 @@ if __name__ == "__main__":
         device = torch.device("cpu")
 
     # Initialize WandB
-    wandb.init(project="VDP DQN Acrobot - Distill - MSE", entity="naddeok") # mode="disabled")
-    wandb.config.fc1_size = fc1_size = 256
+    wandb.init(project="VDP DQN Acrobot - Distill", entity="naddeok") # mode="disabled")
+    wandb.config.fc1_size = fc1_size = 128
     wandb.config.fc2_size = fc2_size = 128
 
     wandb.config.kl_w_factor = kl_w_factor = 0.01
@@ -119,6 +119,5 @@ if __name__ == "__main__":
     agent.load_model("saved_models/DQN Acrobot_olive-pyramid-9_dqn.pt")
 
     vdp_agent = VDPDQNAgent(state_size, action_size, kl_w_factor = kl_w_factor, kl1_w_factor = kl1_w_factor, kl2_w_factor = kl2_w_factor, kl3_w_factor = kl3_w_factor, kl_b_factor = kl_b_factor, kl1_b_factor = kl1_b_factor, kl2_b_factor = kl2_b_factor, kl3_b_factor = kl3_b_factor, fc1_size=fc1_size, fc2_size=fc2_size, device=device, gamma=gamma, k = k, learning_rate=learning_rate, memory_size=memory_size)
-    # vdp_agent.load_model("saved_models/VDP DQN Acrobot - True Off Policy_worldly-serenity-7_vdp_dqn_at_650_episodes.pt")
-
+    
     train(env, agent, vdp_agent, batch_size, episodes, max_steps, target_reward, target_successes)
