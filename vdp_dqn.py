@@ -407,7 +407,7 @@ class VDPDQNAgent:
         
         # weighted_predictive_sigmas = self.pred_factor * (self.pred_fc1_factor*predictive_sigmas["fc1"] + self.pred_relu1_factor*predictive_sigmas["relu1"] + self.pred_fc2_factor*predictive_sigmas["fc2"] + self.pred_relu2_factor*predictive_sigmas["relu2"] + self.pred_fc3_factor*predictive_sigmas["fc3"])
         weighted_predictive_sigmas = 0.1 * (predictive_sigmas["fc1"] + predictive_sigmas["relu1"] + (1/1600)*predictive_sigmas["fc2"] + (1/1600)*predictive_sigmas["relu2"] + (1/5e6)*predictive_sigmas["fc3"])
-        total_loss = nll_loss + weighted_w_kl_loss + weighted_b_kl_loss + 0.01*mse# + weighted_predictive_sigmas
+        total_loss = nll_loss + weighted_w_kl_loss + weighted_b_kl_loss #+ 0.01*mse# + weighted_predictive_sigmas
         
         if torch.isnan(total_loss):
             print("The loss is NaN") 
@@ -483,7 +483,6 @@ class VDPDQNAgent:
         model_sigmas = self.get_covariance_matrices()
         return total_loss, nll_loss, weighted_w_kl_loss, weighted_b_kl_loss, weighted_predictive_sigmas, current_kl_losses, model_sigmas, predictive_sigmas, mse, error_over_sigma, log_determinant, len(self.memory)
         
-
     def get_epsilon(self, q_sigmas):
         # Calculate the determinants of Sigma matrices
         det_sigmas = torch.linalg.det(q_sigmas)
