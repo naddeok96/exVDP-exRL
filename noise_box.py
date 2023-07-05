@@ -232,7 +232,7 @@ class NoiseGenerator:
             raise ValueError("SNR value is not specified.")
         max_level = np.ceil(np.log2(np.max(data) - np.min(data)))
         noise_power = np.var(data) / (10 ** (self.snr / 10))
-        return int(np.sqrt(12 * noise_power) / (max_level + 1))
+        return max(1, int(np.sqrt(12 * noise_power) / (max(1, max_level + 1))))
 
     def _calculate_noise_sparsity(self, data):
         """
