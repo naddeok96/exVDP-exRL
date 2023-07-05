@@ -1,9 +1,10 @@
 import numpy as np
 
 class NoiseGenerator:
-    def __init__(self, snr=None, noise_type=None):
+    def __init__(self, snr=None, noise_type=None, return_only_noise=False):
         self.snr = snr
         self.noise_type = noise_type
+        self.return_only_noise = return_only_noise
     
     def add_gaussian_noise(self, data, magnitude=None):
         """
@@ -19,7 +20,11 @@ class NoiseGenerator:
         if magnitude is None:
             magnitude = self._calculate_noise_magnitude(data)
         noise = np.random.normal(0, magnitude, data.shape)
-        return data + noise
+        
+        if self.return_only_noise:
+            return noise
+        else:
+            return data + noise
     
     def add_uniform_noise(self, data, magnitude=None):
         """
