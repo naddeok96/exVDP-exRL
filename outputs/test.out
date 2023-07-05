@@ -1,6 +1,0 @@
-Epochs:  0
-Adversarial Training Type:  None
-MNIST Data Loaded
-Network Loaded
-Testing: 100%|███████████████████████████████████████████████████████████████████████████████████████████| 40/40 [16:38<00:00, 24.96s/it]
-Accuarcy:  0.7913
