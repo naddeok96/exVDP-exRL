@@ -90,12 +90,10 @@ def compute_kl_loss(mu, sigma):
     device = mu.device
 
     # calculate the KL divergence
-    k = torch.tensor(mu.size(0)).view(-1, 1).to(device)
-    trace_sigma = torch.diagonal(sigma, dim1=-2, dim2=-1).sum(-1).view(-1, 1)
-    mu_sq = torch.bmm(mu.t().unsqueeze(1), mu.t().unsqueeze(2)).view(-1, 1)
-    logdet_sigma = torch.slogdet(sigma)[1].view(-1, 1)
-    kl_loss = 0.5 * (trace_sigma + mu_sq - k - logdet_sigma).sum()
-    
+    k = torch.tensor(mu.size(0)).to(device)
+    norm_squared = torch.norm(mu, p='fro', dim=1).pow(2)
+    log_sigma_squared = torch.log(sigma.pow(2))
+    kl_loss = 0.5 * torch.sum(norm_squared - k * (1 - sigma.pow(2) + log_sigma_squared))
     return kl_loss
 
 class RVLinearlayer(nn.Module):
@@ -150,53 +148,19 @@ class RVLinearlayer(nn.Module):
         B_Sigma = B_Sigma + NS
 
         # # Calculate Sigma_out
-        import time
-        # Calculate Sigma_out using a for loop
-        start_time = time.time()
-        
-        tr_W_Sigma_and_sigma_in = torch.zeros(batch_size, self.size_out)
-        mu_w_t_sigma_in_mu_w  = torch.zeros(batch_size, self.size_out)
-        mu_in_t_W_Sigma_mu_in  = torch.zeros(batch_size, self.size_out)
-        for i in range(self.size_out):
-            
-            if sigma_in is not None:
-                tr_W_Sigma_and_sigma_in[:, i] = torch.sum(W_Sigma[i,:].view(self.size_in, 1) * sigma_in.view(batch_size, self.size_in, 1), dim=1).view(-1)
-                mu_w_t_sigma_in_mu_w[:, i] = torch.sum((self.w_mu[:,i]**2).view(self.size_in, 1) * sigma_in.view(batch_size, self.size_in, 1), dim=1).view(-1)
-            mu_in_t_W_Sigma_mu_in[:, i] = torch.matmul((mu_in**2).view(batch_size, 1, self.size_in), W_Sigma[i,:].view(self.size_in, 1)).view(-1)
-            
-        Sigma_out = (tr_W_Sigma_and_sigma_in + mu_w_t_sigma_in_mu_w + mu_in_t_W_Sigma_mu_in) + B_Sigma
-
-        loop_time = time.time() - start_time
-
-        # Calculate Sigma_out without a for loop
-        start_time = time.time()
-        
-        tr_W_Sigma_and_sigma_in2 = torch.zeros(batch_size, self.size_out)
-        mu_w_t_sigma_in_mu_w2  = torch.zeros(batch_size, self.size_out)
-
         if sigma_in is not None:
-            tr_W_Sigma_and_sigma_in2 = torch.einsum('ij,bj->bi', W_Sigma, sigma_in)
-            mu_w_t_sigma_in_mu_w2 = torch.einsum('ij,bj->bi', (self.w_mu.t()**2), sigma_in)
+            tr_W_Sigma_and_sigma_in = torch.einsum('ij,bj->bi', W_Sigma, sigma_in)
+            mu_w_t_sigma_in_mu_w = torch.einsum('ij,bj->bi', (self.w_mu.t()**2), sigma_in)
 
         mu_in_t_W_Sigma_mu_in = torch.einsum('bi,oi->bo', (mu_in**2), W_Sigma)
 
-        Sigma_out_no_loop = tr_W_Sigma_and_sigma_in2 + mu_w_t_sigma_in_mu_w2 + mu_in_t_W_Sigma_mu_in + B_Sigma
-        no_loop_time = time.time() - start_time
-
-        # Compare the answers
-        print("Sigma_out calculated with a for loop:\n", Sigma_out)
-        print("\nSigma_out calculated without a for loop:\n", Sigma_out_no_loop)
-        print("\nAre the results equal?", torch.allclose(Sigma_out, Sigma_out_no_loop))
-
-        # Compare the runtimes
-        print("\nRuntime with a for loop:", loop_time)
-        print("Runtime without a for loop:", no_loop_time)
+        Sigma_out = tr_W_Sigma_and_sigma_in + mu_w_t_sigma_in_mu_w + mu_in_t_W_Sigma_mu_in + B_Sigma if sigma_in is not None else mu_in_t_W_Sigma_mu_in + B_Sigma
 
         # KL loss
-        w_kl_loss = None # compute_kl_loss(self.w_mu, W_Sigma)
-        b_kl_loss = None # compute_kl_loss(self.b_mu, B_Sigma)
+        w_kl_loss = compute_kl_loss(self.w_mu, W_Sigma)
+        b_kl_loss = compute_kl_loss(self.b_mu, B_Sigma)
         
-        return mu_out, Sigma_out , w_kl_loss, b_kl_loss
+        return mu_out, Sigma_out, w_kl_loss, b_kl_loss
 
 class RVNonLinearFunc(nn.Module):
     """
@@ -231,17 +195,13 @@ class RVNonLinearFunc(nn.Module):
 
         # Compute the derivative of the ReLU activation function with respect to the input mean
         gradi = torch.autograd.grad(mu_out, mu_in, grad_outputs=torch.ones_like(mu_out), create_graph=True, retain_graph=True)[0].view(batch_size,-1)
-
-        # add an extra dimension to gradi at position 2 and 1
-        grad1 = gradi.unsqueeze(dim=2)
-        grad2 = gradi.unsqueeze(dim=1)
         
-        # compute the outer product of grad1 and grad2
-        outer_product = torch.bmm(grad1, grad2)
+        # Calculate the diagonal elements of the outer product
+        diag_outer_product = torch.mul(gradi, gradi).view(batch_size, -1)
         
         # element-wise multiply Sigma_in with the outer product
         # and return the result
-        Sigma_out = torch.mul(Sigma_in, outer_product)
+        Sigma_out = torch.mul(Sigma_in, diag_outer_product)
 
         return mu_out, Sigma_out
 
@@ -259,9 +219,8 @@ class VDPDQN(nn.Module):
 
     def forward(self, x, return_sigmas = False):
         m, s1, w_kl_1, b_kl_1 = self.fc1(x, None)
-        # m, s2 = self.relu(m, s1)
-        print("Skip first relu")
-        m, s3, w_kl_2, b_kl_2  = self.fc2(m, s1)
+        m, s2 = self.relu(m, s1)
+        m, s3, w_kl_2, b_kl_2  = self.fc2(m, s2)
         m, s4 = self.relu(m, s3)
         m, s5, w_kl_3, b_kl_3 = self.fc3(m, s4)
 
