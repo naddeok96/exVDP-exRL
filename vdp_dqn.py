@@ -164,7 +164,7 @@ class RVLinearlayer(nn.Module):
             
         else:
             Sigma_out = torch.diag_embed(mu_in_t_W_Sigma_mu_in) + B_Sigma
-      
+    
         # KL loss
         w_kl_loss = compute_kl_loss(self.w_mu, W_Sigma)
         b_kl_loss = compute_kl_loss(self.b_mu, B_Sigma)
@@ -515,3 +515,8 @@ class VDPDQNAgent:
         self.model.load_state_dict(torch.load(filename))
         self.model.to(self.device)
         self.update_target_model()
+
+if __name__ == "__main__":
+    agent = VDPDQNAgent(6,3)
+    agent.act(np.random.rand(6))
+    
