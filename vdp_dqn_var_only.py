@@ -16,49 +16,43 @@ from datetime import datetime
 import math
 import time
 
-def nll_gaussian(y_test, y_pred_mean, y_pred_sd, num_labels, return_components=False):
+import torch
+
+import torch
+
+def nll_gaussian(y_test, y_pred_mean, y_pred_sigma_sq, return_components=False):
     """
     Compute the negative log-likelihood of a Gaussian distribution.
 
     Args:
-        y_test (torch.Tensor): A tensor of shape (batch_size, num_labels).
-        y_pred_mean (torch.Tensor): A tensor of shape (batch_size, num_labels).
-        y_pred_sd (torch.Tensor): A tensor of shape (batch_size, num_labels, num_labels).
-        num_labels (int): The number of output labels.
+        y_test (torch.Tensor): A tensor of shape (batch_size, 1).
+        y_pred_mean (torch.Tensor): A tensor of shape (batch_size, 1).
+        y_pred_sigma_sq (torch.Tensor): A tensor of shape (batch_size,).
+        return_components (bool): Whether to return individual loss components.
 
     Returns:
         torch.Tensor: A scalar tensor representing the negative log-likelihood of the predicted distribution.
     """
-    # Collect Stats
-    batch_size = y_test.size(0)
-
-    # Declare device
-    device = y_pred_mean.device
-
-    # Add small constant to diagonal for numerical stability
-    NS = torch.diag_embed(torch.full((batch_size, num_labels), 1e-3)).to(device)
-    y_pred_sd_ns = y_pred_sd + NS
-    
-    # Invert sigma
-    y_pred_sd_inv = torch.linalg.inv(y_pred_sd_ns)
-
     # Calculate error
     error = y_pred_mean - y_test
     mse = (error**2).mean().item()
 
+    # Add small constant to variance for numerical stability
+    epsilon = 1e-8
+    variance = y_pred_sigma_sq + epsilon
+
     # First term is error over sigma
-    mu_sigma = torch.matmul(error.permute(0,2,1), y_pred_sd_inv)
-    error_over_sigma = torch.mean(torch.squeeze(torch.matmul(mu_sigma, error)))
+    error_over_sigma = torch.mean((error / variance).pow(2))
 
     # Second term is log determinant
-    log_det = torch.mean(torch.linalg.slogdet(y_pred_sd_ns)[1])
+    log_det = torch.mean(torch.log(variance))
 
     # Compute the mean
     nll_loss = (error_over_sigma + log_det) / 2
 
     if return_components:
         return nll_loss, mse, error_over_sigma, log_det
-    else:   
+    else:
         return nll_loss
 
 def compute_kl_loss(mu, sigma):
@@ -91,9 +85,9 @@ def compute_kl_loss(mu, sigma):
 
     # calculate the KL divergence
     k = torch.tensor(mu.size(0)).to(device)
-    norm_squared = torch.norm(mu, p='fro', dim=1).pow(2)
-    log_sigma_squared = torch.log(sigma.pow(2))
-    kl_loss = 0.5 * torch.sum(norm_squared - k * (1 - sigma.pow(2) + log_sigma_squared))
+    norm_squared = torch.norm(mu, p=2, dim=1).pow(2)
+    log_sigma_squared = torch.log(sigma) 
+    kl_loss = 0.5 * torch.sum(norm_squared - k * (1 - sigma + log_sigma_squared))
     return kl_loss
 
 class RVLinearlayer(nn.Module):
@@ -137,30 +131,30 @@ class RVLinearlayer(nn.Module):
         
     
         # Perform a reparameterization trick
-        W_Sigma = torch.log(1. + torch.exp(self.w_sigma))
-        B_Sigma = torch.log(1. + torch.exp(self.b_sigma))
+        W_sigma = torch.log(1. + torch.exp(self.w_sigma))
+        B_sigma = torch.log(1. + torch.exp(self.b_sigma))
 
         # Numerical stability
-        NS = torch.full((W_Sigma.size()), 1e-6).to(device)
-        W_Sigma = W_Sigma + NS
+        NS = torch.full((W_sigma.size()), 1e-6).to(device)
+        W_sigma = W_sigma + NS
 
-        NS = torch.full((B_Sigma.size()), 1e-6).to(device)
-        B_Sigma = B_Sigma + NS
+        NS = torch.full((B_sigma.size()), 1e-6).to(device)
+        B_sigma = B_sigma + NS
 
-        # # Calculate Sigma_out
+        # # Calculate sigma_out
         if sigma_in is not None:
-            tr_W_Sigma_and_sigma_in = torch.einsum('ij,bj->bi', W_Sigma, sigma_in)
+            tr_W_sigma_and_sigma_in = torch.einsum('ij,bj->bi', W_sigma, sigma_in)
             mu_w_t_sigma_in_mu_w = torch.einsum('ij,bj->bi', (self.w_mu.t()**2), sigma_in)
 
-        mu_in_t_W_Sigma_mu_in = torch.einsum('bi,oi->bo', (mu_in**2), W_Sigma)
+        mu_in_t_W_sigma_mu_in = torch.einsum('bi,oi->bo', (mu_in**2), W_sigma)
 
-        Sigma_out = tr_W_Sigma_and_sigma_in + mu_w_t_sigma_in_mu_w + mu_in_t_W_Sigma_mu_in + B_Sigma if sigma_in is not None else mu_in_t_W_Sigma_mu_in + B_Sigma
+        sigma_out = tr_W_sigma_and_sigma_in + mu_w_t_sigma_in_mu_w + mu_in_t_W_sigma_mu_in + B_sigma if sigma_in is not None else mu_in_t_W_sigma_mu_in + B_sigma
 
         # KL loss
-        w_kl_loss = compute_kl_loss(self.w_mu, W_Sigma)
-        b_kl_loss = compute_kl_loss(self.b_mu, B_Sigma)
+        w_kl_loss = compute_kl_loss(self.w_mu, W_sigma)
+        b_kl_loss = compute_kl_loss(self.b_mu, B_sigma)
         
-        return mu_out, Sigma_out, w_kl_loss, b_kl_loss
+        return mu_out, sigma_out, w_kl_loss, b_kl_loss
 
 class RVNonLinearFunc(nn.Module):
     """
@@ -173,14 +167,14 @@ class RVNonLinearFunc(nn.Module):
         super(RVNonLinearFunc, self).__init__()
         self.func = func
 
-    def forward(self, mu_in, Sigma_in):
+    def forward(self, mu_in, sigma_in):
         """
         Forward pass of the Bayesian ReLU activation function.
 
         Args:
             mu_in (torch.Tensor): A tensor of shape (batch_size, input_size),
                 representing the mean input to the ReLU activation function.
-            Sigma_in (torch.Tensor): A tensor of shape (batch_size, input_size, input_size),
+            sigma_in (torch.Tensor): A tensor of shape (batch_size, input_size, input_size),
                 representing the covariance input to the ReLU activation function.
 
         Returns:
@@ -199,15 +193,15 @@ class RVNonLinearFunc(nn.Module):
         # Calculate the diagonal elements of the outer product
         diag_outer_product = torch.mul(gradi, gradi).view(batch_size, -1)
         
-        # element-wise multiply Sigma_in with the outer product
+        # element-wise multiply sigma_in with the outer product
         # and return the result
-        Sigma_out = torch.mul(Sigma_in, diag_outer_product)
+        sigma_out = torch.mul(sigma_in, diag_outer_product)
 
-        return mu_out, Sigma_out
+        return mu_out, sigma_out
 
-class VDPDQN(nn.Module):
+class VarOnlyVDPDQN(nn.Module):
     def __init__(self, input_dim, output_dim, fc1_size=128, fc2_size=128):
-        super(VDPDQN, self).__init__()
+        super(VarOnlyVDPDQN, self).__init__()
         self.fc1_size = fc1_size
         self.fc2_size = fc2_size
 
@@ -243,7 +237,7 @@ class VDPDQN(nn.Module):
             
             return m, s5, kl_losses, sigmas
             
-class VDPDQNAgent:
+class VarOnlyVDPDQNAgent:
     def __init__(self, state_size, action_size, fc1_size=128, fc2_size=128, device='cpu', gamma=0.99, k=0.1, epsilon=1.0, epsilon_min=0.01, epsilon_decay=0.9995, explore=True, learning_rate=0.001, kl_w_factor=0.0001, kl1_w_factor = 1, kl2_w_factor = 1, kl3_w_factor = 1, kl_b_factor=0.0001, kl1_b_factor = 1, kl2_b_factor = 1, kl3_b_factor = 1, memory_size=10000, teacher_model=None):
         self.state_size = state_size
         self.action_size = action_size
@@ -270,9 +264,9 @@ class VDPDQNAgent:
         self.device = device
         self.fc1_size = fc1_size
         self.fc2_size = fc2_size
-        self.model = VDPDQN(state_size, action_size, fc1_size, fc2_size).to(self.device)
+        self.model = VarOnlyVDPDQN(state_size, action_size, fc1_size, fc2_size).to(self.device)
         self.teacher_model = teacher_model
-        self.target_model = VDPDQN(state_size, action_size, fc1_size, fc2_size).to(self.device)
+        self.target_model = VarOnlyVDPDQN(state_size, action_size, fc1_size, fc2_size).to(self.device)
         self.update_target_model()
         self.optimizer = optim.SGD(self.model.parameters(), lr=self.learning_rate)
 
@@ -283,7 +277,7 @@ class VDPDQNAgent:
         self.memory.append((state, q_values))
 
     def act(self, state, return_sigma = False, use_uncert_epsilon = False):
-     
+    
         state = torch.FloatTensor(state).unsqueeze(0).to(self.device)
         q_values, q_sigmas, _ = self.model(state)
 
@@ -306,7 +300,7 @@ class VDPDQNAgent:
     def replay(self, batch_size, return_uncertainty_values = False):
         if len(self.memory) < batch_size:
             if return_uncertainty_values:
-                return None, None, None, None, None, None, None, None, None, None, None
+                return 12*[None]
             else:
                 return None, None, None
         
@@ -314,27 +308,27 @@ class VDPDQNAgent:
         states, actions, rewards, next_states, dones = zip(*minibatch)
         states = torch.FloatTensor(states).to(self.device)
         actions = torch.LongTensor(actions).unsqueeze(1).to(self.device)
-        rewards = torch.FloatTensor(torch.stack(rewards,dim=0)).to(self.device)
-        next_states = torch.FloatTensor(torch.stack(next_states,dim=0)).to(self.device)
-        dones = torch.FloatTensor(torch.stack(dones,dim=0)).to(self.device)
+        rewards = torch.FloatTensor(rewards).to(self.device)
+        next_states = torch.FloatTensor(next_states).to(self.device)
+        dones = torch.BoolTensor(dones).to(self.device)
 
         if return_uncertainty_values:
             current_q_values, current_q_sigmas, current_kl_losses, predictive_sigmas = self.model(states, return_sigmas = return_uncertainty_values)
+            current_q_sigmas = current_q_sigmas.gather(1, actions.type(torch.int64)).squeeze()
         else:
             current_q_values, current_q_sigmas, current_kl_losses = self.model(states)
+            
+        current_q_values = current_q_values.gather(1, actions.type(torch.int64)).squeeze()
 
-        target_q_values = torch.zeros_like(current_q_values)
-        for i in range(self.action_size):
-            next_q_values_i, _, _ = self.target_model(next_states[:,i,:])
-            next_action_q_value_i = next_q_values_i.squeeze().max(1)[0].detach().squeeze()
+        next_q_values, _, _ = self.target_model(next_states)
+        next_q_values = next_q_values.squeeze().max(1)[0].detach().squeeze()
 
-            target_q_values[:,i,0] = rewards[:,i] + (1 - dones[:,i]) * self.gamma * next_action_q_value_i
+        target_q_values = rewards + (1 - dones.float()) * self.gamma * next_q_values
 
-        nll_loss, error_over_sigma, log_determinant = nll_gaussian(y_test=target_q_values, 
-                                                                   y_pred_mean=current_q_values, 
-                                                                   y_pred_sd=current_q_sigmas, 
-                                                                   num_labels=self.action_size, 
-                                                                   return_components=return_uncertainty_values)
+        nll_loss, mse, error_over_sigma, log_determinant = nll_gaussian( y_test=target_q_values, 
+                                                                    y_pred_mean=current_q_values, 
+                                                                    y_pred_sigma_sq=current_q_sigmas, 
+                                                                    return_components=return_uncertainty_values)
         nll_loss = nll_loss + 10 # Offset to keep positive
         
         weighted_w_kl_loss = self.kl_w_factor * (self.kl1_w_factor*current_kl_losses["w"]["fc1"] + self.kl2_w_factor*current_kl_losses["w"]["fc2"] + self.kl3_w_factor*current_kl_losses["w"]["fc3"])
@@ -361,7 +355,7 @@ class VDPDQNAgent:
 
         if return_uncertainty_values:
             model_sigmas = self.get_covariance_matrices()
-            return total_loss, nll_loss, weighted_w_kl_loss, weighted_b_kl_loss, weighted_predictive_sigmas, current_kl_losses, model_sigmas, predictive_sigmas, error_over_sigma, log_determinant, len(self.memory)
+            return total_loss, nll_loss, weighted_w_kl_loss, weighted_b_kl_loss, weighted_predictive_sigmas, current_kl_losses, model_sigmas, predictive_sigmas, mse, error_over_sigma, log_determinant, len(self.memory)
         else:
             return total_loss, nll_loss, current_kl_losses
         
@@ -384,7 +378,7 @@ class VDPDQNAgent:
 
         nll_loss, mse, error_over_sigma, log_determinant = nll_gaussian(  y_test=target_q_values, 
                                                                             y_pred_mean=current_q_values, 
-                                                                            y_pred_sd=current_q_sigmas, 
+                                                                            y_pred_sigma_sq=current_q_sigmas, 
                                                                             num_labels=self.action_size, 
                                                                             return_components=return_uncertainty_values)
         nll_loss = nll_loss + 10 # Offset to keep positive
@@ -440,7 +434,7 @@ class VDPDQNAgent:
 
         nll_loss, mse, error_over_sigma, log_determinant = nll_gaussian(y_test              = target_q_values,
                                                                         y_pred_mean         = current_q_values,
-                                                                        y_pred_sd           = current_q_sigmas,
+                                                                        y_pred_sigma_sq     = current_q_sigmas,
                                                                         num_labels          = self.action_size,
                                                                         return_components   = True)
         nll_loss = nll_loss + 10 # Offset to keep positive
@@ -471,10 +465,10 @@ class VDPDQNAgent:
         return total_loss, nll_loss, weighted_w_kl_loss, weighted_b_kl_loss, weighted_predictive_sigmas, current_kl_losses, model_sigmas, predictive_sigmas, mse, error_over_sigma, log_determinant, len(self.memory)
         
     def get_epsilon(self, q_sigmas):
-        # Calculate the determinants of Sigma matrices
+        # Calculate the determinants of sigma matrices
         det_sigmas = torch.linalg.det(q_sigmas)
         
-        # Calculate ε using the equation: ε = (1 - exp(-k * |det(Sigma)|))
+        # Calculate ε using the equation: ε = (1 - exp(-k * |det(sigma)|))
         epsilon = 1 - torch.exp(-self.k * det_sigmas)
         
         return epsilon.item()
