@@ -5,7 +5,7 @@ import torch
 import os
 import wandb
 
-from dqn import DQNAgent
+from model_classes.dqn import DQNAgent
 
 def print_params(model):
     for name, param in model.named_parameters():

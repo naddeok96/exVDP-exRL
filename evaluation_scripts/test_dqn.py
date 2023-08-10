@@ -8,7 +8,7 @@ import os
 import wandb
 import numpy as np
 
-from dqn import DQNAgent
+from model_classes.dqn import DQNAgent
 
 def add_noise(state, snr):
     

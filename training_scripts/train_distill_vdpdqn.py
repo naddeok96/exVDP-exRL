@@ -7,7 +7,7 @@ import wandb
 from copy import deepcopy
 
 from vdp_dqn import VDPDQNAgent
-from dqn import DQNAgent
+from model_classes.dqn import DQNAgent
 
 def train(env, agent, vdp_agent, batch_size=32, episodes=500, max_steps=200, target_reward=-100, target_successes=100):
     num_success = 0

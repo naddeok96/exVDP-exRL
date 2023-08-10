@@ -4,7 +4,7 @@ This script will train a model and save it
 # Imports
 import torch
 import time
-from data_setup import Data
+from reference_codes.data_setup import Data
 import torch.nn.functional as F
 from tqdm import tqdm
 

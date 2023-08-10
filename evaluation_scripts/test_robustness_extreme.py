@@ -2,15 +2,23 @@ import gym
 import torch
 import os
 import wandb
+import cv2
 import numpy as np
+import random
+import imageio
 
-from dqn import DQNAgent
+from model_classes.dqn import DQNAgent
 from vdp_dqn import VDPDQNAgent
 from noise_box import NoiseGenerator
 
 
 def test(env, agent, noise_box, episodes=100, max_steps=300, model_weights=None):
     rewards = []  # List to collect total rewards
+    reg_uncerts = []
+    adv_uncerts = []
+    # render_points = random.sample(range(episodes), 10)  # Randomly sample 10 render points
+    # frames = []
+    
     for e in range(episodes):
         state, _ = env.reset()
         total_reward = 0
@@ -18,24 +26,43 @@ def test(env, agent, noise_box, episodes=100, max_steps=300, model_weights=None)
         for step in range(max_steps):
             
             adv_state = noise_box.add_noise(state)
-            action = agent.act(adv_state)
+            action, q_values, q_sigmas = agent.act(adv_state, return_sigma=True)
+            reg_action, _, reg_q_sigmas = agent.act(state, return_sigma=True)
+            
+            reg_uncert = reg_q_sigmas[:,action, action]
+            adv_uncert = q_sigmas[:,action, action]
+            
+            reg_uncerts.append(reg_uncert.item())
+            adv_uncerts.append(adv_uncert.item())
+            
+            # print("State/Adv_state: ", np.stack((state, adv_state)), " Action/Adv_action:", agent.act(state), "/", action)
             
             next_state, reward, done, _, _ = env.step(action)
             total_reward += reward
-
-            if done:
-                reward = -100
                 
             state = next_state
+            
+            # if e in render_points:  # Render the environment at selected render points
+            #     render_frame = env.render()
+            #     frames.append(cv2.cvtColor(render_frame, cv2.COLOR_BGR2RGB))
 
             if done or step == max_steps - 1:
                 # Log total reward to the list
                 rewards.append(total_reward)
 
                 break
+    
+    # output_path = 'results/normal.mp4'
+    # os.makedirs(os.path.dirname(output_path), exist_ok=True)
+    # with imageio.get_writer(output_path, fps=30) as writer:
+    #     for frame in frames:
+    #         writer.append_data(frame)
 
     # Calculate and log the mean total reward
     mean_reward = np.mean(rewards)
+    reg_uncert = np.mean(reg_uncerts)
+    adv_uncert = np.mean(adv_uncerts)
+    print("Reg Avg Uncert: ", reg_uncert, " Adv Avg Uncert: ", adv_uncert)
     print(f"Mean Total Reward: {mean_reward}, Noise Type: {noise_box.noise_type}, SNR: {noise_box.snr}, Model Weights: {model_weights}")
     print(f"")
     
@@ -56,18 +83,18 @@ if __name__ == "__main__":
         device = torch.device("cpu")
 
     # Initialize WandB
-    episodes = 100
+    episodes = 10
     max_steps = 300
 
-    env = gym.make("Acrobot-v1")
+    env = gym.make("Acrobot-v1", render_mode='rgb_array')
     state_size = env.observation_space.shape[0]
     action_size = env.action_space.n
     
     noise_box = NoiseGenerator()
 
     models = ["saved_models/VDP DQN Acrobot - Distill_stilted-rain-11_vdp_dqn.pt"] # "saved_models/DQN Acrobot_olive-pyramid-9_dqn.pt", 
-    noises = ["gaussian", "uniform", "salt_and_pepper", "quantization", "sparse_coding"] #, "perlin"]
-    snr_values = [0.01,  0.1, 1.0, 2.5, 5.0, 7.5, 10.0, 100]
+    noises = ["gaussian"] # , "uniform", "salt_and_pepper", "quantization", "sparse_coding"] #, "perlin"]
+    snr_values = [1000]
     
     for model_weights in models:
         
@@ -83,13 +110,11 @@ if __name__ == "__main__":
             for snr in snr_values:
                 noise_box.snr = snr
 
-                wandb.init(project="Acrobot Robustness Test", entity="naddeok") # , mode="disabled")
+                wandb.init(project="Acrobot Robustness Test Extreme", entity="naddeok") # , mode="disabled")
                 wandb.config.model_weights = model_weights
                 wandb.config.noise_type = noise_type
                 wandb.config.snr = snr
-                
-                
-                
+
                 test(env, agent, noise_box, episodes, max_steps, model_weights)
                 wandb.finish()
 

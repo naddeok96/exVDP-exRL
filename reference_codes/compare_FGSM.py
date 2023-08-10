@@ -8,7 +8,7 @@ import numpy as np
 import torchattacks
 from tqdm import tqdm
 
-from data_setup import Data
+from reference_codes.data_setup import Data
 from torch_MLP import MLP
 from torch_exVDP_MLP import exVDPMLP
 
