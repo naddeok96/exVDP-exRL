@@ -78,52 +78,103 @@ This repository serves as a checklist for evaluating a new reinforcement learnin
 
 ## 1. Checklist for Environments and Networks
 
-### Select Environments:
+## **Select Environments**:
 
-#### Classic Control:
-- [ ] CartPole-v1
-- [ ] MountainCar-v0
-- [ ] Pendulum-v0
-- [ ] Acrobot-v1
+<small>**(D)**: Discrete</small>  
+<small>**(C)**: Continuous</small>
 
-#### Box2D:
-- [ ] LunarLander-v2
-- [ ] BipedalWalker-v3
+---
 
-#### Atari:
-- [ ] Breakout-v4
-- [ ] Pong-v4
-- [ ] SpaceInvaders-v4
+### **Classic Control**:
+- [ ] **CartPole-v1** - (D)
+- [ ] **MountainCar-v0** - (D)
+- [ ] **Pendulum-v0** - (C)
+- [ ] **Acrobot-v1** - (D)
 
-#### MuJoCo:
-- [ ] HalfCheetah-v2
-- [ ] Hopper-v2
-- [ ] Ant-v2
-- [ ] Humanoid-v2
+---
 
-### Select Models for Comparison:
+### **Box2D**:
+- [ ] **LunarLander-v2** - (D)
+- [ ] **BipedalWalker-v3** - (C)
 
-#### Value-Based Methods:
-- [ ] DQN
-- [ ] C51
-- [ ] Rainbow
+---
 
-#### Policy Gradient Methods:
-- [ ] REINFORCE
-- [ ] PPO
-- [ ] TRPO
-- [ ] A3C
-- [ ] A2C
+### **Atari**:
+- [ ] **Breakout-v4** - (D)
+- [ ] **Pong-v4** - (D)
+- [ ] **SpaceInvaders-v4** - (D)
 
-#### Actor-Critic Methods:
-- [ ] SAC
-- [ ] TD3
+---
 
-#### Uncertainty Estimation Methods:
+### **MuJoCo**:
+- [ ] **HalfCheetah-v2** - (C)
+- [ ] **Hopper-v2** - (C)
+- [ ] **Ant-v2** - (C)
+- [ ] **Humanoid-v2** - (C)
 
-- [ ] Bayesian Neural Networks (BNNs) in RL
-- [ ] Bootstrapped DQN
-- [ ] Gaussian Processes (GPs) in RL
+---
+
+
+## **Select Models for Comparison**:
+
+---
+
+### **Value-Based Methods**:
+- [ ] **DQN** - (D)
+- [ ] **C51** - (D)
+- [ ] **Rainbow** - (D)
+- [ ] **Continuous Q-Learning (CQL)** - (C)
+
+---
+
+### **Policy Gradient Methods**:
+- [ ] **REINFORCE** - (D/C)
+- [ ] **PPO** - (D/C)
+- [ ] **TRPO** - (D/C)
+
+---
+
+### **Actor-Critic Methods**:
+- [ ] **A2C** - (D/C)
+- [ ] **A3C** - (D/C)
+- [ ] **SAC** - (C)
+- [ ] **TD3** - (C)
+
+---
+
+### **Uncertainty Estimation Methods**:
+- [ ] **Bayesian Neural Networks (BNNs)** in RL - (D/C)
+- [ ] **Bootstrapped DQN** - (D)
+- [ ] **Gaussian Processes (GPs)** in RL - (D/C)
+
+---
+### **Discrete (D) Table**:
+
+|                 | DQN | C51 | Rainbow | REINFORCE | PPO | TRPO | A2C | A3C | Bootstrapped DQN |
+|-----------------|-----|-----|---------|-----------|-----|------|-----|-----|------------------|
+| CartPole-v1     |   ✔  |     |         |           |     |      |     |     |                  |
+| MountainCar-v0  |   ✔  |     |         |           |     |      |     |     |                  |
+| Acrobot-v1      |   ✔  |     |         |           |     |      |     |     |                  |
+| LunarLander-v2  |   ✔  |     |         |           |     |      |     |     |                  |
+| Breakout-v4     |     |     |         |           |     |      |     |     |                  |
+| Pong-v4         |     |     |         |           |     |      |     |     |                  |
+| SpaceInvaders-v4|     |     |         |           |     |      |     |     |                  |
+
+---
+
+### **Continuous (C) Table**:
+
+|                 | CQL | REINFORCE | PPO | TRPO | A2C | A3C | SAC | TD3 | Gaussian Processes (GPs) |
+|-----------------|-----|-----------|-----|------|-----|-----|-----|-----|---------------------------|
+| Pendulum-v0     |     |           |     |      |     |     |     |     |                           |
+| BipedalWalker-v3|     |           |     |      |     |     |     |     |                           |
+| HalfCheetah-v2  |     |           |     |      |     |     |     |     |                           |
+| Hopper-v2       |     |           |     |      |     |     |     |     |                           |
+| Ant-v2          |     |           |     |      |     |     |     |     |                           |
+| Humanoid-v2     |     |           |     |      |     |     |     |     |                           |
+
+---
+
 
 ## 2. Checklist for Testing Uncertainty-Aware Reinforcement Learning
  
