@@ -85,16 +85,6 @@ def train(env, agent, batch_size=32, episodes=500, max_steps=200):
 
             loss, prev_epsilon = agent.replay(batch_size)
 
-            # Check if the loss for this step is better than the best so far
-            if loss is not None:
-                if loss < best_loss:
-                    best_loss = loss
-                    print(f"New best loss: {best_loss}. Saving model...")
-                    if best_loss_model_path and os.path.exists(best_loss_model_path):
-                        os.remove(best_loss_model_path)  # Delete the previous best model file
-                    best_loss_model_path = f"saved_models/dqn/{wandb.config.env_name}_{wandb.run.project}_{wandb.run.name}_dqn_best_loss_at_{e}_eps.pt"
-                    agent.save(best_loss_model_path)
-
             # Log
             wandb.log({
                 "step": step,
@@ -117,6 +107,15 @@ def train(env, agent, batch_size=32, episodes=500, max_steps=200):
                 print(f"Episode: {e+1}/{episodes}, Score: {total_reward}, Epsilon: {agent.epsilon:.2f}")
                 break
 
+        # Check if the loss for this step is better than the best so far
+        if loss is not None:
+            if loss < best_loss:
+                best_loss = loss
+                print(f"New best loss: {best_loss}. Saving model...")
+                if best_loss_model_path and os.path.exists(best_loss_model_path):
+                    os.remove(best_loss_model_path)  # Delete the previous best model file
+                best_loss_model_path = f"saved_models/dqn/{wandb.config.env_name}_{wandb.run.project}_{wandb.run.name}_dqn_best_loss_at_{e}_eps.pt"
+                agent.save(best_loss_model_path)
 
         # Check if the total reward for this episode is better than the best so far
         if total_reward > best_reward:
