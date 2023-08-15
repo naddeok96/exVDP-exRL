@@ -131,3 +131,5 @@ dmypy.json
 # Personal
 .vscode/*
 wandb/*
+saved_models/*
+outputs/*
