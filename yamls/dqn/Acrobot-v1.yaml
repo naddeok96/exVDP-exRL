@@ -1,0 +1,16 @@
+fc1_size: 128
+fc2_size: 128
+gamma: 0.99
+epsilon: 1.0
+epsilon_min: 0.01
+epsilon_decay: 0.9995
+learning_rate: 0.0001
+memory_size: 10000
+batch_size: 32
+episodes: 10000
+max_steps: 300
+environment: Acrobot-v1
+reward_plateau_threshold: 0.0001
+loss_plateau_threshold: 0.00001
+plateau_window: 50
+use_conv: false

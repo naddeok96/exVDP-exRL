@@ -6,6 +6,54 @@ import random
 from collections import deque
 from datetime import datetime
 
+import torch
+import torch.nn as nn
+import numpy as np
+
+import torch.nn as nn
+import torch
+
+class ConvDQN(nn.Module):
+    def __init__(self, input_shape, action_size,
+                 conv1_out_channels=32, conv1_kernel_size=8, conv1_stride=4,
+                 conv2_out_channels=64, conv2_kernel_size=4, conv2_stride=2,
+                 conv3_out_channels=64, conv3_kernel_size=3, conv3_stride=1,
+                 fc1_size=512):
+        super(ConvDQN, self).__init__()
+
+        # Assuming input shape is in the format: (height, width, channels)
+        self.input_shape = input_shape
+        self.action_size = action_size
+
+        self.features = nn.Sequential(
+            nn.Conv2d(input_shape[-1], conv1_out_channels, kernel_size=conv1_kernel_size, stride=conv1_stride),  # input_shape[2] is the channel dimension
+            nn.ReLU(),
+            nn.Conv2d(conv1_out_channels, conv2_out_channels, kernel_size=conv2_kernel_size, stride=conv2_stride),
+            nn.ReLU(),
+            nn.Conv2d(conv2_out_channels, conv3_out_channels, kernel_size=conv3_kernel_size, stride=conv3_stride),
+            nn.ReLU()
+        )
+        
+        self.fc_input_dim = self.feature_size()
+
+        self.fc = nn.Sequential(
+            nn.Linear(self.fc_input_dim, fc1_size),
+            nn.ReLU(),
+            nn.Linear(fc1_size, action_size)
+        )
+
+    def forward(self, x):
+        x = x.permute(0, 3, 1, 2)  # Change shape from [batch, H, W, C] to [batch, C, H, W]
+        x = self.features(x)
+        x = x.reshape(x.size(0), -1)
+        return self.fc(x)
+
+
+
+    def feature_size(self):
+        return self.features(torch.zeros(1, *self.input_shape[::-1])).view(1, -1).size(1)  # Reverse the input shape to (channels, height, width) for PyTorch
+
+
 class DQN(nn.Module):
     def __init__(self, input_dim, output_dim, fc1_size=128, fc2_size=128):
         super(DQN, self).__init__()
@@ -17,12 +65,32 @@ class DQN(nn.Module):
         self.fc3 = nn.Linear(fc2_size, output_dim)
 
     def forward(self, x):
+        batch_size = x.size(0)
+        x = x.view(batch_size, -1)
+
         x = torch.relu(self.fc1(x))
         x = torch.relu(self.fc2(x))
         return self.fc3(x)
 
 class DQNAgent:
-    def __init__(self, state_size, action_size, fc1_size=128, fc2_size=128, device='cpu', gamma=0.99, explore=True, epsilon=1.0, epsilon_min=0.01, epsilon_decay=0.995, learning_rate=0.001, memory_size=10000):
+    def __init__(self, 
+                 state_size,
+                 action_size,
+                 fc1_size=128,
+                 fc2_size=128,
+                 device='cpu',
+                 gamma=0.99,
+                 explore=True,
+                 epsilon=1.0,
+                 epsilon_min=0.01,
+                 epsilon_decay=0.995,
+                 learning_rate=0.001,
+                 memory_size=10000,
+                 use_conv=True,
+                 conv1_out_channels=32, conv1_kernel_size=8, conv1_stride=4,
+                 conv2_out_channels=64, conv2_kernel_size=4, conv2_stride=2,
+                 conv3_out_channels=64, conv3_kernel_size=3, conv3_stride=1):
+        
         self.state_size = state_size
         self.action_size = action_size
         self.memory_size = memory_size
@@ -36,8 +104,32 @@ class DQNAgent:
         self.device = device
         self.fc1_size = fc1_size
         self.fc2_size = fc2_size
-        self.model = DQN(state_size, action_size, fc1_size, fc2_size).to(self.device)
-        self.target_model = DQN(state_size, action_size, fc1_size, fc2_size).to(self.device)
+
+        self.use_conv = use_conv
+
+
+        if use_conv:
+            Network = ConvDQN
+            network_args = {
+                'conv1_out_channels': conv1_out_channels, 
+                'conv1_kernel_size': conv1_kernel_size,
+                'conv1_stride': conv1_stride,
+                'conv2_out_channels': conv2_out_channels,
+                'conv2_kernel_size': conv2_kernel_size,
+                'conv2_stride': conv2_stride,
+                'conv3_out_channels': conv3_out_channels,
+                'conv3_kernel_size': conv3_kernel_size,
+                'conv3_stride': conv3_stride,
+                'fc1_size': fc1_size
+            }
+        else:
+            Network = DQN
+            network_args = {'fc1_size': fc1_size,
+                            'fc2_size': fc2_size}
+        
+        self.model = Network(state_size, action_size, **network_args).to(self.device)
+        self.target_model = Network(state_size, action_size, **network_args).to(self.device)
+        
         self.update_target_model()
         self.optimizer = optim.Adam(self.model.parameters(), lr=self.learning_rate)
 
@@ -86,6 +178,7 @@ class DQNAgent:
         
     def update_target_model(self):
         self.target_model.load_state_dict(self.model.state_dict())
+        self.target_model.to(self.device)
         self.target_model.eval()
 
     def save(self, path = None):
