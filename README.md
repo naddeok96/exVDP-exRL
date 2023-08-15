@@ -125,6 +125,27 @@ This repository serves as a checklist for evaluating a new reinforcement learnin
 - [ ] Bootstrapped DQN
 - [ ] Gaussian Processes (GPs) in RL
 
+|                        | DQN | C51 | Rainbow | REINFORCE | PPO | TRPO | A3C | A2C | SAC | TD3 | BNNs in RL | Bootstrapped DQN | GPs in RL |
+|------------------------|-----|-----|---------|-----------|-----|------|-----|-----|-----|-----|------------|------------------|-----------|
+| **Classic Control**    |     |     |         |           |     |      |     |     |     |     |            |                  |           |
+| CartPole-v1            |   ✔  |     |         |           |     |      |     |     |     |     |            |                  |           |
+| MountainCar-v0         |   ✔  |     |         |           |     |      |     |     |     |     |            |                  |           |
+| Pendulum-v0            |     |     |         |           |     |      |     |     |     |     |            |                  |           |
+| Acrobot-v1             |   ✔ |     |         |           |     |      |     |     |     |     |            |                  |           |
+| **Box2D**              |     |     |         |           |     |      |     |     |     |     |            |                  |           |
+| LunarLander-v2         |  ✔   |     |         |           |     |      |     |     |     |     |            |                  |           |
+| BipedalWalker-v3       |     |     |         |           |     |      |     |     |     |     |            |                  |           |
+| **Atari**              |     |     |         |           |     |      |     |     |     |     |            |                  |           |
+| Breakout-v4            |     |     |         |           |     |      |     |     |     |     |            |                  |           |
+| Pong-v4                |     |     |         |           |     |      |     |     |     |     |            |                  |           |
+| SpaceInvaders-v4       |     |     |         |           |     |      |     |     |     |     |            |                  |           |
+| **MuJoCo**             |     |     |         |           |     |      |     |     |     |     |            |                  |           |
+| HalfCheetah-v2         |     |     |         |           |     |      |     |     |     |     |            |                  |           |
+| Hopper-v2              |     |     |         |           |     |      |     |     |     |     |            |                  |           |
+| Ant-v2                 |     |     |         |           |     |      |     |     |     |     |            |                  |           |
+| Humanoid-v2            |     |     |         |           |     |      |     |     |     |     |            |                  |           |
+
+
 ## 2. Checklist for Testing Uncertainty-Aware Reinforcement Learning
  
 #### Implementation of the Proposed Method
