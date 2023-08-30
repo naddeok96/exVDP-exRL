@@ -1,0 +1,65 @@
+project: DQN Envpool Async Sweep
+name: pong-sweep
+method: bayes  # using Bayesian optimization
+metric:
+  goal: maximize
+  name: Mean Episode Reward
+program: training_scripts/train_dqn_parallel_sweep.py
+parameters:
+  LR:
+    min: 0.0001
+    max: 0.1
+  BATCH_SIZE:
+    values: [16, 32, 64, 128, 256, 512, 1024]
+  GAMMA:
+    min: 0.9
+    max: 0.99
+  EPS_DECAY:
+    min: 0.95
+    max: 0.9999
+  ENV_NAME:
+    values: ["Pong-v5"]
+  EPS_START:
+    values: [1.0]
+  EPS_END:
+    values: [0.05]
+  TARGET_UPDATE:
+    values: [100, 1000, 10000, 100000]
+  NUM_ENVS:
+    values: [1000]
+  NUM_EPS:
+    values: [100000]
+  MIN_NUM_EPISODES:
+    values: [5000]
+  MAX_STEPS:
+    values: [100000]
+  MEMORY_SIZE:
+    values: [5000, 10000, 50000]
+  REWARD_PLATEAU_THRESHOLD:
+    values: [0.0001]
+  LOSS_PLATEAU_THRESHOLD:
+    values: [0.00001]
+  PLATEAU_WINDOW:
+    values: [50]
+  STACK_NUM:
+    values: [4]
+  conv1_out_channels:
+    values: [32]
+  conv1_kernel_size:
+    values: [8]
+  conv1_stride:
+    values: [4]
+  conv2_out_channels:
+    values: [64]
+  conv2_kernel_size:
+    values: [4]
+  conv2_stride:
+    values: [2]
+  conv3_out_channels:
+    values: [64]
+  conv3_kernel_size:
+    values: [3]
+  conv3_stride:
+    values: [1]
+  fc1_size:
+    values: [512]

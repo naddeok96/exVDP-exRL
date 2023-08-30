@@ -4,7 +4,8 @@ import torch.nn as nn
 import torch.optim as optim
 from collections import deque
 import wandb
-import envpool
+import gym
+import gym.vector
 import cv2
 import os
 import yaml
@@ -26,7 +27,7 @@ def check_trend(history, threshold):
     return abs(slope) < threshold
 
 class DQN(nn.Module):
-    def __init__(self, input_shape, action_size,
+    def __init__(self, input_shape, action_size, n_stack_images = 4,
                  conv1_out_channels=32, conv1_kernel_size=8, conv1_stride=4,
                  conv2_out_channels=64, conv2_kernel_size=4, conv2_stride=2,
                  conv3_out_channels=64, conv3_kernel_size=3, conv3_stride=1,
@@ -37,8 +38,18 @@ class DQN(nn.Module):
         self.input_shape = input_shape
         self.action_size = action_size
 
+        self.n_stack_images = 4
+
+        # Image pre process params
+        self.orginal_height = self.input_shape[0]
+        self.orginal_width = self.input_shape[1]
+        self.target_h = 80  # Height after process
+        self.target_w = 64  # Widht after process
+        self.crop_dim = [20, self.orginal_height, 0, self.orginal_width]  # Cut 20 px from top to get rid of the score table
+        self.preprocessed_input_shape = (self.target_h, self.target_w)
+
         self.features = nn.Sequential(
-            nn.Conv2d(self.input_shape[0], conv1_out_channels, kernel_size=conv1_kernel_size, stride=conv1_stride),  # input_shape[2] is the channel dimension
+            nn.Conv2d(n_stack_images, conv1_out_channels, kernel_size=conv1_kernel_size, stride=conv1_stride),  # input_shape[2] is the channel dimension
             nn.ReLU(),
             nn.Conv2d(conv1_out_channels, conv2_out_channels, kernel_size=conv2_kernel_size, stride=conv2_stride),
             nn.ReLU(),
@@ -54,13 +65,33 @@ class DQN(nn.Module):
             nn.Linear(fc1_size, action_size)
         )
 
+    def preprocess(self, images):
+        """
+        Process image crop resize, grayscale and normalize the images
+        """
+
+        # Convert to grayscale - take the mean along the color channel axis
+        gray_images = np.array([cv2.cvtColor(img, cv2.COLOR_BGR2GRAY) for img in images])
+
+        # Crop
+        gray_cropped_images = gray_images[:, self.crop_dim[0]:self.crop_dim[1], self.crop_dim[2]:self.crop_dim[3]]
+
+        # Resize
+        gray_cropped_resized_images = np.array([cv2.resize(img, (self.target_w, self.target_h)) for img in gray_cropped_images])
+        
+        # Normalize
+        normalized_images = gray_cropped_resized_images / 255.0
+        
+        return normalized_images
+
     def forward(self, x):
+        assert x.size(1) != self.orginal_height, "Proper preprocessing is not done on the input."
         x = self.features(x)
         x = x.reshape(x.size(0), -1)
         return self.fc(x)
 
     def feature_size(self):
-        return self.features(torch.zeros(1, *self.input_shape)).view(1, -1).size(1)
+        return self.features(torch.zeros(1, self.n_stack_images, *self.preprocessed_input_shape)).view(1, -1).size(1)
         # return self.features(torch.zeros(1, *self.input_shape[::-1])).view(1, -1).size(1)  # Reverse the input shape to (channels, height, width) for PyTorch
 
     
@@ -69,7 +100,7 @@ def select_action(state, policy_net, n_actions, epsilon):
     sample = np.random.rand()
     if sample > epsilon:
         with torch.no_grad():
-            return policy_net(state).max(1)[1].view(-1)
+            return policy_net(state).max(1)[1].view(num_envs, 1)
     else:
         return np.random.randint(0, n_actions, num_envs)
 
@@ -142,9 +173,9 @@ def train(env, policy_net, target_net, optimizer, memory, cfg):
     for i in tqdm(range(cfg.NUM_EPS // cfg.NUM_ENVS)):
         i_episode = i * cfg.NUM_ENVS
 
-        env.async_reset()              
-        obs, _, _, _, info = env.recv()
-        env_id = info["env_id"]
+        obs, _ = env.reset()        
+        obs = policy_net.preprocess(obs)        
+        obs = np.repeat(obs[:, np.newaxis], policy_net.n_stack_images, axis=1) # We stack frames like 4 channel image
 
         total_reward = cfg.NUM_ENVS * [0]
 
@@ -178,11 +209,11 @@ def train(env, policy_net, target_net, optimizer, memory, cfg):
         reset_envs = np.zeros(cfg.NUM_ENVS, dtype=bool)
         for t in range(cfg.MAX_STEPS):
             obs_tensor = torch.tensor(obs, dtype=torch.float32).to(device)
-            # action = select_action(obs_tensor, policy_net, env.action_space.n, 0).cpu().numpy()
-            action = select_action(obs_tensor, policy_net, env.action_space.n, epsilon).cpu().numpy()
-            env.send(action, env_id)
-            next_obs, reward, done, _, info = env.recv()
-            env_id = info["env_id"]
+            action = select_action(obs_tensor, policy_net, env.action_space[0].n, 0)
+            # action = select_action(obs_tensor, policy_net, env.action_space[0].n, epsilon)
+            next_obs, reward, done, _, _ = env.step(action)
+            next_obs = policy_net.preprocess(next_obs)
+            next_obs = np.hstack([next_obs[:, np.newaxis], obs[:, :policy_net.n_stack_images-1]]) # We stack frames like 4 channel image
 
             total_reward += reward
 
@@ -223,7 +254,7 @@ def train(env, policy_net, target_net, optimizer, memory, cfg):
                 print(f"New best loss: {best_loss}. Saving model...")
                 if best_loss_model_path and os.path.exists(best_loss_model_path):
                     os.remove(best_loss_model_path)  # Delete the previous best model file
-                best_loss_model_path = f"saved_models/dqn/{wandb.config.ENV_NAME}_{wandb.run.project}_{wandb.run.name}_dqn_best_loss_at_{i_episode}_eps.pt"
+                best_loss_model_path = f"saved_models/dqn/{wandb.config.env_name}_{wandb.run.project}_{wandb.run.name}_dqn_best_loss_at_{i_episode}_eps.pt"
                 torch.save(policy_net.state_dict(), best_loss_model_path)
 
         # Check if the total reward for this episode is better than the best so far
@@ -232,7 +263,7 @@ def train(env, policy_net, target_net, optimizer, memory, cfg):
             print(f"New best score: {best_reward}. Saving model...")
             if best_reward_model_path and os.path.exists(best_reward_model_path):
                 os.remove(best_reward_model_path)  # Delete the previous best model file
-            best_reward_model_path = f"saved_models/dqn/{wandb.config.ENV_NAME}_{wandb.run.project}_{wandb.run.name}_dqn_best_reward_at_{i_episode}_eps.pt"
+            best_reward_model_path = f"saved_models/dqn/{wandb.config.env_name}_{wandb.run.project}_{wandb.run.name}_dqn_best_reward_at_{i_episode}_eps.pt"
             torch.save(policy_net.state_dict(), best_reward_model_path)
 
         if (total_reward < worst_reward).any():
@@ -242,7 +273,7 @@ def train(env, policy_net, target_net, optimizer, memory, cfg):
 
 if __name__ == "__main__":
     # Initialize GPU usage
-    gpu_number = "6"
+    gpu_number = "5"
     if gpu_number:
         os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
         os.environ["CUDA_VISIBLE_DEVICES"] = gpu_number
@@ -251,23 +282,20 @@ if __name__ == "__main__":
         device = torch.device("cpu")
 
     # Load hyperparameters from YAML file
-    with open('yamls/dqn/Pongv5-async.yaml', 'r') as file:
+    env_name = "Pong-v4"
+    with open('yamls/dqn/' + env_name + '-async.yaml', 'r') as file:
         cfg_dict = yaml.safe_load(file)
         config = namedtuple('Config', cfg_dict.keys())
         cfg = config(**cfg_dict)
 
-    wandb.init(project="DQN Envpool Async", entity="naddeok", config=cfg_dict) # , mode="disabled")
+    wandb.init(project="DQN Async", entity="naddeok", config=cfg_dict)
 
-    env = envpool.make(task_id = cfg.ENV_NAME,, 
-                       env_type = "gym",
-                       num_envs = cfg.NUM_ENVS,
-                       stack_num = cfg.STACK_NUM
-                       )
-    # env = gym.vector.AsyncVectorEnv([lambda: gym.make(cfg.ENV_NAME) for _ in range(cfg.NUM_ENVS)], shared_memory=True, daemon=True)
-    obs_dim = env.observation_space.shape
-    n_actions = env.action_space.n
+    env = gym.vector.AsyncVectorEnv([lambda: gym.make(cfg.env_name) for _ in range(cfg.NUM_ENVS)], shared_memory=True, daemon=True)
+    obs_dim = env.observation_space.shape[1:]
+    n_actions = env.action_space[0].n
 
     policy_net = DQN(obs_dim, n_actions,
+                    n_stack_images=cfg.n_stack_images,
                     conv1_out_channels=cfg.conv1_out_channels,
                     conv1_kernel_size=cfg.conv1_kernel_size,
                     conv1_stride=cfg.conv1_stride,
@@ -280,6 +308,7 @@ if __name__ == "__main__":
                     fc1_size=cfg.fc1_size).to(device)
 
     target_net = DQN(obs_dim, n_actions,
+                    n_stack_images=cfg.n_stack_images,
                     conv1_out_channels=cfg.conv1_out_channels,
                     conv1_kernel_size=cfg.conv1_kernel_size,
                     conv1_stride=cfg.conv1_stride,

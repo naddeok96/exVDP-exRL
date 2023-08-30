@@ -69,7 +69,7 @@ def select_action(state, policy_net, n_actions, epsilon):
     sample = np.random.rand()
     if sample > epsilon:
         with torch.no_grad():
-            return policy_net(state).max(1)[1].view(-1)
+            return policy_net(state).max(1)[1].view(-1).cpu().numpy()
     else:
         return np.random.randint(0, n_actions, num_envs)
 
@@ -178,8 +178,8 @@ def train(env, policy_net, target_net, optimizer, memory, cfg):
         reset_envs = np.zeros(cfg.NUM_ENVS, dtype=bool)
         for t in range(cfg.MAX_STEPS):
             obs_tensor = torch.tensor(obs, dtype=torch.float32).to(device)
-            # action = select_action(obs_tensor, policy_net, env.action_space.n, 0).cpu().numpy()
-            action = select_action(obs_tensor, policy_net, env.action_space.n, epsilon).cpu().numpy()
+            # action = select_action(obs_tensor, policy_net, env.action_space.n, 0)
+            action = select_action(obs_tensor, policy_net, env.action_space.n, epsilon)
             env.send(action, env_id)
             next_obs, reward, done, _, info = env.recv()
             env_id = info["env_id"]
@@ -188,10 +188,11 @@ def train(env, policy_net, target_net, optimizer, memory, cfg):
 
             memory.push(obs, action, reward, next_obs, done)
 
+
             loss = optimize_model(memory, policy_net, target_net, optimizer, cfg)
             steps_done += 1
 
-            wandb.log({"Optim Steps": steps_done, "Loss": loss})
+            wandb.log({"Optim Steps": steps_done, "Loss": loss, "Memory Size": len(memory)})
 
             if steps_done % cfg.TARGET_UPDATE == 0:
                 target_net.load_state_dict(policy_net.state_dict())
@@ -213,6 +214,10 @@ def train(env, policy_net, target_net, optimizer, memory, cfg):
 
         episode_rewards.extend(total_reward[~reset_envs])
 
+        wandb.log({"Episode Batch": i, 
+                   "Mean Episode Reward": np.mean(episode_rewards),
+                   "STD Episode Reward": np.std(episode_rewards)})
+        
         for ep_num, ep_reward in enumerate(episode_rewards):
             wandb.log({"Episode Number" : ep_num + i_episode, "Episode Reward": ep_reward})
 
@@ -238,32 +243,26 @@ def train(env, policy_net, target_net, optimizer, memory, cfg):
         if (total_reward < worst_reward).any():
             worst_reward = min(total_reward)
 
-    env.close()
-
 if __name__ == "__main__":
+
     # Initialize GPU usage
-    gpu_number = "6"
-    if gpu_number:
-        os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
-        os.environ["CUDA_VISIBLE_DEVICES"] = gpu_number
-        device = torch.device("cuda")
-    else:
-        device = torch.device("cpu")
+    device = torch.device("cuda")
 
     # Load hyperparameters from YAML file
-    with open('yamls/dqn/Pongv5-async.yaml', 'r') as file:
+    with open('yamls/dqn/Pong-v5-async.yaml', 'r') as file:
         cfg_dict = yaml.safe_load(file)
         config = namedtuple('Config', cfg_dict.keys())
         cfg = config(**cfg_dict)
+    
+    # Update wandb.config with your cfg
+    wandb.init()
+    cfg = wandb.config
 
-    wandb.init(project="DQN Envpool Async", entity="naddeok", config=cfg_dict) # , mode="disabled")
-
-    env = envpool.make(task_id = cfg.ENV_NAME,, 
+    env = envpool.make(task_id = cfg.ENV_NAME,
                        env_type = "gym",
                        num_envs = cfg.NUM_ENVS,
                        stack_num = cfg.STACK_NUM
                        )
-    # env = gym.vector.AsyncVectorEnv([lambda: gym.make(cfg.ENV_NAME) for _ in range(cfg.NUM_ENVS)], shared_memory=True, daemon=True)
     obs_dim = env.observation_space.shape
     n_actions = env.action_space.n
 

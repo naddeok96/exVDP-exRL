@@ -1,15 +1,15 @@
 import sys
 sys.path.append(sys.path[0] + '/..')  # Add parent directory to the path
-from model_classes.dqn import DQNAgent
-
 import random
 import gym
 import yaml
-import torch
 import os
+import torch
 import wandb
-import numpy as np
 from scipy.stats import linregress
+from model_classes.c51 import C51Agent  # Import the C51Agent class
+import numpy as np
+
 
 def check_trend(history, threshold):
     # Create an array of time indices
@@ -47,6 +47,7 @@ def train(env, agent, batch_size=32, episodes=500, max_steps=200):
     total_reward = 0
     for e in range(episodes):
         
+
         # Check for reward plateau
         if len(reward_history) > plateau_window:
             reward_history.pop(0)
@@ -113,7 +114,7 @@ def train(env, agent, batch_size=32, episodes=500, max_steps=200):
                 print(f"New best loss: {best_loss}. Saving model...")
                 if best_loss_model_path and os.path.exists(best_loss_model_path):
                     os.remove(best_loss_model_path)  # Delete the previous best model file
-                best_loss_model_path = f"saved_models/dqn/{wandb.config.env_name}_{wandb.run.project}_{wandb.run.name}_dqn_best_loss_at_{e}_eps.pt"
+                best_loss_model_path = f"saved_models/c51/{wandb.config.env_name}_{wandb.run.project}_{wandb.run.name}_c51_best_loss_at_{e}_eps.pt"
                 agent.save(best_loss_model_path)
 
         # Check if the total reward for this episode is better than the best so far
@@ -122,32 +123,32 @@ def train(env, agent, batch_size=32, episodes=500, max_steps=200):
             print(f"New best score: {best_reward}. Saving model...")
             if best_reward_model_path and os.path.exists(best_reward_model_path):
                 os.remove(best_reward_model_path)  # Delete the previous best model file
-            best_reward_model_path = f"saved_models/dqn/{wandb.config.env_name}_{wandb.run.project}_{wandb.run.name}_dqn_best_reward_at_{e}_eps.pt"
+            best_reward_model_path = f"saved_models/c51/{wandb.config.env_name}_{wandb.run.project}_{wandb.run.name}_c51_best_reward_at_{e}_eps.pt"
             agent.save(best_reward_model_path)
 
         if total_reward <= worst_reward:
             worst_reward = total_reward
 
     # Save the final model
-    agent.save(f"saved_models/dqn/{wandb.config.env_name}_{wandb.run.project}_{wandb.run.name}_dqn_final_at_{e}_eps.pt")
+    agent.save(f"saved_models/c51/{wandb.config.env_name}_{wandb.run.project}_{wandb.run.name}_c51_final_at_{e}_eps.pt")
+
 
 
 if __name__ == "__main__":
-
     # List of environments
     environments = [
-        # "CartPole-v1", 
+        "CartPole-v1", 
         # "MountainCar-v0", 
         # "Acrobot-v1",
         # "LunarLander-v2",  
         # "Breakout-v4", 
         # "Pong-v4", 
-        "SpaceInvaders-v4"
+        # "SpaceInvaders-v4"
     ] 
     random.shuffle(environments)
 
     # Initialize GPU usage
-    gpu_number = "6"
+    gpu_number = "7"
     if gpu_number:
         os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
         os.environ["CUDA_VISIBLE_DEVICES"] = gpu_number
@@ -155,14 +156,13 @@ if __name__ == "__main__":
     else:
         device = torch.device("cpu")
 
-    # Iterate through environments
     for env_name in environments:
-        # Load hyperparameters from YAML file
-        with open('yamls/dqn/' + env_name + '.yaml', 'r') as file:
+         # Load hyperparameters from YAML file
+        with open('yamls/c51/' + env_name + '.yaml', 'r') as file:
             config = yaml.safe_load(file)
 
         # Initialize WandB
-        wandb.init(project="DQN", entity="naddeok", config=config) #, mode="disabled")
+        wandb.init(project="C51", entity="naddeok", config=config) #, mode="disabled")
         wandb.config.env_name = env_name
         
         # Access hyperparameters from WandB config
@@ -178,6 +178,9 @@ if __name__ == "__main__":
         episodes = wandb.config.episodes
         max_steps = wandb.config.max_steps
         use_conv = wandb.config.use_conv
+        num_atoms = wandb.config.num_atoms
+        v_min = wandb.config.v_min
+        v_max = wandb.config.v_max
 
         # Extract conv-specific settings if use_conv=True
         if use_conv:
@@ -191,52 +194,56 @@ if __name__ == "__main__":
             conv3_kernel_size = wandb.config.conv3_kernel_size
             conv3_stride = wandb.config.conv3_stride
 
-
         env = gym.make(env_name)
         
         cont = isinstance(env.observation_space, gym.spaces.Box) and len(env.observation_space.shape) > 1
         state_size = env.observation_space.shape if cont else env.observation_space.shape[0]
 
         action_size = env.action_space.n
-        
-        if use_conv:
-            agent = DQNAgent(state_size, 
-                            action_size, 
-                            fc1_size=fc1_size, 
-                            fc2_size=fc2_size,
-                            conv1_out_channels=conv1_out_channels,
-                            conv1_kernel_size=conv1_kernel_size,
-                            conv1_stride=conv1_stride,
-                            conv2_out_channels=conv2_out_channels,
-                            conv2_kernel_size=conv2_kernel_size,
-                            conv2_stride=conv2_stride,
-                            conv3_out_channels=conv3_out_channels,
-                            conv3_kernel_size=conv3_kernel_size,
-                            conv3_stride=conv3_stride,
-                            device=device, 
-                            gamma=gamma,
-                            epsilon=epsilon, 
-                            epsilon_min=epsilon_min, 
-                            epsilon_decay=epsilon_decay, 
-                            learning_rate=learning_rate, 
-                            memory_size=memory_size,
-                            use_conv=use_conv)
-        else:
-            agent = DQNAgent(state_size, 
-                            action_size, 
-                            fc1_size=fc1_size, 
-                            fc2_size=fc2_size,
-                            device=device, 
-                            gamma=gamma,
-                            epsilon=epsilon, 
-                            epsilon_min=epsilon_min, 
-                            epsilon_decay=epsilon_decay, 
-                            learning_rate=learning_rate, 
-                            memory_size=memory_size,
-                            use_conv=use_conv)
 
-        # Standard train
+        if use_conv:
+            agent = C51Agent(state_size,
+                             action_size,
+                             fc1_size=fc1_size,
+                             fc2_size=fc2_size,
+                             conv1_out_channels=conv1_out_channels,
+                             conv1_kernel_size=conv1_kernel_size,
+                             conv1_stride=conv1_stride,
+                             conv2_out_channels=conv2_out_channels,
+                             conv2_kernel_size=conv2_kernel_size,
+                             conv2_stride=conv2_stride,
+                             conv3_out_channels=conv3_out_channels,
+                             conv3_kernel_size=conv3_kernel_size,
+                             conv3_stride=conv3_stride,
+                             num_atoms=num_atoms,
+                             v_min=v_min,
+                             v_max=v_max,
+                             device=device,
+                             gamma=gamma,
+                             epsilon=epsilon,
+                             epsilon_min=epsilon_min,
+                             epsilon_decay=epsilon_decay,
+                             learning_rate=learning_rate,
+                             memory_size=memory_size,
+                             use_conv=use_conv)
+        else:
+            agent = C51Agent(state_size,
+                             action_size,
+                             fc1_size=fc1_size,
+                             fc2_size=fc2_size,
+                             num_atoms=num_atoms,
+                             v_min=v_min,
+                             v_max=v_max,
+                             device=device,
+                             gamma=gamma,
+                             epsilon=epsilon,
+                             epsilon_min=epsilon_min,
+                             epsilon_decay=epsilon_decay,
+                             learning_rate=learning_rate,
+                             memory_size=memory_size,
+                             use_conv=use_conv)
+
+        # Train the C51Agent
         train(env, agent, batch_size, episodes, max_steps)
 
         wandb.finish()
-
